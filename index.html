@@ -1,0 +1,67 @@
+<html>
+<meta chrset='utf-8'>
+<head>
+<script>
+var timeJsonData;//Jsonデータ
+var timeMiliSec;//ミリ秒数
+var cnt = 0;//Jsonデータ取得後に経過秒数
+var jTimeExist = false;
+var myDay = new Array("日","月","火","水","木","金","土");
+var miliSecTurnning = 1000;//微調整(ミリ秒)※ネットワーク状態により、1秒誤差あるかもしれない
+/*----------------------------------------
+ *  日本時間整形し、表示
+ *----------------------------------------*/
+function clock() {
+	/* 日本標準時間を取得(60秒毎に時間微調整する) */
+	if(!jTimeExist || cnt % 60 == 0) {
+		httpObj = new XMLHttpRequest();
+		httpObj.open("get", "https://ntp-a1.nict.go.jp/cgi-bin/json", true);
+		httpObj.onload = function(){
+			timeJsonData = JSON.parse(this.responseText);
+			timeMiliSec = timeJsonData['st'] * 1000 + miliSecTurnning;
+			jTimeExist = true;
+			cnt = 0;
+		}
+		httpObj.send(null);
+		//console.log(timeMiliSec);
+	}
+	var nowMiliSec = timeMiliSec + cnt * 1000;
+	cnt++;
+
+	var now  = new Date(nowMiliSec);
+	var year = now.getFullYear(); // 年
+	var month = now.getMonth()+1; // 月
+	var date = now.getDate(); // 日
+	var day = now.getDay();
+	var hour = now.getHours(); // 時
+	var min  = now.getMinutes(); // 分
+	var sec  = now.getSeconds(); // 秒
+
+	// 数値が1桁の場合、頭に0を付けて2桁で表示する指定
+	if(hour < 10) { hour = "0" + hour; }
+	if(min < 10) { min = "0" + min; }
+	if(sec < 10) { sec = "0" + sec; }
+
+	// フォーマット①
+	var clock1 = hour + ':' + min + ':' + sec;
+	document . getElementById( 'timer1' ) . innerHTML= clock1 . toLocaleString(); // div id="clock-01"
+
+	// フォーマット②
+	var clock2 = year + '年' + month + '月' + date + '日' + '（' + myDay[day] + '曜日）'  + hour + '時' + min + '分' + sec + '秒';
+	document . getElementById( 'timer2' ) . innerHTML= clock2 . toLocaleString(); // div id="clock-02"
+
+	// 1000ミリ秒ごとに処理を実効
+	window . setTimeout( "clock()", 1000);
+}
+
+window . onload = clock;
+
+</script>
+
+</head>
+<body>
+<div id="timer1"></div>
+<!-- または -->
+<div id="timer2"></div>
+</body>
+</html>
