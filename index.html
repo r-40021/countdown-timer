@@ -16,7 +16,7 @@ function clock() {
 	/* 日本標準時間を取得(60秒毎に時間微調整する) */
 	if(!jTimeExist || cnt % 60 == 0) {
 		httpObj = new XMLHttpRequest();
-		httpObj.open("get", "https://ntp-a1.nict.go.jp/cgi-bin/json", true);
+		httpObj.open("get", "https://time.google.com", true);
 		httpObj.onload = function(){
 			timeJsonData = JSON.parse(this.responseText);
 			timeMiliSec = timeJsonData['st'] * 1000 + miliSecTurnning;
