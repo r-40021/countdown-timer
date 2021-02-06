@@ -2,8 +2,9 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
- <title>Document</title>
+ <title>Countdown Timer</title>
   <link rel="stylesheet" type="text/css" href="materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
@@ -12,14 +13,16 @@
     </div>
     <div class="container">
       <div class="row">
-        <div class="col l4 m6 s12">
-          <input placeholder="日付を選んでください" id="Date" type="text" class="datepicker" >
+        <div class="col m6 s12">
+          <input placeholder="日付" id="Date" type="text" class="datepicker" >
         </div>
-        <div class="col l4 m6 s12">
-          <input placeholder="時間を選んでください" id="Date" type="text" class="timepicker" >
+        <div class="col m6 s12">
+          <input placeholder="時間" id="Time" type="text" class="timepicker" >
         </div>
-        <div class="col l4 m6 s12"></div>
-      </div>
+        <div class="col s12 center">
+          <div class="waves-effect waves-light btn-large blue">SET</div>
+          <div class="waves-effect waves-light btn-large pink">STOP</div>
+        </div>
     </div>
     <script src="jquery-3.5.1.min.js"></script>
     <script src="materialize.min.js"></script>
