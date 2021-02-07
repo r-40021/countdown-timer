@@ -2,19 +2,34 @@ $ (function () {
     var count = $('.time').text().length;
     $('.time').css('font-size', 100/count + 'vw');
     var date = new Date();
-    var date2 = date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate()
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    if (month < 10) {
+        month = "0" + month;
+    }
+    if (day < 10) {
+        day = "0" + day;
+    }
+    var date2 = date.getFullYear() + "/" + month + "/" + day
     var minute = date.getMinutes()
     if (minute < 10) {
         minute = "0" + minute
     }
     var SetTime = date.getHours() + ":" + minute
+    /*var params = url.searchParams;
+    // getメソッド
+    date2 = params.get('date');
+    SetTime = params.get('time');*/
     $("#Date").val(date2);
     $("#Time").val(SetTime);
 });
 
 function set() {
-    var myquery = $(location).attr('search');
-    console.log(myquery);
+    var url = new URL(window.location.href);
+    var myDate = $('#Date').val();
+    var myTime = $('#Time').val();
+    url.searchParams.append('username','taro');
+    url.searchParams.append('mode','data1');
 }
 
 $(document).ready(function(){
@@ -24,7 +39,7 @@ $(document).ready(function(){
     });
     $('.timepicker').timepicker({
         twelveHour:false,
-        autoClose:true
+        autoClose:false
     });
     $('.fixed-action-btn').floatingActionButton();
   });
