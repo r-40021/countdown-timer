@@ -41,6 +41,7 @@ function set() {
     var url = new URL(window.location.href);
     var myDate = $('#Date').val();
     var myTime = $('#Time').val();
+    location.search = "?date=" + myDate;
 }
 
 $(document).ready(function(){
