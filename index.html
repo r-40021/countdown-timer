@@ -1,6 +1,7 @@
 <html>
 <meta chrset='utf-8'>
 <head>
+<title>時刻表示テスト</title>
 <script>
 var timeJsonData;//Jsonデータ
 var timeMiliSec;//ミリ秒数
@@ -15,7 +16,7 @@ function clock() {
 	/* 日本標準時間を取得(60秒毎に時間微調整する) */
 	if(!jTimeExist || cnt % 60 == 0) {
 		httpObj = new XMLHttpRequest();
-		httpObj.open("get", "https://ntp-a1.nict.go.jp/cgi-bin/json", true);
+		httpObj.open("get", "https://time.google.com", true);
 		httpObj.onload = function(){
 			timeJsonData = JSON.parse(this.responseText);
 			timeMiliSec = timeJsonData['st'] * 1000 + miliSecTurnning;
@@ -42,7 +43,7 @@ function clock() {
 	if(min < 10) { min = "0" + min; }
 	if(sec < 10) { sec = "0" + sec; }
 
-	// フォーマット①
+	// フォーマット
 	var clock1 = hour + ':' + min + ':' + sec;
 	document . getElementById( 'timer1' ) . innerHTML= clock1 . toLocaleString(); // div id="clock-01"
 
