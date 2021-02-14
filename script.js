@@ -41,7 +41,7 @@ function set() {
     var url = new URL(window.location.href);
     var myDate = $('#Date').val();
     var myTime = $('#Time').val();
-    location.search = "?date=" + myDate;
+    location.search = "?date=" + myDate + "&time=" + myTime;
 }
 
 $(document).ready(function(){
@@ -55,3 +55,11 @@ $(document).ready(function(){
     });
     $('.fixed-action-btn').floatingActionButton();
   });
+
+  function copy() {
+    $('body').append('<textarea id="currentURL" style="position:fixed;left:-100%;">'+location.href+'</textarea>');
+    $('#currentURL').select();
+    document.execCommand('copy');
+    $('#currentURL').remove();
+    M.toast({html: 'URLをコピーしました'})
+  }
