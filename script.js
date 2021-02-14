@@ -41,6 +41,7 @@ function set() {
     var url = new URL(window.location.href);
     var myDate = $('#Date').val();
     var myTime = $('#Time').val();
+    document.cookie = "date=" + myDate + ";time=" + myTime;
     location.search = "?date=" + myDate + "&time=" + myTime;
 }
 
