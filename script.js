@@ -1,6 +1,23 @@
 $ (function () {
     var count = $('.time').text().length;
-    $('.time').css('font-size', 100/count + 'vw');
+    $('.time').css('font-size', 100/count + 'vw');//文字サイズ調整
+    var param = location.search;
+    var paramObject = new Object();
+    if (param) {
+        param = param.substring(1);
+        var parameters = param.split('&');
+        
+        for (var i =0 ; i < parameters.length; i++) {
+            var element = parameters[i].split('=');
+
+            var paramName = decodeURIComponent(element[0]);
+            var paramValue = decodeURIComponent(element[1]);
+
+            paramObject[paramName] = paramValue;
+        }
+        $('#Date').val(paramObject.date);
+        $('#Time').val(paramObject.time);
+    } else{
     var date = new Date();
     var month = date.getMonth() + 1;
     var day = date.getDate();
@@ -15,21 +32,17 @@ $ (function () {
     if (minute < 10) {
         minute = "0" + minute
     }
-    var SetTime = date.getHours() + ":" + minute
-    /*var params = url.searchParams;
-    // getメソッド
-    date2 = params.get('date');
-    SetTime = params.get('time');*/
+    var SetTime = date.getHours() + ":" + minute;
     $("#Date").val(date2);
-    $("#Time").val(SetTime);
+    $("#Time").val(SetTime);}
 });
 
 function set() {
     var url = new URL(window.location.href);
     var myDate = $('#Date').val();
     var myTime = $('#Time').val();
-    url.searchParams.append('username','taro');
-    url.searchParams.append('mode','data1');
+    document.cookie = "date=" + myDate + ";time=" + myTime;
+    location.search = "?date=" + myDate + "&time=" + myTime;
 }
 
 $(document).ready(function(){
@@ -43,3 +56,11 @@ $(document).ready(function(){
     });
     $('.fixed-action-btn').floatingActionButton();
   });
+
+  function copy() {
+    $('body').append('<textarea id="currentURL" style="position:fixed;left:-100%;">'+location.href+'</textarea>');
+    $('#currentURL').select();
+    document.execCommand('copy');
+    $('#currentURL').remove();
+    M.toast({html: 'URLをコピーしました'})
+  }
