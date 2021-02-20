@@ -24,7 +24,7 @@ $ (function () {
         var myTime = paramObject.time;
         myDate = myDate.split('/');
         var targetTime = myDate[0] + "-" + myDate[1] + "-" + myDate[2] + " " + myTime + ":00";
-        console.log(targetTime);
+        setInterval(function(){
         var setmonth = date.getMonth() + 1;
         var setday = date.getDate();
         if (setmonth < 10) {
@@ -33,15 +33,15 @@ $ (function () {
         if (setday < 10) {
             setday = "0" + setday;
         }
-        var setminute = date.getMinutes;
-        var setseconds = date.getSeconds;
+        var setminute = date.getMinutes();
+        var setseconds = date.getSeconds();
         if (setminute < 10) {
             setminute = "0" + setminute;
         }
         if (setseconds < 10) {
             setseconds = "0" + setseconds;
         }
-        var now = date.getFullYear + "-" + setmonth + "-" + setday + " " + date.getHours + ":" + setminute + ":" + setseconds;
+        var now = date.getFullYear() + "-" + setmonth + "-" + setday + " " + date.getHours() + ":" + setminute + ":" + setseconds;
         var diffTime = targetTime.getTime() - now.getTime();
         var diffHour = Math.floor(diffTime / (1000*60*60));
         var diffMinute = Math.floor((diffTime-diffHour*1000*60*60) / (1000*60));
@@ -54,7 +54,7 @@ $ (function () {
         }
         var display = diffHour + ":" + diffMinute + ":" + diffSecond;
         var displayPlace = document.getElementById('displayTime');
-        displayPlace.innerHTML = display;
+        displayPlace.innerHTML = display;},100);
     } else{
         var month = date.getMonth() + 1;
         var day = date.getDate();
