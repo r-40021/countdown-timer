@@ -24,7 +24,6 @@ $ (function () {
         $('#Date').val(paramObject.date);
         $('#Time').val(paramObject.time);
         var lineShare = document.getElementById('line');
-        lineshare.data-url = location.href;
 
         var myDate = paramObject.date;
         var myTime = paramObject.time;
