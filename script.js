@@ -125,7 +125,7 @@ $(document).ready(function(){
     M.toast({html: 'URLをコピーしました'})
   }
 
-  function resize(params) {
+  function resize() {
     var count = $('#displayTime').text().length;
     $('#displayTime').css('font-size', 100/count + 'vw');//文字サイズ調整
   }
