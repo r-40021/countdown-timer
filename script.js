@@ -59,10 +59,11 @@ $ (function () {
         if (display == "-1:59:59") {
             alarm.play();
             stop();
+　　　　　　　document.title = "Countdown Timer";
         } else if(display.match("-")){
          stop();
          display = "0:00:00";
-        document.title = display;}
+        document.title = "Countdown Timer";}
         else{
         var displayPlace = document.getElementById('displayTime');
         displayPlace.innerHTML = display;
