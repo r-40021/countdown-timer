@@ -61,9 +61,9 @@ $ (function () {
         display = diffHour + ":" + diffMinute + ":" + diffSecond;
         if (diffTime === 0) {
             stop();
-            music.addEventListener("ended", function () {
-            music.currentTime = 0;
-            music.play();
+            alarm.addEventListener("ended", function () {
+            alarm.currentTime = 0;
+            alarm.play();
             }, false);
         } else if (diffTime < 0) {
             stop();
