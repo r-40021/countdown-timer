@@ -59,7 +59,10 @@ $ (function () {
         if (display == "-1:59:59") {
             alarm.play();
             stop();
-        } 
+        } else if(display.match("-")){
+         stop();
+         display = "0:00:00";
+        document.title = display;}
         else{
         var displayPlace = document.getElementById('displayTime');
         displayPlace.innerHTML = display;
