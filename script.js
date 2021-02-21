@@ -1,13 +1,10 @@
 var down;
-var alarm;
-var display;
+var alarm = new Audio("alarm.mp3");
 $ (function () {
-    var count = $('#displayTime').text().length;
-    $('#displayTime').css('font-size', 100/count + 'vw');//文字サイズ調整
+    resize();
     var param = location.search;
     var paramObject = new Object();
     var date = new Date();
-    alarm = new Audio('alarm.mp3');
     
     if (param) {
         param = param.substring(1);
@@ -58,26 +55,17 @@ $ (function () {
         if (diffSecond < 10) {
             diffSecond = "0" + diffSecond;
         }
-        display = diffHour + ":" + diffMinute + ":" + diffSecond;
-        if (diffTime === 0) {
-            stop();
-            alarm.addEventListener("ended", function () {
-            alarm.currentTime = 0;
+        var display = diffHour + ":" + diffMinute + ":" + diffSecond;
+        if (display == "-1:59:59") {
             alarm.play();
-            }, false);
-        } else if (diffTime < 0) {
             stop();
-            
-        }
+        } 
         else{
-            var displayPlace = document.getElementById('displayTime');
-          displayPlace.innerHTML = display;
-          document.title = display;
-          var count = $('#displayTime').text().length;
-    $('#displayTime').css('font-size', 100/count + 'vw');//文字サイズ調整
-            stop();
-        }}
-        down = setInterval(myCount, 500);
+        var displayPlace = document.getElementById('displayTime');
+        displayPlace.innerHTML = display;
+        document.title = display;
+        resize();}}
+        down = setInterval(myCount, 1000);
     } else{
         var month = date.getMonth() + 1;
         var day = date.getDate();
@@ -121,18 +109,11 @@ $(document).ready(function(){
     M.toast({html: 'URLをコピーしました'})
   }
 
- 
+  function resize(params) {
+    var count = $('#displayTime').text().length;
+    $('#displayTime').css('font-size', 100/count + 'vw');//文字サイズ調整
+  }
+
   function stop(){
     clearInterval(down);
-    display = "0:00:00";
-            var displayPlace = document.getElementById('displayTime');
-          displayPlace.innerHTML = display;
-          document.title = display;
-          var count = $('#displayTime').text().length;
-    $('#displayTime').css('font-size', 100/count + 'vw');//文字サイズ調整
-}
-
-  function stopalarm(){
-    alarm.pause();
-    alarm.currentTime = 0;
 }
