@@ -22,22 +22,6 @@
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-  <script>
-     function stop(){
-    clearInterval(down);
-    display = "0:00:00";
-            var displayPlace = document.getElementById('displayTime');
-          displayPlace.innerHTML = display;
-          document.title = display;
-          var count = $('#displayTime').text().length;
-    $('#displayTime').css('font-size', 100/count + 'vw');//文字サイズ調整
-}
-
-  function stopalarm(){
-    alarm.pause();
-    alarm.currentTime = 0;
-}
-  </script>
     <div class="timer teal lighten-1">
         <span id="displayTime">00:00:00</span>
     </div>
