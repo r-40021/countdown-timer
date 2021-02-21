@@ -23,7 +23,6 @@ $ (function () {
         }
         $('#Date').val(paramObject.date);
         $('#Time').val(paramObject.time);
-        var lineShare = document.getElementById('line');
 
         var myDate = paramObject.date;
         var myTime = paramObject.time;
