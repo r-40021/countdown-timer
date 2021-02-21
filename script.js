@@ -1,6 +1,6 @@
+var down;
 $ (function () {
-    var count = $('#displayTime').text().length;
-    $('#displayTime').css('font-size', 100/count + 'vw');//文字サイズ調整
+    resize();
     var param = location.search;
     var paramObject = new Object();
     var date = new Date();
@@ -23,8 +23,10 @@ $ (function () {
         var myDate = paramObject.date;
         var myTime = paramObject.time;
         myDate = myDate.split('/');
-        var targetTime = myDate[0] + "-" + myDate[1] + "-" + myDate[2] + " " + myTime + ":00";
-        setInterval(function(){
+        var target = new Date(myDate[0] + "-" + myDate[1] + "-" + myDate[2] + " " + myTime + ":00");
+        
+        function myCount(){
+        date = new Date();
         var setmonth = date.getMonth() + 1;
         var setday = date.getDate();
         if (setmonth < 10) {
@@ -41,11 +43,11 @@ $ (function () {
         if (setseconds < 10) {
             setseconds = "0" + setseconds;
         }
-        var now = date.getFullYear() + "-" + setmonth + "-" + setday + " " + date.getHours() + ":" + setminute + ":" + setseconds;
-        var diffTime = targetTime.getTime() - now.getTime();
+        var now = new Date(date.getFullYear() + "-" + setmonth + "-" + setday + " " + date.getHours() + ":" + setminute + ":" + setseconds);
+        var diffTime = target.getTime() - now.getTime();
         var diffHour = Math.floor(diffTime / (1000*60*60));
         var diffMinute = Math.floor((diffTime-diffHour*1000*60*60) / (1000*60));
-        var diffSecond = (diffTime - diffHour*1000*60*60 - diffMinute*1000*60) *1000;
+        var diffSecond = (diffTime - diffHour*1000*60*60 - diffMinute*1000*60) /1000;
         if (diffMinute < 10) {
             diffMinute = "0" + diffMinute;
         }
@@ -53,8 +55,16 @@ $ (function () {
             diffSecond = "0" + diffSecond;
         }
         var display = diffHour + ":" + diffMinute + ":" + diffSecond;
+        if (diffTime = 0) {
+            stop();
+        } else if (diffTime < 0) {
+            stop();
+        }
+        else{
         var displayPlace = document.getElementById('displayTime');
-        displayPlace.innerHTML = display;},100);
+        displayPlace.innerHTML = display;
+        resize();}}
+        down = setInterval(myCount, 1000);
     } else{
         var month = date.getMonth() + 1;
         var day = date.getDate();
@@ -83,14 +93,11 @@ function set() {
 
 $(document).ready(function(){
     $('.datepicker').datepicker({
-        format:"yyyy/mm/dd",
-        autoClose:true
+        format:"yyyy/mm/dd"
     });
     $('.timepicker').timepicker({
-        twelveHour:false,
-        autoClose:false
+        twelveHour:false
     });
-    $('.fixed-action-btn').floatingActionButton();
   });
 
   function copy() {
@@ -100,3 +107,12 @@ $(document).ready(function(){
     $('#currentURL').remove();
     M.toast({html: 'URLをコピーしました'})
   }
+
+  function resize(params) {
+    var count = $('#displayTime').text().length;
+    $('#displayTime').css('font-size', 100/count + 'vw');//文字サイズ調整
+  }
+
+  function stop(){
+    clearInterval(down);
+}
