@@ -130,12 +130,6 @@ $(document).ready(function(){
     $('#displayTime').css('font-size', 100/count + 'vw');//文字サイズ調整
   }
 
-  function displaytime(display){
-      var displayPlace = document.getElementById('displayTime');
-      displayPlace.innerHTML = display;
-      document.title = display;
-      resize();
-  }
 
   function stop(){
     clearInterval(down);
