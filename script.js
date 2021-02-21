@@ -1,5 +1,6 @@
 var down;
 var alarm;
+var display;
 $ (function () {
     resize();
     var param = location.search;
@@ -56,7 +57,7 @@ $ (function () {
         if (diffSecond < 10) {
             diffSecond = "0" + diffSecond;
         }
-        var display = diffHour + ":" + diffMinute + ":" + diffSecond;
+        display = diffHour + ":" + diffMinute + ":" + diffSecond;
         if (diffTime === 0) {
             stop();
             music.addEventListener("ended", function () {
