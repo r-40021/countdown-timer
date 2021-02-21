@@ -2,7 +2,8 @@ var down;
 var alarm;
 var display;
 $ (function () {
-    resize();
+    var count = $('#displayTime').text().length;
+    $('#displayTime').css('font-size', 100/count + 'vw');//文字サイズ調整
     var param = location.search;
     var paramObject = new Object();
     var date = new Date();
@@ -72,13 +73,15 @@ $ (function () {
             var displayPlace = document.getElementById('displayTime');
           displayPlace.innerHTML = display;
           document.title = display;
-          resize();
+          var count = $('#displayTime').text().length;
+    $('#displayTime').css('font-size', 100/count + 'vw');//文字サイズ調整
         }
         else{
             var displayPlace = document.getElementById('displayTime');
           displayPlace.innerHTML = display;
           document.title = display;
-          resize();
+          var count = $('#displayTime').text().length;
+    $('#displayTime').css('font-size', 100/count + 'vw');//文字サイズ調整
             stop();
         }}
         down = setInterval(myCount, 1000);
@@ -125,12 +128,7 @@ $(document).ready(function(){
     M.toast({html: 'URLをコピーしました'})
   }
 
-  function resize() {
-    var count = $('#displayTime').text().length;
-    $('#displayTime').css('font-size', 100/count + 'vw');//文字サイズ調整
-  }
-
-
+ 
   function stop(){
     clearInterval(down);
     displaytime("0:00:00");
