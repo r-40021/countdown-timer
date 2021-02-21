@@ -68,9 +68,17 @@ $ (function () {
             }, false);
         } else if (diffTime < 0) {
             stop();
+            display = "0:00:00";
+            var displayPlace = document.getElementById('displayTime');
+          displayPlace.innerHTML = display;
+          document.title = display;
+          resize();
         }
         else{
-            displaytime(display);
+            var displayPlace = document.getElementById('displayTime');
+          displayPlace.innerHTML = display;
+          document.title = display;
+          resize();
             stop();
         }}
         down = setInterval(myCount, 1000);
@@ -125,9 +133,6 @@ $(document).ready(function(){
   function displaytime(display){
       var displayPlace = document.getElementById('displayTime');
       displayPlace.innerHTML = display;
-      if(display == "0:00:00"){
-          display = "Countdown Timer";
-      }
       document.title = display;
       resize();
   }
