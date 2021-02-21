@@ -68,12 +68,7 @@ $ (function () {
             }, false);
         } else if (diffTime < 0) {
             stop();
-            display = "0:00:00";
-            var displayPlace = document.getElementById('displayTime');
-          displayPlace.innerHTML = display;
-          document.title = display;
-          var count = $('#displayTime').text().length;
-    $('#displayTime').css('font-size', 100/count + 'vw');//文字サイズ調整
+            
         }
         else{
             var displayPlace = document.getElementById('displayTime');
@@ -83,7 +78,7 @@ $ (function () {
     $('#displayTime').css('font-size', 100/count + 'vw');//文字サイズ調整
             stop();
         }}
-        down = setInterval(myCount, 1000);
+        down = setInterval(myCount, 500);
     } else{
         var month = date.getMonth() + 1;
         var day = date.getDate();
@@ -130,7 +125,12 @@ $(document).ready(function(){
  
   function stop(){
     clearInterval(down);
-    displaytime("0:00:00");
+    display = "0:00:00";
+            var displayPlace = document.getElementById('displayTime');
+          displayPlace.innerHTML = display;
+          document.title = display;
+          var count = $('#displayTime').text().length;
+    $('#displayTime').css('font-size', 100/count + 'vw');//文字サイズ調整
 }
 
   function stopalarm(){
