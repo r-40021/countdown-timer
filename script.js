@@ -1,9 +1,11 @@
 var down;
+var alarm;
 $ (function () {
     resize();
     var param = location.search;
     var paramObject = new Object();
     var date = new Date();
+    alarm = new Audio('alarm.mp3');
     
     if (param) {
         param = param.substring(1);
@@ -55,15 +57,19 @@ $ (function () {
             diffSecond = "0" + diffSecond;
         }
         var display = diffHour + ":" + diffMinute + ":" + diffSecond;
-        if (diffTime = 0) {
+        if (diffTime === 0) {
             stop();
+            music.addEventListener("ended", function () {
+            music.currentTime = 0;
+            music.play();
+            }, false);
         } else if (diffTime < 0) {
             stop();
         }
         else{
-        var displayPlace = document.getElementById('displayTime');
-        displayPlace.innerHTML = display;
-        resize();}}
+            displaytime(display);
+            stop();
+        }}
         down = setInterval(myCount, 1000);
     } else{
         var month = date.getMonth() + 1;
@@ -113,6 +119,22 @@ $(document).ready(function(){
     $('#displayTime').css('font-size', 100/count + 'vw');//文字サイズ調整
   }
 
+  function displaytime(display){
+      var displayPlace = document.getElementById('displayTime');
+      displayPlace.innerHTML = display;
+      if(display == "0:00:00"){
+          display = "Countdown Timer";
+      }
+      document.title = display;
+      resize();
+  }
+
   function stop(){
     clearInterval(down);
+    displaytime("0:00:00");
+}
+
+  function stopalarm(){
+    alarm.pause();
+    alarm.currentTime = 0;
 }
