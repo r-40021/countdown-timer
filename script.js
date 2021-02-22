@@ -115,7 +115,7 @@ $(document).ready(function(){
 
   function resize(params) {
     var count = $('#displayTime').text().length;
-    $('#displayTime').css('font-size', 100/count + 'vw');//文字サイズ調整
+    $('#displayTime').css('font-size', 150/count + 'vw');//文字サイズ調整
   }
 
   function stop(){
