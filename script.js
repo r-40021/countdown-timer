@@ -23,8 +23,7 @@ $ (function () {
 
         var myDate = paramObject.date;
         var myTime = paramObject.time;
-        myDate = myDate.split('/');
-        var target = new Date(myDate[0] + "-" + myDate[1] + "-" + myDate[2] + " " + myTime + ":00");
+        var target = new Date(myDate + " " + myTime + ":00");
         
         function myCount(){
         date = new Date();
@@ -44,7 +43,7 @@ $ (function () {
         if (setseconds < 10) {
             setseconds = "0" + setseconds;
         }
-        var now = new Date(date.getFullYear() + "-" + setmonth + "-" + setday + " " + date.getHours() + ":" + setminute + ":" + setseconds);
+        var now = new Date(date.getFullYear() + "/" + setmonth + "/" + setday + " " + date.getHours() + ":" + setminute + ":" + setseconds);
         var diffTime = target.getTime() - now.getTime();
         var diffHour = Math.floor(diffTime / (1000*60*60));
         var diffMinute = Math.floor((diffTime-diffHour*1000*60*60) / (1000*60));
@@ -69,7 +68,7 @@ $ (function () {
         displayPlace.innerHTML = display;
         document.title = display;
         resize();}}
-        down = setInterval(myCount, 1000);
+        down = setInterval(myCount, 200);
     } else{
         var month = date.getMonth() + 1;
         var day = date.getDate();
