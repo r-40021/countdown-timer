@@ -1,4 +1,4 @@
-# <img src="/fabicon/fabicon.png" width="30px">Countdown Timer
+# <img src="/fabicon/fabicon.ico" width="30px">Countdown Timer
 半永久的に計れるタイマー  
 <img src="/snsicon/sns.png" width="300px">
 # DEMO
