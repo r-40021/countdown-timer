@@ -1,5 +1,6 @@
 var down;
 var alarm = new Audio("alarm.mp3");
+alarm.loop = true;
 $ (function () {
     resize();
     var param = location.search;
@@ -83,7 +84,7 @@ $ (function () {
         if (minute < 10) {
             minute = "0" + minute;
         }
-        var SetTime = date.getHours()+1 + ":" + minute;
+        var SetTime = date.getHours() + ":" + minute;
     $("#Date").val(date2);
     $("#Time").val(SetTime);}
 });
@@ -102,6 +103,7 @@ $(document).ready(function(){
     $('.timepicker').timepicker({
         twelveHour:false
     });
+    $('.modal').modal();
   });
 
   function copy() {
@@ -119,4 +121,9 @@ $(document).ready(function(){
 
   function stop(){
     clearInterval(down);
+}
+
+function audiostop(){
+    alarm.pause();
+    alarm.currentTime = 0;
 }
