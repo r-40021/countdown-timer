@@ -38,6 +38,11 @@
       </div>
       <div class="row">
         <div class="col s12">
+          <a class="waves-effect waves-light btn modal-trigger" href="#modal1">アラーム音を鳴らすには</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
           <!--URL-->
           <a onclick="copy()" class="btn-flat grey darken-1 white-text waves-effect waves-teal" style="margin-right: 10px">URLをコピー</a>
           <!--Twitter-->
@@ -45,6 +50,25 @@
           <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         
         </div>
+      </div>
+    </div>
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <h4>アラーム音を有効にするには</h4>
+        <ol>
+          <li>URLの左側の錠マークをクリック</li>
+          <li>「サイトの設定」（表現は多少異なる場合があります）をクリック</li>
+          <li>「サウンド」もしくは「音」の項目を探し、「自動」から「許可」に変更</li>
+          <li>タイマーアプリを再読み込み</li>
+        </ol>
+        <p>注意点</p>
+        <ol>
+          <li>iPhoneやiPadなどでは、アラーム音を有効に設定できません。</li>
+          <li>ブラウザによっては、この設定をしなくてもアラーム音が鳴るものもあります。<br>（Edgeなどがその例です。）</li>
+        </ol>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">OK</a>
       </div>
     </div>
     <script src="jquery-3.5.1.min.js"></script>
