@@ -103,6 +103,7 @@ $(document).ready(function(){
     $('.timepicker').timepicker({
         twelveHour:false
     });
+    $('.modal').modal();
   });
 
   function copy() {
