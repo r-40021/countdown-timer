@@ -84,7 +84,7 @@ $ (function () {
         if (minute < 10) {
             minute = "0" + minute;
         }
-        var SetTime = date.getHours()+1 + ":" + minute;
+        var SetTime = date.getHours() + ":" + minute;
     $("#Date").val(date2);
     $("#Time").val(SetTime);}
 });
