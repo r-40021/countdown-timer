@@ -26,14 +26,14 @@
     <div class="container">
       <div class="row">
         <div class="col m6 s12">
-          <input placeholder="日付" id="Date" type="text" class="datepicker" >
+          <input placeholder="日付" id="Date" type="text" class="datepicker" readonly="readonly">
         </div>
         <div class="col m6 s12">
-          <input placeholder="時間" id="Time" type="text" class="timepicker" >
+          <input placeholder="時間" id="Time" type="text" class="timepicker" readonly="readonly">
         </div>
         <div class="col s12 center">
           <a class="waves-effect waves-light btn-large blue" onclick="set()">SET</a>
-          <a class="waves-effect waves-light btn-large pink" onclick="stop()">STOP</a>
+          <a class="waves-effect waves-light btn-large pink" onclick="stop();audiostop();">STOP</a>
         </div>
       </div>
       <div class="row">

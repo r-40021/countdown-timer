@@ -1,5 +1,6 @@
 var down;
 var alarm = new Audio("alarm.mp3");
+alarm.loop = true;
 $ (function () {
     resize();
     var param = location.search;
@@ -119,4 +120,9 @@ $(document).ready(function(){
 
   function stop(){
     clearInterval(down);
+}
+
+function audiostop(){
+    alarm.pause();
+    alarm.currentTime = 0;
 }
