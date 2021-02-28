@@ -1,8 +1,9 @@
 var down;
 var alarm = new Audio("alarm.mp3");
 alarm.loop = true;
-$ (function () {
-    resize();
+window.onload = function(){
+    resize();　//文字サイズ調整
+    //パラメータ取得
     var param = location.search;
     var paramObject = new Object();
     var date = new Date();
@@ -19,8 +20,9 @@ $ (function () {
 
             paramObject[paramName] = paramValue;
         }
-        $('#Date').val(paramObject.date);
-        $('#Time').val(paramObject.time);
+        //テキストボックスに日時をセット
+        document.getElementById('Date').value = paramObject.date;
+        document.getElementById('Time').value = paramObject.time;
 
         var myDate = paramObject.date;
         var myTime = paramObject.time;
@@ -85,14 +87,14 @@ $ (function () {
             minute = "0" + minute;
         }
         var SetTime = date.getHours() + ":" + minute;
-    $("#Date").val(date2);
-    $("#Time").val(SetTime);}
-});
+    document.getElementById('Date').value = date2;
+    document.getElementById('Time').value = SetTime;}
+}
 
 function set() {
     var url = new URL(window.location.href);
-    var myDate = $('#Date').val();
-    var myTime = $('#Time').val();
+    var myDate = document.getElementById('Date').value;
+    var myTime =  document.getElementById('Time').value;
     location.search = "?date=" + myDate + "&time=" + myTime;
 }
 
