@@ -1,4 +1,4 @@
-[日本語版](README_ja.md)
+[日本語(Japanese)](README_ja.md)
 # <img src="/fabicon/fabicon.ico" width="30px">Countdown Timer
 This is a timer that can be timed semi-permanently.
 # Screenshots
