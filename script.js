@@ -63,10 +63,10 @@ window.addEventListener('DOMContentLoaded', function() {
         if (display == "-1:59:59") {
             for (var i = 0; i < 5; i++) {
               Push.create('時間です！', {
-            　　body: message[i] + '\n通知はあと' + 5 - i - 1 +'回！',
+            　　body: '時間です！',
             　　icon: './fabicon/fabicon.ico',//アイコン
             　　timeout: 8000, // 通知時間
-            　　vibrate: [100, 100, 100]            　　
+            　　vibrate: [100, 100, 100,100,100]            　　
             }); 
                 
             }
