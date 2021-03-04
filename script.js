@@ -60,15 +60,17 @@ window.addEventListener('DOMContentLoaded', function() {
         }
         var display = diffHour + ":" + diffMinute + ":" + diffSecond;
         if (display == "-1:59:59") {
+              //通知
               Push.create('時間です！', {
-            　　body: '時間です！',
+            　　body: 'くっ...時の流れが疾風迅雷の俺に追いついたようだ......',
             　　icon: './fabicon/fabicon.ico',//アイコン
-            　　timeout: 8000, // 通知時間
-            　　vibrate: [200, 200, 200, 200, 200]            　　
+            　　timeout: 20000, // 通知時間
+            　　vibrate: [200, 100, 200, 100, 200]            　　
             }); 
             alarm.play();
             stop();
 　　　　　　　document.title = "やまだのタイマー";
+            window.navigator.vibrate([200, 100, 200, 100, 200]);
         } else if(display.match("-")){
          stop();
          display = "0:00:00";
