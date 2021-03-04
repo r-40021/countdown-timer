@@ -8,7 +8,6 @@ window.addEventListener('DOMContentLoaded', function() {
     var param = location.search;
     var paramObject = new Object();
     var date = new Date();
-    var message = ['時間です！','約束の時間がやってきた！','時間、時間、時間...','じ♡か♡ん','通知くどくてごめんね。']
     
     if (param) {
         param = param.substring(1);
@@ -65,7 +64,7 @@ window.addEventListener('DOMContentLoaded', function() {
             　　body: '時間です！',
             　　icon: './fabicon/fabicon.ico',//アイコン
             　　timeout: 8000, // 通知時間
-            　　vibrate: [100, 100, 100, 100, 100]            　　
+            　　vibrate: [200, 200, 200]            　　
             }); 
             alarm.play();
             stop();
