@@ -61,15 +61,12 @@ window.addEventListener('DOMContentLoaded', function() {
         }
         var display = diffHour + ":" + diffMinute + ":" + diffSecond;
         if (display == "-1:59:59") {
-            for (var i = 0; i < 5; i++) {
               Push.create('時間です！', {
             　　body: '時間です！',
             　　icon: './fabicon/fabicon.ico',//アイコン
             　　timeout: 8000, // 通知時間
-            　　vibrate: [100, 100, 100,100,100]            　　
+            　　vibrate: [100, 100, 100, 100, 100]            　　
             }); 
-                
-            }
             alarm.play();
             stop();
 　　　　　　　document.title = "Countdown Timer";
@@ -139,11 +136,4 @@ $(document).ready(function(){
 function audiostop(){
     alarm.pause();
     alarm.currentTime = 0;
-}
-
-function sleep(waitMsec) {
-  var startMsec = new Date();
- 
-  // 指定ミリ秒間だけループさせる（CPUは常にビジー状態）
-  while (new Date() - startMsec < waitMsec);
 }
