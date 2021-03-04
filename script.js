@@ -65,12 +65,12 @@ window.addEventListener('DOMContentLoaded', function() {
             　　body: 'くっ...時の流れが疾風迅雷の俺に追いついたようだ......',
             　　icon: './fabicon/fabicon.ico',//アイコン
             　　timeout: 20000, // 通知時間
-            　　vibrate: [200, 100, 200, 100, 200]            　　
+            　　vibrate: [1000, 1000, 1000, 1000, 1000]            　　
             }); 
             alarm.play();
             stop();
 　　　　　　　document.title = "やまだのタイマー";
-            window.navigator.vibrate([200, 100, 200, 100, 200]);
+            window.navigator.vibrate([1000, 1000, 1000, 1000, 1000]);
         } else if(display.match("-")){
          stop();
          display = "0:00:00";
