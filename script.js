@@ -2,11 +2,13 @@ var down;
 var alarm = new Audio("alarm.mp3");
 alarm.loop = true;
 window.onload = function(){
+    Push.Permission.request();//プッシュ通知許可ダイアログ
     resize();　//文字サイズ調整
     //パラメータ取得
     var param = location.search;
     var paramObject = new Object();
     var date = new Date();
+    var message = ['時間です！','約束の時間がやってきた！','時間、時間、時間...','じ♡か♡ん','通知くどくてごめんね。']
     
     if (param) {
         param = param.substring(1);
@@ -59,6 +61,14 @@ window.onload = function(){
         }
         var display = diffHour + ":" + diffMinute + ":" + diffSecond;
         if (display == "-1:59:59") {
+            for (let i = 0; i < 5; i++) {
+              Push.create('時間です！', {
+            　　body: message[i] + '\n通知はあと' + 5-i-1 +'回！',
+            　　icon: './fabicon/fabicon.ico',//アイコン
+            　　timeout: 8000, // 通知時間
+            　　vibrate: [100, 100, 100]            　　
+            });   
+            }
             alarm.play();
             stop();
 　　　　　　　document.title = "Countdown Timer";
