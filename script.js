@@ -61,13 +61,14 @@ window.addEventListener('DOMContentLoaded', function() {
         }
         var display = diffHour + ":" + diffMinute + ":" + diffSecond;
         if (display == "-1:59:59") {
-            for (let i = 0; i < 5; i++) {
+            for (var i = 0; i < 5; i++) {
               Push.create('時間です！', {
-            　　body: message[i] + '\n通知はあと' + 5-i-1 +'回！',
+            　　body: message[i] + '\n通知はあと' + 5 - i - 1 +'回！',
             　　icon: './fabicon/fabicon.ico',//アイコン
             　　timeout: 8000, // 通知時間
             　　vibrate: [100, 100, 100]            　　
-            });   
+            }); 
+                
             }
             alarm.play();
             stop();
@@ -138,4 +139,11 @@ $(document).ready(function(){
 function audiostop(){
     alarm.pause();
     alarm.currentTime = 0;
+}
+
+function sleep(waitMsec) {
+  var startMsec = new Date();
+ 
+  // 指定ミリ秒間だけループさせる（CPUは常にビジー状態）
+  while (new Date() - startMsec < waitMsec);
 }
