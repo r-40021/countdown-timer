@@ -69,11 +69,11 @@ window.addEventListener('DOMContentLoaded', function() {
             }); 
             alarm.play();
             stop();
-　　　　　　　document.title = "Countdown Timer";
+　　　　　　　document.title = "やまだのタイマー";
         } else if(display.match("-")){
          stop();
          display = "0:00:00";
-        document.title = "Countdown Timer";}
+        document.title = "やまだのタイマー";}
         else{
         var displayPlace = document.getElementById('displayTime');
         displayPlace.innerHTML = display;
