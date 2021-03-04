@@ -64,7 +64,7 @@ window.addEventListener('DOMContentLoaded', function() {
             　　body: '時間です！',
             　　icon: './fabicon/fabicon.ico',//アイコン
             　　timeout: 8000, // 通知時間
-            　　vibrate: [200, 200, 200]            　　
+            　　vibrate: [200, 200, 200, 200, 200]            　　
             }); 
             alarm.play();
             stop();
