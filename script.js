@@ -1,11 +1,14 @@
 var down;
 var alarm = new Audio("alarm.mp3");
 alarm.loop = true;
-$ (function () {
-    resize();
+window.addEventListener('DOMContentLoaded', function() {
+    Push.Permission.request();//プッシュ通知許可ダイアログ
+    resize();　//文字サイズ調整
+    //パラメータ取得
     var param = location.search;
     var paramObject = new Object();
     var date = new Date();
+    var message = ['時間です！','約束の時間がやってきた！','時間、時間、時間...','じ♡か♡ん','通知くどくてごめんね。']
     
     if (param) {
         param = param.substring(1);
@@ -19,8 +22,9 @@ $ (function () {
 
             paramObject[paramName] = paramValue;
         }
-        $('#Date').val(paramObject.date);
-        $('#Time').val(paramObject.time);
+        //テキストボックスに日時をセット
+        document.getElementById('Date').value = paramObject.date;
+        document.getElementById('Time').value = paramObject.time;
 
         var myDate = paramObject.date;
         var myTime = paramObject.time;
@@ -57,6 +61,14 @@ $ (function () {
         }
         var display = diffHour + ":" + diffMinute + ":" + diffSecond;
         if (display == "-1:59:59") {
+            for (let i = 0; i < 5; i++) {
+              Push.create('時間です！', {
+            　　body: message[i] + '\n通知はあと' + 5-i-1 +'回！',
+            　　icon: './fabicon/fabicon.ico',//アイコン
+            　　timeout: 8000, // 通知時間
+            　　vibrate: [100, 100, 100]            　　
+            });   
+            }
             alarm.play();
             stop();
 　　　　　　　document.title = "Countdown Timer";
@@ -85,14 +97,14 @@ $ (function () {
             minute = "0" + minute;
         }
         var SetTime = date.getHours() + ":" + minute;
-    $("#Date").val(date2);
-    $("#Time").val(SetTime);}
+    document.getElementById('Date').value = date2;
+    document.getElementById('Time').value = SetTime;}
 });
 
 function set() {
     var url = new URL(window.location.href);
-    var myDate = $('#Date').val();
-    var myTime = $('#Time').val();
+    var myDate = document.getElementById('Date').value;
+    var myTime =  document.getElementById('Time').value;
     location.search = "?date=" + myDate + "&time=" + myTime;
 }
 
