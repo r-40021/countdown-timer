@@ -22,4 +22,4 @@ For privacy reasons, we do not have an access analysis for this web app. If you 
 - Google Chrome v.88
 - Microsoft Edge(Chromium) v.88
 # OSS
--(c) 2014-2019 Materialize
+- (c) 2014-2019 Materialize
