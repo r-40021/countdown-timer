@@ -1,4 +1,5 @@
 var down;
+var vibrate;
 var alarm = new Audio("alarm.mp3");
 alarm.loop = true;
 window.addEventListener('DOMContentLoaded', function() {
@@ -75,7 +76,9 @@ window.addEventListener('DOMContentLoaded', function() {
             alarm.play();
             stop();
 　　　　　　　document.title = "やまだのタイマー";
-            window.navigator.vibrate([1000, 1000, 1000, 1000, 1000]);
+            vibrate = setInterval(function(){
+                        window.navigator.vibrate([1000, 1000, 1000, 1000, 1000]);
+                       }, 1000);
         } else if(display.match("-")){
          stop();
          display = "0:00:00";
@@ -141,5 +144,6 @@ $(document).ready(function(){
 
 function audiostop(){
     alarm.pause();
-    alarm.currentTime = 0;
+    alarm.currentTime = 0;//音停止
+    clearInterval(vibrate);//バイブ停止
 }
