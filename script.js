@@ -5,7 +5,7 @@ alarm.loop = true;
 window.addEventListener('DOMContentLoaded', function() {
     Push.Permission.request();//プッシュ通知許可ダイアログ
     resize();　//文字サイズ調整
-    //パラメータ取得
+    /*パラメータ取得*/
     var param = location.search;
     var paramObject = new Object();
     var date = new Date();
@@ -28,31 +28,15 @@ window.addEventListener('DOMContentLoaded', function() {
 
         var myDate = paramObject.date;
         var myTime = paramObject.time;
-        var target = new Date(myDate + " " + myTime + ":00");
+        var target = new Date(myDate + " " + myTime + ":00");//設定時間
         
+        /*カウントダウン（一番大事）*/
         function myCount(){
         date = new Date();
-        var setmonth = date.getMonth() + 1;
-        var setday = date.getDate();
-        if (setmonth < 10) {
-            setmonth = "0" + setmonth;
-        }
-        if (setday < 10) {
-            setday = "0" + setday;
-        }
-        var setminute = date.getMinutes();
-        var setseconds = date.getSeconds();
-        if (setminute < 10) {
-            setminute = "0" + setminute;
-        }
-        if (setseconds < 10) {
-            setseconds = "0" + setseconds;
-        }
-        var now = new Date(date.getFullYear() + "/" + setmonth + "/" + setday + " " + date.getHours() + ":" + setminute + ":" + setseconds);
-        var diffTime = target.getTime() - now.getTime();
-        var diffHour = Math.floor(diffTime / (1000*60*60));
-        var diffMinute = Math.floor((diffTime-diffHour*1000*60*60) / (1000*60));
-        var diffSecond = (diffTime - diffHour*1000*60*60 - diffMinute*1000*60) /1000;
+        var diffTime = target.getTime() - date.getTime();//時間の差を計算
+        var diffHour = Math.floor(diffTime / (1000*60*60));//時間に変換
+        var diffMinute = Math.floor((diffTime-diffHour*1000*60*60) / (1000*60));//分に変換
+        var diffSecond = (diffTime - diffHour*1000*60*60 - diffMinute*1000*60) /1000;//秒に変換
         if (diffMinute < 10) {
             diffMinute = "0" + diffMinute;
         }
@@ -61,7 +45,7 @@ window.addEventListener('DOMContentLoaded', function() {
         }
         var display = diffHour + ":" + diffMinute + ":" + diffSecond;
         if (display == "-1:59:59") {
-              //通知
+              /*通知*/
               Push.create('時間です！', {
             　　body: 'くっ...時の流れが疾風迅雷の俺に追いついたようだ......',
             　　icon: './fabicon/fabicon.ico',//アイコン
@@ -79,7 +63,7 @@ window.addEventListener('DOMContentLoaded', function() {
             vibrate = setInterval(function(){
                         window.navigator.vibrate([1000, 1000, 1000, 1000, 1000]);
                        }, 1000);
-        } else if(display.match("-")){
+        } else /*計算結果が負のときの処理*/if(display.match("-")){
          stop();
          display = "0:00:00";
         document.title = "やまだのタイマー";}
@@ -90,6 +74,7 @@ window.addEventListener('DOMContentLoaded', function() {
         resize();}}
         down = setInterval(myCount, 200);
     } else{
+        /*パラメータがないとき*/
         var month = date.getMonth() + 1;
         var day = date.getDate();
         if (month < 10) {
