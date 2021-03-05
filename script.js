@@ -36,7 +36,7 @@ window.addEventListener('DOMContentLoaded', function() {
         var diffTime = target.getTime() - date.getTime();//時間の差を計算
         var diffHour = Math.floor(diffTime / (1000*60*60));//時間に変換
         var diffMinute = Math.floor((diffTime-diffHour*1000*60*60) / (1000*60));//分に変換
-        var diffSecond = (diffTime - diffHour*1000*60*60 - diffMinute*1000*60) /1000;//秒に変換
+        var diffSecond = Math.floor((diffTime - diffHour*1000*60*60 - diffMinute*1000*60) /1000);//秒に変換
         if (diffMinute < 10) {
             diffMinute = "0" + diffMinute;
         }
