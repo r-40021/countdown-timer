@@ -47,6 +47,7 @@ window.addEventListener('DOMContentLoaded', function() {
         if (display == "-1:59:59") {
               /*通知*/
               Push.create('時間です！', {
+               tag: 'timeUp',
             　　body: 'くっ...時の流れが疾風迅雷の俺に追いついたようだ......',
             　　icon: './fabicon/fabicon.ico',//アイコン
             　　requireInteraction: true, // 永遠に通知
