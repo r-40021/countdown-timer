@@ -64,8 +64,13 @@ window.addEventListener('DOMContentLoaded', function() {
               Push.create('時間です！', {
             　　body: 'くっ...時の流れが疾風迅雷の俺に追いついたようだ......',
             　　icon: './fabicon/fabicon.ico',//アイコン
-            　　timeout: 20000, // 通知時間
-            　　vibrate: [1000, 1000, 1000, 1000, 1000]            　　
+            　　requireInteraction: true, // 永遠に通知
+            　　vibrate: [1000, 1000, 1000, 1000, 1000] ,
+                onClick: function () {
+                    window.focus();
+                    this.close();
+                    stop();
+                    audiostop();}
             }); 
             alarm.play();
             stop();
