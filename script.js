@@ -3,7 +3,22 @@ var vibrate;
 var alarm = new Audio("alarm.mp3");
 alarm.loop = true;
 window.addEventListener('DOMContentLoaded', function() {
-    Push.Permission.request();//プッシュ通知許可ダイアログ
+    /*トーストで通知の権限を通知*/
+    if (Push.Permission.has() == true){
+        M.toast({html: '時間になったらデスクトップ通知でお知らせします'})
+    } else if (Push.Permission.has() == false){
+         M.toast({html: '通知を許可して、時間になったらデスクトップに通知が届くようにしてください'})
+    }
+    /*プッシュ通知許可ダイアログ*/
+   Push.Permission.request(onGranted, onDenied);
+
+    function onGranted() {
+         M.toast({html: '時間になったらデスクトップ通知でお知らせします'})
+    }
+
+    function onDenied() {
+        M.toast({html: '時間になっても、デスクトップに通知を表示しません。'})
+    }
     resize();　//文字サイズ調整
     /*パラメータ取得*/
     var param = location.search;
