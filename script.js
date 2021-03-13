@@ -4,7 +4,7 @@ var alarm = new Audio("alarm.mp3");
 alarm.loop = true;
 window.addEventListener('DOMContentLoaded', function() {
     var userAgent = window.navigator.userAgent.toLowerCase();//ブラウザ情報取得
-    if (userAgent.indexOf("android") === -1){//androidでは実行しない
+    if (userAgent.indexOf("msie") === -1||userAgent.indexOf("trident") === -1||'ontouchend' in document){//タッチデバイスとIEでは実行しない
     /*トーストで通知の権限を通知*/
     if (Push.Permission.has() == false){
          M.toast({html: '通知を許可して、時間になったらデスクトップに通知が届くようにしてください'})
@@ -58,8 +58,8 @@ window.addEventListener('DOMContentLoaded', function() {
         }
         var display = diffHour + ":" + diffMinute + ":" + diffSecond;
         if (display == "-1:59:59") {
-              /*通知(androidはなし)*/
-            if (userAgent.indexOf("android") === -1){
+              /*通知(タッチデバイスとIEはなし)*/
+            if (userAgent.indexOf("msie") === -1||userAgent.indexOf("trident") === -1||'ontouchend' in document){
               Push.create('時間です！', {
             　　body: 'くっ...時の流れが疾風迅雷の俺に追いついたようだ......',
             　　icon: './fabicon/fabicon.ico',//アイコン
