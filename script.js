@@ -4,7 +4,7 @@ var alarm = new Audio("alarm.mp3");
 alarm.loop = true;
 window.addEventListener('DOMContentLoaded', function() {
     var userAgent = window.navigator.userAgent.toLowerCase();//ブラウザ情報取得
-    if ((userAgent.indexOf("msie") === -1&&userAgent.indexOf("trident") === -1)&&userAgent.indexOf("windows") != -1||(userAgent.indexOf("mac os x") != -1&&!'ontouchend' in document)||userAgent.indexOf("cros") != -1||userAgent.indexOf("linux") != -1){//PCとIE以外でしか実行しない
+    if ((userAgent.indexOf("msie") === -1&&userAgent.indexOf("trident") === -1/*IEを省く*/)&&(userAgent.indexOf("windows") != -1||(userAgent.indexOf("mac os x") != -1&&!'ontouchend' in document)/*mac os xが含まれていて、かつマウスデバイス*/||userAgent.indexOf("cros") != -1||userAgent.indexOf("linux") != -1)&&userAgent.indexOf("android") === -1/*android省く*/){//PCとIE以外でしか実行しない
     /*トーストで通知の権限を通知*/
     if (Push.Permission.has() == false){
          M.toast({html: '通知を許可して、時間になったらデスクトップに通知が届くようにしてください'})
@@ -59,7 +59,7 @@ window.addEventListener('DOMContentLoaded', function() {
         var display = diffHour + ":" + diffMinute + ":" + diffSecond;
         if (display == "-1:59:59") {
               /*通知(タッチデバイスとIEはなし)*/
-            if ((userAgent.indexOf("msie") === -1&&userAgent.indexOf("trident") === -1)&&userAgent.indexOf("windows") != -1||(userAgent.indexOf("mac os x") != -1&&!'ontouchend' in document)||userAgent.indexOf("cros") != -1||userAgent.indexOf("linux") != -1){
+            if ((userAgent.indexOf("msie") === -1&&userAgent.indexOf("trident") === -1/*IEを省く*/)&&(userAgent.indexOf("windows") != -1||(userAgent.indexOf("mac os x") != -1&&!'ontouchend' in document)/*mac os xが含まれていて、かつマウスデバイス*/||userAgent.indexOf("cros") != -1||userAgent.indexOf("linux") != -1)&&userAgent.indexOf("android") === -1/*android省く*/){
               Push.create('時間です！', {
             　　body: 'くっ...時の流れが疾風迅雷の俺に追いついたようだ......',
             　　icon: './fabicon/fabicon.ico',//アイコン
