@@ -140,10 +140,8 @@ function set() {
   });
 
   function copy() {
-    document.querySelector('body').append('<textarea id="currentURL" style="position:fixed;left:-100%;">'+location.href+'</textarea>');
-    document.querySelector('#currentURL').select();
-    document.execCommand('copy');
-    document.querySelector('#currentURL').remove();
+     var url = location.href;
+     navigator.clipboard.writeText(url);
     M.toast({html: 'URLをコピーしました'})
   }
 
