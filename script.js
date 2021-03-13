@@ -19,6 +19,8 @@ window.addEventListener('DOMContentLoaded', function() {
     function onGranted() {
          M.toast({html: '時間になったらデスクトップ通知でお知らせします'})
     }
+    } else{
+         M.toast({html: 'ご利用の環境では、時間になってもプッシュ通知を行うことができません。<br><a class="white-text" href="#push">詳しい情報</a>'})
     }
     
     resize();　//文字サイズ調整
