@@ -121,27 +121,35 @@ function set() {
     location.search = "?date=" + myDate + "&time=" + myTime;
 }
 
-$(document).ready(function(){
-    $('.datepicker').datepicker({
-        format:"yyyy/mm/dd"
-    });
-    $('.timepicker').timepicker({
-        twelveHour:false
-    });
-    $('.modal').modal();
+ document.addEventListener('DOMContentLoaded', function() {
+     /*datepicker*/
+    var elems = document.querySelectorAll('.datepicker');
+    var options = {
+        "format":"yyyy/mm/dd"
+    }
+    var instances = M.Datepicker.init(elems, options);
+     /*timepicker*/
+    elems = document.querySelectorAll('.timepicker');
+    options = {
+        "twelveHour":false
+    }
+    instances = M.Timepicker.init(elems, options);
+     /*modal*/
+     elems = document.querySelectorAll('.modal');
+     instances = M.Modal.init(elems);
   });
 
   function copy() {
-    $('body').append('<textarea id="currentURL" style="position:fixed;left:-100%;">'+location.href+'</textarea>');
-    $('#currentURL').select();
+    document.querySelector('body').append('<textarea id="currentURL" style="position:fixed;left:-100%;">'+location.href+'</textarea>');
+    document.querySelector('#currentURL').select();
     document.execCommand('copy');
-    $('#currentURL').remove();
+    document.querySelector('#currentURL').remove();
     M.toast({html: 'URLをコピーしました'})
   }
 
   function resize(params) {
-    var count = $('#displayTime').text().length;
-    $('#displayTime').css('font-size', 150/count + 'vw');//文字サイズ調整
+    var count = document.querySelector('#displayTime').innerHTML.length;
+    document.querySelector('#displayTime').style.fontSize = 150/count + 'vw';//文字サイズ調整
   }
 
   function stop(){
