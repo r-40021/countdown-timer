@@ -4,6 +4,10 @@ var alarm = new Audio("alarm.mp3");
 alarm.loop = true;
 window.addEventListener('DOMContentLoaded', function() {
     var userAgent = window.navigator.userAgent.toLowerCase();//ブラウザ情報取得
+    if (userAgent.indexOf("msie") != -1||userAgent.indexOf("trident") != -1){
+        alert('Internet Explorerは動作保証対象外です。\nEdgeやChromeをお使いください。');
+    }
+        
     if ((userAgent.indexOf("msie") === -1&&userAgent.indexOf("trident") === -1/*IEを省く*/)&&(userAgent.indexOf("windows") != -1||(userAgent.indexOf("mac os x") != -1&&!'ontouchend' in document)/*mac os xが含まれていて、かつマウスデバイス*/||userAgent.indexOf("cros") != -1||userAgent.indexOf("linux") != -1)&&userAgent.indexOf("android") === -1/*android省く*/){//PCとIE以外でしか実行しない
     /*トーストで通知の権限を通知*/
     if (Push.Permission.has() == false){
