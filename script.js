@@ -20,7 +20,7 @@ window.addEventListener('DOMContentLoaded', function() {
          M.toast({html: '時間になったらデスクトップ通知でお知らせします'})
     }
     } else{
-         M.toast({html: 'ご利用の環境では、時間になってもプッシュ通知を行うことができません。'})
+         M.toast({html: '<span>ご利用の環境では、時間になってもプッシュ通知を行うことができません。</span><a class="btn-flat toast-action modal-trigger" href="#push">詳しい情報</a>'})
     }
     
     resize();　//文字サイズ調整
