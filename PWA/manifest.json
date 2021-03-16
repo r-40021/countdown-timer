@@ -1,1 +1,18 @@
-
+{
+  "name":"やまだのタイマー",
+  "short_name":"やまだタイマー",
+  "description": "目覚まし時計とタイマーのいいとこ取りをした、オープンソースのちょっと変わったタイマーです。いろんな用途に使えます。",
+  "icons": [{
+      "src": "icon_192px.png",
+      "sizes":"192x192",
+      "type": "image/png"
+    }, {
+      "src": "icon_512px.png",
+      "sizes":"512x512",
+      "type": "image/png"
+    }],
+  "start_url": "../index.html",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#26a69a"
+}
