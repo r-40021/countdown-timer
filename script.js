@@ -121,6 +121,7 @@ function set() {
     var myDate = document.getElementById('Date').value;
     var myTime =  document.getElementById('Time').value;
     history.replaceState( null, "やまだのタイマー", "index.html?date=" + myDate + "&time=" + myTime);
+    stop();
     onload();
 }
 
