@@ -86,7 +86,7 @@ function onload() {
             vibrate = setInterval(function(){
                         window.navigator.vibrate([1000, 1000, 1000, 1000, 1000]);
                        }, 1000);
-        } else /*計算結果が負のときの処理*/if(display.match("-")){
+        } else /*計算結果が負orNaNのときの処理*/if(display.match("-|NaN")){
          stop();
          display = "0:00:00";
          var displayPlace = document.getElementById('displayTime');
