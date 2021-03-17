@@ -12,12 +12,12 @@
   <!--Android PWA-->
   <link rel="manifest" href="/PWA/manifest.json">
   <script>
-  if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/PWA/sw.js')
-        .then((reg) => {
-          console.log('Service worker registered.', reg);
-        });
-  }
+    if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service_worker.js').then(function(registration) {
+        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    }).catch(function(err) {
+        console.log('ServiceWorker registration failed: ', err);
+    });
   </script>
   <!--OGP-->	
   <meta name="twitter:card" content="summary_large_image" />
