@@ -89,7 +89,9 @@ function onload() {
         } else /*計算結果が負のときの処理*/if(display.match("-")){
          stop();
          display = "0:00:00";
-        document.title = "やまだのタイマー";}
+         var displayPlace = document.getElementById('displayTime');
+         displayPlace.innerHTML = display;
+         document.title = "やまだのタイマー";}
         else{
         var displayPlace = document.getElementById('displayTime');
         displayPlace.innerHTML = display;
