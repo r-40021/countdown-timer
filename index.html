@@ -10,7 +10,7 @@
   <meta name="apple-mobile-web-app-title" content="やまだタイマー">
   <link rel="apple-touch-icon-precomposed" href="./fabicon/fabicon.png">
   <!--Android PWA-->
-  <link rel="manifest" href="/PWA/manifest.json">
+  <link rel="manifest" href="./PWA/manifest.json">
   <script>
     if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('service_worker.js').then(function(registration) {
@@ -81,7 +81,7 @@
         <p>注意点</p>
         <ol>
           <li>iPhoneやiPadなどでは、アラーム音を有効に設定できません。</li>
-          <li>ブラウザによっては、この設定をしなくてもアラーム音が鳴るものもあります。<br>（Edgeなどがその例です。）</li>
+          <li>ブラウザによっては、この設定をしなくてもアラーム音が鳴るものもあります。<br>（Edgeがその例です。）</li>
         </ol>
       </div>
       <div class="modal-footer">
@@ -106,7 +106,7 @@
       <p>※プッシュ通知は「オマケ機能」程度のものですので、アプリ自体は問題なくご利用になれます。</p>
     </div>
     <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-green btn-flat">OK</a>
+      <a class="modal-close waves-effect waves-green btn-flat">OK</a>
     </div>
   </div>
   

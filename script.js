@@ -2,7 +2,9 @@ var down;
 var vibrate;
 var alarm = new Audio("alarm.mp3");
 alarm.loop = true;
-window.addEventListener('DOMContentLoaded', function() {
+window.addEventListener('DOMContentLoaded', onload);
+
+function onload() {
     var userAgent = window.navigator.userAgent.toLowerCase();//ブラウザ情報取得
     if (userAgent.indexOf("msie") != -1||userAgent.indexOf("trident") != -1){
         alert('Internet Explorerでは正常に動作しない可能性があります。\nEdgeやChromeをお使いください。');
@@ -84,10 +86,12 @@ window.addEventListener('DOMContentLoaded', function() {
             vibrate = setInterval(function(){
                         window.navigator.vibrate([1000, 1000, 1000, 1000, 1000]);
                        }, 1000);
-        } else /*計算結果が負のときの処理*/if(display.match("-")){
+        } else /*計算結果が負orNaNのときの処理*/if(display.match("-|NaN")){
          stop();
-         display = "0:00:00";
-        document.title = "やまだのタイマー";}
+         display = "00:00:00";
+         var displayPlace = document.getElementById('displayTime');
+         displayPlace.innerHTML = display;
+         document.title = "やまだのタイマー";}
         else{
         var displayPlace = document.getElementById('displayTime');
         displayPlace.innerHTML = display;
@@ -112,13 +116,15 @@ window.addEventListener('DOMContentLoaded', function() {
         var SetTime = date.getHours() + ":" + minute;
     document.getElementById('Date').value = date2;
     document.getElementById('Time').value = SetTime;}
-});
+}
 
 function set() {
     var url = new URL(window.location.href);
     var myDate = document.getElementById('Date').value;
     var myTime =  document.getElementById('Time').value;
-    location.search = "?date=" + myDate + "&time=" + myTime;
+    history.replaceState( null, "やまだのタイマー", "index.html?date=" + myDate + "&time=" + myTime);
+    stop();
+    onload();
 }
 
  document.addEventListener('DOMContentLoaded', function() {
