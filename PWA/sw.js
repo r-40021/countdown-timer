@@ -1,37 +1,33 @@
-self.addEventListener('fetch', function(e) {
-  // インストール促す
-})
+// キャッシュファイルの指定
+var CACHE_NAME = '210317';
+var urlsToCache = [
+    '/r-40021.github.io/countdown-timer/index.html',
+    '/r-40021.github.io/countdown-timer/style.css',
+    '/r-40021.github.io/countdown-timer/script.js',
+    '/r-40021.github.io/countdown-timer/materialize.min.css',
+    '/r-40021.github.io/countdown-timer/materialize.min.js',
+    '/r-40021.github.io/countdown-timer/alarm.mp3',
+    '/r-40021.github.io/countdown-timer/fabicon/fabicon.ico',
+];
 
-importScripts('https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js')//workboxインポート
+// インストール処理
+self.addEventListener('install', function(event) {
+    event.waitUntil(
+        caches
+            .open(CACHE_NAME)
+            .then(function(cache) {
+                return cache.addAll(urlsToCache);
+            })
+    );
+});
 
-// ファイルのキャッシュ
-workbox.precaching.precacheAndRoute([
-  {
-    url: '../index.html',
-    revision: '210316'
-  },
-  {
-    url: '../style.css',
-    revision: '210316'
-  },
-  { 
-　url: '../script.js',
-    revision: '210316'
-  },
-  { 
-　url: '../materialize.min.css',
-    revision: '210316'
-  },
-  { 
-　url: '../materialize.min.js',
-    revision: '210316'
-  },
-  { 
-　url: '../alarm.mp3',
-    revision: '210316'
-  },
-  { 
-　url: '../fabicon/fabicon.ico',
-    revision: '210316'
-  },
-])
+// リソースフェッチ時のキャッシュロード処理
+self.addEventListener('fetch', function(event) {
+    event.respondWith(
+        caches
+            .match(event.request)
+            .then(function(response) {
+                return response ? response : fetch(event.request);
+            })
+    );
+});
