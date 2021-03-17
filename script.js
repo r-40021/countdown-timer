@@ -2,7 +2,7 @@ var down;
 var vibrate;
 var alarm = new Audio("alarm.mp3");
 alarm.loop = true;
-window.addEventListener('DOMContentLoaded', function() {
+window.addEventListener('DOMContentLoaded', function onload() {
     var userAgent = window.navigator.userAgent.toLowerCase();//ブラウザ情報取得
     if (userAgent.indexOf("msie") != -1||userAgent.indexOf("trident") != -1){
         alert('Internet Explorerでは正常に動作しない可能性があります。\nEdgeやChromeをお使いください。');
@@ -119,6 +119,7 @@ function set() {
     var myDate = document.getElementById('Date').value;
     var myTime =  document.getElementById('Time').value;
     history.replaceState( null, "やまだのタイマー", "index.html?date=" + myDate + "&time=" + myTime);
+    onload();
 }
 
  document.addEventListener('DOMContentLoaded', function() {
