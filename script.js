@@ -88,7 +88,7 @@ function onload() {
                        }, 1000);
         } else /*計算結果が負orNaNのときの処理*/if(display.match("-|NaN")){
          stop();
-         display = "0:00:00";
+         display = "00:00:00";
          var displayPlace = document.getElementById('displayTime');
          displayPlace.innerHTML = display;
          document.title = "やまだのタイマー";}
