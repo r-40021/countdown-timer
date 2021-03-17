@@ -85,7 +85,7 @@ function onload() {
 　　　　　　　document.title = "やまだのタイマー";
             vibrate = setInterval(function(){
                         window.navigator.vibrate([1000, 1000, 1000, 1000, 1000]);
-                       }, 1000);
+                       }, 6000);
         } else /*計算結果が負orNaNのときの処理*/if(display.match("-|NaN")){
          stop();
          display = "00:00:00";
