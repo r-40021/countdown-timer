@@ -118,7 +118,7 @@ function set() {
     var url = new URL(window.location.href);
     var myDate = document.getElementById('Date').value;
     var myTime =  document.getElementById('Time').value;
-    location.search = "?date=" + myDate + "&time=" + myTime;
+    history.replaceState( null, "やまだのタイマー", "index.html?date=" + myDate + "&time=" + myTime);
 }
 
  document.addEventListener('DOMContentLoaded', function() {
