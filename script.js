@@ -2,7 +2,9 @@ var down;
 var vibrate;
 var alarm = new Audio("alarm.mp3");
 alarm.loop = true;
-window.addEventListener('DOMContentLoaded', function onload() {
+window.addEventListener('DOMContentLoaded', onload);
+
+function onload() {
     var userAgent = window.navigator.userAgent.toLowerCase();//ブラウザ情報取得
     if (userAgent.indexOf("msie") != -1||userAgent.indexOf("trident") != -1){
         alert('Internet Explorerでは正常に動作しない可能性があります。\nEdgeやChromeをお使いください。');
@@ -112,7 +114,7 @@ window.addEventListener('DOMContentLoaded', function onload() {
         var SetTime = date.getHours() + ":" + minute;
     document.getElementById('Date').value = date2;
     document.getElementById('Time').value = SetTime;}
-});
+}
 
 function set() {
     var url = new URL(window.location.href);
