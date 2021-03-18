@@ -1,6 +1,8 @@
 var down;
 var vibrate;
 var timerbox;
+var displayEnd;
+var timerbox;
 var useDevice = 0;
 var alarm = new Audio("alarm.mp3");
 alarm.loop = true;
@@ -93,13 +95,14 @@ function onload() {
             stop();
 　　　　　　 document.title = "やまだのタイマー";
             timerbox = document.getElementById("displayTime")
-            var displayEnd  = setInterval(function(){
+            displayEnd  = setInterval(function(){
                                timerbox.style.color ="#26a69a";
 　　　　　　　　　　　　　　　　　　　document.title = "時間です！";
                              setTimeout(function(){
                                 timerbox.style.color ="#FFFFFF";
                                 document.title = "やまだのタイマー";
                                }, 1000);
+                           }, 2000);
 
         } else /*計算結果が負orNaNのときの処理*/if(display.match("-|NaN")){
          stop();
@@ -108,7 +111,7 @@ function onload() {
          displayPlace.innerHTML = display;
          document.title = "やまだのタイマー";}
         else{
-        var displayPlace = document.getElementById('displayTime');
+        displayPlace = document.getElementById('displayTime');
         displayPlace.innerHTML = display;
         document.title = display;
         resize();}}
