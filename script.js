@@ -2,7 +2,7 @@ var down;
 var vibrate;
 var timerbox;
 var displayEnd;
-var timerbox;
+var displayPlace;
 var useDevice = 0;
 var alarm = new Audio("alarm.mp3");
 alarm.loop = true;
@@ -184,6 +184,7 @@ function audiostop(){
     alarm.pause();
     alarm.currentTime = 0;//音停止
     clearInterval(displayEnd);
+    timerbox.style.color ="#FFFFFF";
 }
 
 input.addEventListener('keydown', (e) => {
