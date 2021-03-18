@@ -91,7 +91,14 @@ function onload() {
             alarm.play();
             stop();
 　　　　　　 document.title = "やまだのタイマー";
-            vibrate = setInterval(function(){
+            var timerbox = document.getElementById("displayTime")
+            var displayEnd  = setInterval(function(){
+                        timerbox.style.display ="none";
+                             setTimeout(function(){
+                                timerbox.style.display ="block";
+                               }, 1000);
+                       }, 2000);
+            var vibrate = setInterval(function(){
                         window.navigator.vibrate([1000, 1000, 1000, 1000, 1000]);
                        }, 6000);
         } else /*計算結果が負orNaNのときの処理*/if(display.match("-|NaN")){
@@ -176,6 +183,7 @@ function audiostop(){
     alarm.pause();
     alarm.currentTime = 0;//音停止
     clearInterval(vibrate);//バイブ停止
+    clearInterval(displayEnd);
 }
 
 input.addEventListener('keydown', (e) => {
