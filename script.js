@@ -6,10 +6,10 @@ var displayPlace;
 var useDevice = 0;
 var alarm = new Audio("alarm.mp3");
 alarm.loop = true;
-window.onload = ()=>{
+window.addEventListener('load', (event) => {
     const loader = document.getElementById('load');
     loader.classList.add('loaded');
-}
+});
 window.addEventListener('DOMContentLoaded', onload);
 
 function onload() {
