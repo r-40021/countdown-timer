@@ -11,7 +11,7 @@
       "sizes":"512x512",
       "type": "image/png"
     }],
-  "start_url": "/r-40021.github.io/countdown-timer/index.html",
+  "start_url": "../index.html",
   "display": "standalone",
   "background_color": "#FFFFFF",
   "theme_color": "#26a69a"
