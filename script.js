@@ -9,6 +9,7 @@ alarm.loop = true;
 window.addEventListener('load', (event) => {
     const loader = document.getElementById('load');
     loader.classList.add('loaded');
+    pushrequest();
 });
 window.addEventListener('DOMContentLoaded', onload);
 
@@ -20,22 +21,7 @@ function onload() {
     if (userAgent.indexOf("msie") != -1||userAgent.indexOf("trident") != -1){
         alert('Internet Explorerでは正常に動作しない可能性があります。\nEdgeやChromeをお使いください。');
     }
-        
-    if (useDevice){//PCとIE以外でしか実行しない
-    /*トーストで通知の権限を通知*/
-    if (Push.Permission.has() == false){
-         M.toast({html: '通知を許可して、時間になったらデスクトップに通知が届くようにしてください'})
-    }
-       /*プッシュ通知許可ダイアログ*/
-   Push.Permission.request(onGranted);
-
-    function onGranted() {
-         M.toast({html: '時間になったらデスクトップ通知でお知らせします'})
-    }
-    } else{
-         M.toast({html: '<span>ご利用の環境では、時間になってもプッシュ通知を行うことができません。</span><a class="btn-flat toast-action modal-trigger" href="#push">MORE</a>'})
-    }
-    
+    pushrequest();//通知リクエスト
     resize();　//文字サイズ調整
     /*パラメータ取得*/
     var param = location.search;
@@ -146,6 +132,7 @@ function set() {
     var myTime =  document.getElementById('Time').value;
     history.replaceState( null, "やまだのタイマー", "index.html?date=" + myDate + "&time=" + myTime);//パラメータセット（リロードなし）
     stop();
+    pushrequest();
     onload();
     audiostop();
     Push.clear();//通知削除
@@ -189,4 +176,21 @@ function audiostop(){
     alarm.currentTime = 0;//音停止
     clearInterval(displayEnd);
     timerbox.style.color ="#FFFFFF";
+}
+
+function pushrequest(){
+    if (useDevice){//PCとIE以外でしか実行しない
+    /*トーストで通知の権限を通知*/
+    if (Push.Permission.has() == false){
+         M.toast({html: '通知を許可して、時間になったらデスクトップに通知が届くようにしてください'})
+    }
+       /*プッシュ通知許可ダイアログ*/
+   Push.Permission.request(onGranted);
+
+    function onGranted() {
+         M.toast({html: '時間になったらデスクトップ通知でお知らせします'})
+    }
+    } else{
+         M.toast({html: '<span>ご利用の環境では、時間になってもプッシュ通知を行うことができません。</span><a class="btn-flat toast-action modal-trigger" href="#push">MORE</a>'})
+    }
 }
