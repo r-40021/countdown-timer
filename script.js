@@ -21,7 +21,6 @@ function onload() {
     if (userAgent.indexOf("msie") != -1||userAgent.indexOf("trident") != -1){
         alert('Internet Explorerでは正常に動作しない可能性があります。\nEdgeやChromeをお使いください。');
     }
-    pushrequest();//通知リクエスト
     resize();　//文字サイズ調整
     /*パラメータ取得*/
     var param = location.search;
