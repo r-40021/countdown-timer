@@ -177,3 +177,9 @@ function audiostop(){
     alarm.currentTime = 0;//音停止
     clearInterval(vibrate);//バイブ停止
 }
+
+input.addEventListener('keydown', (e) => {
+  if(e.key === 'Enter') {
+    set();
+  }
+})
