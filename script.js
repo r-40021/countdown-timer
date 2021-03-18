@@ -1,16 +1,20 @@
 var down;
 var vibrate;
+var useDevice = 0;
 var alarm = new Audio("alarm.mp3");
 alarm.loop = true;
 window.addEventListener('DOMContentLoaded', onload);
 
 function onload() {
     var userAgent = window.navigator.userAgent.toLowerCase();//ブラウザ情報取得
+    if ((userAgent.indexOf("msie") === -1&&userAgent.indexOf("trident") === -1/*IEを省く*/)&&(userAgent.indexOf("windows") != -1||(userAgent.indexOf("mac os x") != -1&&'ontouchend' in document ===false)/*mac os xが含まれていて、かつマウスデバイス*/||userAgent.indexOf("cros") != -1||userAgent.indexOf("linux") != -1)&&userAgent.indexOf("android") === -1/*android省く*/){//PCとIE以外でしか実行しない
+        useDevice = 1;
+    }
     if (userAgent.indexOf("msie") != -1||userAgent.indexOf("trident") != -1){
         alert('Internet Explorerでは正常に動作しない可能性があります。\nEdgeやChromeをお使いください。');
     }
         
-    if ((userAgent.indexOf("msie") === -1&&userAgent.indexOf("trident") === -1/*IEを省く*/)&&(userAgent.indexOf("windows") != -1||(userAgent.indexOf("mac os x") != -1&&'ontouchend' in document ===false)/*mac os xが含まれていて、かつマウスデバイス*/||userAgent.indexOf("cros") != -1||userAgent.indexOf("linux") != -1)&&userAgent.indexOf("android") === -1/*android省く*/){//PCとIE以外でしか実行しない
+    if (useDevice){//PCとIE以外でしか実行しない
     /*トーストで通知の権限を通知*/
     if (Push.Permission.has() == false){
          M.toast({html: '通知を許可して、時間になったらデスクトップに通知が届くようにしてください'})
@@ -65,9 +69,13 @@ function onload() {
             diffSecond = "0" + diffSecond;
         }
         var display = diffHour + ":" + diffMinute + ":" + diffSecond;
-        if (display == "-1:59:59") {
+        if (display === "0:00:00") {
+             display = "0:00:00";
+             var displayPlace = document.getElementById('displayTime');
+             displayPlace.innerHTML = display;
+             document.title = "やまだのタイマー";
               /*通知(タッチデバイスとIEはなし)*/
-            if ((userAgent.indexOf("msie") === -1&&userAgent.indexOf("trident") === -1/*IEを省く*/)&&(userAgent.indexOf("windows") != -1||(userAgent.indexOf("mac os x") != -1&&'ontouchend' in document === false)/*mac os xが含まれていて、かつマウスデバイス*/||userAgent.indexOf("cros") != -1||userAgent.indexOf("linux") != -1)&&userAgent.indexOf("android") === -1/*android省く*/){
+            if (useDevice){
               Push.create('時間です！', {
             　　body: 'くっ...時の流れが疾風迅雷の俺に追いついたようだ......',
             　　icon: './fabicon/fabicon.ico',//アイコン
@@ -82,20 +90,20 @@ function onload() {
             }
             alarm.play();
             stop();
-　　　　　　　document.title = "やまだのタイマー";
+　　　　　　 document.title = "やまだのタイマー";
             vibrate = setInterval(function(){
                         window.navigator.vibrate([1000, 1000, 1000, 1000, 1000]);
-                       }, 1000);
+                       }, 6000);
         } else /*計算結果が負orNaNのときの処理*/if(display.match("-|NaN")){
          stop();
-         display = "00:00:00";
+         display = "0:00:00";
          var displayPlace = document.getElementById('displayTime');
          displayPlace.innerHTML = display;
          document.title = "やまだのタイマー";}
         else{
         var displayPlace = document.getElementById('displayTime');
         displayPlace.innerHTML = display;
-        document.title = display;
+        document.title = display + " -やまだのタイマー";
         resize();}}
         down = setInterval(myCount, 200);
     } else{
@@ -122,9 +130,13 @@ function set() {
     var url = new URL(window.location.href);
     var myDate = document.getElementById('Date').value;
     var myTime =  document.getElementById('Time').value;
-    history.replaceState( null, "やまだのタイマー", "index.html?date=" + myDate + "&time=" + myTime);
+    history.replaceState( null, "やまだのタイマー", "index.html?date=" + myDate + "&time=" + myTime);//パラメータセット（リロードなし）
     stop();
     onload();
+    alarm.pause();
+    alarm.currentTime = 0;//音停止
+    clearInterval(vibrate);//バイブ停止
+    Push.clear();//通知削除
 }
 
  document.addEventListener('DOMContentLoaded', function() {
