@@ -1,5 +1,6 @@
 var down;
 var vibrate;
+var timerbox;
 var useDevice = 0;
 var alarm = new Audio("alarm.mp3");
 alarm.loop = true;
@@ -91,16 +92,15 @@ function onload() {
             alarm.play();
             stop();
 　　　　　　 document.title = "やまだのタイマー";
-            var timerbox = document.getElementById("displayTime")
+            timerbox = document.getElementById("displayTime")
             var displayEnd  = setInterval(function(){
-                        timerbox.style.display ="none";
+                               timerbox.style.color ="#26a69a";
+　　　　　　　　　　　　　　　　　　　document.title = "時間です！";
                              setTimeout(function(){
-                                timerbox.style.display ="block";
+                                timerbox.style.color ="#FFFFFF";
+                                document.title = "やまだのタイマー";
                                }, 1000);
-                       }, 2000);
-            var vibrate = setInterval(function(){
-                        window.navigator.vibrate([1000, 1000, 1000, 1000, 1000]);
-                       }, 6000);
+
         } else /*計算結果が負orNaNのときの処理*/if(display.match("-|NaN")){
          stop();
          display = "0:00:00";
@@ -110,7 +110,7 @@ function onload() {
         else{
         var displayPlace = document.getElementById('displayTime');
         displayPlace.innerHTML = display;
-        document.title = display + " -やまだのタイマー";
+        document.title = display;
         resize();}}
         down = setInterval(myCount, 200);
     } else{
@@ -140,9 +140,7 @@ function set() {
     history.replaceState( null, "やまだのタイマー", "index.html?date=" + myDate + "&time=" + myTime);//パラメータセット（リロードなし）
     stop();
     onload();
-    alarm.pause();
-    alarm.currentTime = 0;//音停止
-    clearInterval(vibrate);//バイブ停止
+    audiostop();
     Push.clear();//通知削除
 }
 
@@ -182,7 +180,6 @@ function set() {
 function audiostop(){
     alarm.pause();
     alarm.currentTime = 0;//音停止
-    clearInterval(vibrate);//バイブ停止
     clearInterval(displayEnd);
 }
 
