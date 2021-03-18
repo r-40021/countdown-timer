@@ -101,8 +101,8 @@ function onload() {
                              setTimeout(function(){
                                 timerbox.style.color ="#FFFFFF";
                                 document.title = "やまだのタイマー";
-                               }, 1000);
-                           }, 2000);
+                               }, 500);
+                           }, 1000);
 
         } else /*計算結果が負orNaNのときの処理*/if(display.match("-|NaN")){
          stop();
@@ -115,7 +115,7 @@ function onload() {
         displayPlace.innerHTML = display;
         document.title = display;
         resize();}}
-        down = setInterval(myCount, 200);
+        down = setInterval(myCount, 100);
     } else{
         /*パラメータがないとき*/
         var month = date.getMonth() + 1;
@@ -186,9 +186,3 @@ function audiostop(){
     clearInterval(displayEnd);
     timerbox.style.color ="#FFFFFF";
 }
-
-input.addEventListener('keydown', (e) => {
-  if(e.key === 'Enter') {
-    set();
-  }
-})
