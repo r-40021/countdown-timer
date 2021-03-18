@@ -1,33 +1,88 @@
-// キャッシュファイルの指定
-var CACHE_NAME = '210317';
-var urlsToCache = [
-    '/r-40021.github.io/countdown-timer/index.html',
-    '/r-40021.github.io/countdown-timer/style.css',
-    '/r-40021.github.io/countdown-timer/script.js',
-    '/r-40021.github.io/countdown-timer/materialize.min.css',
-    '/r-40021.github.io/countdown-timer/materialize.min.js',
-    '/r-40021.github.io/countdown-timer/alarm.mp3',
-    '/r-40021.github.io/countdown-timer/fabicon/fabicon.ico',
+/*
+Copyright 2015, 2019, 2020, 2021 Google LLC. All Rights Reserved.
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ http://www.apache.org/licenses/LICENSE-2.0
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+*/
+
+// Incrementing OFFLINE_VERSION will kick off the install event and force
+// previously cached resources to be updated from the network.
+const OFFLINE_VERSION = 1;
+const CACHE_NAME = "PWA";
+// Customize this with a different URL if needed.
+const OFFLINE_URL =  [
+    '../index.html',
+    '../style.css',
+    '../script.js',
+    '../materialize.min.css',
+    '../materialize.min.js',
+    '../alarm.mp3',
+    '../fabicon/fabicon.ico',
 ];
 
-// インストール処理
-self.addEventListener('install', function(event) {
-    event.waitUntil(
-        caches
-            .open(CACHE_NAME)
-            .then(function(cache) {
-                return cache.addAll(urlsToCache);
-            })
-    );
+self.addEventListener("install", (event) => {
+  event.waitUntil(
+    (async () => {
+      const cache = await caches.open(CACHE_NAME);
+      // Setting {cache: 'reload'} in the new request will ensure that the
+      // response isn't fulfilled from the HTTP cache; i.e., it will be from
+      // the network.
+      await cache.add(new Request(OFFLINE_URL, { cache: "reload" }));
+    })()
+  );
+  // Force the waiting service worker to become the active service worker.
+  self.skipWaiting();
 });
 
-// リソースフェッチ時のキャッシュロード処理
-self.addEventListener('fetch', function(event) {
+self.addEventListener("activate", (event) => {
+  event.waitUntil(
+    (async () => {
+      // Enable navigation preload if it's supported.
+      // See https://developers.google.com/web/updates/2017/02/navigation-preload
+      if ("navigationPreload" in self.registration) {
+        await self.registration.navigationPreload.enable();
+      }
+    })()
+  );
+
+  // Tell the active service worker to take control of the page immediately.
+  self.clients.claim();
+});
+
+self.addEventListener("fetch", (event) => {
+  // We only want to call event.respondWith() if this is a navigation request
+  // for an HTML page.
+  if (event.request.mode === "navigate") {
     event.respondWith(
-        caches
-            .match(event.request)
-            .then(function(response) {
-                return response ? response : fetch(event.request);
-            })
+      (async () => {
+        try {
+          // First, try to use the navigation preload response if it's supported.
+          const preloadResponse = await event.preloadResponse;
+          if (preloadResponse) {
+            return preloadResponse;
+          }
+
+          // Always try the network first.
+          const networkResponse = await fetch(event.request);
+          return networkResponse;
+        } catch (error) {
+          // catch is only triggered if an exception is thrown, which is likely
+          // due to a network error.
+          // If fetch() returns a valid HTTP response with a response code in
+          // the 4xx or 5xx range, the catch() will NOT be called.
+          console.log("Fetch failed; returning offline page instead.", error);
+
+          const cache = await caches.open(CACHE_NAME);
+          const cachedResponse = await cache.match(OFFLINE_URL);
+          return cachedResponse;
+        }
+      })()
     );
+  }
 });
