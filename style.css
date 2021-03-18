@@ -19,13 +19,13 @@
     }
 }
 
-#loader {
+#load {
     width: 100%;
     height: 100vh;
     background-color: #00c2bc;
 }
 
-#loader.loaded {
+#load.loaded {
     animation: fadeOut 3s forwards;
 }
 
