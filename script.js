@@ -7,7 +7,7 @@ var useDevice = 0;
 var alarm = new Audio("alarm.mp3");
 alarm.loop = true;
 window.onload = ()=>{
-    const loader = document.getElementById('loader');
+    const loader = document.getElementById('load');
     loader.classList.add('loaded');
 }
 window.addEventListener('DOMContentLoaded', onload);
