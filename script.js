@@ -216,6 +216,7 @@ function pushrequest(){
     const reader = new FileReader();
     reader.onload = () => {
       alarm = new Audio(reader.result);
+      alarm.loop = true;
       M.toast({html: 'アラーム音を設定しました'})
     };
 
