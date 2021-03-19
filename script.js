@@ -21,7 +21,7 @@ function onload() {
     if (userAgent.indexOf("msie") != -1||userAgent.indexOf("trident") != -1){
         alert('Internet Explorerでは正常に動作しない可能性があります。\nEdgeやChromeをお使いください。');
     }
-    if(userAgent.indexOf("iphone") === -1 && (userAgent.indexOf("mac os x") != -1&&'ontouchend' in document)/*iPhone/iPad除く*/{
+    if(userAgent.indexOf("iphone") === -1 && (userAgent.indexOf("mac os x") != -1&&'ontouchend' in document))/*iPhone/iPad除く*/{
        document.getElementById("audioInput").style.display = "inline";
     }
     resize();　//文字サイズ調整
