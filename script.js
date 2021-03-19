@@ -202,6 +202,9 @@ function pushrequest(){
       return;
     }
     const file = input.files[0];
+     if(!file.type.match('audio.*')) {
+            return;
+        }
     const reader = new FileReader();
     reader.onload = () => {
       alarm = new Audio(reader.result);
