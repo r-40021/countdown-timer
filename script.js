@@ -193,3 +193,20 @@ function pushrequest(){
          M.toast({html: '<span>ご利用の環境では、時間になってもプッシュ通知を行うことができません。</span><a class="btn-flat toast-action modal-trigger" href="#push">MORE</a>'})
     }
 }
+
+  window.addEventListener('load', () => {
+  const f = document.getElementById('file1');
+  f.addEventListener('change', evt => {
+    let input = evt.target;
+    if (input.files.length == 0) {
+      return;
+    }
+    const file = input.files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      alarm = new Audio(reader.result);
+    };
+
+    reader.readAsDataURL(file);
+  });
+});
