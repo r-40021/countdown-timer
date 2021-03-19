@@ -1,6 +1,4 @@
 var down;
-var vibrate;
-var timerbox;
 var displayEnd;
 var displayPlace;
 var useDevice = 0;
@@ -88,7 +86,7 @@ function onload() {
             alarm.play();
             stop();
 　　　　　　 document.title = "やまだのタイマー";
-            timerbox = document.getElementById("displayTime")
+            var timerbox = document.getElementById("displayTime")
             displayEnd  = setInterval(function(){
                                timerbox.style.color ="#26a69a";
 　　　　　　　　　　　　　　　　　　　document.title = "時間です！";
@@ -182,6 +180,7 @@ function audiostop(){
     alarm.pause();
     alarm.currentTime = 0;//音停止
     clearInterval(displayEnd);
+    var timerbox = document.getElementById("displayTime")
     timerbox.style.color ="#FFFFFF";
 }
 
