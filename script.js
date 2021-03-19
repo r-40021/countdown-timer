@@ -22,8 +22,7 @@ function onload() {
         alert('Internet Explorerでは正常に動作しない可能性があります。\nEdgeやChromeをお使いください。');
     }
     if(userAgent.indexOf("iphone") != -1 || (userAgent.indexOf("mac os x") != -1&&'ontouchend' in document))/*iPhone/iPad除く*/{
-        document.getElementById("audioInput").innerHTML = "<i class="fas fa-volume-mute grey-text text-lighten-1 tooltipped" style="font-size:35px;" data-position="bottom" data-tooltip="iPhone/iPadではアラーム音を有効にできません"></i>"
-        document.getElementById("audioInput").style.display = "inline";
+        
     } else{
         document.getElementById("audioInput").style.display = "inline";
     }
