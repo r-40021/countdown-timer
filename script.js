@@ -210,12 +210,13 @@ function pushrequest(){
     }
     const file = input.files[0];
      if(!file.type.match('audio.*')) {
-            M.toast({html: '音声ファイルを選択してください。'});
+            M.toast({html: '音声ファイルを選択してください'});
             return;
         }
     const reader = new FileReader();
     reader.onload = () => {
       alarm = new Audio(reader.result);
+      M.toast({html: 'アラーム音を設定しました'})
     };
 
     reader.readAsDataURL(file);
