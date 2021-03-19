@@ -44,6 +44,9 @@
         <div class="col m6 s12">
           <input placeholder="時間" id="Time" type="text" class="timepicker" readonly="readonly">
         </div>
+        <input id="file1" type="file" accept="audio/*">
+        <label for="file1"><i class="far fa-file-audio teal-text text-lighten-1" style="font-size:35px;"></i></label>
+    　　 <button onclick="play()">再生</button>
         <div class="col s12 center">
           <a class="waves-effect waves-light btn-large blue" onclick="set()">SET</a>
           <a class="waves-effect waves-light btn-large pink" onclick="stop();audiostop();Push.clear();">STOP</a>
