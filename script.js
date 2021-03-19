@@ -158,6 +158,8 @@ function set() {
      /*modal*/
      elems = document.querySelectorAll('.modal');
      instances = M.Modal.init(elems);
+　　　elems = document.querySelectorAll('.tooltipped');
+     instances = M.Tooltip.init(elems);
   });
 
   function copy() {
