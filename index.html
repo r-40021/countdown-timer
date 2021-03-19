@@ -22,7 +22,8 @@
   <meta content="目覚まし時計とタイマーのいいとこ取りをした、オープンソースのちょっと変わったタイマーです。いろんな用途に使えます。" name="description">
  
   <meta name="viewport" content="width=device-width,initial-scale=1">
- <title>やまだのタイマー</title>
+  <title>やまだのタイマー</title>
+  <script src="https://kit.fontawesome.com/54f6fe7c4d.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" type="text/css" href="materialize.min.css">
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
@@ -38,11 +39,16 @@
     </div>
     <div class="container">
       <div class="row">
-        <div class="col m6 s12">
+        <div class="col m5 s10">
           <input placeholder="日付" id="Date" type="text" class="datepicker" readonly="readonly">
         </div>
-        <div class="col m6 s12">
+        <div class="col m5 s10">
           <input placeholder="時間" id="Time" type="text" class="timepicker" readonly="readonly">
+        </div>
+        <div class="col m2 s2">
+        <input id="file1" type="file" accept="audio/*">
+        <label for="file1" id="audioInput"><i class="far fa-file-audio teal-text text-lighten-1" style="font-size:35px;"></i></label>
+    　　 <button onclick="play()">再生</button>
         </div>
         <div class="col s12 center">
           <a class="waves-effect waves-light btn-large blue" onclick="set()">SET</a>
