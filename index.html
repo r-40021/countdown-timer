@@ -38,6 +38,7 @@
         <span id="displayTime">0:00:00</span>
     </div>
     <div class="container">
+      <!--Date&Time-->
       <div class="row">
         <div class="col m5 s10">
           <input placeholder="日付" id="Date" type="text" class="datepicker" readonly="readonly">
@@ -49,10 +50,19 @@
         <input id="file1" type="file" accept="audio/*">
         <label for="file1" id="audioInput"><i class="far fa-file-audio teal-text text-lighten-1 tooltipped" style="font-size:35px;" data-position="bottom" data-tooltip="アラーム音を変更"></i></label>
         </div>
+        <!--SET/STOP-->
         <div class="col s12 center">
           <a class="waves-effect waves-light btn-large blue" onclick="set()">SET</a>
           <a class="waves-effect waves-light btn-large pink" onclick="stop();audiostop();Push.clear();">STOP</a>
         </div>
+      </div>
+      <div class="row">
+        <audio
+        controls
+        src="alarm.mp3" id="player" preload="metadata" controlslist="nodownload" loop="true">
+            Your browser does not support the
+            <code>audio</code> element.
+    </audio>
       </div>
       <div class="row">
         <div class="col s12">
