@@ -7,7 +7,11 @@ alarm.loop = true;
 window.addEventListener('load', (event) => {
     const loader = document.getElementById('load');
     loader.classList.add('loaded');
-    pushrequest();
+    setTimeout(function(){
+        return_scroll();
+        pushrequest();
+    }, 3000);
+    
 });
 window.addEventListener('DOMContentLoaded', onload);
 
