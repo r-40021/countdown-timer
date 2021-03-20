@@ -23,6 +23,7 @@ function onload() {
         
     } else{
         document.getElementById("audioInput").style.display = "inline";
+        document.getElementById("player").style.display = "block";
     }
     resize();　//文字サイズ調整
     /*パラメータ取得*/
@@ -203,6 +204,7 @@ function pushrequest(){
 
   window.addEventListener('load', () => {
   const f = document.getElementById('file1');
+  var player = document.getElementById('player');
   f.addEventListener('change', evt => {
     let input = evt.target;
     if (input.files.length == 0) {
@@ -217,6 +219,7 @@ function pushrequest(){
     reader.onload = () => {
       alarm = new Audio(reader.result);
       alarm.loop = true;
+      player.src = reader.result;
       M.toast({html: 'アラーム音を設定しました'})
     };
 
