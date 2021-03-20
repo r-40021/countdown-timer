@@ -23,7 +23,7 @@ function onload() {
         
     } else{
         document.getElementById("audioInput").style.display = "inline";
-        document.getElementById("player").style.display = "inline";
+        document.getElementById("playb").style.display = "inline";
     }
     resize();　//文字サイズ調整
     /*パラメータ取得*/
