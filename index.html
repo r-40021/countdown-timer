@@ -56,13 +56,17 @@
           <a class="waves-effect waves-light btn-large pink" onclick="stop();audiostop();Push.clear();">STOP</a>
         </div>
       </div>
+      <!--player-->
       <div class="row">
-        <audio
-        controls
-        src="alarm.mp3" id="player" preload="metadata" controlslist="nodownload" loop="true">
-            Your browser does not support the
-            <code>audio</code> element.
-    </audio>
+        <div class="col s12">
+          <figcaption>アラーム音視聴：</figcaption>
+          <audio
+          controls
+          src="alarm.mp3" id="player" preload="metadata" controlslist="nodownload" loop="true">
+              Your browser does not support the
+              <code>audio</code> element.
+          </audio>
+        </div>
       </div>
       <div class="row">
         <div class="col s12">
