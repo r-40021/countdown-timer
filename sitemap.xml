@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-
-<!--  created with free sitemap generation system www.sitemapxml.jp  --> 
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-  <loc>https://r-40021.github.io/countdown-timer/</loc>
-  <priority>1.0</priority>
-  <lastmod>2021-03-20T12:35:46+09:00</lastmod>
+<loc>https://r-40021.github.io/countdown-timer/index.html</loc>
+<lastmod>2021-03-21</lastmod>
 </url>
-
 </urlset>
