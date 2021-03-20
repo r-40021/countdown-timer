@@ -10,7 +10,7 @@ window.addEventListener('load', (event) => {
     setTimeout(function(){
         return_scroll();
         pushrequest();
-    }, 999);
+    }, 499);
     
 });
 window.addEventListener('DOMContentLoaded', onload);
