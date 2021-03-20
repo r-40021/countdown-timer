@@ -28,6 +28,28 @@
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+  <script>
+    // スクロール禁止
+      function no_scroll() {
+          // PCでのスクロール禁止
+          document.addEventListener("mousewheel", scroll_control, { passive: false });
+          // スマホでのタッチ操作でのスクロール禁止
+          document.addEventListener("touchmove", scroll_control, { passive: false });
+      }
+      // スクロール禁止解除
+      function return_scroll() {
+          // PCでのスクロール禁止解除
+          document.removeEventListener("mousewheel", scroll_control, { passive: false });
+          // スマホでのタッチ操作でのスクロール禁止解除
+          document.removeEventListener('touchmove', scroll_control, { passive: false });
+      }
+
+      // スクロール関連メソッド
+      function scroll_control(event) {
+          event.preventDefault();
+      }
+    no_scroll();
+  </script>
    <div id="load" class="loading"> 
     <div class="spinner">
     <div class="double-bounce1"></div>
