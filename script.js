@@ -224,7 +224,7 @@ function pushrequest(){
       alarm = new Audio(reader.result);
       alarm.loop = true;
       player.src = reader.result;
-      M.toast({html: '<p>アラーム音を設定しました</p><p>このページから離れると、アラーム音はリセットされます</p>'});
+      M.toast({html: 'アラーム音を設定しました。<br>このページから離れると、アラーム音はリセットされます。'});
       window.addEventListener('beforeunload', move, false);
     };
 
