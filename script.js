@@ -224,9 +224,16 @@ function pushrequest(){
       alarm = new Audio(reader.result);
       alarm.loop = true;
       player.src = reader.result;
-      M.toast({html: 'アラーム音を設定しました'})
+      M.toast({html: '<p>アラーム音を設定しました</p><p>このページから離れると、アラーム音はリセットされます</p>'});
+      window.addEventListener('beforeunload', move, false);
     };
 
     reader.readAsDataURL(file);
   });
 });
+
+var move = function(e){
+    e.preventDefault();
+  // Chrome では returnValue を設定する必要がある
+  e.returnValue = '';
+}
