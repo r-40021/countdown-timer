@@ -9,7 +9,6 @@ window.addEventListener('load', (event) => {
     const loader = document.getElementById('load');
     loader.classList.add('loaded');
     setTimeout(function(){
-        return_scroll();
         pushrequest();
     }, 499);
     
