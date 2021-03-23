@@ -1,166 +1,145 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-  <meta content = "text / html; charset = UTF-8" name = "Content-Type" />
-  <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
-  <link rel="shortcut icon" href="./favicon/favicon.ico">
-  <!--Apple-->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="やまだタイマー">
-  <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
-  <link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#5bbad5">
-  <!--Microsoft-->
-  <meta name="msapplication-TileColor" content="#00aba9">
-  <meta name="msapplication-config" content="./favicon/browserconfig.xml">
-  <meta name="theme-color" content="#ffffff">
-  <!--OGP-->	
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta property="og:url" content="https://r-40021.github.io/countdown-timer" />	
-  <meta property="og:type" content="website" />	
-  <meta property="og:title" content="やまだのタイマー" />	
-  <meta property="og:description" content="半永久的に計れる「やまだのタイマー」" />	
-  <meta property="og:site_name" content="やまだのタイマー" />	
-  <meta property="og:image" content="https://r-40021.github.io/countdown-timer/snsicon/sns.png" />	
-  
-  <link rel="manifest" href="./favicon/site.webmanifest">
-  <!--SEO-->
-  <meta content="目覚まし時計とタイマーのいいとこ取りをした、オープンソースのちょっと変わったタイマーです。いろんな用途に使えます。" name="description">
- 
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>やまだのタイマー</title>
-  <script src="https://kit.fontawesome.com/54f6fe7c4d.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" type="text/css" href="materialize.min.css">
-  <link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body>
-  <script>
-    // スクロール禁止
-      function no_scroll() {
-          // PCでのスクロール禁止
-          document.addEventListener("mousewheel", scroll_control, { passive: false });
-          // スマホでのタッチ操作でのスクロール禁止
-          document.addEventListener("touchmove", scroll_control, { passive: false });
-      }
-      // スクロール禁止解除
-      function return_scroll() {
-          // PCでのスクロール禁止解除
-          document.removeEventListener("mousewheel", scroll_control, { passive: false });
-          // スマホでのタッチ操作でのスクロール禁止解除
-          document.removeEventListener('touchmove', scroll_control, { passive: false });
-      }
 
-      // スクロール関連メソッド
-      function scroll_control(event) {
-          event.preventDefault();
-      }
-    no_scroll();
-  </script>
-   <div id="load" class="loading"> 
-    <div class="spinner">
-    <div class="double-bounce1"></div>
-    <div class="double-bounce2"></div>
-</div>
-  </div>
+<head>
+    <meta content="text / html; charset = UTF-8" name="Content-Type" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+    <link rel="shortcut icon" href="./favicon/favicon.ico">
+    <!--Apple-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="やまだタイマー">
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+    <link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <!--Microsoft-->
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="msapplication-config" content="./favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <!--OGP-->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:url" content="https://r-40021.github.io/countdown-timer" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="やまだのタイマー" />
+    <meta property="og:description" content="半永久的に計れる「やまだのタイマー」" />
+    <meta property="og:site_name" content="やまだのタイマー" />
+    <meta property="og:image" content="https://r-40021.github.io/countdown-timer/snsicon/sns.png" />
+
+    <link rel="manifest" href="./favicon/site.webmanifest">
+    <!--SEO-->
+    <meta content="目覚まし時計とタイマーのいいとこ取りをした、オープンソースのちょっと変わったタイマーです。いろんな用途に使えます。" name="description">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>やまだのタイマー</title>
+    <script src="https://kit.fontawesome.com/54f6fe7c4d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <div id="load" class="loading">
+        <div class="spinner">
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
+        </div>
+    </div>
     <div class="timer teal lighten-2">
         <span id="displayTime">0:00:00</span>
     </div>
     <div class="container">
-      <!--Date&Time-->
-      <div class="row">
-        <div class="col m5 s10">
-          <input placeholder="日付" id="Date" type="text" class="datepicker" readonly="readonly">
+        <!--Date&Time-->
+        <div class="row">
+            <div class="col m5 s10">
+                <input placeholder="日付" id="Date" type="text" class="datepicker" readonly="readonly">
+            </div>
+            <div class="col m5 s10">
+                <input placeholder="時間" id="Time" type="text" class="timepicker" readonly="readonly">
+            </div>
+            <div class="col m2 s2">
+                <input id="file1" type="file" accept="audio/*">
+                <label for="file1" id="audioInput"><i class="far fa-file-audio teal-text text-lighten-1 tooltipped" style="font-size:35px;margin-top: 10px;" data-position="bottom" data-tooltip="アラーム音を変更"></i></label>
+            </div>
+            <!--SET/STOP-->
+            <div class="col s12 center">
+                <a class="waves-effect waves-light btn-large blue" onclick="set()">SET</a>
+                <a class="waves-effect waves-light btn-large pink" onclick="stop();audiostop();Push.clear();">STOP</a>
+            </div>
         </div>
-        <div class="col m5 s10">
-          <input placeholder="時間" id="Time" type="text" class="timepicker" readonly="readonly">
-        </div>
-        <div class="col m2 s2">
-        <input id="file1" type="file" accept="audio/*">
-        <label for="file1" id="audioInput"><i class="far fa-file-audio teal-text text-lighten-1 tooltipped" style="font-size:35px;margin-top: 10px;" data-position="bottom" data-tooltip="アラーム音を変更"></i></label>
-        </div>
-        <!--SET/STOP-->
-        <div class="col s12 center">
-          <a class="waves-effect waves-light btn-large blue" onclick="set()">SET</a>
-          <a class="waves-effect waves-light btn-large pink" onclick="stop();audiostop();Push.clear();">STOP</a>
-        </div>
-      </div>
-      <!--player-->
-      <div class="row">
-        <div class="col s12" id="playb">
-          <figcaption>アラーム音試聴：</figcaption>
-          <audio
-          controls
-          src="alarm.mp3" id="player" preload="metadata" controlslist="nodownload">
-              Your browser does not support the
-              <code>audio</code> element.
-          </audio>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col s12">
-          <a class="waves-effect waves-light btn modal-trigger" href="#modal1">アラーム音が鳴らない</a>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col s12">
-          <!--URL-->
-          <a onclick="copy()" class="btn-flat grey darken-1 white-text waves-effect waves-teal" style="margin-right: 10px">URLをコピー</a>
-          <!--Twitter-->
-          <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="半永久的に計れるタイマー&#13;" data-hashtags="やまだのタイマー,卒業,終業式"　data-size="large"　data-show-count="false" data-url="https://r-40021.github.io/countdown-timer">Tweet</a>
-          <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-        </div>
+        <!--player-->
+        <div class="row">
+            <div class="col s12" id="playb">
+                <figcaption>アラーム音試聴：</figcaption>
+                <audio controls src="alarm.mp3" id="player" preload="metadata" controlslist="nodownload">
+                    Your browser does not support the
+                    <code>audio</code> element.
+                </audio>
+            </div>
         </div>
         <div class="row">
-          <div class="col s12">
-            <!--GitHub-->
-            <a href="https://github.com/r-40021/countdown-timer" target="_blank"><i class="fab fa-github"></i>View on GitHub</a>
-          </div>
+            <div class="col s12">
+                <a class="waves-effect waves-light btn modal-trigger" href="#modal1">アラーム音が鳴らない</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <!--URL-->
+                <a onclick="copy()" class="btn-flat grey darken-1 white-text waves-effect waves-teal" style="margin-right: 10px">URLをコピー</a>
+                <!--Twitter-->
+                <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="半永久的に計れるタイマー&#13;" data-hashtags="やまだのタイマー,卒業,終業式" 　data-size="large" 　data-show-count="false" data-url="https://r-40021.github.io/countdown-timer">Tweet</a>
+                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <!--GitHub-->
+                <a href="https://github.com/r-40021/countdown-timer" target="_blank"><i class="fab fa-github"></i>View on GitHub</a>
+            </div>
         </div>
     </div>
     <div id="modal1" class="modal">
-      <div class="modal-content">
-        <h4>アラーム音を有効にするには</h4>
-        <ol>
-          <li>URLの左側の錠マークをクリック</li>
-          <li>「サイトの設定」（表現は多少異なる場合があります）をクリック</li>
-          <li>「サウンド」もしくは「音声」の項目を探し、「自動」から「許可」に変更</li>
-          <li>タイマーアプリを再読み込み</li>
-        </ol>
-        <p>注意点</p>
-        <ol>
-          <li>iPhoneやiPadなどでは、アラーム音を有効に設定できません。</li>
-          <li>ブラウザによっては、この設定をしなくてもアラーム音が鳴るものもあります。<br>（Edgeがその例です。）</li>
-        </ol>
-      </div>
-      <div class="modal-footer">
-        <a class="modal-close waves-effect waves-green btn-flat">OK</a>
-      </div>
+        <div class="modal-content">
+            <h4>アラーム音を有効にするには</h4>
+            <ol>
+                <li>URLの左側の錠マークをクリック</li>
+                <li>「サイトの設定」（表現は多少異なる場合があります）をクリック</li>
+                <li>「サウンド」もしくは「音声」の項目を探し、「自動」から「許可」に変更</li>
+                <li>タイマーアプリを再読み込み</li>
+            </ol>
+            <p>注意点</p>
+            <ol>
+                <li>iPhoneやiPadなどでは、アラーム音を有効に設定できません。</li>
+                <li>ブラウザによっては、この設定をしなくてもアラーム音が鳴るものもあります。<br>（Edgeがその例です。）</li>
+            </ol>
+        </div>
+        <div class="modal-footer">
+            <a class="modal-close waves-effect waves-green btn-flat">OK</a>
+        </div>
     </div>
     <div id="push" class="modal">
-    <div class="modal-content">
-      <h4>プッシュ通知対応環境</h4>
-      <h5>OS</h5>
-      <ul>
-        <li>PC(Windows,Mac,Linux)</li>
-      </ul>
-      <h5>ブラウザ</h5>
-      <ul>
-        <li>最新版のChrome</li>
-        <li>最新版のSafari</li>
-        <li>最新版のFirefox</li>
-        <li>最新版のEdge</li>
-      </ul>
-      <p>プッシュ通知をご利用になるには、OSとブラウザの両方が対応している必要があります。</p>
-      <p>※プッシュ通知は「オマケ機能」程度のものですので、アプリ自体は問題なくご利用になれます。</p>
+        <div class="modal-content">
+            <h4>プッシュ通知対応環境</h4>
+            <h5>OS</h5>
+            <ul>
+                <li>PC(Windows,Mac,Linux)</li>
+            </ul>
+            <h5>ブラウザ</h5>
+            <ul>
+                <li>最新版のChrome</li>
+                <li>最新版のSafari</li>
+                <li>最新版のFirefox</li>
+                <li>最新版のEdge</li>
+            </ul>
+            <p>プッシュ通知をご利用になるには、OSとブラウザの両方が対応している必要があります。</p>
+            <p>※プッシュ通知は「オマケ機能」程度のものですので、アプリ自体は問題なくご利用になれます。</p>
+        </div>
+        <div class="modal-footer">
+            <a class="modal-close waves-effect waves-green btn-flat">OK</a>
+        </div>
     </div>
-    <div class="modal-footer">
-      <a class="modal-close waves-effect waves-green btn-flat">OK</a>
-    </div>
-  </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.12/push.min.js"></script>
     <script src="materialize.min.js"></script>
     <script src="nosleep.min.js"></script>
     <script src="script.js"></script>
 </body>
+
 </html>
