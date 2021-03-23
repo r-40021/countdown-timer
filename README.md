@@ -1,5 +1,5 @@
 [日本語(Japanese)](README_ja.md)
-# <img src="/fabicon/fabicon.ico" width="30px">Countdown Timer
+# <img src="/favicon/favicon.ico" width="30px">Countdown Timer
 半永久的に計れるタイマー
 
 This is a timer that can be timed semi-permanently.
