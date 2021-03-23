@@ -4,6 +4,7 @@ var displayPlace;
 var useDevice = 0;
 var alarm = new Audio("alarm.mp3");
 alarm.loop = true;
+var noSleep = new NoSleep();
 window.addEventListener('load', (event) => {
     const loader = document.getElementById('load');
     loader.classList.add('loaded');
@@ -237,3 +238,9 @@ var move = function(e){
   // Chrome では returnValue を設定する必要がある
   e.returnValue = '';
 }
+
+/*NoSleep*/
+document.addEventListener('click', function enableNoSleep() {
+  document.removeEventListener('click', enableNoSleep, false);
+  noSleep.enable();
+}, false);
