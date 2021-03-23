@@ -2,7 +2,7 @@
 <browserconfig>
     <msapplication>
         <tile>
-            <square150x150logo src="mstile-150x150.png"/>
+            <square150x150logo src="https://r-40021.github.io/countdown-timer/favicon/mstile-150x150.png"/>
             <TileColor>#00aba9</TileColor>
         </tile>
     </msapplication>
