@@ -17,6 +17,7 @@ window.addEventListener('load', (event) => {
 window.addEventListener('DOMContentLoaded', onload);
 
 function onload() {
+    document.getElementById("all").style.display = "block";
     var userAgent = window.navigator.userAgent.toLowerCase();//ブラウザ情報取得
     if ((userAgent.indexOf("msie") === -1&&userAgent.indexOf("trident") === -1/*IEを省く*/)&&(userAgent.indexOf("windows") != -1||(userAgent.indexOf("mac os x") != -1&&'ontouchend' in document ===false)/*mac os xが含まれていて、かつマウスデバイス*/||userAgent.indexOf("cros") != -1||userAgent.indexOf("linux") != -1)&&userAgent.indexOf("android") === -1/*android省く*/){//PCとIE以外でしか実行しない
         useDevice = 1;
