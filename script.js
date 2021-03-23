@@ -233,6 +233,16 @@ function pushrequest(){
   });
 });
 
+window.addEventListener('DOMContentLoaded', function(){
+
+    window.addEventListener('scroll', function(){
+        let load = document.querySelector("#load");
+        load.style.left = window.pageXOffset;
+        load.style.top = window.pageYOffset;
+    });
+
+});
+
 var move = function(e){
     e.preventDefault();
   // Chrome では returnValue を設定する必要がある
