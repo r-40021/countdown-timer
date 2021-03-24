@@ -5,23 +5,25 @@ var useDevice = 0;
 var alarm = new Audio("alarm.mp3");
 alarm.loop = true;
 var noSleep = new NoSleep();
+
+window.addEventListener('DOMContentLoaded', (event) => {
+    setTimeout(function(){
+        const loader = document.getElementById('load');
+        if (loader.classList.indexOf("loaded") === -1){
+        loader.classList.add('loaded');
+             setTimeout(function(){
+                M.toast({html: '読み込みに時間がかかっているため、アプリが正常に動作しないおそれがあります。'});
+            }, 499);}
+    }, 10000);
+    
+});
+
 window.addEventListener('load', (event) => {
     const loader = document.getElementById('load');
     loader.classList.add('loaded');
     setTimeout(function(){
         pushrequest();
     }, 499);
-    
-});
-
-window.addEventListener('DOMContentLoaded', (event) => {
-    setTimeout(function(){
-        const loader = document.getElementById('load');
-        loader.classList.add('loaded');
-             setTimeout(function(){
-                M.toast({html: '読み込みに時間がかかっているため、アプリが正常に動作しないおそれがあります。'});
-            }, 499);
-    }, 10000);
     
 });
 
