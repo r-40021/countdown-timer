@@ -27,9 +27,9 @@ function onload() {
         const dateField = document.querySelector("#Date");
         const timeField = document.querySelector("#Time");
         dateField.classList.remove("m5","s10");
-        dateField.classList..add("m6","s12");
+        dateField.classList.add("m6","s12");
         timeField.classList.remove("m5","s10");
-        timeField.classList..add("m6","s12");        
+        timeField.classList.add("m6","s12");        
         
     } else{
         document.getElementById("audioInput").style.display = "inline";
