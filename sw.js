@@ -1,5 +1,4 @@
-const CACHE_VERSION = 'v1';
-const CACHE_NAME = `${registration.scope}!${CACHE_VERSION}`;
+const CACHE_NAME = `20210324`;
 
 // キャッシュするファイルをセットする
 const urlsToCache = [
