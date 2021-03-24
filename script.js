@@ -17,13 +17,19 @@ window.addEventListener('DOMContentLoaded', onload);
 
 function onload() {
     var userAgent = window.navigator.userAgent.toLowerCase();//ブラウザ情報取得
-    if ((userAgent.indexOf("msie") === -1&&userAgent.indexOf("trident") === -1/*IEを省く*/)&&(userAgent.indexOf("windows") != -1||(userAgent.indexOf("mac os x") != -1&&'ontouchend' in document ===false)/*mac os xが含まれていて、かつマウスデバイス*/||userAgent.indexOf("cros") != -1||userAgent.indexOf("linux") != -1)&&userAgent.indexOf("android") === -1/*android省く*/){//PCとIE以外でしか実行しない
+    if ((userAgent.indexOf("msie") === -1&&userAgent.indexOf("trident") === -1/*IEを省く*/)&&(userAgent.indexOf("windows") != -1||(userAgent.indexOf("mac os x") != -1&&'ontouchend' in document ===false)/*mac os xが含まれていて、かつマウスデバイス*/||userAgent.indexOf("cros") != -1||userAgent.indexOf("linux") != -1&&'ontouchend' in document ===false)){//PCとIE以外でしか実行しない
         useDevice = 1;
     }
     if (userAgent.indexOf("msie") != -1||userAgent.indexOf("trident") != -1){
         alert('Internet Explorerでは正常に動作しない可能性があります。\nEdgeやChromeをお使いください。');
     }
     if(userAgent.indexOf("iphone") != -1 || (userAgent.indexOf("mac os x") != -1&&'ontouchend' in document))/*iPhone/iPad除く*/{
+        const dateField = document.querySelector("#Date");
+        const timeField = document.querySelector("#Time");
+        dateField.classList.remove("m5","s10");
+        dateField.classList..add("m6","s12");
+        timeField.classList.remove("m5","s10");
+        timeField.classList..add("m6","s12");        
         
     } else{
         document.getElementById("audioInput").style.display = "inline";
