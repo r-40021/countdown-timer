@@ -33,7 +33,6 @@ function onload() {
     /*パラメータ取得*/
     var param = location.search;
     var paramObject = new Object();
-    var date = new Date();
     
     if (param) {
         param = param.substring(1);
@@ -114,24 +113,7 @@ function onload() {
         document.title = display;
         resize();}}
         down = setInterval(myCount, 100);
-    } else{
-        /*パラメータがないとき*/
-        var month = date.getMonth() + 1;
-        var day = date.getDate();
-        if (month < 10) {
-            month = "0" + month;
-        }
-        if (day < 10) {
-            day = "0" + day;
-        }
-        var date2 = date.getFullYear() + "/" + month + "/" + day;
-        var minute = date.getMinutes();
-        if (minute < 10) {
-            minute = "0" + minute;
-        }
-        var SetTime = date.getHours() + ":" + minute;
-    document.getElementById('Date').value = date2;
-    document.getElementById('Time').value = SetTime;}
+    }
 }
 
 function set() {
@@ -147,16 +129,26 @@ function set() {
 }
 
  document.addEventListener('DOMContentLoaded', function() {
+    let date = new Date();
+    let after = new Date();
+    after.setHours(date.getHours() +1);
+    let defaultSet = after.toLocaleString().split(' ');
+    const defaultDate = defaultSet[0];
+    let originalDefaultTime = defaultSet[1].split(':');
+    const defaultTime = originalDefaultTime[0] + ":" + originalDefaultTime[1];
      /*datepicker*/
     var elems = document.querySelectorAll('.datepicker');
     var options = {
-        "format":"yyyy/mm/dd"
+        "format":"yyyy/m/d",
+        "defaultDate":defaultDate,
+        "setDefaultDate":true
     }
     var instances = M.Datepicker.init(elems, options);
      /*timepicker*/
     elems = document.querySelectorAll('.timepicker');
     options = {
-        "twelveHour":false
+        "twelveHour":false,
+        "defaultTime":defaultTime
     }
     instances = M.Timepicker.init(elems, options);
      /*modal*/
