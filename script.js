@@ -1,3 +1,11 @@
+setTimeout(function(){
+    const loader = document.getElementById('load');
+    if (loader.classList.contains("loaded")===false){
+    loader.classList.add('loaded');
+         setTimeout(function(){
+            M.toast({html: '読み込みに時間がかかっているため、アプリが正常に動作しないおそれがあります。'});
+        }, 499);}
+}, 10000);//DOMを待たずに処理
 var down;
 var displayEnd;
 var displayPlace;
@@ -5,18 +13,6 @@ var useDevice = 0;
 var alarm = new Audio("alarm.mp3");
 alarm.loop = true;
 var noSleep = new NoSleep();
-
-window.addEventListener('DOMContentLoaded', (event) => {
-    setTimeout(function(){
-        const loader = document.getElementById('load');
-        if (loader.classList.contains("loaded")===false){
-        loader.classList.add('loaded');
-             setTimeout(function(){
-                M.toast({html: '読み込みに時間がかかっているため、アプリが正常に動作しないおそれがあります。'});
-            }, 499);}
-    }, 10000);
-    
-});
 
 window.addEventListener('load', (event) => {
     const loader = document.getElementById('load');
