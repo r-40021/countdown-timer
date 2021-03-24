@@ -13,6 +13,18 @@ window.addEventListener('load', (event) => {
     }, 499);
     
 });
+
+window.addEventListener('DOMContentLoaded', (event) => {
+    setTimeout(function(){
+        const loader = document.getElementById('load');
+        loader.classList.add('loaded');
+             setTimeout(function(){
+                M.toast({html: '読み込みに時間がかかっているため、アプリが正常に動作しないおそれがあります。'});
+            }, 499);
+    }, 10000);
+    
+});
+
 window.addEventListener('DOMContentLoaded', onload);
 
 function onload() {
