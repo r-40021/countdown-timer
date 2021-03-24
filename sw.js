@@ -1,8 +1,8 @@
-const CACHE_NAME = `20210324`;
+const CACHE_NAME = `20210324v2`;
 
 // キャッシュするファイルをセットする
 const urlsToCache = [
-  '.',
+  'index.html',
   'style.css',
   'script.js',
   'materialize.min.css',
