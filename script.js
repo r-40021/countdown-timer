@@ -6,7 +6,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
              setTimeout(function(){
                 M.toast({html: '読み込みに時間がかかっているため、アプリが正常に動作しないおそれがあります。'});
             }, 499);}
-    }, 3000);
+    }, 5000);
 });
 var down;
 var displayEnd;
