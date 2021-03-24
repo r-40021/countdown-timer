@@ -105,7 +105,7 @@ function onload() {
             if (useDevice){
               Push.create('時間です！', {
             　　body: 'くっ...時の流れが疾風迅雷の俺に追いついたようだ......',
-            　　icon: './fabicon/fabicon.ico',//アイコン
+            　　icon: './favicon/favicon.ico',//アイコン
             　　requireInteraction: true, // 永遠に通知
             　　vibrate: [1000, 1000, 1000, 1000, 1000] ,
                 onClick: function () {
