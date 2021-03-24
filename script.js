@@ -5,7 +5,7 @@ setTimeout(function(){
          setTimeout(function(){
             M.toast({html: '読み込みに時間がかかっているため、アプリが正常に動作しないおそれがあります。'});
         }, 499);}
-}, 10000);//DOMを待たずに処理
+}, 3000);//DOMを待たずに処理
 var down;
 var displayEnd;
 var displayPlace;
