@@ -24,8 +24,8 @@ function onload() {
         alert('Internet Explorerでは正常に動作しない可能性があります。\nEdgeやChromeをお使いください。');
     }
     if(userAgent.indexOf("iphone") != -1 || (userAgent.indexOf("mac os x") != -1&&'ontouchend' in document))/*iPhone/iPad除く*/{
-        const dateField = document.querySelector("#Date");
-        const timeField = document.querySelector("#Time");
+        const dateField = document.querySelector("#DateField");
+        const timeField = document.querySelector("#TimeField");
         dateField.classList.remove("m5","s10");
         dateField.classList.add("m6","s12");
         timeField.classList.remove("m5","s10");
