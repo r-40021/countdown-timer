@@ -16,6 +16,16 @@ var alarm = new Audio("alarm.mp3");
 alarm.loop = true;
 var noSleep = new NoSleep();
 
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').then(function(registration) {
+    // 登録成功
+    console.log('ServiceWorker の登録に成功しました。スコープ: ', registration.scope);
+  }).catch(function(err) {
+    // 登録失敗
+    console.log('ServiceWorker の登録に失敗しました。', err);
+  });
+}
+
 window.addEventListener('load', (event) => {
     const loader = document.getElementById('load');
     loader.classList.add('loaded');
