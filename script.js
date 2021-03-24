@@ -9,7 +9,7 @@ var noSleep = new NoSleep();
 window.addEventListener('DOMContentLoaded', (event) => {
     setTimeout(function(){
         const loader = document.getElementById('load');
-        if (loader.classList.indexOf("loaded") === -1){
+        if (loader.classList.contains("loaded")===false){
         loader.classList.add('loaded');
              setTimeout(function(){
                 M.toast({html: '読み込みに時間がかかっているため、アプリが正常に動作しないおそれがあります。'});
