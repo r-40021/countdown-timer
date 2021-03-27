@@ -3,7 +3,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         const loader = document.getElementById('load');
         if (loader.classList.contains("loaded")===false){
         loader.classList.add('loaded');
-    }, 5000);
+    }}, 5000);
 });
 var down;
 var displayEnd;
