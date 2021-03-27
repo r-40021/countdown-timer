@@ -17,7 +17,7 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js').then(function(registration) {
     // 登録成功
     console.log('ServiceWorker の登録に成功しました。スコープ: ', registration.scope);
-    M.toast({html: '<i class="fas fa-check"></i>オフラインでも利用可能です'});
+    M.toast({html: '<span><i class="fas fa-check"></i>オフラインでも利用可能です</span>'});
   }).catch(function(err) {
     // 登録失敗
     console.log('ServiceWorker の登録に失敗しました。', err);
