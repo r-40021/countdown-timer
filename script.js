@@ -3,9 +3,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
         const loader = document.getElementById('load');
         if (loader.classList.contains("loaded")===false){
         loader.classList.add('loaded');
-             setTimeout(function(){
-                M.toast({html: '読み込みに時間がかかっているため、アプリが正常に動作しないおそれがあります。'});
-            }, 499);}
     }, 5000);
 });
 var down;
@@ -20,6 +17,7 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js').then(function(registration) {
     // 登録成功
     console.log('ServiceWorker の登録に成功しました。スコープ: ', registration.scope);
+    M.toast({html: '<i class="fas fa-check"></i>オフラインでも利用可能です'});
   }).catch(function(err) {
     // 登録失敗
     console.log('ServiceWorker の登録に失敗しました。', err);
