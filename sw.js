@@ -1,4 +1,4 @@
-const CACHE_NAME = `20210327v4`;
+const CACHE_NAME = `20210327v5`;
 
 // キャッシュするファイルをセットする
 const urlsToCache = [
@@ -20,6 +20,7 @@ self.addEventListener('install', (event) => {
     .then((cache) => {
       // 指定されたファイルをキャッシュに追加する
       return cache.addAll(urlsToCache);
+      M.toast({html: '<span><i class="fas fa-check"></i>オフラインでも利用可能です</span>'});
     })
   );
 });
