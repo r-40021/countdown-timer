@@ -24,8 +24,8 @@ This is a timer that can be timed semi-permanently.
 For privacy reasons, we do not have an access analysis for this web app. If you would like to help us, please click on the share button on the screen and tweet us with the "#やまだのタイマー" and "#やまだけんいち" on Twitter so that we can get a rough idea of the number of accesses.
 # Execution Check Environment
 - Windows 10 (64bit)
-- Google Chrome v.88
-- Microsoft Edge(Chromium) v.88
+- Google Chrome v.89
+- Microsoft Edge(Chromium) v.89
 - Firefox 87.0
 # OSS
 - (c) 2014-2019 Materialize

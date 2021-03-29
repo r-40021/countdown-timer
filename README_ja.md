@@ -21,8 +21,8 @@
 このWEBアプリには、プライバシーの観点からアクセス解析をつけていません。画面上のシェアボタンから、Twitterで"#やまだのタイマー"と"#やまだけんいち"をつけてツイートして頂ければ、こちらも大体のアクセス数を把握できますので、もしよろしければご協力ください。
 # 動作確認済み環境
 - Windows 10 (64bit)
-- Google Chrome v.88
-- Microsoft Edge(Chromium) v.88
+- Google Chrome v.89
+- Microsoft Edge(Chromium) v.89
 - Firefox 87.0
 # OSS
 - (c) 2014-2019 Materialize
