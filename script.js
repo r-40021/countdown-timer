@@ -113,9 +113,12 @@ function onload() {
             }); 
             }
             alarm.play();
+            var noevent = document.getElementById('audioicon');
+            noevent.classList.add('noevent');
+            noevent.classList.replace("teal-text", "grey-text");
             stop();
 　　　　　　 document.title = "やまだのタイマー";
-            var timerbox = document.getElementById("displayTime")
+            var timerbox = document.getElementById("displayTime");
             displayEnd  = setInterval(function(){
                                timerbox.style.color ="#26a69a";
 　　　　　　　　　　　　　　　　　　　document.title = "時間です！";
@@ -201,6 +204,9 @@ function set() {
 
 function audiostop(){
     alarm.pause();
+    var noevent = document.getElementById('audioicon');
+    noevent.classList.replace('noevent','autoevent');
+    noevent.classList.replace("grey-text", "teal-text");
     alarm.currentTime = 0;//音停止
     clearInterval(displayEnd);
     var timerbox = document.getElementById("displayTime")
