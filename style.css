@@ -81,3 +81,11 @@
 #audioInput, #playb{
     display:none;
 }
+
+.noevent {
+  pointer-events: none;
+}
+
+.autoevent{
+  pointer-events: auto;
+}
