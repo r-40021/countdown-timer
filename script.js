@@ -117,7 +117,7 @@ function onload() {
               console.log("error");
             }
             var noevent = document.getElementById('audioicon');
-            noevent.classList.add('noevent');
+            noevent.classList.add('noevent');//クリック不可
             document.getElementById('audioInput').classList.add('noevent');
             noevent.classList.replace("teal-text", "grey-text");
             alarm.play();          
@@ -211,7 +211,7 @@ function audiostop(){
     var noevent = document.getElementById('audioicon');
     noevent.classList.replace('noevent','autoevent');
     document.getElementById('audioInput').classList.replace('noevent','autoevent');
-    noevent.classList.replace("grey-text", "teal-text");
+    noevent.classList.replace("grey-text", "teal-text");//クリック不可
     alarm.pause();
     alarm.currentTime = 0;//音停止
     clearInterval(displayEnd);
