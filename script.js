@@ -126,9 +126,10 @@ function onload() {
         alarm.play();
         stop();
         document.title = "やまだのタイマー";
+        document.querySelector('#bigtimer').style.backgroundColor = "#ec407a";
         var timerbox = document.getElementById("displayTime");
         displayEnd = setInterval(function () {
-          timerbox.style.color = "#26a69a";
+          timerbox.style.color = "#d81b60";
           document.title = "時間です！";
           setTimeout(function () {
             timerbox.style.color = "#FFFFFF";
@@ -235,6 +236,7 @@ function audiostop() {
   clearInterval(displayEnd);
   var timerbox = document.getElementById("displayTime")
   timerbox.style.color = "#FFFFFF";
+  document.querySelector('#bigtimer').style.backgroundColor = "#4db6ac";
 }
 
 function pushrequest() {
