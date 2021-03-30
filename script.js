@@ -99,23 +99,28 @@ function onload() {
              displayPlace.innerHTML = display;
              document.title = "やまだのタイマー";
               /*通知(タッチデバイスとIEはなし)*/
-            if (useDevice){
-              Push.create('時間です！', {
-            　　body: 'くっ...時の流れが疾風迅雷の俺に追いついたようだ......',
-            　　icon: './favicon/favicon.ico',//アイコン
-            　　requireInteraction: true, // 永遠に通知
-            　　vibrate: [1000, 1000, 1000, 1000, 1000] ,
-                onClick: function () {
-                    window.focus();
-                    this.close();
-                    stop();
-                    audiostop();}
-            }); 
+            try {
+              if (useDevice){
+                Push.create('時間です！', {
+              　　body: 'くっ...時の流れが疾風迅雷の俺に追いついたようだ......',
+              　　icon: './favicon/favicon.ico',//アイコン
+              　　requireInteraction: true, // 永遠に通知
+              　　vibrate: [1000, 1000, 1000, 1000, 1000] ,
+                  onClick: function () {
+                      window.focus();
+                      this.close();
+                      stop();
+                      audiostop();}
+              }); 
+              }
+            } catch (error) {
+              console.log("error");
             }
-            alarm.play();
             var noevent = document.getElementById('audioicon');
             noevent.classList.add('noevent');
+            document.getElementById('audioInput').classList.add('noevent');
             noevent.classList.replace("teal-text", "grey-text");
+            alarm.play();          
             stop();
 　　　　　　 document.title = "やまだのタイマー";
             var timerbox = document.getElementById("displayTime");
@@ -203,10 +208,11 @@ function set() {
 }
 
 function audiostop(){
-    alarm.pause();
     var noevent = document.getElementById('audioicon');
     noevent.classList.replace('noevent','autoevent');
+    document.getElementById('audioInput').classList.replace('noevent','autoevent');
     noevent.classList.replace("grey-text", "teal-text");
+    alarm.pause();
     alarm.currentTime = 0;//音停止
     clearInterval(displayEnd);
     var timerbox = document.getElementById("displayTime")
