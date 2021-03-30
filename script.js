@@ -1,9 +1,10 @@
 window.addEventListener('DOMContentLoaded', (event) => {
-    setTimeout(function(){
-        const loader = document.getElementById('load');
-        if (loader.classList.contains("loaded")===false){
-        loader.classList.add('loaded');
-    }}, 5000);
+  setTimeout(function () {
+    const loader = document.getElementById('load');
+    if (loader.classList.contains("loaded") === false) {
+      loader.classList.add('loaded');
+    }
+  }, 5000);
 });
 var down;
 var displayEnd;
@@ -14,229 +15,246 @@ alarm.loop = true;
 var noSleep = new NoSleep();
 
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js').then(function(registration) {
+  navigator.serviceWorker.register('sw.js').then(function (registration) {
     // 登録成功
     console.log('ServiceWorker の登録に成功しました。スコープ: ', registration.scope);
-  }).catch(function(err) {
+  }).catch(function (err) {
     // 登録失敗
     console.log('ServiceWorker の登録に失敗しました。', err);
   });
 }
 
 window.addEventListener('load', (event) => {
-    const loader = document.getElementById('load');
-    loader.classList.add('loaded');
-    setTimeout(function(){
-        pushrequest();
-    }, 499);
-    
+  const loader = document.getElementById('load');
+  loader.classList.add('loaded');
+  setTimeout(function () {
+    pushrequest();
+  }, 499);
+
 });
 
 window.addEventListener('DOMContentLoaded', onload);
 
 function onload() {
-    var userAgent = window.navigator.userAgent.toLowerCase();//ブラウザ情報取得
-    if ((userAgent.indexOf("msie") === -1&&userAgent.indexOf("trident") === -1/*IEを省く*/)&&(userAgent.indexOf("windows") != -1||(userAgent.indexOf("mac os x") != -1&&'ontouchend' in document ===false)/*mac os xが含まれていて、かつマウスデバイス*/||userAgent.indexOf("cros") != -1||userAgent.indexOf("linux") != -1&&'ontouchend' in document ===false)){//PCとIE以外でしか実行しない
-        useDevice = 1;
-    }
-    if (userAgent.indexOf("msie") != -1||userAgent.indexOf("trident") != -1){
-        alert('Internet Explorerでは正常に動作しない可能性があります。\nEdgeやChromeをお使いください。');
-    }
-    if(userAgent.indexOf("iphone") != -1 || (userAgent.indexOf("mac os x") != -1&&'ontouchend' in document))/*iPhone/iPad除く*/{
-        const dateField = document.querySelector("#DateField");
-        const timeField = document.querySelector("#TimeField");
-        dateField.classList.remove("m5","s10");
-        dateField.classList.add("m6","s12");
-        timeField.classList.remove("m5","s10");
-        timeField.classList.add("m6","s12");        
-        
-    } else{
-        document.getElementById("audioInput").style.display = "inline";
-        document.getElementById("playb").style.display = "inline";
-    }
-    resize();　//文字サイズ調整
-    /*パラメータ取得*/
-    var param = location.search;
-    var paramObject = new Object();
-    
-    if (param) {
-        param = param.substring(1);
-        var parameters = param.split('&');
-        
-        for (var i =0 ; i < parameters.length; i++) {
-            var element = parameters[i].split('=');
+  box();
+  var userAgent = window.navigator.userAgent.toLowerCase();//ブラウザ情報取得
+  if ((userAgent.indexOf("msie") === -1 && userAgent.indexOf("trident") === -1/*IEを省く*/) && (userAgent.indexOf("windows") != -1 || (userAgent.indexOf("mac os x") != -1 && 'ontouchend' in document === false)/*mac os xが含まれていて、かつマウスデバイス*/ || userAgent.indexOf("cros") != -1 || userAgent.indexOf("linux") != -1 && 'ontouchend' in document === false)) {//PCとIE以外でしか実行しない
+    useDevice = 1;
+  }
+  if (userAgent.indexOf("msie") != -1 || userAgent.indexOf("trident") != -1) {
+    alert('Internet Explorerでは正常に動作しない可能性があります。\nEdgeやChromeをお使いください。');
+  }
+  if (userAgent.indexOf("iphone") != -1 || (userAgent.indexOf("mac os x") != -1 && 'ontouchend' in document))/*iPhone/iPad除く*/ {
+    const dateField = document.querySelector("#DateField");
+    const timeField = document.querySelector("#TimeField");
+    dateField.classList.remove("m5", "s10");
+    dateField.classList.add("m6", "s12");
+    timeField.classList.remove("m5", "s10");
+    timeField.classList.add("m6", "s12");
 
-            var paramName = decodeURIComponent(element[0]);
-            var paramValue = decodeURIComponent(element[1]);
+  } else {
+    document.getElementById("audioInput").style.display = "inline";
+    document.getElementById("playb").style.display = "inline";
+  }
+  resize();　//文字サイズ調整
+  /*パラメータ取得*/
+  var param = location.search;
+  var paramObject = new Object();
 
-            paramObject[paramName] = paramValue;
-        }
-        //テキストボックスに日時をセット
-        document.getElementById('Date').value = paramObject.date;
-        document.getElementById('Time').value = paramObject.time;
+  if (param) {
+    param = param.substring(1);
+    var parameters = param.split('&');
 
-        var myDate = paramObject.date;
-        var myTime = paramObject.time;
-        var target = new Date(myDate + " " + myTime + ":00");//設定時間
-        
-        /*カウントダウン（一番大事）*/
-        function myCount(){
-        date = new Date();
-        var diffTime = target.getTime() - date.getTime();//時間の差を計算
-        var diffHour = Math.floor(diffTime / (1000*60*60));//時間に変換
-        var diffMinute = Math.floor((diffTime-diffHour*1000*60*60) / (1000*60));//分に変換
-        var diffSecond = Math.floor((diffTime - diffHour*1000*60*60 - diffMinute*1000*60) /1000);//秒に変換
-        if (diffMinute < 10) {
-            diffMinute = "0" + diffMinute;
-        }
-        if (diffSecond < 10) {
-            diffSecond = "0" + diffSecond;
-        }
-        var display = diffHour + ":" + diffMinute + ":" + diffSecond;
-        if (display === "0:00:00") {
-             display = "0:00:00";
-             var displayPlace = document.getElementById('displayTime');
-             displayPlace.innerHTML = display;
-             document.title = "やまだのタイマー";
-              /*通知(タッチデバイスとIEはなし)*/
-            try {
-              if (useDevice){
-                Push.create('時間です！', {
-              　　body: 'くっ...時の流れが疾風迅雷の俺に追いついたようだ......',
-              　　icon: './favicon/favicon.ico',//アイコン
-              　　requireInteraction: true, // 永遠に通知
-              　　vibrate: [1000, 1000, 1000, 1000, 1000] ,
-                  onClick: function () {
-                      window.focus();
-                      this.close();
-                      stop();
-                      audiostop();}
-              }); 
+    for (var i = 0; i < parameters.length; i++) {
+      var element = parameters[i].split('=');
+
+      var paramName = decodeURIComponent(element[0]);
+      var paramValue = decodeURIComponent(element[1]);
+
+      paramObject[paramName] = paramValue;
+    }
+    //テキストボックスに日時をセット
+    document.getElementById('Date').value = paramObject.date;
+    document.getElementById('Time').value = paramObject.time;
+
+    var myDate = paramObject.date;
+    var myTime = paramObject.time;
+    var target = new Date(myDate + " " + myTime + ":00");//設定時間
+
+    /*カウントダウン（一番大事）*/
+    function myCount() {
+      date = new Date();
+      var diffTime = target.getTime() - date.getTime();//時間の差を計算
+      var diffHour = Math.floor(diffTime / (1000 * 60 * 60));//時間に変換
+      var diffMinute = Math.floor((diffTime - diffHour * 1000 * 60 * 60) / (1000 * 60));//分に変換
+      var diffSecond = Math.floor((diffTime - diffHour * 1000 * 60 * 60 - diffMinute * 1000 * 60) / 1000);//秒に変換
+      if (diffMinute < 10) {
+        diffMinute = "0" + diffMinute;
+      }
+      if (diffSecond < 10) {
+        diffSecond = "0" + diffSecond;
+      }
+      var display = diffHour + ":" + diffMinute + ":" + diffSecond;
+      if (display === "0:00:00") {
+        display = "0:00:00";
+        var displayPlace = document.getElementById('displayTime');
+        displayPlace.innerHTML = display;
+        document.title = "やまだのタイマー";
+        /*通知(タッチデバイスとIEはなし)*/
+        try {
+          if (useDevice) {
+            Push.create('時間です！', {
+              body: 'くっ...時の流れが疾風迅雷の俺に追いついたようだ......',
+              icon: './favicon/favicon.ico',//アイコン
+              requireInteraction: true, // 永遠に通知
+              vibrate: [1000, 1000, 1000, 1000, 1000],
+              onClick: function () {
+                window.focus();
+                this.close();
+                stop();
+                audiostop();
               }
-            } catch (error) {
-              console.log("error");
-            }
-            var noevent = document.getElementById('audioicon');
-            noevent.classList.add('noevent');//クリック不可
-            document.getElementById('audioInput').classList.add('noevent');
-            noevent.classList.replace("teal-text", "grey-text");
-            alarm.play();          
-            stop();
-　　　　　　 document.title = "やまだのタイマー";
-            var timerbox = document.getElementById("displayTime");
-            displayEnd  = setInterval(function(){
-                               timerbox.style.color ="#26a69a";
-　　　　　　　　　　　　　　　　　　　document.title = "時間です！";
-                             setTimeout(function(){
-                                timerbox.style.color ="#FFFFFF";
-                                document.title = "やまだのタイマー";
-                               }, 500);
-                           }, 1000);
+            });
+          }
+        } catch (error) {
+          console.log("error");
+        }
+        var noevent = document.getElementById('audioicon');
+        noevent.classList.add('noevent');//クリック不可
+        document.getElementById('audioInput').classList.add('noevent');
+        noevent.classList.replace("teal-text", "grey-text");
+        alarm.play();
+        stop();
+        document.title = "やまだのタイマー";
+        var timerbox = document.getElementById("displayTime");
+        displayEnd = setInterval(function () {
+          timerbox.style.color = "#26a69a";
+          document.title = "時間です！";
+          setTimeout(function () {
+            timerbox.style.color = "#FFFFFF";
+            document.title = "やまだのタイマー";
+          }, 500);
+        }, 1000);
 
-        } else /*計算結果が負orNaNのときの処理*/if(display.match("-|NaN")){
-         stop();
-         display = "0:00:00";
-         var displayPlace = document.getElementById('displayTime');
-         displayPlace.innerHTML = display;
-         resize();
-         document.title = "やまだのタイマー";}
-        else{
+      } else /*計算結果が負orNaNのときの処理*/if (display.match("-|NaN")) {
+        stop();
+        display = "0:00:00";
+        var displayPlace = document.getElementById('displayTime');
+        displayPlace.innerHTML = display;
+        resize();
+        document.title = "やまだのタイマー";
+      }
+      else {
         displayPlace = document.getElementById('displayTime');
         displayPlace.innerHTML = display;
         document.title = display;
-        resize();}}
-        down = setInterval(myCount, 100);
-    } else {
-        /*パラメータがなかったら*/
-        let date = new Date();
-        let after = new Date();
-        after.setHours(date.getHours() +1);
-        let defaultSet = after.toLocaleString().split(' ');
-        const defaultDate = defaultSet[0];
-        let originalDefaultTime = defaultSet[1].split(':');
-        const defaultTime = originalDefaultTime[0] + ":" + originalDefaultTime[1];
-        document.getElementById('Date').value = defaultDate;
-        document.getElementById('Time').value = defaultTime;
+        resize();
+      }
     }
+    down = setInterval(myCount, 100);
+  } else {
+    /*パラメータがなかったら*/
+    let date = new Date();
+    let after = new Date();
+    after.setHours(date.getHours() + 1);
+    let defaultSet = after.toLocaleString().split(' ');
+    const defaultDate = defaultSet[0];
+    let originalDefaultTime = defaultSet[1].split(':');
+    const defaultTime = originalDefaultTime[0] + ":" + originalDefaultTime[1];
+    document.getElementById('Date').value = defaultDate;
+    document.getElementById('Time').value = defaultTime;
+  }
 }
 
 function set() {
-    var url = new URL(window.location.href);
-    var myDate = document.getElementById('Date').value;
-    var myTime =  document.getElementById('Time').value;
-    history.replaceState( null, "やまだのタイマー", "index.html?date=" + myDate + "&time=" + myTime);//パラメータセット（リロードなし）
-    stop();
-    pushrequest();
-    onload();
-    audiostop();
-    Push.clear();//通知削除
+  var url = new URL(window.location.href);
+  var myDate = document.getElementById('Date').value;
+  var myTime = document.getElementById('Time').value;
+  history.replaceState(null, "やまだのタイマー", "index.html?date=" + myDate + "&time=" + myTime);//パラメータセット（リロードなし）
+  stop();
+  pushrequest();
+  onload();
+  audiostop();
+  Push.clear();//通知削除
 }
 
- document.addEventListener('DOMContentLoaded', function() {
-     /*datepicker*/
-    var elems = document.querySelectorAll('.datepicker');
-    var options = {
-        "format":"yyyy/m/d"
-    }
-    var instances = M.Datepicker.init(elems, options);
-     /*timepicker*/
-    elems = document.querySelectorAll('.timepicker');
-    options = {
-        "twelveHour":false
-    }
-    instances = M.Timepicker.init(elems, options);
-     /*modal*/
-     elems = document.querySelectorAll('.modal');
-     instances = M.Modal.init(elems);
-　　　elems = document.querySelectorAll('.tooltipped');
-     instances = M.Tooltip.init(elems);
-  });
-
-  function copy() {
-     var url = location.href;
-     navigator.clipboard.writeText(url);
-    M.toast({html: 'URLをコピーしました'})
+document.addEventListener('DOMContentLoaded', function () {
+  /*datepicker*/
+  var elems = document.querySelectorAll('.datepicker');
+  var options = {
+    "format": "yyyy/m/d"
   }
-
-  function resize(params) {
-    var count = document.querySelector('#displayTime').innerHTML.length;
-    document.querySelector('#displayTime').style.fontSize = 150/count + 'vw';//文字サイズ調整
+  var instances = M.Datepicker.init(elems, options);
+  /*timepicker*/
+  elems = document.querySelectorAll('.timepicker');
+  options = {
+    "twelveHour": false
   }
+  instances = M.Timepicker.init(elems, options);
+  /*modal*/
+  elems = document.querySelectorAll('.modal');
+  instances = M.Modal.init(elems);
+  elems = document.querySelectorAll('.tooltipped');
+  instances = M.Tooltip.init(elems);
+});
 
-  function stop(){
-    clearInterval(down);
+function copy() {
+  var url = location.href;
+  navigator.clipboard.writeText(url);
+  M.toast({ html: 'URLをコピーしました' })
 }
 
-function audiostop(){
-    var noevent = document.getElementById('audioicon');
-    noevent.classList.replace('noevent','autoevent');
-    document.getElementById('audioInput').classList.replace('noevent','autoevent');
-    noevent.classList.replace("grey-text", "teal-text");//クリック不可
-    alarm.pause();
-    alarm.currentTime = 0;//音停止
-    clearInterval(displayEnd);
-    var timerbox = document.getElementById("displayTime")
-    timerbox.style.color ="#FFFFFF";
+function resize(params) {
+  const place = document.querySelector('#displayTime')
+  let count = place.innerHTML.length;
+  place.style.fontSize = 150 / count + 'vw';//文字サイズ調整
+  let textheight = place.clientHeight;
+  let placeheight = document.querySelector('#bigtimer').clientHeight;
+  if (textheight > placeheight*0.5) {
+    let windowheight = window.innerHeight;
+    place.style.fontSize = (placeheight / windowheight) * 100 - 20 + "vh"
+    let textwidth = place.clientWidth;
+    let placewidth = document.querySelector('#bigtimer').clientWidth;
+    if (textwidth > placewidth*0.8) {
+      place.style.fontSize = 150 / count + 'vw';
+    }
+  }
 }
 
-function pushrequest(){
-    if (useDevice){//PCとIE以外でしか実行しない
+function stop() {
+  clearInterval(down);
+}
+
+function audiostop() {
+  var noevent = document.getElementById('audioicon');
+  noevent.classList.replace('noevent', 'autoevent');
+  document.getElementById('audioInput').classList.replace('noevent', 'autoevent');
+  noevent.classList.replace("grey-text", "teal-text");//クリック不可
+  alarm.pause();
+  alarm.currentTime = 0;//音停止
+  clearInterval(displayEnd);
+  var timerbox = document.getElementById("displayTime")
+  timerbox.style.color = "#FFFFFF";
+}
+
+function pushrequest() {
+  if (useDevice) {//PCとIE以外でしか実行しない
     /*トーストで通知の権限を通知*/
-    if (Push.Permission.has() == false){
-         M.toast({html: '通知を許可して、時間になったらデスクトップに通知が届くようにしてください'})
+    if (Push.Permission.has() == false) {
+      M.toast({ html: '通知を許可して、時間になったらデスクトップに通知が届くようにしてください' })
     }
-       /*プッシュ通知許可ダイアログ*/
-   Push.Permission.request(onGranted);
+    /*プッシュ通知許可ダイアログ*/
+    Push.Permission.request(onGranted);
 
     function onGranted() {
-         M.toast({html: '時間になったらデスクトップ通知でお知らせします'})
+      M.toast({ html: '時間になったらデスクトップ通知でお知らせします' })
     }
-    } else{
-         M.toast({html: '<span>ご利用の環境では、時間になってもプッシュ通知を行うことができません。</span><a class="btn-flat toast-action modal-trigger" href="#push">MORE</a>'})
-    }
+  } else {
+    M.toast({ html: '<span>ご利用の環境では、時間になってもプッシュ通知を行うことができません。</span><a class="btn-flat toast-action modal-trigger" href="#push">MORE</a>' })
+  }
 }
 
-  window.addEventListener('load', () => {
+window.addEventListener('load', () => {
   const f = document.getElementById('file1');
   var player = document.getElementById('player');
   f.addEventListener('change', evt => {
@@ -245,16 +263,16 @@ function pushrequest(){
       return;
     }
     const file = input.files[0];
-     if(!file.type.match('audio.*')) {
-            M.toast({html: '音声ファイルを選択してください'});
-            return;
-        }
+    if (!file.type.match('audio.*')) {
+      M.toast({ html: '音声ファイルを選択してください' });
+      return;
+    }
     const reader = new FileReader();
     reader.onload = () => {
       alarm = new Audio(reader.result);
       alarm.loop = true;
       player.src = reader.result;
-      M.toast({html: 'アラーム音を設定しました。<br>このページから離れると、アラーム音はリセットされます。'});
+      M.toast({ html: 'アラーム音を設定しました。<br>このページから離れると、アラーム音はリセットされます。' });
       window.addEventListener('beforeunload', move, false);
     };
 
@@ -262,8 +280,14 @@ function pushrequest(){
   });
 });
 
-var move = function(e){
-    e.preventDefault();
+function box() {
+  let allheight = window.innerHeight;
+  let height = document.querySelector('#settings').clientHeight;
+  document.querySelector('#bigtimer').style.height = (allheight - height - 50) + 'px';
+}
+
+var move = function (e) {
+  e.preventDefault();
   // Chrome では returnValue を設定する必要がある
   e.returnValue = '';
 }
@@ -272,4 +296,9 @@ var move = function(e){
 document.addEventListener('click', function enableNoSleep() {
   document.removeEventListener('click', enableNoSleep, false);
   noSleep.enable();
+}, false);
+
+window.addEventListener('resize', function () {
+  box();
+  resize();
 }, false);

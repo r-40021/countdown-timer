@@ -2,6 +2,9 @@
 <html lang="ja">
 
 <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+    <meta http-equiv="Cache-Control" content="no-cache">
     <meta content="text / html; charset = UTF-8" name="Content-Type" />
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
@@ -43,58 +46,75 @@
             <div class="double-bounce2"></div>
         </div>
     </div>
-    <div class="timer teal lighten-2">
-        <span id="displayTime">0:00:00</span>
-    </div>
-    <div class="container">
-        <!--Date&Time-->
-        <div class="row">
-            <div class="col m5 s10" id="DateField">
-                <input placeholder="日付" id="Date" type="text" class="datepicker" readonly="readonly">
+    <div class="scrollarea">
+        <div class="scroll">
+            <div class="timer teal lighten-2" id="bigtimer">
+                <div id="displayTime">0:00:00</div>
             </div>
-            <div class="col m5 s10" id="TimeField">
-                <input placeholder="時間" id="Time" type="text" class="timepicker" readonly="readonly">
-            </div>
-            <div class="col m2 s2">
-                <input id="file1" type="file" accept="audio/*">
-                <label for="file1" id="audioInput"><i class="far fa-file-audio teal-text text-lighten-1 tooltipped" style="font-size:35px;margin-top: 10px;" data-position="bottom" data-tooltip="アラーム音を変更" id="audioicon"></i></label>
-            </div>
-            <!--SET/STOP-->
-            <div class="col s12 center">
-                <a class="waves-effect waves-light btn-large blue" onclick="set()">SET</a>
-                <a class="waves-effect waves-light btn-large pink" onclick="stop();audiostop();Push.clear();">STOP</a>
-            </div>
-        </div>
-        <!--player-->
-        <div class="row">
-            <div class="col s12" id="playb">
-                <figcaption>アラーム音試聴：</figcaption>
-                <audio controls src="alarm.mp3" id="player" preload="metadata" controlslist="nodownload">
-                    Your browser does not support the
-                    <code>audio</code> element.
-                </audio>
+            <div class="container" id="settings">
+                <!--Date&Time-->
+                <div class="row">
+                    <div class="col m5 s10" id="DateField">
+                        <input placeholder="日付" id="Date" type="text" class="datepicker" readonly="readonly">
+                    </div>
+                    <div class="col m5 s10" id="TimeField">
+                        <input placeholder="時間" id="Time" type="text" class="timepicker" readonly="readonly">
+                    </div>
+                    <div class="col m2 s2">
+                        <input id="file1" type="file" accept="audio/*">
+                        <label for="file1" id="audioInput"><i
+                                class="far fa-file-audio teal-text text-lighten-1 tooltipped"
+                                style="font-size:35px;margin-top: 10px;" data-position="bottom" data-tooltip="アラーム音を変更"
+                                id="audioicon"></i></label>
+                    </div>
+                    <!--SET/STOP-->
+                    <div class="col s12 center">
+                        <a class="waves-effect waves-light btn-large blue" onclick="set()">SET</a>
+                        <a class="waves-effect waves-light btn-large pink"
+                            onclick="stop();audiostop();Push.clear();">STOP</a>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col s12">
-                <a class="waves-effect waves-light btn modal-trigger" href="#modal1">アラーム音が鳴らない</a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col s12">
-                <!--URL-->
-                <a onclick="copy()" class="btn-flat grey darken-1 white-text waves-effect waves-teal" style="margin-right: 10px">URLをコピー</a>
-                <!--Twitter-->
-                <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="半永久的に計れるタイマー&#13;" data-hashtags="やまだのタイマー,やまだけんいち" 　data-size="large" 　data-show-count="false" data-url="https://r-40021.github.io/countdown-timer">Tweet</a>
-                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col s12">
-                <!--info-->
-                <a href="https://r-40021.github.io/" target="_blank"><i class="far fa-user"></i>作者について</a>&emsp;
-                <!--GitHub-->
-                <a href="https://github.com/r-40021/countdown-timer" target="_blank"><i class="fab fa-github"></i>View on GitHub</a>
+        <div class="scroll">
+            <!--player-->
+            <div class="container">
+                <div class="row">
+                    <div class="col s12" id="playb">
+                        <figcaption>アラーム音試聴：</figcaption>
+                        <audio controls src="alarm.mp3" id="player" preload="metadata" controlslist="nodownload">
+                            Your browser does not support the
+                            <code>audio</code> element.
+                        </audio>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <a class="waves-effect waves-light btn modal-trigger" href="#modal1">アラーム音が鳴らない</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <!--URL-->
+                        <a onclick="copy()" class="btn-flat grey darken-1 white-text waves-effect waves-teal"
+                            style="margin-right: 10px">URLをコピー</a>
+                        <!--Twitter-->
+                        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button"
+                            data-text="半永久的に計れるタイマー&#13;" data-hashtags="やまだのタイマー,やまだけんいち" 　data-size="large"
+                            　data-show-count="false" data-url="https://r-40021.github.io/countdown-timer">Tweet</a>
+                        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <!--info-->
+                        <a href="https://r-40021.github.io/" target="_blank"><i class="far fa-user"></i>作者について</a>&emsp;
+                        <!--GitHub-->
+                        <a href="https://github.com/r-40021/countdown-timer" target="_blank"><i
+                                class="fab fa-github"></i>View
+                            on GitHub</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
