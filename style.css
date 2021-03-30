@@ -66,8 +66,22 @@
 }
 
 .timer {
-    text-align: center;
+    display: grid;
+    place-items: center;
     color: #FFFFFF;
+    font-family: 'Open Sans', sans-serif;
+    font-weight:300;
+}
+
+.scrollarea{
+  height: 100vh;
+  overflow: auto;
+  scroll-snap-type: y mandatory;
+}
+
+.scroll{
+  height: 100vh;
+  scroll-snap-align: start; 
 }
 
 .class input[type=text] {
@@ -88,4 +102,34 @@
 
 .autoevent{
   pointer-events: auto;
+}
+
+#playb{
+  margin-top: 50px;
+}
+
+::selection {
+  background: #4db6ac;
+  color: #fff;
+}
+
+/*Firefox*/
+::-moz-selection {
+  background: #4db6ac;
+  color: #fff;
+}
+
+::-webkit-scrollbar{
+  width: 10px;
+}
+::-webkit-scrollbar-track{
+  background: #fff;
+  border: none;
+  border-radius: 10px;
+  box-shadow: inset 0 0 2px #777; 
+}
+::-webkit-scrollbar-thumb{
+  background: #ccc;
+  border-radius: 10px;
+  box-shadow: none;
 }
