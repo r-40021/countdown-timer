@@ -1,4 +1,4 @@
-const CACHE_NAME = `20210330v2`;
+const CACHE_NAME = `20210330v3`;
 
 // キャッシュするファイルをセットする
 const urlsToCache = [
