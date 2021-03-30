@@ -79,11 +79,6 @@
   scroll-snap-type: y mandatory;
 }
 
-.scroll{
-  height: 100vh;
-  scroll-snap-align: start; 
-}
-
 .class input[type=text] {
     font-size: 16px;
     transform: scale(0.9);
