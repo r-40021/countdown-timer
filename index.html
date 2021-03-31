@@ -49,34 +49,40 @@
     <div class="timer" id="bigtimer" style="background-color: #4db6ac;">
         <div id="displayTime">0:00:00</div>
     </div>
-    <div class="container" id="settings">
-        <!--Date&Time-->
-        <div class="row">
-            <div class="col m5 s10" id="DateField">
-                <input placeholder="日付" id="Date" type="text" class="datepicker" readonly="readonly">
-            </div>
-            <div class="col m5 s10" id="TimeField">
-                <input placeholder="時間" id="Time" type="text" class="timepicker" readonly="readonly">
-            </div>
-            <div class="col m2 s2">
-                <input id="file1" type="file" accept="audio/*">
-                <label for="file1" id="audioInput"><i class="far fa-file-audio teal-text text-lighten-1 tooltipped"
-                        style="font-size:35px;margin-top: 10px;" data-position="bottom" data-tooltip="アラーム音を変更"
-                        id="audioicon"></i></label>
-            </div>
-            <!--SET/STOP-->
-            <div class="col s12 center">
-                <a class="waves-effect waves-light btn-large blue" onclick="set()">SET</a>
-                <a class="waves-effect waves-light btn-large pink" onclick="stop();audiostop();Push.clear();">STOP</a>
+    <!--menu-->
+    <div class="menu">
+        <div class="upmenu" id="upmenu">
+            <i class="fas fa-chevron-up"></i>
+        </div>
+        <div class="downmenu" id="downmenu">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="mymenu">
+        <div class="container" id="menu1">
+            <!--Date&Time-->
+            <div class="row">
+                <div class="col m5 s10" id="DateField">
+                    <input placeholder="日付" id="Date" type="text" class="datepicker" readonly="readonly">
+                </div>
+                <div class="col m5 s10" id="TimeField">
+                    <input placeholder="時間" id="Time" type="text" class="timepicker" readonly="readonly">
+                </div>
+                <div class="col m2 s2">
+                    <input id="file1" type="file" accept="audio/*">
+                    <label for="file1" id="audioInput"><i class="far fa-file-audio teal-text text-lighten-1 tooltipped"
+                            style="font-size:35px;margin-top: 10px;" data-position="bottom" data-tooltip="アラーム音を変更"
+                            id="audioicon"></i></label>
+                </div>
+                <!--SET/STOP-->
+                <div class="col s12 center">
+                    <a class="waves-effect waves-light btn-large blue" onclick="set()">SET</a>
+                    <a class="waves-effect waves-light btn-large pink"
+                        onclick="stop();audiostop();Push.clear();">STOP</a>
+                </div>
             </div>
         </div>
-    </div>
-    <!--player-->
-    <div class="menu">
-        <input type="checkbox" id="humCheck">
-        <label for="humCheck" id="humOpen"><i class="fas fa-bars"></i></label>
-        <label for="humCheck" id="humCose"></label>
-        <div class="mymenu">
+
+        <div id="menu2">
             <div class="container">
                 <div class="row">
                     <div class="col s12" id="playb">
@@ -92,6 +98,8 @@
                         <a class="waves-effect waves-light btn modal-trigger" href="#modal1">アラーム音が鳴らない</a>
                     </div>
                 </div>
+            
+            <div class="mymenu" id="menu2">
                 <div class="row">
                     <div class="col s12">
                         <!--URL-->
@@ -116,50 +124,52 @@
                 </div>
             </div>
         </div>
-        <div id="modal1" class="modal">
-            <div class="modal-content">
-                <h4>アラーム音を有効にするには</h4>
-                <ol>
-                    <li>URLの左側の錠マークをクリック</li>
-                    <li>「サイトの設定」（表現は多少異なる場合があります）をクリック</li>
-                    <li>「サウンド」もしくは「音声」の項目を探し、「自動」から「許可」に変更</li>
-                    <li>タイマーアプリを再読み込み</li>
-                </ol>
-                <p>注意点</p>
-                <ol>
-                    <li>iPhoneやiPadなどでは、アラーム音を有効に設定できません。</li>
-                    <li>ブラウザによっては、この設定をしなくてもアラーム音が鳴るものもあります。<br>（例：Edge）</li>
-                </ol>
-            </div>
-            <div class="modal-footer">
-                <a class="modal-close waves-effect waves-green btn-flat">OK</a>
-            </div>
         </div>
-        <div id="push" class="modal">
-            <div class="modal-content">
-                <h4>プッシュ通知対応環境</h4>
-                <h5>OS</h5>
-                <ul>
-                    <li>PC(Windows,Mac,Linux,Chrome OS)</li>
-                </ul>
-                <h5>ブラウザ</h5>
-                <ul>
-                    <li>最新版のChrome</li>
-                    <li>最新版のSafari</li>
-                    <li>最新版のFirefox</li>
-                    <li>最新版のEdge</li>
-                </ul>
-                <p>プッシュ通知をご利用になるには、OSとブラウザの両方が対応している必要があります。</p>
-                <p>※プッシュ通知は「オマケ機能」程度のものですので、アプリ自体は問題なくご利用になれます。</p>
-            </div>
-            <div class="modal-footer">
-                <a class="modal-close waves-effect waves-green btn-flat">OK</a>
-            </div>
+    </div>
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <h4>アラーム音を有効にするには</h4>
+            <ol>
+                <li>URLの左側の錠マークをクリック</li>
+                <li>「サイトの設定」（表現は多少異なる場合があります）をクリック</li>
+                <li>「サウンド」もしくは「音声」の項目を探し、「自動」から「許可」に変更</li>
+                <li>タイマーアプリを再読み込み</li>
+            </ol>
+            <p>注意点</p>
+            <ol>
+                <li>iPhoneやiPadなどでは、アラーム音を有効に設定できません。</li>
+                <li>ブラウザによっては、この設定をしなくてもアラーム音が鳴るものもあります。<br>（例：Edge）</li>
+            </ol>
         </div>
-        <script src="push.min.js"></script>
-        <script src="materialize.min.js"></script>
-        <script src="nosleep.min.js"></script>
-        <script src="script.js"></script>
+        <div class="modal-footer">
+            <a class="modal-close waves-effect waves-green btn-flat">OK</a>
+        </div>
+    </div>
+    <div id="push" class="modal">
+        <div class="modal-content">
+            <h4>プッシュ通知対応環境</h4>
+            <h5>OS</h5>
+            <ul>
+                <li>PC(Windows,Mac,Linux,Chrome OS)</li>
+            </ul>
+            <h5>ブラウザ</h5>
+            <ul>
+                <li>最新版のChrome</li>
+                <li>最新版のSafari</li>
+                <li>最新版のFirefox</li>
+                <li>最新版のEdge</li>
+            </ul>
+            <p>プッシュ通知をご利用になるには、OSとブラウザの両方が対応している必要があります。</p>
+            <p>※プッシュ通知は「オマケ機能」程度のものですので、アプリ自体は問題なくご利用になれます。</p>
+        </div>
+        <div class="modal-footer">
+            <a class="modal-close waves-effect waves-green btn-flat">OK</a>
+        </div>
+    </div>
+    <script src="push.min.js"></script>
+    <script src="materialize.min.js"></script>
+    <script src="nosleep.min.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
