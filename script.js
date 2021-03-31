@@ -286,7 +286,7 @@ window.addEventListener('load', () => {
 
 function box() {
   let allheight = window.innerHeight;
-  let height = document.querySelector('#settings').clientHeight;
+  let height = document.querySelector('#menu1').clientHeight;
   document.querySelector('#bigtimer').style.height = (allheight - height - 50) + 'px';
 }
 
