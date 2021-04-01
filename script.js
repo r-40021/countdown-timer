@@ -112,9 +112,9 @@ function device() {
   if (userAgent.indexOf("iphone") != -1 || (userAgent.indexOf("mac os x") != -1 && 'ontouchend' in document))/*iPhone/iPad除く*/ {
     const dateField = document.querySelector("#DateField");
     const timeField = document.querySelector("#TimeField");
-    dateField.classList.remove("m5", "s10");
+    dateField.classList.remove("m5", "s12");
     dateField.classList.add("m6", "s12");
-    timeField.classList.remove("m5", "s10");
+    timeField.classList.remove("m5", "s12");
     timeField.classList.add("m6", "s12");
     document.getElementById("fullscreen").style.display = "none";
     document.getElementById("escFullscreen").style.display = "none";
