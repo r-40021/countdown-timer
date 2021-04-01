@@ -16,7 +16,7 @@ var alarm = new Audio("alarm.mp3");
 alarm.loop = true;
 var noSleep = new NoSleep();
 
-/*if ('serviceWorker' in navigator) {
+if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
     navigator.serviceWorker.register('sw.js').then(function(registration) {
       // Registration was successful
@@ -26,7 +26,7 @@ var noSleep = new NoSleep();
       console.log('ServiceWorker registration failed: ', err);
     });
   });
-}*/
+}
 
 window.addEventListener('load', (event) => {
   const loader = document.getElementById('load');
