@@ -238,6 +238,8 @@ function onload() {
         var noevent = document.getElementById('audioicon');
         noevent.classList.add('noevent');//クリック不可
         document.getElementById('audioInput').classList.add('noevent');
+　　　　　noevent.classList.remove('autoevent');
+        document.getElementById('audioInput').classList.remove('autoevent');
         noevent.classList.replace("teal-text", "grey-text");
         alarm.play();
         if (menuStatus === 0) {
