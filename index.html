@@ -71,16 +71,18 @@
                             </div>
                             <div class="col m2 s12 center">
                                 <input id="file1" type="file" accept="audio/*">
-                                <label for="file1" id="audioInput"><i
-                                        class="far fa-file-audio teal-text text-lighten-1 tooltipped"
-                                        style="font-size:35px;margin-top: 10px;" data-position="bottom"
-                                        data-tooltip="アラーム音を変更" id="audioicon"></i></label>
-                                <i class="fas fa-expand-arrows-alt teal-text text-lighten-1 tooltipped"
-                                    data-position="bottom" data-tooltip="全画面"
-                                    style="font-size:35px;margin-top: 10px;margin-left: 10px;" id="fullscreen"></i>
-                                <i class="fas fa-compress-arrows-alt teal-text text-lighten-1 tooltipped"
-                                    data-position="bottom" data-tooltip="全画面解除"
-                                    style="font-size:35px;margin-top: 10px;margin-left: 10px;" id="escFullscreen"></i>
+                                <label for="file1" id="audioInput"><span  class="tooltipped" data-position="bottom"
+                                    data-tooltip="アラーム音を変更"><i class="far fa-file-audio teal-text text-lighten-1"
+                                        style="font-size:35px;margin-top: 10px;" id="audioicon"></i></label></span>
+                                <span id="fullscreen" class="tooltipped" data-position="bottom" data-tooltip="全画面">
+                                    <i class="fas fa-expand-arrows-alt teal-text text-lighten-1"
+                                        style="font-size:35px;margin-top: 10px;margin-left: 10px;" id="fullscreen"></i>
+                                </span>
+                                <span class="tooltipped" id="escFullscreen" data-position="bottom" data-tooltip="全画面解除">
+                                    <i class="fas fa-compress-arrows-alt teal-text text-lighten-1"
+                                        style="font-size:35px;margin-top: 10px;margin-left: 10px;"
+                                        id="escFullscreen"></i>
+                                </span>
                             </div>
                         </div>
                         <div class="row">
