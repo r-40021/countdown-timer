@@ -10,6 +10,8 @@ var down;
 var displayEnd;
 var displayPlace;
 var useDevice = 0;
+var menuStatus = 1;
+var timerStatus = 0;
 var alarm = new Audio("alarm.mp3");
 alarm.loop = true;
 var noSleep = new NoSleep();
@@ -35,10 +37,71 @@ window.addEventListener('load', (event) => {
 
 });
 
-window.addEventListener('DOMContentLoaded', onload);
+window.addEventListener('DOMContentLoaded', function () {
+  device();
+  onload();
+});
 
-function onload() {
-  box();
+window.addEventListener('DOMContentLoaded', function () {
+  /*メニューの上げ下げ*/
+  const upmenu = document.querySelector('#upmenu');
+  const downmenu = document.querySelector('#downmenu');
+  const menu1 = document.querySelector('#menu1');
+  const menu2 = document.querySelector('#menu2');
+  var once;
+  upmenu.addEventListener('click', function () {
+    if (menuStatus === 1 || menuStatus === 3) {
+      clearTimeout(once);
+      menu2.classList.add('is-open');
+      if (menuStatus === 1) {
+        menuStatus = 2;
+      }
+      upmenu.style.visibility = "hidden";
+    } else if (menuStatus === 0) {
+      menu1.classList.add('is-open');
+      menuStatus = 3;
+      downmenu.style.visibility = "visible";
+      once = setTimeout(f, 3000);
+    }
+  });
+  downmenu.addEventListener('click', function () {
+    clearTimeout(once);
+    if (menuStatus === 3) {
+      menu2.classList.remove('is-open');
+      menu1.classList.remove('is-open');
+      upmenu.style.visibility = "visible";
+      downmenu.style.visibility = "hidden";
+      document.querySelector('audio#player').pause();
+      menuStatus = 0;
+    } else if (menuStatus === 2) {
+      menu2.classList.remove('is-open');
+      menuStatus = 1;
+      document.querySelector('audio#player').pause();
+      upmenu.style.visibility = "visible";
+    } else if (menuStatus === 1) {
+      menu1.classList.remove('is-open');
+      menuStatus = 0;
+      downmenu.style.visibility = "hidden";
+    }
+  });
+});
+
+function f() {
+  menuStatus = 1;
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  const bigtimer = document.querySelector('#bigtimer');
+  bigtimer.addEventListener('click', function () {
+    if (timerStatus) {
+      document.getElementById('stopTimer').click();
+    } else {
+      document.getElementById('setTimer').click();
+    }
+  });
+});
+
+function device() {
   var userAgent = window.navigator.userAgent.toLowerCase();//ブラウザ情報取得
   if ((userAgent.indexOf("msie") === -1 && userAgent.indexOf("trident") === -1/*IEを省く*/) && (userAgent.indexOf("windows") != -1 || (userAgent.indexOf("mac os x") != -1 && 'ontouchend' in document === false)/*mac os xが含まれていて、かつマウスデバイス*/ || userAgent.indexOf("cros") != -1 || userAgent.indexOf("linux") != -1 && 'ontouchend' in document === false)) {//PCとIE以外でしか実行しない
     useDevice = 1;
@@ -53,11 +116,61 @@ function onload() {
     dateField.classList.add("m6", "s12");
     timeField.classList.remove("m5", "s10");
     timeField.classList.add("m6", "s12");
-
+    document.getElementById("fullscreen").style.display = "none";
+    document.getElementById("escFullscreen").style.display = "none";
   } else {
     document.getElementById("audioInput").style.display = "inline";
     document.getElementById("playb").style.display = "inline";
   }
+}
+
+window.addEventListener('DOMContentLoaded', function(){
+			
+  // フルスクリーン表示
+  document.getElementById('fullscreen').addEventListener('click', function(){
+
+    // Chrome & Firefox v64以降
+    if( document.body.requestFullscreen ) {
+      document.body.requestFullscreen();
+      
+    // Firefox v63以前
+    } else if( document.body.mozRequestFullScreen ) {
+      document.body.mozRequestFullScreen();
+
+    // Safari & Edge & Chrome v68以前
+    } else if( document.body.webkitRequestFullscreen ) {
+      document.body.webkitRequestFullscreen();
+      
+    // IE11
+    } else if( document.body.msRequestFullscreen ) {
+      document.body.msRequestFullscreen();
+    }				
+  });
+
+  // フルスクリーン解除
+  document.getElementById('escFullscreen').addEventListener('click', function(){
+    
+    // Chrome & Firefox v64以降
+    if( document.exitFullscreen ) {
+      document.exitFullscreen();
+
+    // Firefox v63以前
+    } else if( document.mozCancelFullScreen ) {
+      document.mozCancelFullScreen();
+
+    // Safari & Edge & Chrome v44以前
+    } else if( document.webkitCancelFullScreen ) {
+      document.webkitCancelFullScreen();
+
+    // IE11
+    } else if( document.msExitFullscreen ) {
+      document.msExitFullscreen();
+    }
+  });
+});
+
+
+function onload() {
   resize();　//文字サイズ調整
   /*パラメータ取得*/
   var param = location.search;
@@ -82,6 +195,7 @@ function onload() {
     var myDate = paramObject.date;
     var myTime = paramObject.time;
     var target = new Date(myDate + " " + myTime + ":00");//設定時間
+    timerStatus = 1;
 
     /*カウントダウン（一番大事）*/
     function myCount() {
@@ -126,6 +240,11 @@ function onload() {
         document.getElementById('audioInput').classList.add('noevent');
         noevent.classList.replace("teal-text", "grey-text");
         alarm.play();
+        if (menuStatus === 0) {
+          document.getElementById('menu1').classList.add('is-open');
+          menuStatus = 1;
+          downmenu.style.visibility = "visible";
+        }
         stop();
         document.title = "やまだのタイマー";
         document.querySelector('#bigtimer').style.backgroundColor = "#ec407a";
@@ -175,10 +294,10 @@ function set() {
   var myTime = document.getElementById('Time').value;
   history.replaceState(null, "やまだのタイマー", "index.html?date=" + myDate + "&time=" + myTime);//パラメータセット（リロードなし）
   stop();
-  pushrequest();
   onload();
   audiostop();
   Push.clear();//通知削除
+  timerStatus = 1;
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -210,18 +329,7 @@ function copy() {
 function resize(params) {
   const place = document.querySelector('#displayTime')
   let count = place.innerHTML.length;
-  place.style.fontSize = 150 / count + 'vw';//文字サイズ調整
-  let textheight = place.clientHeight;
-  let placeheight = document.querySelector('#bigtimer').clientHeight;
-  if (textheight > placeheight*0.5) {
-    let windowheight = window.innerHeight;
-    place.style.fontSize = (placeheight / windowheight) * 100 - 20 + "vh"
-    let textwidth = place.clientWidth;
-    let placewidth = document.querySelector('#bigtimer').clientWidth;
-    if (textwidth > placewidth*0.8) {
-      place.style.fontSize = 150 / count + 'vw';
-    }
-  }
+  place.style.fontSize = 195 / count + 'vmin';//文字サイズ調整
 }
 
 function stop() {
@@ -229,6 +337,7 @@ function stop() {
 }
 
 function audiostop() {
+  timerStatus = 0;
   var noevent = document.getElementById('audioicon');
   noevent.classList.replace('noevent', 'autoevent');
   document.getElementById('audioInput').classList.replace('noevent', 'autoevent');
@@ -284,12 +393,6 @@ window.addEventListener('load', () => {
   });
 });
 
-function box() {
-  let allheight = window.innerHeight;
-  let height = document.querySelector('#menu1').clientHeight;
-  document.querySelector('#bigtimer').style.height = (allheight - height - 50) + 'px';
-}
-
 var move = function (e) {
   e.preventDefault();
   // Chrome では returnValue を設定する必要がある
@@ -300,9 +403,4 @@ var move = function (e) {
 document.addEventListener('click', function enableNoSleep() {
   document.removeEventListener('click', enableNoSleep, false);
   noSleep.enable();
-}, false);
-
-window.addEventListener('resize', function () {
-  box();
-  resize();
 }, false);

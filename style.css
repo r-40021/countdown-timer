@@ -16,9 +16,8 @@
   position: fixed;
   left: 0;
   top: 0;
-  width: 100%;
-  height: 100%;
   z-index: 99999999999;
+  margin: 0;
 }
 
 #load.loaded {
@@ -71,17 +70,12 @@
 }
 
 .timer {
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: #FFFFFF;
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
-}
-
-.scrollarea {
-  height: 100vh;
-  overflow: auto;
-  scroll-snap-type: y mandatory;
 }
 
 .class input[type=text] {
@@ -97,8 +91,16 @@
   display: none;
 }
 
-#audioicon{
+#audioicon,#fullscreen,#escFullscreen{
   cursor: pointer;
+}
+
+body:fullscreen #fullscreen{
+  display: none;
+}
+
+body:not(:fullscreen) #escFullscreen{
+  display: none;
 }
 
 .noevent {
@@ -143,6 +145,7 @@
 }
 
 .upmenu, .downmenu {
+  position: absolute;
   text-align: center;
   font-size: 20px;
   width: 50px;
@@ -153,35 +156,58 @@
   cursor: pointer;
 }
 
+.upmenu:hover,.downmenu:hover {
+    opacity: 0.7;
+    color: white;
+    transition: color 250ms,
+                opacity 250ms;
+  }
+
 .mymenu {
-  position: relative;
-  height: auto;
-  background-color: #fff;
+  background-color: rgb(247,247,247);
 }
 
 .menu {
-  position: fixed;
-  bottom: 0;
-  left: 0;
+  position: relative;
+  flex-shrink: 0;
   margin: 0px;
   padding: 0;
   width: 100%;
-  height: auto;
 }
 
-body{
+html,body{
+  width: 100%;
+  height: 100vh;
   margin: 0;
   padding: 0;
 }
 
 #menu1 {
-  height: 50px;
-  background-color: #fff;
+  height: 0;
+  overflow: hidden;
+  background-color: rgb(247,247,247);
+  transition: 350ms ease-in-out;
+}
+
+#menu1.is-open{
+  padding-top: 0;
+  padding-bottom: 0;
+  height: 150px;
+  transition: 350ms ease-in-out;
 }
 
 #menu2 {
-  margin-bottom: -15px;
-  background-color: #fff;
+  height: 0;
+  overflow: hidden;
+  background-color: rgb(247,247,247);
+  transition: 350ms ease-in-out;
+}
+
+#menu2.is-open{
+  padding-top: 0;
+  padding-bottom: 0;
+  height: 150px;
+  transition: 350ms ease-in-out;
 }
 
 @media only screen and (max-width: 480px) {
@@ -200,6 +226,18 @@ body{
     top: -30px;
     left: 55px;
     margin: 0;
+  }
+  #menu1.is-open{
+    padding-top: 0;
+    padding-bottom: 0;
+    height: 180px;
+    transition: 350ms ease-in-out;
+  }
+  #menu2.is-open{
+    padding-top: 0;
+    padding-bottom: 0;
+    height: 210px;
+    transition: 350ms ease-in-out;
   }
   
 }
@@ -225,6 +263,17 @@ body{
 }
 
 #bigtimer{
-  position: relative;
+  flex: 1;
   z-index: 0;
+  flex-shrink: 0;
+  transition: background-color 250ms ease-in-out;
+}
+
+.flex{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
