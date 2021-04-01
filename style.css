@@ -148,8 +148,8 @@ body:not(:fullscreen) #escFullscreen{
   position: absolute;
   text-align: center;
   font-size: 20px;
-  width: 50px;
-  height: 30px;
+  width: 60px;
+  height: 40px;
   background-color: #ccc;
   color: #000;
   border-radius: 10px 10px 0 0;
@@ -216,15 +216,15 @@ html,body{
   }
   .upmenu {
     position: absolute;
-    top: -30px;
+    top: -40px;
     left: 0;
     margin: 0;
   }
   
   .downmenu {
     position: absolute;
-    top: -30px;
-    left: 55px;
+    top: -40px;
+    left: 65px;
     margin: 0;
   }
   #menu1.is-open{
@@ -248,15 +248,15 @@ html,body{
   }
   .upmenu {
     position: absolute;
-    top: -30px;
-    left: 50px;
+    top: -40px;
+    left: 60px;
     margin: 0;
   }
   
   .downmenu {
     position: absolute;
-    top: -30px;
-    left: 105px;
+    top: -40px;
+    left: 125px;
     margin: 0;
   }
   
