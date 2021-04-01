@@ -230,7 +230,7 @@ html,body{
   #menu1.is-open{
     padding-top: 0;
     padding-bottom: 0;
-    height: 180px;
+    height: 230px;
     transition: 350ms ease-in-out;
   }
   #menu2.is-open{
