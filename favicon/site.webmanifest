@@ -1,6 +1,6 @@
 {
-    "name": "\u3084\u307e\u3060\u30bf\u30a4\u30de\u30fc",
-    "short_name": "\u3084\u307e\u3060\u30bf\u30a4\u30de\u30fc",
+    "name": "やまだのタイマー",
+    "short_name": "やまだタイマー",
     "icons": [
         {
             "src": "android-chrome-192x192.png",
@@ -13,7 +13,10 @@
             "type": "image/png"
         }
     ],
-    "theme_color": "#ffffff",
-    "background_color": "#ffffff",
-    "display": "standalone"
+    "theme_color": "#4db6ac",
+    "background_color": "#00C2BC",
+    "display": "standalone",
+    "start_url":"/countdown-timer/index.html",
+    "dir":"ltr",
+    "lang":"ja-jp"
 }
