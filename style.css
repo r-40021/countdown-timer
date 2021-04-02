@@ -186,28 +186,28 @@ html,body{
   height: 0;
   overflow: hidden;
   background-color: rgb(247,247,247);
-  transition: 350ms ease-in-out;
+  transition: height 350ms ease-in-out;
 }
 
 #menu1.is-open{
   padding-top: 0;
   padding-bottom: 0;
   height: 150px;
-  transition: 350ms ease-in-out;
+  transition: height 350ms ease-in-out;
 }
 
 #menu2 {
   height: 0;
   overflow: hidden;
   background-color: rgb(247,247,247);
-  transition: 350ms ease-in-out;
+  transition: height 350ms ease-in-out;
 }
 
 #menu2.is-open{
   padding-top: 0;
   padding-bottom: 0;
   height: 150px;
-  transition: 350ms ease-in-out;
+  transition: height 350ms ease-in-out;
 }
 
 @media only screen and (max-width: 480px) {
@@ -231,13 +231,13 @@ html,body{
     padding-top: 0;
     padding-bottom: 0;
     height: 230px;
-    transition: 350ms ease-in-out;
+    transition: height 350ms ease-in-out;
   }
   #menu2.is-open{
     padding-top: 0;
     padding-bottom: 0;
     height: 210px;
-    transition: 350ms ease-in-out;
+    transition: height 350ms ease-in-out;
   }
   
 }
