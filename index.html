@@ -186,6 +186,17 @@
             <a class="modal-close waves-effect waves-green btn-flat">OK</a>
         </div>
     </div>
+    <script>
+        let wavesElement = document.getElementsByClassName('waves-effect');
+        for (let i = 0; i < wavesElement.length; i++) {
+            var element = wavesElement[i];
+            element.addEventListener('touchstart',function (e) {
+                if (e.touches.length >= 2) {
+                    e.stopImmediatePropagation();
+                }
+            },false);
+        }
+    </script>
     <script src="push.min.js"></script>
     <script src="materialize.min.js"></script>
     <script src="nosleep.min.js"></script>
