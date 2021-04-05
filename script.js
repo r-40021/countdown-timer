@@ -21,11 +21,11 @@ var noSleep = new NoSleep();
 
 /*Service Worker*/
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('sw.js').then(function(registration) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('sw.js').then(function (registration) {
       // Registration was successful
       console.log('ServiceWorker registration successful with scope: ', registration.scope);
-    }, function(err) {
+    }, function (err) {
       // registration failed :(
       console.log('ServiceWorker registration failed: ', err);
     });
@@ -132,46 +132,46 @@ function device() {
   }
 }
 
-window.addEventListener('DOMContentLoaded', function(){
-			
+window.addEventListener('DOMContentLoaded', function () {
+
   // フルスクリーン表示
-  document.getElementById('fullscreen').addEventListener('click', function(){
+  document.getElementById('fullscreen').addEventListener('click', function () {
 
     // Chrome & Firefox v64以降
-    if( document.body.requestFullscreen ) {
+    if (document.body.requestFullscreen) {
       document.body.requestFullscreen();
-      
-    // Firefox v63以前
-    } else if( document.body.mozRequestFullScreen ) {
+
+      // Firefox v63以前
+    } else if (document.body.mozRequestFullScreen) {
       document.body.mozRequestFullScreen();
 
-    // Safari & Edge & Chrome v68以前
-    } else if( document.body.webkitRequestFullscreen ) {
+      // Safari & Edge & Chrome v68以前
+    } else if (document.body.webkitRequestFullscreen) {
       document.body.webkitRequestFullscreen();
-      
-    // IE11
-    } else if( document.body.msRequestFullscreen ) {
+
+      // IE11
+    } else if (document.body.msRequestFullscreen) {
       document.body.msRequestFullscreen();
-    }				
+    }
   });
 
   // フルスクリーン解除
-  document.getElementById('escFullscreen').addEventListener('click', function(){
-    
+  document.getElementById('escFullscreen').addEventListener('click', function () {
+
     // Chrome & Firefox v64以降
-    if( document.exitFullscreen ) {
+    if (document.exitFullscreen) {
       document.exitFullscreen();
 
-    // Firefox v63以前
-    } else if( document.mozCancelFullScreen ) {
+      // Firefox v63以前
+    } else if (document.mozCancelFullScreen) {
       document.mozCancelFullScreen();
 
-    // Safari & Edge & Chrome v44以前
-    } else if( document.webkitCancelFullScreen ) {
+      // Safari & Edge & Chrome v44以前
+    } else if (document.webkitCancelFullScreen) {
       document.webkitCancelFullScreen();
 
-    // IE11
-    } else if( document.msExitFullscreen ) {
+      // IE11
+    } else if (document.msExitFullscreen) {
       document.msExitFullscreen();
     }
   });
@@ -246,7 +246,7 @@ function onload() {
         var noevent = document.getElementById('audioicon');
         noevent.classList.add('noevent');//クリック不可
         document.getElementById('audioInput').classList.add('noevent');
-　　　　　noevent.classList.remove('autoevent');
+        noevent.classList.remove('autoevent');
         document.getElementById('audioInput').classList.remove('autoevent');
         noevent.classList.replace("teal-text", "grey-text");
         alarm.play();
@@ -378,7 +378,7 @@ function pushrequest() {
 }
 
 window.addEventListener('load', () => {
-　/*アラーム音設定・プレビューも*/
+  /*アラーム音設定・プレビューも*/
   const f = document.getElementById('file1');
   var player = document.getElementById('player');
   f.addEventListener('change', evt => {
@@ -405,7 +405,7 @@ window.addEventListener('load', () => {
 });
 
 var move = function (e) {
- //ページ離脱時に警告
+  //ページ離脱時に警告
   e.preventDefault();
   // Chrome では returnValue を設定する必要がある
   e.returnValue = '';
@@ -417,14 +417,14 @@ document.addEventListener('click', function enableNoSleep() {
   noSleep.enable();
 }, false);
 
-window.addEventListener('DOMContentLoaded',function () {
+window.addEventListener('DOMContentLoaded', function () {
   //残り時間が変わったら、文字サイズ調整
   var element = document.getElementById('displayTime');
-  var action = new MutationObserver(function(record,observer){
+  var action = new MutationObserver(function (record, observer) {
     resize();
   });
-  var config ={
+  var config = {
     childList: true
   };
-  action.observe(element,config);
+  action.observe(element, config);
 })
