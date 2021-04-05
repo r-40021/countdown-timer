@@ -1,4 +1,4 @@
-[日本語(Japanese)](README_ja.md)
+[日本語(Japanese)](./readme/README_ja.md)
 # <img src="./favicon/favicon.ico" width="30px">Countdown Timer
 半永久的に計れるタイマー
 
