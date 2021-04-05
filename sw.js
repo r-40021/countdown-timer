@@ -1,4 +1,4 @@
-const CACHE_NAME = '20210405v6';
+const CACHE_NAME = '20210405v7';
 
 // キャッシュするファイルをセットする
 const urlsToCache = [
@@ -27,7 +27,7 @@ self.addEventListener('install', function (event) {
 
 self.addEventListener('activate', function (event) {
 
-  var cacheAllowlist = ['20210405v6'];
+  var cacheAllowlist = ['20210405v7'];
 
   event.waitUntil(
     caches.keys().then(function (cacheNames) {
