@@ -2,20 +2,24 @@ window.addEventListener('DOMContentLoaded', (event) => {
   setTimeout(function () {
     const loader = document.getElementById('load');
     if (loader.classList.contains("loaded") === false) {
-      loader.classList.add('loaded');//5000ms
+      loader.classList.add('loaded');//5000ms経ったら強制的にローディング画面解除
     }
   }, 5000);
 });
+/*変数の定義*/
 var down;
 var displayEnd;
 var displayPlace;
 var useDevice = 0;
 var menuStatus = 1;
 var timerStatus = 0;
+
+/*初期アラーム音設定*/
 var alarm = new Audio("alarm.mp3");
 alarm.loop = true;
 var noSleep = new NoSleep();
 
+/*Service Worker*/
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
     navigator.serviceWorker.register('sw.js').then(function(registration) {
@@ -29,10 +33,11 @@ if ('serviceWorker' in navigator) {
 }
 
 window.addEventListener('load', (event) => {
+  /*読み込み終わったらローディング画面解除*/
   const loader = document.getElementById('load');
   loader.classList.add('loaded');
   setTimeout(function () {
-    pushrequest();
+    pushrequest();//プッシュ通知に関するお知らせ
   }, 499);
 
 });
@@ -59,12 +64,12 @@ window.addEventListener('DOMContentLoaded', function () {
       upmenu.style.visibility = "hidden";
     } else if (menuStatus === 0) {
       menu1.classList.add('is-open');
-      menuStatus = 3;
+      menuStatus = 3;//３秒以内に全開したら、ワンクリックで閉じる
       downmenu.style.visibility = "visible";
       once = setTimeout(f, 3000);
     }
   });
-  downmenu.addEventListener('click', function () {
+  downmenu.addEventListener('click', function () {//メニューを閉じる
     clearTimeout(once);
     if (menuStatus === 3) {
       menu2.classList.remove('is-open');
@@ -107,6 +112,7 @@ function device() {
     useDevice = 1;
   }
   if (userAgent.indexOf("iphone") != -1 || (userAgent.indexOf("mac os x") != -1 && 'ontouchend' in document))/*iPhone/iPad除く*/ {
+    /*iPhone/iPadのときは、アラーム音関連・全画面表示関連を非表示*/
     const dateField = document.querySelector("#DateField");
     const timeField = document.querySelector("#TimeField");
     dateField.classList.remove("m5", "s12");
@@ -120,6 +126,7 @@ function device() {
     document.getElementById("playb").style.display = "inline";
   }
   if ('ontouched' in document === false) {
+    //PCのときは、hover
     document.getElementById('upmenu').classList.add('pc');
     document.getElementById('downmenu').classList.add('pc');
   }
@@ -290,6 +297,7 @@ function onload() {
 }
 
 function set() {
+  /*SETボタンを押したときの挙動*/
   var url = new URL(window.location.href);
   var myDate = document.getElementById('Date').value;
   var myTime = document.getElementById('Time').value;
@@ -322,6 +330,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function copy() {
+  /*URLコピー*/
   var url = location.href;
   navigator.clipboard.writeText(url);
   M.toast({ html: 'URLをコピーしました' })
@@ -369,6 +378,7 @@ function pushrequest() {
 }
 
 window.addEventListener('load', () => {
+　/*アラーム音設定・プレビューも*/
   const f = document.getElementById('file1');
   var player = document.getElementById('player');
   f.addEventListener('change', evt => {
@@ -395,6 +405,7 @@ window.addEventListener('load', () => {
 });
 
 var move = function (e) {
+ //ページ離脱時に警告
   e.preventDefault();
   // Chrome では returnValue を設定する必要がある
   e.returnValue = '';
@@ -407,6 +418,7 @@ document.addEventListener('click', function enableNoSleep() {
 }, false);
 
 window.addEventListener('DOMContentLoaded',function () {
+  //残り時間が変わったら、文字サイズ調整
   var element = document.getElementById('displayTime');
   var action = new MutationObserver(function(record,observer){
     resize();
