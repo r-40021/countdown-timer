@@ -1,6 +1,6 @@
-# <img src="./favicon/favicon.ico" width="30px">Countdown Timer
+# <img src="../favicon/favicon.ico" width="30px">Countdown Timer
 半永久的に計れるタイマー  
-<img src="./snsicon/sns.png" width="300px">
+<img src="../snsicon/sns.png" width="300px">
 # スクリーンショット
 ![screenshot](https://user-images.githubusercontent.com/75155258/113495588-d5533880-952d-11eb-90de-b302e0cc1fd2.png)
 <figcaption>月日設定</figcaption><img src="https://user-images.githubusercontent.com/75155258/113495782-9f628400-952e-11eb-9683-34d22e1e57ca.png" width ="200px">
