@@ -2,7 +2,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
   setTimeout(function () {
     const loader = document.getElementById('load');
     if (loader.classList.contains("loaded") === false) {
-      loader.classList.add('loaded');
+      loader.classList.add('loaded');//5000ms
     }
   }, 5000);
 });
@@ -106,9 +106,6 @@ function device() {
   if ((userAgent.indexOf("msie") === -1 && userAgent.indexOf("trident") === -1/*IEを省く*/) && (userAgent.indexOf("windows") != -1 || (userAgent.indexOf("mac os x") != -1 && 'ontouchend' in document === false)/*mac os xが含まれていて、かつマウスデバイス*/ || userAgent.indexOf("cros") != -1 || userAgent.indexOf("linux") != -1 && 'ontouchend' in document === false)) {//PCとIE以外でしか実行しない
     useDevice = 1;
   }
-  if (userAgent.indexOf("msie") != -1 || userAgent.indexOf("trident") != -1) {
-    alert('Internet Explorerでは正常に動作しない可能性があります。\nEdgeやChromeをお使いください。');
-  }
   if (userAgent.indexOf("iphone") != -1 || (userAgent.indexOf("mac os x") != -1 && 'ontouchend' in document))/*iPhone/iPad除く*/ {
     const dateField = document.querySelector("#DateField");
     const timeField = document.querySelector("#TimeField");
@@ -121,6 +118,10 @@ function device() {
   } else {
     document.getElementById("audioInput").style.display = "inline";
     document.getElementById("playb").style.display = "inline";
+  }
+  if ('ontouched' in document === false) {
+    document.getElementById('upmenu').classList.add('pc');
+    document.getElementById('downmenu').classList.add('pc');
   }
 }
 
@@ -258,21 +259,19 @@ function onload() {
             timerbox.style.color = "#FFFFFF";
             document.title = "やまだのタイマー";
           }, 500);
-        }, 1000);
+        }, 2000);
 
       } else /*計算結果が負orNaNのときの処理*/if (display.match("-|NaN")) {
         stop();
         display = "0:00:00";
         var displayPlace = document.getElementById('displayTime');
         displayPlace.innerHTML = display;
-        resize();
         document.title = "やまだのタイマー";
       }
       else {
         displayPlace = document.getElementById('displayTime');
         displayPlace.innerHTML = display;
         document.title = display;
-        resize();
       }
     }
     down = setInterval(myCount, 100);
@@ -406,3 +405,14 @@ document.addEventListener('click', function enableNoSleep() {
   document.removeEventListener('click', enableNoSleep, false);
   noSleep.enable();
 }, false);
+
+window.addEventListener('DOMContentLoaded',function () {
+  var element = document.getElementById('displayTime');
+  var action = new MutationObserver(function(record,observer){
+    resize();
+  });
+  var config ={
+    childList: true
+  };
+  action.observe(element,config);
+})

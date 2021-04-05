@@ -15,16 +15,36 @@
     <meta name="apple-mobile-web-app-title" content="やまだタイマー">
     <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
     <link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#5bbad5">
-    <link href="./splashscreens/iphone5_splash.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-    <link href="./splashscreens/iphone6_splash.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-    <link href="./splashscreens/iphoneplus_splash.png" media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
-    <link href="./splashscreens/iphonex_splash.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
-    <link href="./splashscreens/iphonexr_splash.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-    <link href="./splashscreens/iphonexsmax_splash.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
-    <link href="./splashscreens/ipad_splash.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-    <link href="./splashscreens/ipadpro1_splash.png" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-    <link href="./splashscreens/ipadpro3_splash.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-    <link href="./splashscreens/ipadpro2_splash.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+    <link href="./splashscreens/iphone5_splash.png"
+        media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
+        rel="apple-touch-startup-image" />
+    <link href="./splashscreens/iphone6_splash.png"
+        media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
+        rel="apple-touch-startup-image" />
+    <link href="./splashscreens/iphoneplus_splash.png"
+        media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)"
+        rel="apple-touch-startup-image" />
+    <link href="./splashscreens/iphonex_splash.png"
+        media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)"
+        rel="apple-touch-startup-image" />
+    <link href="./splashscreens/iphonexr_splash.png"
+        media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)"
+        rel="apple-touch-startup-image" />
+    <link href="./splashscreens/iphonexsmax_splash.png"
+        media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)"
+        rel="apple-touch-startup-image" />
+    <link href="./splashscreens/ipad_splash.png"
+        media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)"
+        rel="apple-touch-startup-image" />
+    <link href="./splashscreens/ipadpro1_splash.png"
+        media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)"
+        rel="apple-touch-startup-image" />
+    <link href="./splashscreens/ipadpro3_splash.png"
+        media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)"
+        rel="apple-touch-startup-image" />
+    <link href="./splashscreens/ipadpro2_splash.png"
+        media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)"
+        rel="apple-touch-startup-image" />
     <!--Microsoft-->
     <meta name="msapplication-TileColor" content="#00aba9">
     <meta name="msapplication-config" content="./favicon/browserconfig.xml">
@@ -81,9 +101,9 @@
                             </div>
                             <div class="col m2 s12 center">
                                 <input id="file1" type="file" accept="audio/*">
-                                <label for="file1" id="audioInput"><span  class="tooltipped" data-position="bottom"
-                                    data-tooltip="アラーム音を変更"><i class="far fa-file-audio teal-text text-lighten-1"
-                                        style="font-size:35px;margin-top: 10px;" id="audioicon"></i></label></span>
+                                <label for="file1" id="audioInput"><span class="tooltipped" data-position="bottom"
+                                        data-tooltip="アラーム音を変更"><i class="far fa-file-audio teal-text text-lighten-1"
+                                            style="font-size:35px;margin-top: 10px;" id="audioicon"></i></label></span>
                                 <span id="fullscreen" class="tooltipped" data-position="bottom" data-tooltip="全画面">
                                     <i class="fas fa-expand-arrows-alt teal-text text-lighten-1"
                                         style="font-size:35px;margin-top: 10px;margin-left: 10px;" id="fullscreen"></i>
@@ -109,48 +129,45 @@
                     </div>
 
                     <div id="menu2">
-
-                        <div class="container">
-                            <div class="row">
-                                <div class="col s12 m6" id="playb">
-                                    <figcaption>アラーム音試聴：</figcaption>
-                                    <audio controls src="alarm.mp3" id="player" preload="metadata"
-                                        controlslist="nodownload" style="height: 30px;width:100%">
-                                        Your browser does not support the
-                                        <code>audio</code> element.
-                                    </audio>
-                                </div>
-                                <div class="col s12 m6">
-                                    <a class="waves-effect waves-teal btn-flat teal-text modal-trigger trouble"
-                                        href="#modal1" style="border: 2px solid;border-color: #4db6ac;">アラーム音が鳴らない</a>
-                                </div>
+                        <div class="row">
+                            <div class="col s12 m6" id="playb">
+                                <figcaption>アラーム音試聴：</figcaption>
+                                <audio controls src="alarm.mp3" id="player" preload="metadata" controlslist="nodownload"
+                                    style="height: 30px;max-width:100%">
+                                    Your browser does not support the
+                                    <code>audio</code> element.
+                                </audio>
+                            </div>
+                            <div class="col s12 m6">
+                                <a class="waves-effect waves-teal btn-flat teal-text modal-trigger trouble"
+                                    href="#modal1" style="border: 2px solid;border-color: #4db6ac;">アラーム音が鳴らない</a>
+                            </div>
 
 
 
 
-                                <div class="col s12 center">
-                                    <!--URL-->
-                                    <a onclick="copy()"
-                                        class="btn-flat grey-text text-darken-1 waves-effect waves-teal"><i
-                                            class="fas fa-link fa-lg" aria-label="URLをコピー"></i></a>
-                                    <!--Twitter-->
-                                    <a href="https://twitter.com/intent/tweet?text=半永久的に計れるタイマー%0a&url=https://r-40021.github.io/countdown-timer&hashtags=やまだのタイマー,やまだけんいち"
-                                        onClick="window.open(encodeURI(decodeURI(this.href)), 'tweetwindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;"
-                                        rel="nofollow"
-                                        class="twitter-link waves-effect waves-teal btn-flat grey-text text-darken-1">
-                                        <i class="fab fa-twitter fa-lg" aria-label="Twitterでシェア"></i>
-                                    </a>
-                                    <!--GitHub-->
-                                    <a href="https://github.com/r-40021/countdown-timer" target="_blank"
-                                        class="waves-effect waves-teal btn-flat grey-text text-darken-1"><i
-                                            class="fab fa-github fa-lg aria-label=" View on GitHub"></i></a>
-                                    <!--info-->
-                                    <a href="https://r-40021.github.io/" target="_blank"
-                                        class="waves-effect waves-teal btn-flat grey-text text-darken-1"><i
-                                            class="far fa-user fa-lg" aria-label="作者について"></i></a>
-                                </div>
+                            <div class="col s12 center">
+                                <!--URL-->
+                                <a onclick="copy()" class="btn-flat grey-text text-darken-1 waves-effect waves-teal"><i
+                                        class="fas fa-link fa-lg" aria-label="URLをコピー"></i></a>
+                                <!--Twitter-->
+                                <a href="https://twitter.com/intent/tweet?text=半永久的に計れるタイマー%0a&url=https://r-40021.github.io/countdown-timer&hashtags=やまだのタイマー,やまだけんいち"
+                                    onClick="window.open(encodeURI(decodeURI(this.href)), 'tweetwindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;"
+                                    rel="nofollow"
+                                    class="twitter-link waves-effect waves-teal btn-flat grey-text text-darken-1">
+                                    <i class="fab fa-twitter fa-lg" aria-label="Twitterでシェア"></i>
+                                </a>
+                                <!--GitHub-->
+                                <a href="https://github.com/r-40021/countdown-timer" target="_blank" rel="noopener"
+                                    class="waves-effect waves-teal btn-flat grey-text text-darken-1"><i
+                                        class="fab fa-github fa-lg aria-label=" View on GitHub"></i></a>
+                                <!--info-->
+                                <a href="https://r-40021.github.io/" target="_blank" rel="noopener"
+                                    class="waves-effect waves-teal btn-flat grey-text text-darken-1"><i
+                                        class="far fa-user fa-lg" aria-label="作者について"></i></a>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -200,11 +217,11 @@
         let wavesElement = document.getElementsByClassName('waves-effect');
         for (let i = 0; i < wavesElement.length; i++) {
             var element = wavesElement[i];
-            element.addEventListener('touchstart',function (e) {
+            element.addEventListener('touchstart', function (e) {
                 if (e.touches.length >= 2) {
                     e.stopImmediatePropagation();
                 }
-            },false);
+            }, false);
         }
     </script>
     <script src="push.min.js"></script>

@@ -76,6 +76,10 @@
   color: #FFFFFF;
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .class input[type=text] {
@@ -91,15 +95,15 @@
   display: none;
 }
 
-#audioicon,#fullscreen,#escFullscreen{
+#audioicon, #fullscreen, #escFullscreen {
   cursor: pointer;
 }
 
-body:fullscreen #fullscreen{
+body:fullscreen #fullscreen {
   display: none;
 }
 
-body:not(:fullscreen) #escFullscreen{
+body:not(:fullscreen) #escFullscreen {
   display: none;
 }
 
@@ -154,17 +158,23 @@ body:not(:fullscreen) #escFullscreen{
   color: #000;
   border-radius: 10px 10px 0 0;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.upmenu:hover,.downmenu:hover {
-    opacity: 0.7;
-    color: white;
-    transition: color 250ms,
-                opacity 250ms;
-  }
+.upmenu:active, .downmenu:active {
+  opacity: 0.7;
+  color: white;
+  transition: color 250ms, opacity 250ms;
+}
+
+.upmenu.pc:hover, .downmenu.pc:hover {
+  opacity: 0.7;
+  color: white;
+  transition: color 250ms, opacity 250ms;
+}
 
 .mymenu {
-  background-color: rgb(247,247,247);
+  background-color: rgb(247, 247, 247);
 }
 
 .menu {
@@ -173,23 +183,25 @@ body:not(:fullscreen) #escFullscreen{
   margin: 0px;
   padding: 0;
   width: 100%;
+  filter: drop-shadow(3px -3px 10px rgba(0, 0, 0, 0.247));
 }
 
-html,body{
+html, body {
   width: 100%;
   height: 100vh;
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 
 #menu1 {
   height: 0;
   overflow: hidden;
-  background-color: rgb(247,247,247);
+  background-color: rgb(247, 247, 247);
   transition: height 350ms ease-in-out;
 }
 
-#menu1.is-open{
+#menu1.is-open {
   padding-top: 0;
   padding-bottom: 0;
   height: 150px;
@@ -199,19 +211,26 @@ html,body{
 #menu2 {
   height: 0;
   overflow: hidden;
-  background-color: rgb(247,247,247);
+  background-color: rgb(247, 247, 247);
   transition: height 350ms ease-in-out;
 }
 
-#menu2.is-open{
+#menu2.is-open {
   padding-top: 0;
   padding-bottom: 0;
   height: 150px;
   transition: height 350ms ease-in-out;
 }
 
+body:not(.timer) {
+  font-family: -apple-system, "BlinkMacSystemFont",
+  "Segoe UI”, "Roboto, Oxygen",
+  "Ubuntu", "Cantarell", "Fira Sans", 
+ "Droid Sans”, "Helvetica Neue", sans-serif; 
+}
+
 @media only screen and (max-width: 480px) {
-  .trouble{
+  .trouble {
     margin: 15px;
   }
   .upmenu {
@@ -220,31 +239,29 @@ html,body{
     left: 0;
     margin: 0;
   }
-  
   .downmenu {
     position: absolute;
     top: -40px;
     left: 65px;
     margin: 0;
   }
-  #menu1.is-open{
+  #menu1.is-open {
     padding-top: 0;
     padding-bottom: 0;
     height: 230px;
     transition: height 350ms ease-in-out;
   }
-  #menu2.is-open{
+  #menu2.is-open {
     padding-top: 0;
     padding-bottom: 0;
     height: 210px;
     transition: height 350ms ease-in-out;
   }
-  
 }
 
 @media only screen and (min-width: 480px) {
-  .trouble{
-    margin: 60px 10px 20px; 
+  .trouble {
+    margin: 60px 10px 20px;
   }
   .upmenu {
     position: absolute;
@@ -252,24 +269,22 @@ html,body{
     left: 60px;
     margin: 0;
   }
-  
   .downmenu {
     position: absolute;
     top: -40px;
     left: 125px;
     margin: 0;
   }
-  
 }
 
-#bigtimer{
+#bigtimer {
   flex: 1;
   z-index: 0;
   flex-shrink: 0;
   transition: background-color 250ms ease-in-out;
 }
 
-.flex{
+.flex {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
