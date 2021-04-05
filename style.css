@@ -183,7 +183,6 @@ body:not(:fullscreen) #escFullscreen {
   margin: 0px;
   padding: 0;
   width: 100%;
-  filter: drop-shadow(3px -3px 10px rgba(0, 0, 0, 0.127));
 }
 
 html, body {
