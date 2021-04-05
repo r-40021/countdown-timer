@@ -125,7 +125,7 @@ function device() {
     document.getElementById("audioInput").style.display = "inline";
     document.getElementById("playb").style.display = "inline";
   }
-  if ('ontouched' in document === false) {
+  if ('ontouchend' in document === false) {
     //PCのときは、hover
     document.getElementById('upmenu').classList.add('pc');
     document.getElementById('downmenu').classList.add('pc');
