@@ -266,7 +266,7 @@ function onload() {
             timerbox.style.color = "#FFFFFF";
             document.title = "やまだのタイマー";
           }, 500);
-        }, 2000);
+        }, 1000);
 
       } else /*計算結果が負orNaNのときの処理*/if (display.match("-|NaN")) {
         stop();
@@ -281,7 +281,7 @@ function onload() {
         document.title = display;
       }
     }
-    down = setInterval(myCount, 100);
+    down = setInterval(myCount, 200);
   } else {
     /*パラメータがなかったら*/
     let date = new Date();
