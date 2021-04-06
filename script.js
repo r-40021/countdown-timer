@@ -36,6 +36,7 @@ window.addEventListener('load', (event) => {
   /*読み込み終わったらローディング画面解除*/
   const loader = document.getElementById('load');
   loader.classList.add('loaded');
+  flex();//スマホのURLバーに隠されないように
   setTimeout(function () {
     pushrequest();//プッシュ通知に関するお知らせ
   }, 499);
@@ -428,3 +429,10 @@ window.addEventListener('DOMContentLoaded', function () {
   };
   action.observe(element, config);
 })
+
+function flex(){
+  /*スマホのURLバーに隠されないように*/
+  var height = window.innerHeight;
+  document.body.style.height = height + 'px';
+}
+window.addEventListener('resize', flex);
