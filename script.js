@@ -433,6 +433,6 @@ window.addEventListener('DOMContentLoaded', function () {
 function flex(){
   /*スマホのURLバーに隠されないように*/
   var height = window.innerHeight;
-  document.body.style.height = height + 'px';
+  document.getElementsByClassName('flex')[0].style.height = height + 'px';
 }
 window.addEventListener('resize', flex);
