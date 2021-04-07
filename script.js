@@ -439,4 +439,7 @@ function flex() {
   var height = window.innerHeight;
   document.getElementsByClassName('flex')[0].style.height = height + 'px';
 }
-window.addEventListener('resize', flex);
+window.addEventListener('resize', function (){
+  resize();
+  flex();
+});
