@@ -195,7 +195,6 @@ html, body {
   overflow: hidden;
   background-color: rgb(247, 247, 247);
   transition: height 350ms ease-in-out;
-  will-change: height;
 }
 
 #menu2 {
@@ -203,7 +202,6 @@ html, body {
   overflow: hidden;
   background-color: rgb(247, 247, 247);
   transition: height 350ms ease-in-out;
-  will-change: height;
 }
 
 body:not(.timer) {
@@ -236,7 +234,6 @@ body:not(.timer) {
     padding-bottom: 0;
     height: 170px;
     transition: height 350ms ease-in-out;
-    will-change: height;
   }
   #menu1.is-open.iPhone {
     height: 120px;
@@ -246,7 +243,6 @@ body:not(.timer) {
     padding-bottom: 0;
     height: 210px;
     transition: height 350ms ease-in-out;
-    will-change: height;
   }
   #menu2.is-open.iPhone {
     height: 100px;
@@ -274,14 +270,12 @@ body:not(.timer) {
     padding-bottom: 0;
     height: 125px;
     transition: height 350ms ease-in-out;
-    will-change: height;
   }
   #menu2.is-open {
     padding-top: 0;
     padding-bottom: 0;
     height: 105px;
     transition: height 350ms ease-in-out;
-    will-change: height;
   }
 }
 
