@@ -50,10 +50,10 @@ window.addEventListener('DOMContentLoaded', function () {
 
 window.addEventListener('DOMContentLoaded', function () {
   /*メニューの上げ下げ*/
-  const upmenu = document.querySelector('#upmenu');
-  const downmenu = document.querySelector('#downmenu');
-  const menu1 = document.querySelector('#menu1');
-  const menu2 = document.querySelector('#menu2');
+  const upmenu = document.getElementById('upmenu');
+  const downmenu = document.getElementById('downmenu');
+  const menu1 = document.getElementById('menu1');
+  const menu2 = document.getElementById('menu2');
   var once;
   upmenu.addEventListener('click', function () {
     if (menuStatus === 1 || menuStatus === 3) {
@@ -97,7 +97,7 @@ function f() {
 }
 
 window.addEventListener('DOMContentLoaded', function () {
-  const bigtimer = document.querySelector('#bigtimer');
+  const bigtimer = document.getElementById('bigtimer');
   bigtimer.addEventListener('click', function () {
     if (timerStatus) {
       document.getElementById('stopTimer').click();
@@ -114,14 +114,14 @@ function device() {
   }
   if (userAgent.indexOf("iphone") != -1 || (userAgent.indexOf("mac os x") != -1 && 'ontouchend' in document))/*iPhone/iPad除く*/ {
     /*iPhone/iPadのときは、アラーム音関連・全画面表示関連を非表示*/
-    const dateField = document.querySelector("#DateField");
-    const timeField = document.querySelector("#TimeField");
-    dateField.classList.remove("m5", "s12");
-    dateField.classList.add("m6", "s12");
-    timeField.classList.remove("m5", "s12");
-    timeField.classList.add("m6", "s12");
+    const dateField = document.getElementById("DateField");
+    const timeField = document.getElementById("TimeField");
+    dateField.classList.replace("s5", "s6");
+    timeField.classList.replace("s5", "s6");
     document.getElementById("fullscreen").style.display = "none";
-    document.getElementById("escFullscreen").style.display = "none";
+    document.getElementById("escFullscreen").style.display = "none";  
+    document.getElementById('menu1').classList.add('iPhone');  
+    document.getElementById('menu2').classList.add('iPhone');  
   } else {
     document.getElementById("audioInput").style.display = "inline";
     document.getElementById("playb").style.display = "inline";
@@ -258,7 +258,7 @@ function onload() {
         }
         stop();
         document.title = "やまだのタイマー";
-        document.querySelector('#bigtimer').style.backgroundColor = "#ec407a";
+        document.getElementById('bigtimer').style.backgroundColor = "#ec407a";
         var timerbox = document.getElementById("displayTime");
         displayEnd = setInterval(function () {
           timerbox.style.color = "#d81b60";
@@ -338,9 +338,13 @@ function copy() {
 }
 
 function resize(params) {
-  const place = document.querySelector('#displayTime')
+  const place = document.getElementById('displayTime')
   let count = place.innerHTML.length;
-  place.style.fontSize = 195 / count + 'vmin';//文字サイズ調整
+  if (window.innerWidth <= 775) {
+    place.style.fontSize = 150 / count + 'vmin';//文字サイズ調整(Tablet&SP)
+  } else {
+    place.style.fontSize = 195 / count + 'vmin';//文字サイズ調整
+  }
 }
 
 function stop() {
@@ -358,7 +362,7 @@ function audiostop() {
   clearInterval(displayEnd);
   var timerbox = document.getElementById("displayTime")
   timerbox.style.color = "#FFFFFF";
-  document.querySelector('#bigtimer').style.backgroundColor = "#4db6ac";
+  document.getElementById('bigtimer').style.backgroundColor = "#4db6ac";
 }
 
 function pushrequest() {
@@ -430,7 +434,7 @@ window.addEventListener('DOMContentLoaded', function () {
   action.observe(element, config);
 })
 
-function flex(){
+function flex() {
   /*スマホのURLバーに隠されないように*/
   var height = window.innerHeight;
   document.getElementsByClassName('flex')[0].style.height = height + 'px';

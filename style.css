@@ -22,7 +22,7 @@
 
 #load.loaded {
   animation: fadeOut 0.5s forwards;
-  height:0;
+  height: 0;
 }
 
 .spinner {
@@ -116,10 +116,6 @@ body:not(:fullscreen) #escFullscreen {
   pointer-events: auto;
 }
 
-#playb {
-  margin-top: 50px;
-}
-
 ::selection {
   background: #4db6ac;
   color: #fff;
@@ -199,13 +195,7 @@ html, body {
   overflow: hidden;
   background-color: rgb(247, 247, 247);
   transition: height 350ms ease-in-out;
-}
-
-#menu1.is-open {
-  padding-top: 0;
-  padding-bottom: 0;
-  height: 150px;
-  transition: height 350ms ease-in-out;
+  will-change: height;
 }
 
 #menu2 {
@@ -213,13 +203,7 @@ html, body {
   overflow: hidden;
   background-color: rgb(247, 247, 247);
   transition: height 350ms ease-in-out;
-}
-
-#menu2.is-open {
-  padding-top: 0;
-  padding-bottom: 0;
-  height: 150px;
-  transition: height 350ms ease-in-out;
+  will-change: height;
 }
 
 body:not(.timer) {
@@ -228,9 +212,12 @@ body:not(.timer) {
 
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 600px) {
   .trouble {
-    margin: 15px;
+    margin: 5px;
+  }
+  #playb {
+    margin-top: 50px;
   }
   .upmenu {
     position: absolute;
@@ -247,20 +234,28 @@ body:not(.timer) {
   #menu1.is-open {
     padding-top: 0;
     padding-bottom: 0;
-    height: 230px;
+    height: 170px;
     transition: height 350ms ease-in-out;
+    will-change: height;
+  }
+  #menu1.is-open.iPhone {
+    height: 120px;
   }
   #menu2.is-open {
     padding-top: 0;
     padding-bottom: 0;
     height: 210px;
     transition: height 350ms ease-in-out;
+    will-change: height;
+  }
+  #menu2.is-open.iPhone {
+    height: 100px;
   }
 }
 
-@media only screen and (min-width: 480px) {
+@media only screen and (min-width: 600px) {
   .trouble {
-    margin: 60px 10px 20px;
+    margin: 15px 10px 20px;
   }
   .upmenu {
     position: absolute;
@@ -273,6 +268,32 @@ body:not(.timer) {
     top: -40px;
     left: 125px;
     margin: 0;
+  }
+  #menu1.is-open {
+    padding-top: 0;
+    padding-bottom: 0;
+    height: 125px;
+    transition: height 350ms ease-in-out;
+    will-change: height;
+  }
+  #menu2.is-open {
+    padding-top: 0;
+    padding-bottom: 0;
+    height: 105px;
+    transition: height 350ms ease-in-out;
+    will-change: height;
+  }
+}
+
+@media only screen and (max-width: 775px) {
+  .icons {
+    font-size: 25px;
+  }
+}
+
+@media only screen and (min-width: 775px) {
+  .icons {
+    font-size: 30px;
   }
 }
 
@@ -290,4 +311,12 @@ body:not(.timer) {
   width: 100%;
   margin: 0;
   padding: 0;
+}
+
+.icons {
+  white-space: nowrap;
+}
+
+.row {
+  margin-bottom: 0;
 }
