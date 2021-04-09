@@ -296,6 +296,7 @@ body:not(.timer) {
   z-index: 0;
   flex-shrink: 0;
   transition: background-color 250ms ease-in-out;
+  pointer-events: none;
 }
 
 .flex {
@@ -313,4 +314,13 @@ body:not(.timer) {
 
 .row {
   margin-bottom: 0;
+}
+
+#click{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  height: 75%;
+  pointer-events: auto;
 }
