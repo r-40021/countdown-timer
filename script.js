@@ -119,9 +119,9 @@ function device() {
     dateField.classList.replace("s5", "s6");
     timeField.classList.replace("s5", "s6");
     document.getElementById("fullscreen").style.display = "none";
-    document.getElementById("escFullscreen").style.display = "none";  
-    document.getElementById('menu1').classList.add('iPhone');  
-    document.getElementById('menu2').classList.add('iPhone');  
+    document.getElementById("escFullscreen").style.display = "none";
+    document.getElementById('menu1').classList.add('iPhone');
+    document.getElementById('menu2').classList.add('iPhone');
   } else {
     document.getElementById("audioInput").style.display = "inline";
     document.getElementById("playb").style.display = "inline";
@@ -204,10 +204,10 @@ function onload() {
     var myDate = paramObject.date;
     var myTime = paramObject.time;
     var target = new Date(myDate + " " + myTime + ":00");//設定時間
-    timerStatus = 1;
 
     /*カウントダウン（一番大事）*/
     function myCount() {
+      var oldDisplay;
       date = new Date();
       var diffTime = target.getTime() - date.getTime();//時間の差を計算
       var diffHour = Math.floor(diffTime / (1000 * 60 * 60));//時間に変換
@@ -232,7 +232,6 @@ function onload() {
               body: 'くっ...時の流れが疾風迅雷の俺に追いついたようだ......',
               icon: './favicon/favicon.ico',//アイコン
               requireInteraction: true, // 永遠に通知
-              vibrate: [1000, 1000, 1000, 1000, 1000],
               onClick: function () {
                 window.focus();
                 this.close();
@@ -277,9 +276,13 @@ function onload() {
         document.title = "やまだのタイマー";
       }
       else {
-        displayPlace = document.getElementById('displayTime');
-        displayPlace.innerHTML = display;
-        document.title = display;
+        timerStatus = 1;
+        if (display !== oldDisplay) {
+          displayPlace = document.getElementById('displayTime');
+          displayPlace.innerHTML = display;
+          document.title = display;
+          oldDisplay = display;
+        }
       }
     }
     down = setInterval(myCount, 200);
@@ -439,7 +442,7 @@ function flex() {
   var height = window.innerHeight;
   document.getElementsByClassName('flex')[0].style.height = height + 'px';
 }
-window.addEventListener('resize', function (){
+window.addEventListener('resize', function () {
   resize();
   flex();
 });

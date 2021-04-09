@@ -61,8 +61,9 @@
     <link rel="manifest" href="./favicon/site.webmanifest">
     <!--SEO-->
     <meta content="目覚まし時計とタイマーのいいとこ取りをした、オープンソースのちょっと変わったタイマーです。インストール不要で、いろんな用途に使えます。" name="description">
-    
-    <meta name="theme-color" content="#4db6ac">
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#4285f4">
 
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>やまだのタイマー</title>
@@ -84,92 +85,99 @@
         </div>
         <!--menu-->
         <div class="menu">
-            <div class="upmenu" id="upmenu">
-                <i class="fas fa-chevron-up"></i>
-            </div>
-            <div class="downmenu" id="downmenu">
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="mymenu">
-                <div class="container">
-                    <div id="menu1" class="is-open">
-                        <!--Date&Time-->
-                        <div class="row">
-                            <div class="col m5 s6" id="DateField">
-                                <input placeholder="日付" id="Date" type="text" class="datepicker" readonly="readonly">
+            
+                <div class="upmenu" id="upmenu">
+                    <i class="fas fa-chevron-up"></i>
+                </div>
+                <div class="downmenu" id="downmenu">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                
+                <div class="mymenu">
+                    <div class="container">
+                        <div id="menu1" class="is-open">
+                            <!--Date&Time-->
+                            <div class="row">
+                                <div class="col m5 s6" id="DateField">
+                                    <input placeholder="日付" id="Date" type="text" class="datepicker"
+                                        readonly="readonly">
+                                </div>
+                                <div class="col m5 s6" id="TimeField">
+                                    <input placeholder="時間" id="Time" type="text" class="timepicker"
+                                        readonly="readonly">
+                                </div>
+                                <div class="col m2 s12 center icons">
+                                    <input id="file1" type="file" accept="audio/*">
+                                    <label for="file1" id="audioInput"><span class="tooltipped" data-position="bottom"
+                                            data-tooltip="アラーム音を変更"><i
+                                                class="icons far fa-file-audio teal-text text-lighten-1"
+                                                style="margin-top: 10px;" id="audioicon"></i></label></span>
+                                    <span id="fullscreen" class="tooltipped" data-position="bottom" data-tooltip="全画面">
+                                        <i class="icons fas fa-expand-arrows-alt teal-text text-lighten-1"
+                                            style="margin-top: 10px;margin-left: 10px;" id="fullscreen"></i>
+                                    </span>
+                                    <span class="tooltipped" id="escFullscreen" data-position="bottom"
+                                        data-tooltip="全画面解除">
+                                        <i class="icons fas fa-compress-arrows-alt teal-text text-lighten-1"
+                                            style="margin-top: 10px;margin-left: 10px;" id="escFullscreen"></i>
+                                    </span>
+                                </div>
                             </div>
-                            <div class="col m5 s6" id="TimeField">
-                                <input placeholder="時間" id="Time" type="text" class="timepicker" readonly="readonly">
-                            </div>
-                            <div class="col m2 s12 center icons">
-                                <input id="file1" type="file" accept="audio/*">
-                                <label for="file1" id="audioInput"><span class="tooltipped" data-position="bottom"
-                                        data-tooltip="アラーム音を変更"><i class="icons far fa-file-audio teal-text text-lighten-1"
-                                            style="margin-top: 10px;" id="audioicon"></i></label></span>
-                                <span id="fullscreen" class="tooltipped" data-position="bottom" data-tooltip="全画面">
-                                    <i class="icons fas fa-expand-arrows-alt teal-text text-lighten-1"
-                                        style="margin-top: 10px;margin-left: 10px;" id="fullscreen"></i>
-                                </span>
-                                <span class="tooltipped" id="escFullscreen" data-position="bottom" data-tooltip="全画面解除">
-                                    <i class="icons fas fa-compress-arrows-alt teal-text text-lighten-1"
-                                        style="margin-top: 10px;margin-left: 10px;"
-                                        id="escFullscreen"></i>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <!--SET/STOP-->
-                            <div class="col s12 center">
-                                <a class="btn blue waves-effect waves-light" onclick="set()"
-                                    style="height: auto;margin-top: 20px;" id="setTimer"><i class="fas fa-play"
-                                        aria-label="START" style="font-size: small;margin-right: 5px;"></i>SET</a>
-                                <a class="btn pink waves-effect waves-light" onclick="stop();audiostop();Push.clear();"
-                                    style="height: auto;margin-top: 20px;" id="stopTimer"><i class="fas fa-pause"
-                                        aria-label="STOP" style="font-size: small;margin-right: 5px;"></i>STOP</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="menu2">
-                        <div class="row">
-                            <div class="col s12 m6" id="playb">
-                                <figcaption>アラーム音試聴：</figcaption>
-                                <audio controls src="alarm.mp3" id="player" preload="metadata" controlslist="nodownload"
-                                    style="height: 30px;max-width:100%">
-                                    Your browser does not support the
-                                    <code>audio</code> element.
-                                </audio>
-                            </div>
-                            <div class="col s12 m6">
-                                <a class="waves-effect waves-teal btn-flat teal-text modal-trigger trouble"
-                                    href="#modal1" style="border: 2px solid;border-color: #4db6ac;">アラーム音が鳴らない</a>
-                            </div>
-
-
-
-
-                            <div class="col s12 center">
-                                <!--URL-->
-                                <a onclick="copy()" class="btn-flat grey-text text-darken-1 waves-effect waves-teal"><i
-                                        class="fas fa-link fa-lg" aria-label="URLをコピー"></i></a>
-                                <!--Twitter-->
-                                <a href="https://twitter.com/intent/tweet?text=半永久的に計れるタイマー%0a&url=https://r-40021.github.io/countdown-timer&hashtags=やまだのタイマー,やまだけんいち"
-                                    onClick="window.open(encodeURI(decodeURI(this.href)), 'tweetwindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;"
-                                    rel="nofollow"
-                                    class="twitter-link waves-effect waves-teal btn-flat grey-text text-darken-1">
-                                    <i class="fab fa-twitter fa-lg" aria-label="Twitterでシェア"></i>
-                                </a>
-                                <!--GitHub-->
-                                <a href="https://github.com/r-40021/countdown-timer" target="_blank" rel="noopener"
-                                    class="waves-effect waves-teal btn-flat grey-text text-darken-1"><i
-                                        class="fab fa-github fa-lg aria-label=" View on GitHub"></i></a>
-                                <!--info-->
-                                <a href="https://r-40021.github.io/" target="_blank" rel="noopener"
-                                    class="waves-effect waves-teal btn-flat grey-text text-darken-1"><i
-                                        class="far fa-user fa-lg" aria-label="作者について"></i></a>
+                            <div class="row">
+                                <!--SET/STOP-->
+                                <div class="col s12 center">
+                                    <a class="btn blue waves-effect waves-light" onclick="set()"
+                                        style="height: auto;margin-top: 20px;" id="setTimer"><i class="fas fa-play"
+                                            aria-label="START" style="font-size: small;margin-right: 5px;"></i>SET</a>
+                                    <a class="btn pink waves-effect waves-light"
+                                        onclick="stop();audiostop();Push.clear();"
+                                        style="height: auto;margin-top: 20px;" id="stopTimer"><i class="fas fa-pause"
+                                            aria-label="STOP" style="font-size: small;margin-right: 5px;"></i>STOP</a>
+                                </div>
                             </div>
                         </div>
 
+                        <div id="menu2">
+                            <div class="row">
+                                <div class="col s12 m6" id="playb">
+                                    <figcaption>アラーム音試聴：</figcaption>
+                                    <audio controls src="alarm.mp3" id="player" preload="metadata"
+                                        controlslist="nodownload" style="height: 30px;max-width:100%">
+                                        Your browser does not support the
+                                        <code>audio</code> element.
+                                    </audio>
+                                </div>
+                                <div class="col s12 m6">
+                                    <a class="waves-effect waves-teal btn-flat teal-text modal-trigger trouble"
+                                        href="#modal1" style="border: 2px solid;border-color: #4db6ac;">アラーム音が鳴らない</a>
+                                </div>
+
+
+
+
+                                <div class="col s12 center">
+                                    <!--URL-->
+                                    <a onclick="copy()"
+                                        class="btn-flat grey-text text-darken-1 waves-effect waves-teal"><i
+                                            class="fas fa-link fa-lg" aria-label="URLをコピー"></i></a>
+                                    <!--Twitter-->
+                                    <a href="https://twitter.com/intent/tweet?text=半永久的に計れるタイマー%0a&url=https://r-40021.github.io/countdown-timer&hashtags=やまだのタイマー,やまだけんいち"
+                                        onClick="window.open(encodeURI(decodeURI(this.href)), 'tweetwindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;"
+                                        rel="nofollow"
+                                        class="twitter-link waves-effect waves-teal btn-flat grey-text text-darken-1">
+                                        <i class="fab fa-twitter fa-lg" aria-label="Twitterでシェア"></i>
+                                    </a>
+                                    <!--GitHub-->
+                                    <a href="https://github.com/r-40021/countdown-timer" target="_blank" rel="noopener"
+                                        class="waves-effect waves-teal btn-flat grey-text text-darken-1"><i
+                                            class="fab fa-github fa-lg aria-label=" View on GitHub"></i></a>
+                                    <!--info-->
+                                    <a href="https://r-40021.github.io/" target="_blank" rel="noopener"
+                                        class="waves-effect waves-teal btn-flat grey-text text-darken-1"><i
+                                            class="far fa-user fa-lg" aria-label="作者について"></i></a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
