@@ -9,7 +9,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 /*変数の定義*/
 var down;
 var displayEnd;
-var displayPlace;
+var oldDisplay;
 var useDevice = 0;
 var menuStatus = 1;
 var timerStatus = 0;
@@ -97,8 +97,8 @@ function f() {
 }
 
 window.addEventListener('DOMContentLoaded', function () {
-  const bigtimer = document.getElementById('bigtimer');
-  bigtimer.addEventListener('click', function () {
+  const click = document.getElementById('click');
+  click.addEventListener('click', function () {
     if (timerStatus) {
       document.getElementById('stopTimer').click();
     } else {
@@ -207,7 +207,7 @@ function onload() {
 
     /*カウントダウン（一番大事）*/
     function myCount() {
-      var oldDisplay;
+      var displayPlace = document.getElementById('displayTime');
       date = new Date();
       var diffTime = target.getTime() - date.getTime();//時間の差を計算
       var diffHour = Math.floor(diffTime / (1000 * 60 * 60));//時間に変換
@@ -222,7 +222,6 @@ function onload() {
       var display = diffHour + ":" + diffMinute + ":" + diffSecond;
       if (display === "0:00:00") {
         display = "0:00:00";
-        var displayPlace = document.getElementById('displayTime');
         displayPlace.innerHTML = display;
         document.title = "やまだのタイマー";
         /*通知(タッチデバイスとIEはなし)*/
@@ -271,14 +270,12 @@ function onload() {
       } else /*計算結果が負orNaNのときの処理*/if (display.match("-|NaN")) {
         stop();
         display = "0:00:00";
-        var displayPlace = document.getElementById('displayTime');
         displayPlace.innerHTML = display;
         document.title = "やまだのタイマー";
       }
       else {
         timerStatus = 1;
-        if (display !== oldDisplay) {
-          displayPlace = document.getElementById('displayTime');
+        if (display != oldDisplay) {
           displayPlace.innerHTML = display;
           document.title = display;
           oldDisplay = display;
