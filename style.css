@@ -32,7 +32,8 @@
   margin: 100px auto;
 }
 
-.double-bounce1, .double-bounce2 {
+.double-bounce1,
+.double-bounce2 {
   width: 100%;
   height: 100%;
   border-radius: 50%;
@@ -41,32 +42,34 @@
   position: absolute;
   top: 0;
   left: 0;
-  -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
-  animation: sk-bounce 2.0s infinite ease-in-out;
+  -webkit-animation: sk-bounce 2s infinite ease-in-out;
+  animation: sk-bounce 2s infinite ease-in-out;
 }
 
 .double-bounce2 {
-  -webkit-animation-delay: -1.0s;
-  animation-delay: -1.0s;
+  -webkit-animation-delay: -1s;
+  animation-delay: -1s;
 }
 
 @-webkit-keyframes sk-bounce {
-  0%, 100% {
-    -webkit-transform: scale(0.0)
+  0%,
+  100% {
+    -webkit-transform: scale(0);
   }
   50% {
-    -webkit-transform: scale(1.0)
+    -webkit-transform: scale(1);
   }
 }
 
 @keyframes sk-bounce {
-  0%, 100% {
-    transform: scale(0.0);
-    -webkit-transform: scale(0.0);
+  0%,
+  100% {
+    transform: scale(0);
+    -webkit-transform: scale(0);
   }
   50% {
-    transform: scale(1.0);
-    -webkit-transform: scale(1.0);
+    transform: scale(1);
+    -webkit-transform: scale(1);
   }
 }
 
@@ -74,8 +77,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #FFFFFF;
-  font-family: 'Open Sans', sans-serif;
+  color: #ffffff;
+  font-family: "Open Sans", sans-serif;
   font-weight: 300;
   -moz-user-select: none;
   -webkit-user-select: none;
@@ -83,7 +86,7 @@
   user-select: none;
 }
 
-.class input[type=text] {
+.class input[type="text"] {
   font-size: 16px;
   transform: scale(0.9);
 }
@@ -92,11 +95,14 @@
   display: none;
 }
 
-#audioInput, #playb {
+#audioInput,
+#playb {
   display: none;
 }
 
-#audioicon, #fullscreen, #escFullscreen {
+#audioicon,
+#fullscreen,
+#escFullscreen {
   cursor: pointer;
 }
 
@@ -145,7 +151,8 @@ body:not(:fullscreen) #escFullscreen {
   box-shadow: none;
 }
 
-.upmenu, .downmenu {
+.upmenu,
+.downmenu {
   position: absolute;
   text-align: center;
   font-size: 20px;
@@ -158,13 +165,15 @@ body:not(:fullscreen) #escFullscreen {
   -webkit-tap-highlight-color: transparent;
 }
 
-.upmenu:active, .downmenu:active {
+.upmenu:active,
+.downmenu:active {
   opacity: 0.7;
   color: white;
   transition: color 250ms, opacity 250ms;
 }
 
-.upmenu.pc:hover, .downmenu.pc:hover {
+.upmenu.pc:hover,
+.downmenu.pc:hover {
   opacity: 0.7;
   color: white;
   transition: color 250ms, opacity 250ms;
@@ -182,7 +191,8 @@ body:not(:fullscreen) #escFullscreen {
   width: 100%;
 }
 
-html, body {
+html,
+body {
   width: 100%;
   height: 100vh;
   margin: 0;
@@ -195,6 +205,7 @@ html, body {
   overflow: hidden;
   background-color: rgb(247, 247, 247);
   transition: height 350ms ease-in-out;
+  z-index: 9998;
 }
 
 #menu2 {
@@ -202,12 +213,14 @@ html, body {
   overflow: hidden;
   background-color: rgb(247, 247, 247);
   transition: height 350ms ease-in-out;
+  z-index: 9997;
 }
 
 body:not(.timer) {
-  font-family: -apple-system, "BlinkMacSystemFont", "Segoe UI”, "Roboto, Oxygen",
- "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans”, "Helvetica Neue", sans-serif; 
-
+  font-family: -apple-system, "BlinkMacSystemFont", "Segoe UI”, " Roboto,
+    Oxygen ",
+ " Ubuntu ", " Cantarell ", " Fira Sans ", " Droid Sans”,
+    "Helvetica Neue", sans-serif;
 }
 
 @media only screen and (max-width: 600px) {
@@ -317,7 +330,7 @@ body:not(.timer) {
   margin-bottom: 0;
 }
 
-#click{
+#click {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -326,6 +339,37 @@ body:not(.timer) {
   pointer-events: auto;
 }
 
-.hidecursor *{
+.hidecursor * {
   cursor: none !important;
+}
+
+#context {
+  display: none;
+  position: fixed;
+  color: rgb(10, 10, 10);
+  left: 0;
+  top: 0;
+  list-style: none;
+  padding: 0;
+  background-color: rgba(243, 243, 243, 0.945);
+  line-height: 3;
+  border: 0.1px solid rgba(218, 218, 218, 0.822);
+  box-shadow: 5px 5px 5px rgba(26, 26, 26, 0.144);
+  z-index: 99999999999;
+}
+
+#context li{
+  padding: 0 15px;
+  width: 100%;
+  color: rgb(10, 10, 10);
+  height: auto;
+  cursor: pointer;
+  white-space: nowrap;
+}
+#context li:hover {
+  background-color: #039c974b;
+}
+
+#context svg {
+  margin-right: 5px;
 }

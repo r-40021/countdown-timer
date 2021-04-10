@@ -307,7 +307,6 @@ function set() {
   onload();
   audiostop();
   Push.clear();//通知削除
-  timerStatus = 1;
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -454,3 +453,14 @@ window.addEventListener('mousemove',function(){
     document.body.classList.add("hidecursor");
   }, 3000);
 },false);
+
+window.addEventListener("load", function(){
+  document.body.addEventListener("contextmenu", function(e) {
+    document.getElementById("context").style.left = e.pageX + "px";
+    document.getElementById("context").style.top = e.pageY + "px";
+    document.getElementById("context").style.display = "block";
+  });
+});
+document.body.addEventListener("click",function(e){
+  document.getElementById("context").style.display = "none";
+});
