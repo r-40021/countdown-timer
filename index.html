@@ -72,7 +72,7 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
-<body ontouchstart="">
+<body ontouchstart="" oncontextmenu="return false;">
     <div id="load" class="loading">
         <div class="spinner">
             <div class="double-bounce1"></div>
@@ -219,6 +219,19 @@
         <div class="modal-footer">
             <a class="modal-close waves-effect waves-green btn-flat">OK</a>
         </div>
+    </div>
+    <div id="context">
+        <ul>
+            <li onclick="copy()"><i class="fas fa-link" aria-label="URLをコピー"></i>URLをコピー</li>
+            <a href="https://twitter.com/intent/tweet?text=半永久的に計れるタイマー%0a&url=https://r-40021.github.io/countdown-timer&hashtags=やまだのタイマー,やまだけんいち"
+                onClick="window.open(encodeURI(decodeURI(this.href)), 'tweetwindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;"
+                rel="nofollow"><li><i class="fab fa-twitter" aria-label="Twitterでシェア"></i>シェア</li></a>
+                <a href="https://github.com/r-40021/countdown-timer" target="_blank" rel="noopener"
+            ><li><i class="fab fa-github" aria-label=" View on GitHub"></i>ソースコードを見る</li></a>
+            <a href="https://r-40021.github.io/" target="_blank" rel="noopener"><li><i class="far fa-user" aria-label="作者について"></i>作者について</li></a>
+
+             <a href="https://r-40021.github.io/privacy.html" target="_blank" rel="noopener"><li><i class="fas fa-lock"></i>プライバシーポリシー</li></a>
+        </ul>
     </div>
     <script>
         let wavesElement = document.getElementsByClassName('waves-effect');
