@@ -23,7 +23,6 @@
   top: 0;
   z-index: 99999999999;
   margin: 0;
-  overflow: hidden;
 }
 
 #load.loaded {
