@@ -289,6 +289,11 @@ function onload() {
         }, 1000);
       } /*計算結果が負orNaNのときの処理*/ else if (display.match("-|NaN")) {
         stop();
+        if (display.match("-")) {
+          M.toast({ html: "過去の日時はセットできません" });
+        } else if (display.match("NaN")) {
+          M.toast({ html: "むむ？" });
+        }
         display = "0:00:00";
         displayPlace.innerHTML = display;
         document.title = "やまだのタイマー";
@@ -529,3 +534,9 @@ cover.addEventListener("click", function (e) {
   e.stopPropagation();
 });
 });
+
+window.document.addEventListener('keypress', function(e){
+  if (e.key === "Enter") {
+    document.getElementById("setTimer").click();
+  }
+},false);
