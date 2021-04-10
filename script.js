@@ -455,12 +455,13 @@ var move = function (e) {
   e.returnValue = "";
 };
 
-/*NoSleep*/
+/*NoSleep & Focus*/
 document.addEventListener(
   "click",
   function enableNoSleep() {
     document.removeEventListener("click", enableNoSleep, false);
     noSleep.enable();
+    focus();
   },
   false
 );
@@ -540,3 +541,8 @@ window.document.addEventListener('keypress', function(e){
     document.getElementById("setTimer").click();
   }
 },false);
+
+function focus() {
+  /*Focus to the set button*/
+  document.getElementById("setTimer").focus();
+}
