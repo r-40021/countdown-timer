@@ -443,3 +443,14 @@ window.addEventListener('resize', function () {
   resize();
   flex();
 });
+var addcursor;
+window.addEventListener('mousemove',function(){
+  try {
+    document.body.classList.remove("hidecursor"); 
+  } catch (e) {
+  }
+  clearTimeout(addcursor);
+  addcursor = setTimeout(() => {
+    document.body.classList.add("hidecursor");
+  }, 3000);
+},false);
