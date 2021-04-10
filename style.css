@@ -80,10 +80,6 @@
   color: #ffffff;
   font-family: "Open Sans", sans-serif;
   font-weight: 300;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 }
 
 .class input[type="text"] {
@@ -120,18 +116,6 @@ body:not(:fullscreen) #escFullscreen {
 
 .autoevent {
   pointer-events: auto;
-}
-
-::selection {
-  background: #4db6ac;
-  color: #fff;
-}
-
-/*Firefox*/
-
-::-moz-selection {
-  background: #4db6ac;
-  color: #fff;
 }
 
 ::-webkit-scrollbar {
@@ -199,6 +183,10 @@ body {
   padding: 0;
   overflow: hidden;
   -webkit-touch-callout:none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 #menu1 {
