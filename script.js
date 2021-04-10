@@ -501,10 +501,10 @@ window.addEventListener(
 window.addEventListener("load", function () {
   var context = document.getElementById("context");
   document.body.addEventListener("contextmenu", function (e) {
-    var windowWidth = document.body.clientWidth;
-    var windowHeight = document.body.clientHeight;
-    var contextWidth = context.clientWidth;
-    var contextHeight = context.clientHeight;
+    var windowWidth = document.body.offsetWidth;
+    var windowHeight = document.body.offsetHeight;
+    var contextWidth = context.offsetWidth;
+    var contextHeight = context.offsetHeight;
     if (e.pageX + contextWidth >= windowWidth) {
       context.style.right = windowWidth - e.pageX + "px";
       context.style.left = null
