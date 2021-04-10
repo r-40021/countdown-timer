@@ -476,7 +476,6 @@ function flex() {
   /*スマホのURLバーに隠されないように*/
   var height = window.innerHeight;
   document.getElementsByClassName("flex")[0].style.height = height + "px";
-  document.html.style.height = height + "px";
   document.body.style.height = height + "px";
 }
 window.addEventListener("resize", function () {
