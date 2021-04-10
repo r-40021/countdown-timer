@@ -348,10 +348,14 @@ body:not(.timer) {
   line-height: 3;
   border: 0.1px solid rgba(218, 218, 218, 0.822);
   box-shadow: 5px 5px 5px rgba(26, 26, 26, 0.144);
-  z-index: 100000000000;
-  transition: opacity 100ms;
+  z-index: -2;
+  transition: opacity 200ms;
 }
-
+#context.is-open{
+  opacity: 1;
+  z-index: 100000000000;
+  transition: opacity 200ms;
+}
 #context li{
   padding: 0 15px;
   width: 100%;

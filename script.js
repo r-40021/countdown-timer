@@ -518,9 +518,9 @@ window.addEventListener("load", function () {
       context.style.top = e.pageY + "px";
       context.style.bottom = null
     }
-    context.style.opacity = 1;
+    context.classList.add('is-open');
   });
 });
 document.body.addEventListener("click", function (e) {
-  context.style.opacity = 0;
+  context.classList.remove('is-open');
 });
