@@ -1,4 +1,4 @@
-.modal-overlay{
+.modal-overlay {
   overflow: hidden;
 }
 
@@ -187,7 +187,7 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  -webkit-touch-callout:none;
+  -webkit-touch-callout: none;
   -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
@@ -351,12 +351,12 @@ body:not(.timer) {
   z-index: -2;
   transition: opacity 200ms;
 }
-#context.is-open{
+#context.is-open {
   opacity: 1;
   z-index: 100000000000;
   transition: opacity 200ms;
 }
-#context li{
+#context li {
   padding: 0 15px;
   width: 100%;
   color: rgb(10, 10, 10);
@@ -370,4 +370,14 @@ body:not(.timer) {
 
 #context svg {
   margin-right: 5px;
+}
+
+#covered {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  z-index: 99999999998;
 }

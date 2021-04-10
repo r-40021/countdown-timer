@@ -499,6 +499,7 @@ window.addEventListener(
 
 window.addEventListener("load", function () {
   var context = document.getElementById("context");
+  var cover = document.getElementById("covered");
   document.body.addEventListener("contextmenu", function (e) {
     var windowWidth = document.body.offsetWidth;
     var windowHeight = document.body.offsetHeight;
@@ -506,21 +507,25 @@ window.addEventListener("load", function () {
     var contextHeight = context.offsetHeight;
     if (e.pageX + contextWidth >= windowWidth) {
       context.style.right = windowWidth - e.pageX + "px";
-      context.style.left = null
+      context.style.left = null;
     } else {
       context.style.left = e.pageX + "px";
-      context.style.right = null
+      context.style.right = null;
     }
     if (e.pageY + contextHeight >= windowHeight) {
       context.style.bottom = windowHeight - e.pageY + "px";
-      context.style.top = null
+      context.style.top = null;
     } else {
       context.style.top = e.pageY + "px";
-      context.style.bottom = null
+      context.style.bottom = null;
     }
-    context.classList.add('is-open');
+    cover.style.display = "block";
+    context.classList.add("is-open");
   });
+
+cover.addEventListener("click", function (e) {
+  context.classList.remove("is-open");
+  cover.style.display = "none";
+  e.stopPropagation();
 });
-document.body.addEventListener("click", function (e) {
-  context.classList.remove('is-open');
 });
