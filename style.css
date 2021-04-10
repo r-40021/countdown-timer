@@ -1,3 +1,7 @@
+.modal-overlay{
+  overflow: hidden;
+}
+
 @keyframes fadeOut {
   from {
     opacity: 1;
@@ -10,6 +14,7 @@
 }
 
 #load {
+  opacity: 1;
   width: 100%;
   height: 100vh;
   background-color: #00c2bc;
@@ -18,11 +23,12 @@
   top: 0;
   z-index: 99999999999;
   margin: 0;
+  overflow: hidden;
 }
 
 #load.loaded {
-  animation: fadeOut 0.5s forwards;
   height: 0;
+  animation: fadeOut 0.5s forwards;
 }
 
 .spinner {
@@ -342,7 +348,7 @@ body:not(.timer) {
   line-height: 3;
   border: 0.1px solid rgba(218, 218, 218, 0.822);
   box-shadow: 5px 5px 5px rgba(26, 26, 26, 0.144);
-  z-index: 99999999999;
+  z-index: 100000000000;
 }
 
 #context li{
