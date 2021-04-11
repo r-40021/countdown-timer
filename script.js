@@ -490,6 +490,7 @@ window.addEventListener("resize", function () {
 });
 var addcursor;
 window.addEventListener(
+  /*カーソル隠す*/
   "mousemove",
   function () {
     try {
@@ -504,6 +505,7 @@ window.addEventListener(
 );
 
 window.addEventListener("load", function () {
+  /*コンテキストメニュー*/
   var context = document.getElementById("context");
   var cover = document.getElementById("covered");
   document.body.addEventListener("contextmenu", function (e) {
@@ -529,14 +531,14 @@ window.addEventListener("load", function () {
     context.classList.add("is-open");
   });
 
-cover.addEventListener("click", function (e) {
+window.addEventListener("click", function (e) {
   context.classList.remove("is-open");
   cover.style.display = "none";
   e.stopPropagation();
 });
 });
 
-window.document.addEventListener('keypress', function(e){
+window.addEventListener('keypress', function(e){
   if (e.key === "Enter") {
     document.getElementById("setTimer").click();
   }
