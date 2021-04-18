@@ -1,4 +1,4 @@
-var CACHE_NAME = '20210418v3';
+var CACHE_NAME = 'ct-20210418v3';
 var urlsToCache = [
   '/countdown-timer/index.html',
   '/countdown-timer/style.css',
