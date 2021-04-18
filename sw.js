@@ -1,5 +1,5 @@
-const CACHE_NAME = '20210418';
-const urlsToCache = [
+var CACHE_NAME = '20210418v2';
+var urlsToCache = [
   'index.html',
   'style.css',
   'script.js',
