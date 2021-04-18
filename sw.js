@@ -1,4 +1,4 @@
-const CACHE_NAME = '20210416';
+const CACHE_NAME = '20210418';
 const urlsToCache = [
   'index.html',
   'style.css',
@@ -9,6 +9,7 @@ const urlsToCache = [
   './favicon/favicon.ico',
   './js/all.min.js',
   'push.min.js',
+  'push.min.js.map',
   'nosleep.min.js'
 ];
 
@@ -25,7 +26,7 @@ self.addEventListener('install', function (event) {
 
 self.addEventListener('activate', function (event) {
 
-  var cacheAllowlist = ['20210416'];
+  var cacheAllowlist = ['20210418'];
 
   event.waitUntil(
     caches.keys().then(function (cacheNames) {
