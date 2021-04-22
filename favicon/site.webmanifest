@@ -21,7 +21,7 @@
     "theme_color": "#4db6ac",
     "background_color": "#00C2BC",
     "display": "standalone",
-    "start_url":"/index.html",
+    "start_url":"../index.html",
     "dir":"ltr",
     "lang":"ja-jp"
 }
