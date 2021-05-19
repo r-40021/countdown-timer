@@ -1,11 +1,3 @@
-window.addEventListener("DOMContentLoaded", (event) => {
-  setTimeout(function () {
-    const loader = document.getElementById("load");
-    if (loader.classList.contains("loaded") === false) {
-      loader.classList.add("loaded"); //5000ms経ったら強制的にローディング画面解除
-    }
-  }, 5000);
-});
 /*変数の定義*/
 var down;
 var displayEnd;
@@ -18,16 +10,6 @@ var timerStatus = 0;
 var alarm = new Audio("alarm.mp3");
 alarm.loop = true;
 var noSleep = new NoSleep();
-
-window.addEventListener("load", (event) => {
-  /*読み込み終わったらローディング画面解除*/
-  const loader = document.getElementById("load");
-  loader.classList.add("loaded");
-  flex(); //スマホのURLバーに隠されないように
-  setTimeout(function () {
-    pushrequest(); //プッシュ通知に関するお知らせ
-  }, 499);
-});
 
 window.addEventListener("DOMContentLoaded", function () {
   device();

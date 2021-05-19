@@ -7,82 +7,6 @@
   --green: #4db6ac;
 }
 
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-  }
-  to {
-    display: none;
-    opacity: 0;
-    z-index: -1;
-  }
-}
-
-#load {
-  opacity: 1;
-  width: 100%;
-  height: 100vh;
-  background-color: #00c2bc;
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 99999999999;
-  margin: 0;
-}
-
-#load.loaded {
-  height: 0;
-  animation: fadeOut 0.5s forwards;
-}
-
-.spinner {
-  width: 40px;
-  height: 40px;
-  position: relative;
-  margin: 100px auto;
-}
-
-.double-bounce1,
-.double-bounce2 {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background-color: #333;
-  opacity: 0.6;
-  position: absolute;
-  top: 0;
-  left: 0;
-  -webkit-animation: sk-bounce 2s infinite ease-in-out;
-  animation: sk-bounce 2s infinite ease-in-out;
-}
-
-.double-bounce2 {
-  -webkit-animation-delay: -1s;
-  animation-delay: -1s;
-}
-
-@-webkit-keyframes sk-bounce {
-  0%,
-  100% {
-    -webkit-transform: scale(0);
-  }
-  50% {
-    -webkit-transform: scale(1);
-  }
-}
-
-@keyframes sk-bounce {
-  0%,
-  100% {
-    transform: scale(0);
-    -webkit-transform: scale(0);
-  }
-  50% {
-    transform: scale(1);
-    -webkit-transform: scale(1);
-  }
-}
-
 .timer {
   display: flex;
   align-items: center;
@@ -255,7 +179,7 @@ body {
 #settings .section{
   background-color: #fff;
   margin-top: 0.5em;
-  padding: 0 1em;
+  padding: 0.1em 1em;
 }
 #settings .section p{
   color: #666;
