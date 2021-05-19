@@ -391,22 +391,8 @@ function audiostop() {
 function pushrequest() {
   if (useDevice) {
     //PCとIE以外でしか実行しない
-    /*トーストで通知の権限を通知*/
-    if (Push.Permission.has() == false) {
-      M.toast({
-        html: "通知を許可して、時間になったらデスクトップに通知が届くようにしてください",
-      });
-    }
     /*プッシュ通知許可ダイアログ*/
-    Push.Permission.request(onGranted);
-
-    function onGranted() {
-      M.toast({ html: "時間になったらデスクトップ通知でお知らせします" });
-    }
-  } else {
-    M.toast({
-      html: '<span>ご利用の環境では、時間になってもプッシュ通知を行うことができません。</span><a class="btn-flat toast-action modal-trigger" href="#push">MORE</a>',
-    });
+    Push.Permission.request();
   }
 }
 
