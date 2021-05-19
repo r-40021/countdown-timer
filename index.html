@@ -3,7 +3,7 @@
 
 <head>
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
     <meta http-equiv="Cache-Control" content="no-cache">
     <meta content="text / html; charset = UTF-8" name="Content-Type" />
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
@@ -79,14 +79,26 @@
         </div>
     </div>
     <div class="flex">
-        <div class="timer waves-effect waves-light" id="bigtimer" style="background-color: #4db6ac;">
+        <div class="timer waves-effect waves-light" id="bigtimer">
             <div id="click">
                 <div id="displayTime">0:00:00</div>
             </div>
+            <div class="container">
+                <div class="row">
+                    <!--SET/STOP-->
+                    <div class="center">
+                        <a class="myBtn-circle" onclick="set()" id="setTimer">SET</a>
+                        <a class="myBtn-circle" onclick="stop();audiostop();Push.clear();" id="stopTimer">STOP</a>
+                        <a class="myBtn-circle modal-trigger" href="#settings" id="stopTimer">Settings</a>
+                    </div>
+                </div>
+            </div>
         </div>
+
         <!--menu-->
         <div class="menu">
-
+            <input placeholder="日付" id="Date" type="text" class="datepicker" readonly="readonly">
+            <input placeholder="時間" id="Time" type="text" class="timepicker" readonly="readonly">
             <div class="upmenu" id="upmenu">
                 <i class="fas fa-chevron-up"></i>
             </div>
@@ -99,18 +111,9 @@
                     <div id="menu1" class="is-open">
                         <!--Date&Time-->
                         <div class="row">
-                            <div class="col m5 s6" id="DateField">
-                                <input placeholder="日付" id="Date" type="text" class="datepicker" readonly="readonly">
-                            </div>
-                            <div class="col m5 s6" id="TimeField">
-                                <input placeholder="時間" id="Time" type="text" class="timepicker" readonly="readonly">
-                            </div>
+
                             <div class="col m2 s12 center icons">
-                                <input id="file1" type="file" accept="audio/*">
-                                <label for="file1" id="audioInput"><span class="tooltipped" data-position="bottom"
-                                        data-tooltip="アラーム音を変更"><i
-                                            class="icons far fa-file-audio teal-text text-lighten-1"
-                                            style="margin-top: 10px;" id="audioicon"></i></label></span>
+
                                 <span id="fullscreen" class="tooltipped" data-position="bottom" data-tooltip="全画面">
                                     <i class="icons fas fa-expand-arrows-alt teal-text text-lighten-1"
                                         style="margin-top: 10px;margin-left: 10px;" id="fullscreen"></i>
@@ -121,28 +124,13 @@
                                 </span>
                             </div>
                         </div>
-                        <div class="row">
-                            <!--SET/STOP-->
-                            <div class="col s12 center">
-                                <a class="btn blue waves-effect waves-light" onclick="set()"
-                                    style="height: auto;margin-top: 20px;" id="setTimer"><i class="fas fa-play"
-                                        aria-label="START" style="font-size: small;margin-right: 5px;"></i>SET</a>
-                                <a class="btn pink waves-effect waves-light" onclick="stop();audiostop();Push.clear();"
-                                    style="height: auto;margin-top: 20px;" id="stopTimer"><i class="fas fa-pause"
-                                        aria-label="STOP" style="font-size: small;margin-right: 5px;"></i>STOP</a>
-                            </div>
-                        </div>
+
                     </div>
 
                     <div id="menu2">
                         <div class="row">
                             <div class="col s12 m6" id="playb">
-                                <figcaption>アラーム音試聴：</figcaption>
-                                <audio controls src="alarm.mp3" id="player" preload="metadata" controlslist="nodownload"
-                                    style="height: 30px;max-width:100%">
-                                    Your browser does not support the
-                                    <code>audio</code> element.
-                                </audio>
+
                             </div>
                             <div class="col s12 m6">
                                 <a class="waves-effect waves-teal btn-flat teal-text modal-trigger trouble"
@@ -154,25 +142,34 @@
 
                             <div class="col s12 center">
                                 <!--URL-->
-                                <a onclick="copy()" class="tooltipped btn-flat grey-text text-darken-1 waves-effect waves-teal" data-position="top" data-tooltip="URLをコピー"><i
-                                        class="fas fa-link fa-lg" aria-label="URLをコピー"></i></a>
+                                <a onclick="copy()"
+                                    class="tooltipped btn-flat grey-text text-darken-1 waves-effect waves-teal"
+                                    data-position="top" data-tooltip="URLをコピー"><i class="fas fa-link fa-lg"
+                                        aria-label="URLをコピー"></i></a>
                                 <!--Twitter-->
                                 <a href="https://twitter.com/intent/tweet?text=半永久的に計れるタイマー%0a&url=https://r-40021.github.io/countdown-timer&hashtags=やまだのタイマー,やまだけんいち"
                                     onClick="window.open(encodeURI(decodeURI(this.href)), 'tweetwindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;"
                                     rel="nofollow"
-                                    class="tooltipped twitter-link waves-effect waves-teal btn-flat grey-text text-darken-1" data-position="top" data-tooltip="シェア">
+                                    class="tooltipped twitter-link waves-effect waves-teal btn-flat grey-text text-darken-1"
+                                    data-position="top" data-tooltip="シェア">
                                     <i class="fab fa-twitter fa-lg" aria-label="Twitterでシェア"></i>
                                 </a>
                                 <!--GitHub-->
                                 <a href="https://github.com/r-40021/countdown-timer" target="_blank" rel="noopener"
-                                    class="tooltipped waves-effect waves-teal btn-flat grey-text text-darken-1" data-position="top" data-tooltip="コードを見る"><i
-                                        class="fab fa-github fa-lg" aria-label="View on GitHub"></i></a>
+                                    class="tooltipped waves-effect waves-teal btn-flat grey-text text-darken-1"
+                                    data-position="top" data-tooltip="コードを見る"><i class="fab fa-github fa-lg"
+                                        aria-label="View on GitHub"></i></a>
                                 <!--info-->
                                 <a href="https://r-40021.github.io/" target="_blank" rel="noopener"
-                                    class="tooltipped waves-effect waves-teal btn-flat grey-text text-darken-1" data-position="top" data-tooltip="作者HP"><i
-                                        class="far fa-user fa-lg" aria-label="作者について"></i></a>
+                                    class="tooltipped waves-effect waves-teal btn-flat grey-text text-darken-1"
+                                    data-position="top" data-tooltip="作者HP"><i class="far fa-user fa-lg"
+                                        aria-label="作者について"></i></a>
                                 <!--Privacy-->
-                                <a href="https://r-40021.github.io/privacy.html?fromApp=true" target="_blank" rel="noopener" class="tooltipped waves-effect waves-teal btn-flat grey-text text-darken-1" data-position="top" data-tooltip="プライバシーポリシー" aria-label="プライバシーポリシー"><i class="fas fa-lock"></i></a>
+                                <a href="https://r-40021.github.io/privacy.html?fromApp=true" target="_blank"
+                                    rel="noopener"
+                                    class="tooltipped waves-effect waves-teal btn-flat grey-text text-darken-1"
+                                    data-position="top" data-tooltip="プライバシーポリシー" aria-label="プライバシーポリシー"><i
+                                        class="fas fa-lock"></i></a>
                             </div>
                         </div>
                     </div>
@@ -181,44 +178,58 @@
         </div>
     </div>
     </div>
-    <div id="modal1" class="modal">
+    <!-- Settings -->
+    <div id="settings" class="modal">
         <div class="modal-content">
-            <h4>アラーム音を有効にするには</h4>
-            <ol>
-                <li>URLの左側の錠マークをクリック</li>
-                <li>「サイトの設定」（表現は多少異なる場合があります）をクリック</li>
-                <li>「サウンド」もしくは「音声」の項目を探し、「自動」から「許可」に変更</li>
-                <li>タイマーアプリを再読み込み</li>
-            </ol>
-            <p>注意点</p>
-            <ol>
-                <li>iPhoneやiPadなどでは、アラーム音を有効に設定できません。</li>
-                <li>ブラウザによっては、この設定をしなくてもアラーム音が鳴るものもあります。<br>（例：Edge）</li>
-            </ol>
+            <ul id="settings" class="tabs">
+                <li class="tab col s3"><a class="active" href="#settings-1">日時設定</a></li>
+                <li class="tab col s3"><a href="#settings-2">アラーム音</a></li>
+                <li class="tab col s3"><a href="#settings-3">Test 3</a></li>
+            </ul>
+            <div id="settings-1" class="col s12">
+                <div class="section">
+                    <h5>日時設定</h5>
+                    <div class="center">
+                        <div style="width: 45%;display: inline-block;margin-right: 5%;" id="DateField">
+                            <input placeholder="日付" id="dateLabel" type="text" readonly="readonly"
+                                onclick="document.getElementById('Date').click();">
+                        </div>
+                        <div style="width: 45%;display: inline-block;" id="TimeField">
+                            <input placeholder="時間" id="timeLabel" type="text" readonly="readonly"
+                                onclick="document.getElementById('Time').click();">
+                        </div>
+                    </div>
+                    <p><a class="waves-effect waves-light btn modal-close" href="#!"
+                            onclick="document.getElementById('setTimer').click();">セット</a></p>
+                    <p>ここで設定した日時にアラームが鳴ります。<br>※ブラウザを起動しておく必要があります。</p>
+                </div>
+            </div>
+            <div id="settings-2" class="col s12">
+                <div class="section">
+                    <h5>アラーム音</h5>
+                    <div id="droppable">
+                        <div>
+                            <p>音声ファイルをドラッグ＆ドロップ</p>
+                            <input id="file1" type="file" accept="audio/*">
+                            <label for="file1" id="audioInput"><a class="waves-effect waves-light btn">選択</a></label>
+                        </div>
+                    </div>
+                    <input id="file1" type="file" accept="audio/*">
+                    <figcaption>アラーム音試聴：</figcaption>
+                    <audio controls src="alarm.mp3" id="player" preload="metadata" controlslist="nodownload"
+                        style="height: 30px;max-width:100%">
+                        Your browser does not support the
+                        <code>audio</code> element.
+                    </audio>
+                    <p class="range-field">
+                        <input type="range" id="test5" min="0" max="100" />
+                    </p>
+                </div>
+            </div>
+            <div id="settings-3" class="col s12">Test 3</div>
         </div>
         <div class="modal-footer">
-            <a class="modal-close waves-effect waves-green btn-flat">OK</a>
-        </div>
-    </div>
-    <div id="push" class="modal">
-        <div class="modal-content">
-            <h4>プッシュ通知対応環境</h4>
-            <h5>OS</h5>
-            <ul>
-                <li>PC(Windows,Mac,Linux,Chrome OS)</li>
-            </ul>
-            <h5>ブラウザ</h5>
-            <ul>
-                <li>最新版のChrome</li>
-                <li>最新版のSafari</li>
-                <li>最新版のFirefox</li>
-                <li>最新版のEdge</li>
-            </ul>
-            <p>プッシュ通知をご利用になるには、OSとブラウザの両方が対応している必要があります。</p>
-            <p>※プッシュ通知は「オマケ機能」程度のものですので、アプリ自体は問題なくご利用になれます。</p>
-        </div>
-        <div class="modal-footer">
-            <a class="modal-close waves-effect waves-green btn-flat">OK</a>
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">閉じる</a>
         </div>
     </div>
     <div id="covered"></div>
@@ -227,15 +238,42 @@
             <li onclick="copy()"><i class="fas fa-link" aria-label="URLをコピー"></i>URLをコピー</li>
             <a href="https://twitter.com/intent/tweet?text=半永久的に計れるタイマー%0a&url=https://r-40021.github.io/countdown-timer&hashtags=やまだのタイマー,やまだけんいち"
                 onClick="window.open(encodeURI(decodeURI(this.href)), 'tweetwindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;"
-                rel="nofollow"><li><i class="fab fa-twitter" aria-label="Twitterでシェア"></i>シェア</li></a>
-                <a href="https://github.com/r-40021/countdown-timer" target="_blank" rel="noopener"
-            ><li><i class="fab fa-github" aria-label=" View on GitHub"></i>ソースコードを見る</li></a>
-            <a href="https://r-40021.github.io/" target="_blank" rel="noopener"><li><i class="far fa-user" aria-label="作者について"></i>作者について</li></a>
+                rel="nofollow">
+                <li><i class="fab fa-twitter" aria-label="Twitterでシェア"></i>シェア</li>
+            </a>
+            <a href="https://github.com/r-40021/countdown-timer" target="_blank" rel="noopener">
+                <li><i class="fab fa-github" aria-label=" View on GitHub"></i>ソースコードを見る</li>
+            </a>
+            <a href="https://r-40021.github.io/" target="_blank" rel="noopener">
+                <li><i class="far fa-user" aria-label="作者について"></i>作者について</li>
+            </a>
 
-             <a href="https://r-40021.github.io/privacy.html" target="_blank" rel="noopener"><li><i class="fas fa-lock"></i>プライバシーポリシー</li></a>
+            <a href="https://r-40021.github.io/privacy.html" target="_blank" rel="noopener">
+                <li><i class="fas fa-lock"></i>プライバシーポリシー</li>
+            </a>
         </ul>
     </div>
-    <script>
+    <script defer>
+        /*Service Worker*/
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", function () {
+                navigator.serviceWorker.register("sw.js").then(
+                    function (registration) {
+                        // Registration was successful
+                        console.log(
+                            "ServiceWorker registration successful with scope: ",
+                            registration.scope
+                        );
+                    },
+                    function (err) {
+                        // registration failed :(
+                        console.log("ServiceWorker registration failed: ", err);
+                    }
+                );
+            });
+        }
+    </script>
+    <script defer>
         let wavesElement = document.getElementsByClassName('waves-effect');
         for (let i = 0; i < wavesElement.length; i++) {
             var element = wavesElement[i];

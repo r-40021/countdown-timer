@@ -19,25 +19,6 @@ var alarm = new Audio("alarm.mp3");
 alarm.loop = true;
 var noSleep = new NoSleep();
 
-/*Service Worker*/
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", function () {
-    navigator.serviceWorker.register("/countdown-timer/sw.js").then(
-      function (registration) {
-        // Registration was successful
-        console.log(
-          "ServiceWorker registration successful with scope: ",
-          registration.scope
-        );
-      },
-      function (err) {
-        // registration failed :(
-        console.log("ServiceWorker registration failed: ", err);
-      }
-    );
-  });
-}
-
 window.addEventListener("load", (event) => {
   /*読み込み終わったらローディング画面解除*/
   const loader = document.getElementById("load");
@@ -112,6 +93,23 @@ window.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+document.getElementById("Date").addEventListener(
+  "change",
+  () => {
+    document.getElementById("dateLabel").value =
+      document.getElementById("Date").value;
+  },
+  false
+);
+document.getElementById("Time").addEventListener(
+  "change",
+  () => {
+    document.getElementById("timeLabel").value =
+      document.getElementById("Time").value;
+  },
+  false
+);
 
 function device() {
   var userAgent = window.navigator.userAgent.toLowerCase(); //ブラウザ情報取得
@@ -216,7 +214,11 @@ function onload() {
     }
     //テキストボックスに日時をセット
     document.getElementById("Date").value = paramObject.date;
+    document.getElementById("dateLabel").value =
+      document.getElementById("Date").value;
     document.getElementById("Time").value = paramObject.time;
+    document.getElementById("timeLabel").value =
+      document.getElementById("Time").value;
 
     var myDate = paramObject.date;
     var myTime = paramObject.time;
@@ -263,12 +265,8 @@ function onload() {
         } catch (error) {
           console.log("error");
         }
-        var noevent = document.getElementById("audioicon");
-        noevent.classList.add("noevent"); //クリック不可
         document.getElementById("audioInput").classList.add("noevent");
-        noevent.classList.remove("autoevent");
         document.getElementById("audioInput").classList.remove("autoevent");
-        noevent.classList.replace("teal-text", "grey-text");
         alarm.play();
         if (menuStatus === 0) {
           document.getElementById("menu1").classList.add("is-open");
@@ -277,13 +275,9 @@ function onload() {
         }
         stop();
         document.title = "やまだのタイマー";
-        document.getElementById("bigtimer").style.backgroundColor = "#ec407a";
-        var timerbox = document.getElementById("displayTime");
         displayEnd = setInterval(function () {
-          timerbox.style.color = "#d81b60";
           document.title = "時間です！";
           setTimeout(function () {
-            timerbox.style.color = "#FFFFFF";
             document.title = "やまだのタイマー";
           }, 500);
         }, 1000);
@@ -355,6 +349,9 @@ document.addEventListener("DOMContentLoaded", function () {
   instances = M.Modal.init(elems);
   elems = document.querySelectorAll(".tooltipped");
   instances = M.Tooltip.init(elems);
+  // tab
+  elems = document.querySelectorAll(".tabs");
+  instances = M.Tabs.init(elems);
 });
 
 function copy() {
@@ -380,18 +377,15 @@ function stop() {
 
 function audiostop() {
   timerStatus = 0;
-  var noevent = document.getElementById("audioicon");
-  noevent.classList.replace("noevent", "autoevent");
+
   document
     .getElementById("audioInput")
     .classList.replace("noevent", "autoevent");
-  noevent.classList.replace("grey-text", "teal-text"); //クリック不可
+
   alarm.pause();
   alarm.currentTime = 0; //音停止
   clearInterval(displayEnd);
   var timerbox = document.getElementById("displayTime");
-  timerbox.style.color = "#FFFFFF";
-  document.getElementById("bigtimer").style.backgroundColor = "#4db6ac";
 }
 
 function pushrequest() {
@@ -400,8 +394,7 @@ function pushrequest() {
     /*トーストで通知の権限を通知*/
     if (Push.Permission.has() == false) {
       M.toast({
-        html:
-          "通知を許可して、時間になったらデスクトップに通知が届くようにしてください",
+        html: "通知を許可して、時間になったらデスクトップに通知が届くようにしてください",
       });
     }
     /*プッシュ通知許可ダイアログ*/
@@ -412,8 +405,7 @@ function pushrequest() {
     }
   } else {
     M.toast({
-      html:
-        '<span>ご利用の環境では、時間になってもプッシュ通知を行うことができません。</span><a class="btn-flat toast-action modal-trigger" href="#push">MORE</a>',
+      html: '<span>ご利用の環境では、時間になってもプッシュ通知を行うことができません。</span><a class="btn-flat toast-action modal-trigger" href="#push">MORE</a>',
     });
   }
 }
@@ -422,12 +414,16 @@ window.addEventListener("load", () => {
   /*アラーム音設定・プレビューも*/
   const f = document.getElementById("file1");
   var player = document.getElementById("player");
-  f.addEventListener("change", (evt) => {
-    let input = evt.target;
-    if (input.files.length == 0) {
+  f.addEventListener("change", formatNode, false);
+  function formatNode(e) {
+    let input = e.target;
+    selectFile(input.files);
+  }
+  function selectFile(e) {
+    if (e.length == 0) {
       return;
     }
-    const file = input.files[0];
+    const file = e[0];
     if (!file.type.match("audio.*")) {
       M.toast({ html: "音声ファイルを選択してください" });
       return;
@@ -438,14 +434,36 @@ window.addEventListener("load", () => {
       alarm.loop = true;
       player.src = reader.result;
       M.toast({
-        html:
-          "アラーム音を設定しました。<br>このページから離れると、アラーム音はリセットされます。",
+        html: "アラーム音を設定しました。<br>このページから離れると、アラーム音はリセットされます。",
       });
       window.addEventListener("beforeunload", move, false);
     };
 
     reader.readAsDataURL(file);
-  });
+  }
+  // Drug & Drop
+  let dropbox;
+
+  dropbox = document.getElementById("droppable");
+  dropbox.addEventListener("dragenter", dragenter, false);
+  dropbox.addEventListener("dragover", dragover, false);
+  dropbox.addEventListener("drop", drop, false);
+  function dragenter(e) {
+    e.stopPropagation();
+    e.preventDefault();
+  }
+
+  function dragover(e) {
+    e.stopPropagation();
+    e.preventDefault();
+  }
+  function drop(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    const dt = e.dataTransfer;
+    const files = dt.files;
+    selectFile(files);
+  }
 });
 
 var move = function (e) {
@@ -531,18 +549,22 @@ window.addEventListener("load", function () {
     context.classList.add("is-open");
   });
 
-window.addEventListener("click", function (e) {
-  context.classList.remove("is-open");
-  cover.style.display = "none";
-  e.stopPropagation();
-});
+  window.addEventListener("click", function (e) {
+    context.classList.remove("is-open");
+    cover.style.display = "none";
+    e.stopPropagation();
+  });
 });
 
-window.addEventListener('keypress', function(e){
-  if (e.key === "Enter") {
-    document.getElementById("setTimer").click();
-  }
-},false);
+window.addEventListener(
+  "keypress",
+  function (e) {
+    if (e.key === "Enter") {
+      document.getElementById("setTimer").click();
+    }
+  },
+  false
+);
 
 function focus() {
   /*Focus to the set button*/

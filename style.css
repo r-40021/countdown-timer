@@ -1,6 +1,11 @@
 .modal-overlay {
   overflow: hidden;
 }
+:root {
+  --bgColor: #f7f7f7;
+  --fontColor: rgb(75, 75, 75);
+  --green: #4db6ac;
+}
 
 @keyframes fadeOut {
   from {
@@ -82,9 +87,31 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ffffff;
+  flex-direction: column;
   font-family: "Open Sans", sans-serif;
-  font-weight: 300;
+  font-weight: 500;
+}
+.myBtn-circle {
+  border: #666 solid 1px;
+  color: var(--fontColor);
+  position: relative;
+  line-height: 12vh;
+  display: inline-block;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-decoration: none;
+  letter-spacing: 0.15em;
+  padding: 0.1rem 0.1rem;
+  border-radius: 50%;
+  width: 12vh;
+  height: 12vh;
+  cursor: pointer;
+}
+.myBtn-circle:hover {
+  color: var(--green);
+  border-color: var(--green);
 }
 
 .class input[type="text"] {
@@ -99,6 +126,17 @@
 #audioInput,
 #playb {
   display: none;
+}
+
+#droppable {
+  border: rgb(165, 165, 165) dashed 0.3em;
+  text-align: center;
+  border-radius: 1em;
+  height: 15em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1em;
 }
 
 #audioicon,
@@ -168,10 +206,6 @@ body:not(:fullscreen) #escFullscreen {
   transition: color 250ms, opacity 250ms;
 }
 
-.mymenu {
-  background-color: rgb(247, 247, 247);
-}
-
 .menu {
   position: relative;
   flex-shrink: 0;
@@ -192,6 +226,12 @@ body {
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+body {
+  background-color: var(--bgColor);
+  color: var(--fontColor);
 }
 
 #menu1 {
@@ -209,7 +249,27 @@ body {
   transition: height 350ms ease-in-out;
   z-index: 9997;
 }
-
+#Date,#Time{
+  display: none;
+}
+#settings .section{
+  background-color: #fff;
+  margin-top: 0.5em;
+  padding: 0 1em;
+}
+#settings .section p{
+  color: #666;
+  margin-inline-start: 1em;
+}
+#settings .section:not(:last-child){
+  margin-bottom: 4em;
+}
+.modal{
+  max-height: 90vh;
+}
+#settings .modal-content {
+  padding: 0 5px;
+}
 body:not(.timer) {
   font-family: -apple-system, "BlinkMacSystemFont", "Segoe UI”, " Roboto,
     Oxygen ",
@@ -332,7 +392,9 @@ body:not(.timer) {
   height: 100%;
   pointer-events: auto;
 }
-
+.timer a{
+  pointer-events: auto;
+}
 .hidecursor * {
   cursor: none !important;
 }
