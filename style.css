@@ -6,20 +6,20 @@
   --fontColor: rgb(75, 75, 75);
   --green: #4db6ac;
 }
-input{
+input {
   -webkit-user-select: text;
   -moz-user-select: text;
   -ms-user-select: text;
   user-select: text;
 }
-.title{
+.title {
   position: fixed;
   top: 7%;
   left: 0;
   width: 100%;
   height: auto;
 }
-#title{
+#title {
   text-align: center;
   font-size: 7vh;
   padding-bottom: 0.3em;
@@ -30,20 +30,13 @@ input{
   -webkit-text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
 }
-@media screen and (max-width: 480px){
-  #title{
+@media screen and (max-width: 480px) {
+  #title {
     font-size: 5vh;
   }
 }
 
-.timer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  font-family: "Open Sans", sans-serif;
-  font-weight: 500;
-}
+
 .myBtn-circle {
   border: #666 solid 1px;
   color: var(--fontColor);
@@ -64,7 +57,7 @@ input{
   color: var(--green);
   border-color: var(--green);
 }
-.myBtn-small{
+.myBtn-small {
   line-height: 5vh;
   width: 5vh;
   height: 5vh;
@@ -79,7 +72,7 @@ input{
   display: none;
 }
 
-#audioInput{
+#audioInput {
   display: none;
 }
 
@@ -116,7 +109,7 @@ body:not(:fullscreen) #escFullscreen {
   pointer-events: auto;
 }
 
-.share .btn-flat{
+.share .btn-flat {
   padding: 0 7px;
 }
 
@@ -138,8 +131,6 @@ body:not(:fullscreen) #escFullscreen {
   box-shadow: none;
 }
 
-
-
 html,
 body {
   width: 100%;
@@ -158,77 +149,100 @@ body {
 body {
   background-color: var(--bgColor);
   color: var(--fontColor);
+  font-family: -apple-system, blinkMacSystemFont, "Helvetica Neue", "Segoe UI",
+    "Arial", "Roboto", "Hiragino Kaku Gothic ProN", YuGothicM, YuGothic, Meiryo,
+    sans-serif;
+}
+@font-face {
+  font-family: YuGothicM;
+  font-weight: normal;
+  src: local("YuGothic-Medium"), local("Yu Gothic Medium"),
+    local("YuGothic-Regular"); /* Windows8.1ではMediumがないのでRegularを指定 */
+}
+@font-face {
+  font-family: YuGothicM;
+  font-weight: bold;
+  src: local("YoGothic-Bold"), local("Yu Gothic");
 }
 
+.timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-family: "Open Sans", -apple-system, blinkMacSystemFont, "Helvetica Neue",
+    "Segoe UI", "Arial", "Roboto" ,sans-serif;
+}
 
-#Date,#Time{
+#Date,
+#Time {
   display: none;
 }
-#settings .section{
+#settings .section {
   background-color: #fff;
   margin-top: 0.5em;
   padding: 0.1em 1em;
 }
-#settings .section p{
+#settings .section p {
   color: #666;
   margin-inline-start: 1em;
 }
-#settings .section:not(:last-child){
+#settings .section:not(:last-child) {
   margin-bottom: 4em;
 }
-.modal{
+.modal {
   max-height: 90vh;
 }
-#settings .modal-footer{
+#settings .modal-footer {
   display: flex;
 }
-#settings .modal-footer div:first-child{
+#settings .modal-footer div:first-child {
   flex: 9;
   text-align: left;
 }
-#settings .modal-footer div:last-child{
+#settings .modal-footer div:last-child {
   flex: 3;
 }
-.audioFlex{
+.audioFlex {
   display: flex;
   align-items: flex-end;
   justify-content: center;
 }
-.play{
+.play {
   width: auto;
 }
-.volume{
+.volume {
   flex: 1;
 }
-.volume,.play{
+.volume,
+.play {
   margin: 1em 0;
 }
-.volume p{
+.volume p {
   margin: 0;
-
 }
-input[type=text]:not(.browser-default)[readonly="readonly"]{
+input[type="text"]:not(.browser-default)[readonly="readonly"] {
   background-color: transparent;
   color: var(--fontColor);
-    border: none;
-    border-bottom: 1px solid #9e9e9e;
-    border-radius: 0;
-    outline: none;
-    height: 3rem;
-    width: 100%;
-    font-size: 16px;
-    margin: 0 0 8px 0;
-    padding: 0;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    -webkit-box-sizing: content-box;
-    box-sizing: content-box;
-    -webkit-transition: border .3s, -webkit-box-shadow .3s;
-    transition: border .3s, -webkit-box-shadow .3s;
-    transition: box-shadow .3s, border .3s;
-    transition: box-shadow .3s, border .3s, -webkit-box-shadow .3s;
+  border: none;
+  border-bottom: 1px solid #9e9e9e;
+  border-radius: 0;
+  outline: none;
+  height: 3rem;
+  width: 100%;
+  font-size: 16px;
+  margin: 0 0 8px 0;
+  padding: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  -webkit-transition: border 0.3s, -webkit-box-shadow 0.3s;
+  transition: border 0.3s, -webkit-box-shadow 0.3s;
+  transition: box-shadow 0.3s, border 0.3s;
+  transition: box-shadow 0.3s, border 0.3s, -webkit-box-shadow 0.3s;
 }
-.fullscreenIcons{
+.fullscreenIcons {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -237,25 +251,13 @@ input[type=text]:not(.browser-default)[readonly="readonly"]{
   z-index: 999;
   color: var(--fontColor);
 }
-.fullscreenIcons div{
+.fullscreenIcons div {
   display: inline-block;
   cursor: pointer;
 }
 #settings .modal-content {
   padding: 0 5px;
 }
-body:not(.timer) {
-  font-family: -apple-system, "BlinkMacSystemFont", "Segoe UI”, " Roboto,
-    Oxygen ",
- " Ubuntu ", " Cantarell ", " Fira Sans ", " Droid Sans”,
-    "Helvetica Neue", sans-serif;
-}
-
-
-
-
-
-
 
 #bigtimer {
   flex: 1;
@@ -285,15 +287,13 @@ body:not(.timer) {
 .setBtns a {
   display: inline-flex;
 }
-.setBtns{
+.setBtns {
   letter-spacing: 0.3em;
   width: 100%;
 }
-#stopTimer{
+#stopTimer {
   display: none;
 }
-
-
 
 #click {
   display: flex;
@@ -303,7 +303,7 @@ body:not(.timer) {
   height: 100%;
   pointer-events: auto;
 }
-.timer a{
+.timer a {
   pointer-events: auto;
 }
 .hidecursor * {
