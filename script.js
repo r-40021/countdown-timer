@@ -3,7 +3,6 @@ var down;
 var displayEnd;
 var oldDisplay;
 var useDevice = 0;
-var menuStatus = 1;
 var timerStatus = 0;
 
 /*初期アラーム音設定*/
@@ -15,55 +14,6 @@ window.addEventListener("DOMContentLoaded", function () {
   device();
   onload();
 });
-
-window.addEventListener("DOMContentLoaded", function () {
-  /*メニューの上げ下げ*/
-  const upmenu = document.getElementById("upmenu");
-  const downmenu = document.getElementById("downmenu");
-  const menu1 = document.getElementById("menu1");
-  const menu2 = document.getElementById("menu2");
-  var once;
-  upmenu.addEventListener("click", function () {
-    if (menuStatus === 1 || menuStatus === 3) {
-      clearTimeout(once);
-      menu2.classList.add("is-open");
-      if (menuStatus === 1) {
-        menuStatus = 2;
-      }
-      upmenu.style.visibility = "hidden";
-    } else if (menuStatus === 0) {
-      menu1.classList.add("is-open");
-      menuStatus = 3; //３秒以内に全開したら、ワンクリックで閉じる
-      downmenu.style.visibility = "visible";
-      once = setTimeout(f, 3000);
-    }
-  });
-  downmenu.addEventListener("click", function () {
-    //メニューを閉じる
-    clearTimeout(once);
-    if (menuStatus === 3) {
-      menu2.classList.remove("is-open");
-      menu1.classList.remove("is-open");
-      upmenu.style.visibility = "visible";
-      downmenu.style.visibility = "hidden";
-      document.querySelector("audio#player").pause();
-      menuStatus = 0;
-    } else if (menuStatus === 2) {
-      menu2.classList.remove("is-open");
-      menuStatus = 1;
-      document.querySelector("audio#player").pause();
-      upmenu.style.visibility = "visible";
-    } else if (menuStatus === 1) {
-      menu1.classList.remove("is-open");
-      menuStatus = 0;
-      downmenu.style.visibility = "hidden";
-    }
-  });
-});
-
-function f() {
-  menuStatus = 1;
-}
 
 window.addEventListener("DOMContentLoaded", function () {
   const click = document.getElementById("click");
@@ -119,16 +69,8 @@ function device() {
     timeField.classList.replace("s5", "s6");
     document.getElementById("fullscreen").style.display = "none";
     document.getElementById("escFullscreen").style.display = "none";
-    document.getElementById("menu1").classList.add("iPhone");
-    document.getElementById("menu2").classList.add("iPhone");
   } else {
     document.getElementById("audioInput").style.display = "inline";
-    document.getElementById("playb").style.display = "inline";
-  }
-  if ("ontouchend" in document === false) {
-    //PCのときは、hover
-    document.getElementById("upmenu").classList.add("pc");
-    document.getElementById("downmenu").classList.add("pc");
   }
 }
 
@@ -250,11 +192,6 @@ function onload() {
         document.getElementById("audioInput").classList.add("noevent");
         document.getElementById("audioInput").classList.remove("autoevent");
         alarm.play();
-        if (menuStatus === 0) {
-          document.getElementById("menu1").classList.add("is-open");
-          menuStatus = 1;
-          downmenu.style.visibility = "visible";
-        }
         stop();
         document.title = "やまだのタイマー";
         displayEnd = setInterval(function () {
