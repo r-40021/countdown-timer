@@ -10,21 +10,12 @@ var alarm = new Audio("alarm.mp3");
 alarm.loop = true;
 var noSleep = new NoSleep();
 
-window.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
   device();
   onload();
 });
 
-window.addEventListener("DOMContentLoaded", function () {
-  const click = document.getElementById("click");
-  click.addEventListener("click", function () {
-    if (timerStatus) {
-      document.getElementById("stopTimer").click();
-    } else {
-      document.getElementById("setTimer").click();
-    }
-  });
-});
+
 
 document.getElementById("Date").addEventListener(
   "change",
@@ -74,7 +65,7 @@ function device() {
   }
 }
 
-window.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
   // フルスクリーン表示
   document.getElementById("fullscreen").addEventListener("click", function () {
     // Chrome & Firefox v64以降
@@ -389,7 +380,7 @@ document.addEventListener(
   false
 );
 
-window.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
   //残り時間が変わったら、文字サイズ調整
   var element = document.getElementById("displayTime");
   var action = new MutationObserver(function (record, observer) {
@@ -426,41 +417,6 @@ window.addEventListener(
   },
   false
 );
-
-window.addEventListener("load", function () {
-  /*コンテキストメニュー*/
-  var context = document.getElementById("context");
-  var cover = document.getElementById("covered");
-  document.body.addEventListener("contextmenu", function (e) {
-    var windowWidth = document.body.offsetWidth;
-    var windowHeight = document.body.offsetHeight;
-    var contextWidth = context.offsetWidth;
-    var contextHeight = context.offsetHeight;
-    if (e.pageX + contextWidth >= windowWidth) {
-      context.style.right = windowWidth - e.pageX + "px";
-      context.style.left = null;
-    } else {
-      context.style.left = e.pageX + "px";
-      context.style.right = null;
-    }
-    if (e.pageY + contextHeight >= windowHeight) {
-      context.style.bottom = windowHeight - e.pageY + "px";
-      context.style.top = null;
-    } else {
-      context.style.top = e.pageY + "px";
-      context.style.bottom = null;
-    }
-    cover.style.display = "block";
-    context.classList.add("is-open");
-  });
-
-  window.addEventListener("click", function (e) {
-    context.classList.remove("is-open");
-    cover.style.display = "none";
-    e.stopPropagation();
-  });
-});
-
 window.addEventListener(
   "keypress",
   function (e) {

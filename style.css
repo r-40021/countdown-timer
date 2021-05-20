@@ -49,8 +49,7 @@
   display: none;
 }
 
-#audioInput,
-#playb {
+#audioInput{
   display: none;
 }
 
@@ -246,51 +245,4 @@ body:not(.timer) {
 }
 .hidecursor * {
   cursor: none !important;
-}
-
-#context {
-  display: block;
-  opacity: 0;
-  position: fixed;
-  color: rgb(10, 10, 10);
-  list-style: none;
-  padding: 0;
-  background-color: rgba(243, 243, 243, 0.836);
-  backdrop-filter: blur(8px);
-  line-height: 3;
-  border: 0.1px solid rgba(218, 218, 218, 0.822);
-  box-shadow: 5px 5px 5px rgba(26, 26, 26, 0.144);
-  z-index: -2;
-  transition: opacity 250ms;
-  border-radius: 3px;
-}
-#context.is-open {
-  opacity: 1;
-  z-index: 100000000000;
-  transition: opacity 250ms;
-}
-#context li {
-  padding: 0 15px;
-  width: 100%;
-  color: rgb(10, 10, 10);
-  height: auto;
-  cursor: pointer;
-  white-space: nowrap;
-}
-#context li:hover {
-  background-color: #039c974b;
-}
-
-#context svg {
-  margin-right: 5px;
-}
-
-#covered {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100%;
-  z-index: 99999999998;
 }
