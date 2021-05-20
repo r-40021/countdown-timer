@@ -1,5 +1,5 @@
 /*変数の定義*/
-var down,displayEnd,oldDisplay,title,myDate,myTime;
+var down, displayEnd, oldDisplay, title, myDate, myTime;
 var useDevice = 0;
 var timerStatus = 0;
 
@@ -131,10 +131,10 @@ function onload() {
     document.getElementById("Time").value = paramObject.time;
     document.getElementById("timeLabel").value =
       document.getElementById("Time").value;
-      if (paramObject.title) {
-        title = decodeURIComponent(paramObject.title);
-        document.getElementById("title").value = title;
-      }
+    if (paramObject.title) {
+      title = decodeURIComponent(paramObject.title);
+      document.getElementById("title").value = title;
+    }
 
     myDate = paramObject.date;
     myTime = paramObject.time;
@@ -188,8 +188,11 @@ function onload() {
         document.title = "やまだのタイマー";
         displayEnd = setInterval(function () {
           document.title = "時間です！";
+          displayPlace.style.color = "rgb(255 38 111)";
+          displayPlace.style.visibility = "hidden";
           setTimeout(function () {
-            document.title = "やまだのタイマー";
+            document.title = "気付け！！";
+            displayPlace.style.visibility = "";
           }, 500);
         }, 1000);
       } /*計算結果が負orNaNのときの処理*/ else if (display.match("-|NaN")) {
@@ -245,14 +248,19 @@ function changeURL() {
     history.replaceState(
       null,
       "やまだのタイマー",
-      "index.html?date=" + myDate + "&time=" + myTime + "&title=" + encodeURIComponent(title)
+      "index.html?date=" +
+        myDate +
+        "&time=" +
+        myTime +
+        "&title=" +
+        encodeURIComponent(title)
     ); //パラメータセット（リロードなし）
   } else {
-  history.replaceState(
-    null,
-    "やまだのタイマー",
-    "index.html?date=" + myDate + "&time=" + myTime
-  ); //パラメータセット（リロードなし）
+    history.replaceState(
+      null,
+      "やまだのタイマー",
+      "index.html?date=" + myDate + "&time=" + myTime
+    ); //パラメータセット（リロードなし）
   }
 }
 
@@ -312,6 +320,9 @@ function audiostop() {
   stopAlarm();
   clearInterval(displayEnd);
   var timerbox = document.getElementById("displayTime");
+  timerbox.style.color = "";
+  timerbox.style.visibility = "";
+  document.title = "やまだのタイマー";
 }
 
 function stopAlarm() {
@@ -484,7 +495,7 @@ document.getElementById("audioVolume").addEventListener(
   },
   false
 );
-document.getElementById("title").addEventListener("input",()=>{
+document.getElementById("title").addEventListener("input", () => {
   title = document.getElementById("title").value;
   changeURL();
-})
+});
