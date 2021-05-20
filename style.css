@@ -212,6 +212,10 @@ input[type=text]:not(.browser-default)[readonly="readonly"]{
   z-index: 999;
   color: var(--fontColor);
 }
+.fullscreenIcons div{
+  display: inline-block;
+  cursor: pointer;
+}
 #settings .modal-content {
   padding: 0 5px;
 }
