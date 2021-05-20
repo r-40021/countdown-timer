@@ -1,4 +1,4 @@
-var CACHE_NAME = 'ct-20210514';
+var CACHE_NAME = 'ct-20210520';
 var urlsToCache = [
   './index.html',
   './style.css',
@@ -7,7 +7,6 @@ var urlsToCache = [
   './materialize.min.js',
   './alarm.mp3',
   './favicon/favicon.ico',
-  './js/all.min.js',
   './push.min.js',
   './push.min.js.map',
   './nosleep.min.js'

@@ -6,6 +6,35 @@
   --fontColor: rgb(75, 75, 75);
   --green: #4db6ac;
 }
+input{
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+.title{
+  position: fixed;
+  top: 7%;
+  left: 0;
+  width: 100%;
+  height: auto;
+}
+#title{
+  text-align: center;
+  font-size: 7vh;
+  padding-bottom: 0.3em;
+  height: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+}
+@media screen and (max-width: 480px){
+  #title{
+    font-size: 5vh;
+  }
+}
 
 .timer {
   display: flex;
@@ -23,10 +52,6 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
   text-decoration: none;
   letter-spacing: 0.15em;
   padding: 0.1rem 0.1rem;

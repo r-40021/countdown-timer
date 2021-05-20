@@ -1,7 +1,5 @@
 /*変数の定義*/
-var down;
-var displayEnd;
-var oldDisplay;
+var down,displayEnd,oldDisplay,title,myDate,myTime;
 var useDevice = 0;
 var timerStatus = 0;
 
@@ -133,9 +131,13 @@ function onload() {
     document.getElementById("Time").value = paramObject.time;
     document.getElementById("timeLabel").value =
       document.getElementById("Time").value;
+      if (paramObject.title) {
+        title = decodeURIComponent(paramObject.title);
+        document.getElementById("title").value = title;
+      }
 
-    var myDate = paramObject.date;
-    var myTime = paramObject.time;
+    myDate = paramObject.date;
+    myTime = paramObject.time;
     var target = new Date(myDate + " " + myTime + ":00"); //設定時間
 
     /*カウントダウン（一番大事）*/
@@ -229,17 +231,29 @@ function onload() {
 function set() {
   /*SETボタンを押したときの挙動*/
   var url = new URL(window.location.href);
-  var myDate = document.getElementById("Date").value;
-  var myTime = document.getElementById("Time").value;
+  myDate = document.getElementById("Date").value;
+  myTime = document.getElementById("Time").value;
+  changeURL();
+  stop();
+  onload();
+  audiostop();
+  Push.clear(); //通知削除
+}
+
+function changeURL() {
+  if (title) {
+    history.replaceState(
+      null,
+      "やまだのタイマー",
+      "index.html?date=" + myDate + "&time=" + myTime + "&title=" + encodeURIComponent(title)
+    ); //パラメータセット（リロードなし）
+  } else {
   history.replaceState(
     null,
     "やまだのタイマー",
     "index.html?date=" + myDate + "&time=" + myTime
   ); //パラメータセット（リロードなし）
-  stop();
-  onload();
-  audiostop();
-  Push.clear(); //通知削除
+  }
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -470,3 +484,7 @@ document.getElementById("audioVolume").addEventListener(
   },
   false
 );
+document.getElementById("title").addEventListener("input",()=>{
+  title = document.getElementById("title").value;
+  changeURL();
+})
