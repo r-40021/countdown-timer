@@ -56,14 +56,11 @@
     <meta property="og:description" content="半永久的に計れる「やまだのタイマー」" />
     <meta property="og:site_name" content="やまだのタイマー" />
     <meta property="og:image" content="https://r-40021.github.io/countdown-timer/snsicon/sns.png" />
-
     <link rel="manifest" href="./favicon/site.webmanifest">
     <!--SEO-->
     <meta content="目覚まし時計とタイマーのいいとこ取りをした、オープンソースのちょっと変わったタイマーです。インストール不要で、いろんな用途に使えます。" name="description">
-
     <!-- Chrome, Firefox OS and Opera -->
     <meta name="theme-color" content="#4285f4">
-
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>やまだのタイマー</title>
     <link rel="stylesheet" type="text/css" href="materialize.min.css">
@@ -98,16 +95,15 @@
     <div class="flex">
         <div class="title">
             <div class="container">
-            <div class="row">
-                <div class="input-field col s12">
-                    <input placeholder="タイトルを入力" id="title" type="text" class="validate">
-                    <label for="title"></label>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input placeholder="タイトルを入力" id="title" type="text" class="validate">
+                        <label for="title"></label>
+                    </div>
                 </div>
-            </div>
             </div>
         </div>
         <div class="timer waves-effect waves-light" id="bigtimer">
-
             <div id="displayTime">0:00:00</div>
             <div class="setBtns">
                 <div class="container">
@@ -141,13 +137,9 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
-
         <input placeholder="日付" id="Date" type="text" class="datepicker" readonly="readonly">
         <input placeholder="時間" id="Time" type="text" class="timepicker" readonly="readonly">
-
     </div>
     </div>
     <!-- Settings -->
@@ -170,9 +162,11 @@
                             <path fill-rule="evenodd" d="M14 11V2h1v9h-1zM6 3v10H5V3h1z" />
                             <path d="M5 2.905a1 1 0 0 1 .9-.995l8-.8a1 1 0 0 1 1.1.995V3L5 4V2.905z" />
                         </svg>アラーム音</a></li>
-                <li class="tab col s3"><a href="#settings-3"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="icons bi bi-sun" viewBox="0 0 16 16">
-                    <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
-                  </svg>テーマ</a></li>
+                <li class="tab col s3"><a href="#settings-3"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                            height="16" fill="currentColor" class="icons bi bi-sun" viewBox="0 0 16 16">
+                            <path
+                                d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z" />
+                        </svg>テーマ</a></li>
             </ul>
             <div id="settings-1" class="col s12">
                 <div class="section">
@@ -216,33 +210,28 @@
                     </div>
                     <div class="audioFlex">
                         <div class="play">
-
-
                             <a class="myBtn-circle myBtn-small" id="testAudio"><svg xmlns="http://www.w3.org/2000/svg"
                                     width="24" height="24" fill="currentColor" class="bi bi-play" viewBox="0 0 16 16">
                                     <path
                                         d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z" />
                                 </svg></a>
                         </div>
-
                         <div class="volume">
-                            
 
                             <p class="range-field">
                                 <input type="range" id="audioVolume" min="0" max="100" step="1" value="50" />
                             </p>
-
                         </div>
                     </div>
-
-
                 </div>
             </div>
             <div id="settings-3" class="col s12">
                 <div class="section">
-                    <h5><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="icons bi bi-sun" viewBox="0 0 16 16">
-                        <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
-                      </svg>テーマ</h5>
+                    <h5><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                            class="icons bi bi-sun" viewBox="0 0 16 16">
+                            <path
+                                d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z" />
+                        </svg>テーマ</h5>
                     <p>近日実装予定。お楽しみに！</p>
                 </div>
             </div>

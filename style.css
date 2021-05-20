@@ -35,8 +35,6 @@ input {
     font-size: 5vh;
   }
 }
-
-
 .myBtn-circle {
   border: #666 solid 1px;
   color: var(--fontColor);
@@ -62,20 +60,16 @@ input {
   width: 5vh;
   height: 5vh;
 }
-
 .class input[type="text"] {
   font-size: 16px;
   transform: scale(0.9);
 }
-
 #file1 {
   display: none;
 }
-
 #audioInput {
   display: none;
 }
-
 #droppable {
   border: rgb(165, 165, 165) dashed 0.3em;
   text-align: center;
@@ -86,51 +80,41 @@ input {
   justify-content: center;
   margin-bottom: 1em;
 }
-
 #audioicon,
 #fullscreen,
 #escFullscreen {
   cursor: pointer;
 }
-
 body:fullscreen #fullscreen {
   display: none;
 }
-
 body:not(:fullscreen) #escFullscreen {
   display: none;
 }
-
 .noevent {
   pointer-events: none;
 }
-
 .autoevent {
   pointer-events: auto;
 }
-
 .share .btn-flat {
   padding: 0 7px;
 }
-
 ::-webkit-scrollbar {
   width: 5px;
   height: 5px;
 }
-
 ::-webkit-scrollbar-track {
   background: #fff;
   border: none;
   border-radius: 10px;
   box-shadow: inset 0 0 2px #777;
 }
-
 ::-webkit-scrollbar-thumb {
   background: #ccc;
   border-radius: 10px;
   box-shadow: none;
 }
-
 html,
 body {
   width: 100%;
@@ -164,16 +148,14 @@ body {
   font-weight: bold;
   src: local("YoGothic-Bold"), local("Yu Gothic");
 }
-
 .timer {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   font-family: "Open Sans", -apple-system, blinkMacSystemFont, "Helvetica Neue",
-    "Segoe UI", "Arial", "Roboto" ,sans-serif;
+    "Segoe UI", "Arial", "Roboto", sans-serif;
 }
-
 #Date,
 #Time {
   display: none;
@@ -258,7 +240,6 @@ input[type="text"]:not(.browser-default)[readonly="readonly"] {
 #settings .modal-content {
   padding: 0 5px;
 }
-
 #bigtimer {
   flex: 1;
   z-index: 0;
@@ -267,7 +248,6 @@ input[type="text"]:not(.browser-default)[readonly="readonly"] {
   pointer-events: none;
   padding: 30px 30px 50px;
 }
-
 .flex {
   display: flex;
   flex-direction: column;
@@ -278,7 +258,6 @@ input[type="text"]:not(.browser-default)[readonly="readonly"] {
   background-color: var(--bgColor);
   color: var(--fontColor);
 }
-
 .icons {
   white-space: nowrap;
   margin-inline-end: 0.5em;
@@ -294,7 +273,6 @@ input[type="text"]:not(.browser-default)[readonly="readonly"] {
 #stopTimer {
   display: none;
 }
-
 #click {
   display: flex;
   align-items: center;
