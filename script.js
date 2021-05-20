@@ -8,14 +8,13 @@ var timerStatus = 0;
 /*初期アラーム音設定*/
 var alarm = new Audio("alarm.mp3");
 alarm.loop = true;
+alarm.volume = document.getElementById("audioVolume").value /100 ;
 var noSleep = new NoSleep();
 
 document.addEventListener("DOMContentLoaded", function () {
   device();
   onload();
 });
-
-
 
 document.getElementById("Date").addEventListener(
   "change",
@@ -61,7 +60,7 @@ function device() {
     document.getElementById("fullscreen").style.display = "none";
     document.getElementById("escFullscreen").style.display = "none";
   } else {
-    document.getElementById("audioInput").style.display = "inline";
+    document.getElementById("audioInput").style.display = "inline-block";
   }
 }
 
@@ -292,10 +291,14 @@ function audiostop() {
     .getElementById("audioInput")
     .classList.replace("noevent", "autoevent");
 
-  alarm.pause();
-  alarm.currentTime = 0; //音停止
+  stopAlarm();
   clearInterval(displayEnd);
   var timerbox = document.getElementById("displayTime");
+}
+
+function stopAlarm() {
+  alarm.pause();
+  alarm.currentTime = 0; //音停止
 }
 
 function pushrequest() {
@@ -309,7 +312,6 @@ function pushrequest() {
 window.addEventListener("load", () => {
   /*アラーム音設定・プレビューも*/
   const f = document.getElementById("file1");
-  var player = document.getElementById("player");
   f.addEventListener("change", formatNode, false);
   function formatNode(e) {
     let input = e.target;
@@ -328,7 +330,7 @@ window.addEventListener("load", () => {
     reader.onload = () => {
       alarm = new Audio(reader.result);
       alarm.loop = true;
-      player.src = reader.result;
+      alarm.volume = document.getElementById("audioVolume").value /100 ;
       M.toast({
         html: "アラーム音を設定しました。<br>このページから離れると、アラーム音はリセットされます。",
       });
@@ -339,17 +341,25 @@ window.addEventListener("load", () => {
   }
   // Drug & Drop
   let dropbox;
-
+  let bgColor = "#cbf3fa";
   dropbox = document.getElementById("droppable");
   dropbox.addEventListener("dragenter", dragenter, false);
   dropbox.addEventListener("dragover", dragover, false);
+  dropbox.addEventListener("dragleave",dragleave,false);
   dropbox.addEventListener("drop", drop, false);
   function dragenter(e) {
+    dropbox.style.backgroundColor = bgColor;
     e.stopPropagation();
     e.preventDefault();
   }
 
   function dragover(e) {
+    dropbox.style.backgroundColor = bgColor;
+    e.stopPropagation();
+    e.preventDefault();
+  }
+  function dragleave(e) {
+    dropbox.style.backgroundColor = "";
     e.stopPropagation();
     e.preventDefault();
   }
@@ -431,3 +441,28 @@ function focus() {
   /*Focus to the set button*/
   document.getElementById("setTimer").focus();
 }
+
+document.getElementById("testAudio").addEventListener(
+  "click",
+  (e) => {
+    alarm.play();
+    e.stopPropagation();
+    document.addEventListener(
+      "click",
+      (e) => {
+        if (e.target.id !== "audioVolume") {
+          stopAlarm();
+        }
+      },
+      false
+    );
+  },
+  false
+);
+document.getElementById("audioVolume").addEventListener(
+  "input",
+  (e) => {
+    alarm.volume = document.getElementById("audioVolume").value / 100;
+  },
+  false
+);
