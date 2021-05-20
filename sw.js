@@ -1,16 +1,15 @@
-var CACHE_NAME = 'ct-20210514';
+var CACHE_NAME = 'ct-20210520';
 var urlsToCache = [
-  '/countdown-timer/index.html',
-  '/countdown-timer/style.css',
-  '/countdown-timer/script.js',
-  '/countdown-timer/materialize.min.css',
-  '/countdown-timer/materialize.min.js',
-  '/countdown-timer/alarm.mp3',
-  '/countdown-timer/favicon/favicon.ico',
-  '/countdown-timer/js/all.min.js',
-  '/countdown-timer/push.min.js',
-  '/countdown-timer/push.min.js.map',
-  '/countdown-timer/nosleep.min.js'
+  './index.html',
+  './style.css',
+  './script.js',
+  './materialize.min.css',
+  './materialize.min.js',
+  './alarm.mp3',
+  './favicon/favicon.ico',
+  './push.min.js',
+  './push.min.js.map',
+  './nosleep.min.js'
 ];
 self.addEventListener("install", (function(event) {
     event.waitUntil(caches.open(CACHE_NAME).then((function(cache) {

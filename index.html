@@ -3,7 +3,7 @@
 
 <head>
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
     <meta http-equiv="Cache-Control" content="no-cache">
     <meta content="text / html; charset = UTF-8" name="Content-Type" />
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
@@ -66,176 +66,288 @@
 
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>やまだのタイマー</title>
-    <script defer src="./js/all.min.js"></script>
     <link rel="stylesheet" type="text/css" href="materialize.min.css">
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
-<body ontouchstart="" oncontextmenu="return false;" onload="focus()">
-    <div id="load" class="loading">
-        <div class="spinner">
-            <div class="double-bounce1"></div>
-            <div class="double-bounce2"></div>
+<body ontouchstart="" onload="focus()">
+    <div class="fullscreenIcons">
+        <div class="info modal-trigger" href="#info">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                class="icons bi bi-info-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                <path
+                    d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+            </svg>
         </div>
+        <span id="fullscreen">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                class="icons bi bi-fullscreen" viewBox="0 0 16 16">
+                <path
+                    d="M1.5 1a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4A1.5 1.5 0 0 1 1.5 0h4a.5.5 0 0 1 0 1h-4zM10 .5a.5.5 0 0 1 .5-.5h4A1.5 1.5 0 0 1 16 1.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 1-.5-.5zM.5 10a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 0 14.5v-4a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5z" />
+            </svg>
+        </span>
+        <span id="escFullscreen">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                class="icons bi bi-fullscreen-exit" viewBox="0 0 16 16">
+                <path
+                    d="M5.5 0a.5.5 0 0 1 .5.5v4A1.5 1.5 0 0 1 4.5 6h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5zm5 0a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 10 4.5v-4a.5.5 0 0 1 .5-.5zM0 10.5a.5.5 0 0 1 .5-.5h4A1.5 1.5 0 0 1 6 11.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 1-.5-.5zm10 1a1.5 1.5 0 0 1 1.5-1.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4z" />
+            </svg>
+        </span>
     </div>
     <div class="flex">
-        <div class="timer waves-effect waves-light" id="bigtimer" style="background-color: #4db6ac;">
-            <div id="click">
-                <div id="displayTime">0:00:00</div>
+        <div class="title">
+            <div class="container">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input placeholder="タイトルを入力" id="title" type="text" class="validate">
+                    <label for="title"></label>
+                </div>
+            </div>
             </div>
         </div>
-        <!--menu-->
-        <div class="menu">
+        <div class="timer waves-effect waves-light" id="bigtimer">
 
-            <div class="upmenu" id="upmenu">
-                <i class="fas fa-chevron-up"></i>
-            </div>
-            <div class="downmenu" id="downmenu">
-                <i class="fas fa-chevron-down"></i>
-            </div>
-
-            <div class="mymenu">
+            <div id="displayTime">0:00:00</div>
+            <div class="setBtns">
                 <div class="container">
-                    <div id="menu1" class="is-open">
-                        <!--Date&Time-->
-                        <div class="row">
-                            <div class="col m5 s6" id="DateField">
-                                <input placeholder="日付" id="Date" type="text" class="datepicker" readonly="readonly">
-                            </div>
-                            <div class="col m5 s6" id="TimeField">
-                                <input placeholder="時間" id="Time" type="text" class="timepicker" readonly="readonly">
-                            </div>
-                            <div class="col m2 s12 center icons">
-                                <input id="file1" type="file" accept="audio/*">
-                                <label for="file1" id="audioInput"><span class="tooltipped" data-position="bottom"
-                                        data-tooltip="アラーム音を変更"><i
-                                            class="icons far fa-file-audio teal-text text-lighten-1"
-                                            style="margin-top: 10px;" id="audioicon"></i></label></span>
-                                <span id="fullscreen" class="tooltipped" data-position="bottom" data-tooltip="全画面">
-                                    <i class="icons fas fa-expand-arrows-alt teal-text text-lighten-1"
-                                        style="margin-top: 10px;margin-left: 10px;" id="fullscreen"></i>
-                                </span>
-                                <span class="tooltipped" id="escFullscreen" data-position="bottom" data-tooltip="全画面解除">
-                                    <i class="icons fas fa-compress-arrows-alt teal-text text-lighten-1"
-                                        style="margin-top: 10px;margin-left: 10px;" id="escFullscreen"></i>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <!--SET/STOP-->
-                            <div class="col s12 center">
-                                <a class="btn blue waves-effect waves-light" onclick="set()"
-                                    style="height: auto;margin-top: 20px;" id="setTimer"><i class="fas fa-play"
-                                        aria-label="START" style="font-size: small;margin-right: 5px;"></i>SET</a>
-                                <a class="btn pink waves-effect waves-light" onclick="stop();audiostop();Push.clear();"
-                                    style="height: auto;margin-top: 20px;" id="stopTimer"><i class="fas fa-pause"
-                                        aria-label="STOP" style="font-size: small;margin-right: 5px;"></i>STOP</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="menu2">
-                        <div class="row">
-                            <div class="col s12 m6" id="playb">
-                                <figcaption>アラーム音試聴：</figcaption>
-                                <audio controls src="alarm.mp3" id="player" preload="metadata" controlslist="nodownload"
-                                    style="height: 30px;max-width:100%">
-                                    Your browser does not support the
-                                    <code>audio</code> element.
-                                </audio>
-                            </div>
-                            <div class="col s12 m6">
-                                <a class="waves-effect waves-teal btn-flat teal-text modal-trigger trouble"
-                                    href="#modal1" style="border: 2px solid;border-color: #4db6ac;">アラーム音が鳴らない</a>
-                            </div>
-
-
-
-
-                            <div class="col s12 center">
-                                <!--URL-->
-                                <a onclick="copy()" class="tooltipped btn-flat grey-text text-darken-1 waves-effect waves-teal" data-position="top" data-tooltip="URLをコピー"><i
-                                        class="fas fa-link fa-lg" aria-label="URLをコピー"></i></a>
-                                <!--Twitter-->
-                                <a href="https://twitter.com/intent/tweet?text=半永久的に計れるタイマー%0a&url=https://r-40021.github.io/countdown-timer&hashtags=やまだのタイマー,やまだけんいち"
-                                    onClick="window.open(encodeURI(decodeURI(this.href)), 'tweetwindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;"
-                                    rel="nofollow"
-                                    class="tooltipped twitter-link waves-effect waves-teal btn-flat grey-text text-darken-1" data-position="top" data-tooltip="シェア">
-                                    <i class="fab fa-twitter fa-lg" aria-label="Twitterでシェア"></i>
-                                </a>
-                                <!--GitHub-->
-                                <a href="https://github.com/r-40021/countdown-timer" target="_blank" rel="noopener"
-                                    class="tooltipped waves-effect waves-teal btn-flat grey-text text-darken-1" data-position="top" data-tooltip="コードを見る"><i
-                                        class="fab fa-github fa-lg" aria-label="View on GitHub"></i></a>
-                                <!--info-->
-                                <a href="https://r-40021.github.io/" target="_blank" rel="noopener"
-                                    class="tooltipped waves-effect waves-teal btn-flat grey-text text-darken-1" data-position="top" data-tooltip="作者HP"><i
-                                        class="far fa-user fa-lg" aria-label="作者について"></i></a>
-                                <!--Privacy-->
-                                <a href="https://r-40021.github.io/privacy.html?fromApp=true" target="_blank" rel="noopener" class="tooltipped waves-effect waves-teal btn-flat grey-text text-darken-1" data-position="top" data-tooltip="プライバシーポリシー" aria-label="プライバシーポリシー"><i class="fas fa-lock"></i></a>
-                            </div>
+                    <div class="row">
+                        <!--SET/STOP-->
+                        <div class="center">
+                            <a class="myBtn-circle" onclick="set()" id="setTimer">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+                                    class="bi bi-play" viewBox="0 0 16 16">
+                                    <path
+                                        d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z" />
+                                </svg>
+                            </a>
+                            <a class="myBtn-circle" onclick="stop();audiostop();Push.clear();" id="stopTimer">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+                                    class="bi bi-pause" viewBox="0 0 16 16">
+                                    <path
+                                        d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z" />
+                                </svg>
+                            </a>
+                            <a class="myBtn-circle modal-trigger" href="#settings">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+                                    class="bi bi-gear" viewBox="0 0 16 16">
+                                    <path
+                                        d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z" />
+                                    <path
+                                        d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z" />
+                                </svg>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    </div>
-    <div id="modal1" class="modal">
-        <div class="modal-content">
-            <h4>アラーム音を有効にするには</h4>
-            <ol>
-                <li>URLの左側の錠マークをクリック</li>
-                <li>「サイトの設定」（表現は多少異なる場合があります）をクリック</li>
-                <li>「サウンド」もしくは「音声」の項目を探し、「自動」から「許可」に変更</li>
-                <li>タイマーアプリを再読み込み</li>
-            </ol>
-            <p>注意点</p>
-            <ol>
-                <li>iPhoneやiPadなどでは、アラーム音を有効に設定できません。</li>
-                <li>ブラウザによっては、この設定をしなくてもアラーム音が鳴るものもあります。<br>（例：Edge）</li>
-            </ol>
-        </div>
-        <div class="modal-footer">
-            <a class="modal-close waves-effect waves-green btn-flat">OK</a>
-        </div>
-    </div>
-    <div id="push" class="modal">
-        <div class="modal-content">
-            <h4>プッシュ通知対応環境</h4>
-            <h5>OS</h5>
-            <ul>
-                <li>PC(Windows,Mac,Linux,Chrome OS)</li>
-            </ul>
-            <h5>ブラウザ</h5>
-            <ul>
-                <li>最新版のChrome</li>
-                <li>最新版のSafari</li>
-                <li>最新版のFirefox</li>
-                <li>最新版のEdge</li>
-            </ul>
-            <p>プッシュ通知をご利用になるには、OSとブラウザの両方が対応している必要があります。</p>
-            <p>※プッシュ通知は「オマケ機能」程度のものですので、アプリ自体は問題なくご利用になれます。</p>
-        </div>
-        <div class="modal-footer">
-            <a class="modal-close waves-effect waves-green btn-flat">OK</a>
-        </div>
-    </div>
-    <div id="covered"></div>
-    <div id="context" style="left: 0;top: 0;">
-        <ul>
-            <li onclick="copy()"><i class="fas fa-link" aria-label="URLをコピー"></i>URLをコピー</li>
-            <a href="https://twitter.com/intent/tweet?text=半永久的に計れるタイマー%0a&url=https://r-40021.github.io/countdown-timer&hashtags=やまだのタイマー,やまだけんいち"
-                onClick="window.open(encodeURI(decodeURI(this.href)), 'tweetwindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;"
-                rel="nofollow"><li><i class="fab fa-twitter" aria-label="Twitterでシェア"></i>シェア</li></a>
-                <a href="https://github.com/r-40021/countdown-timer" target="_blank" rel="noopener"
-            ><li><i class="fab fa-github" aria-label=" View on GitHub"></i>ソースコードを見る</li></a>
-            <a href="https://r-40021.github.io/" target="_blank" rel="noopener"><li><i class="far fa-user" aria-label="作者について"></i>作者について</li></a>
 
-             <a href="https://r-40021.github.io/privacy.html" target="_blank" rel="noopener"><li><i class="fas fa-lock"></i>プライバシーポリシー</li></a>
-        </ul>
+
+        </div>
+
+        <input placeholder="日付" id="Date" type="text" class="datepicker" readonly="readonly">
+        <input placeholder="時間" id="Time" type="text" class="timepicker" readonly="readonly">
+
     </div>
-    <script>
+    </div>
+    <!-- Settings -->
+    <div id="settings" class="modal">
+        <div class="modal-content">
+            <ul id="settings" class="tabs">
+                <li class="tab col s3"><a class="active" href="#settings-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="icons bi bi-calendar-event" viewBox="0 0 16 16">
+                            <path
+                                d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
+                            <path
+                                d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+                        </svg>日時設定</a></li>
+                <li class="tab col s3" id="audioInput"><a href="#settings-2"><svg xmlns="http://www.w3.org/2000/svg"
+                            width="16" height="16" fill="currentColor" class="icons bi bi-music-note-beamed"
+                            viewBox="0 0 16 16">
+                            <path
+                                d="M6 13c0 1.105-1.12 2-2.5 2S1 14.105 1 13c0-1.104 1.12-2 2.5-2s2.5.896 2.5 2zm9-2c0 1.105-1.12 2-2.5 2s-2.5-.895-2.5-2 1.12-2 2.5-2 2.5.895 2.5 2z" />
+                            <path fill-rule="evenodd" d="M14 11V2h1v9h-1zM6 3v10H5V3h1z" />
+                            <path d="M5 2.905a1 1 0 0 1 .9-.995l8-.8a1 1 0 0 1 1.1.995V3L5 4V2.905z" />
+                        </svg>アラーム音</a></li>
+                <li class="tab col s3"><a href="#settings-3"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="icons bi bi-sun" viewBox="0 0 16 16">
+                    <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+                  </svg>テーマ</a></li>
+            </ul>
+            <div id="settings-1" class="col s12">
+                <div class="section">
+                    <h5><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                            class="icons bi bi-calendar-event" viewBox="0 0 16 16">
+                            <path
+                                d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
+                            <path
+                                d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+                        </svg>日時設定</h5>
+                    <div class="center">
+                        <div style="width: 45%;display: inline-block;margin-right: 5%;" id="DateField">
+                            <input placeholder="日付" id="dateLabel" type="text" readonly="readonly"
+                                onclick="document.getElementById('Date').click();">
+                        </div>
+                        <div style="width: 45%;display: inline-block;" id="TimeField">
+                            <input placeholder="時間" id="timeLabel" type="text" readonly="readonly"
+                                onclick="document.getElementById('Time').click();">
+                        </div>
+                    </div>
+                    <p><a class="waves-effect waves-light btn modal-close" href="#!"
+                            onclick="document.getElementById('setTimer').click();">セット</a></p>
+                    <p>ここで設定した日時にアラームが鳴ります。<br>※ブラウザを起動しておく必要があります。</p>
+                </div>
+            </div>
+            <div id="settings-2" class="col s12">
+                <div class="section">
+                    <h5><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                            class="icons bi bi-music-note-beamed" viewBox="0 0 16 16">
+                            <path
+                                d="M6 13c0 1.105-1.12 2-2.5 2S1 14.105 1 13c0-1.104 1.12-2 2.5-2s2.5.896 2.5 2zm9-2c0 1.105-1.12 2-2.5 2s-2.5-.895-2.5-2 1.12-2 2.5-2 2.5.895 2.5 2z" />
+                            <path fill-rule="evenodd" d="M14 11V2h1v9h-1zM6 3v10H5V3h1z" />
+                            <path d="M5 2.905a1 1 0 0 1 .9-.995l8-.8a1 1 0 0 1 1.1.995V3L5 4V2.905z" />
+                        </svg>アラーム音</h5>
+                    <div id="droppable">
+                        <div>
+                            <p>音声ファイルをドラッグ＆ドロップ</p>
+                            <input id="file1" type="file" accept="audio/*">
+                            <label for="file1"><a class="waves-effect waves-light btn">選択</a></label>
+                        </div>
+                    </div>
+                    <div class="audioFlex">
+                        <div class="play">
+
+
+                            <a class="myBtn-circle myBtn-small" id="testAudio"><svg xmlns="http://www.w3.org/2000/svg"
+                                    width="24" height="24" fill="currentColor" class="bi bi-play" viewBox="0 0 16 16">
+                                    <path
+                                        d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z" />
+                                </svg></a>
+                        </div>
+
+                        <div class="volume">
+                            
+
+                            <p class="range-field">
+                                <input type="range" id="audioVolume" min="0" max="100" step="1" value="50" />
+                            </p>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div id="settings-3" class="col s12">
+                <div class="section">
+                    <h5><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="icons bi bi-sun" viewBox="0 0 16 16">
+                        <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+                      </svg>テーマ</h5>
+                    <p>近日実装予定。お楽しみに！</p>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="col s9 share">
+                <!--URL-->
+                <a onclick="copy()" class="btn-flat grey-text text-darken-1 waves-effect waves-teal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                        class="bi bi-link-45deg" viewBox="0 0 16 16">
+                        <path
+                            d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z" />
+                        <path
+                            d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z" />
+                    </svg></a>
+                <!--Twitter-->
+                <a href="https://twitter.com/intent/tweet?text=半永久的に計れるタイマー%0a&url=https://r-40021.github.io/countdown-timer&hashtags=やまだのタイマー,やまだけんいち"
+                    onClick="window.open(encodeURI(decodeURI(this.href)), 'tweetwindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;"
+                    rel="nofollow" class="twitter-link waves-effect waves-teal btn-flat grey-text text-darken-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                        class="bi bi-twitter" viewBox="0 0 16 16">
+                        <path
+                            d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" />
+                    </svg>
+                </a>
+                <!--GitHub-->
+                <a href="https://github.com/r-40021/countdown-timer" target="_blank" rel="noopener"
+                    class="waves-effect waves-teal btn-flat grey-text text-darken-1"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                        class="bi bi-github" viewBox="0 0 16 16">
+                        <path
+                            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
+                    </svg></a>
+                <!--info-->
+                <a href="https://r-40021.github.io/" target="_blank" rel="noopener"
+                    class="waves-effect waves-teal btn-flat grey-text text-darken-1"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                        class="bi bi-person-fill" viewBox="0 0 16 16">
+                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                    </svg></a>
+                <!--Privacy-->
+                <a href="https://r-40021.github.io/privacy.html?fromApp=true" target="_blank" rel="noopener"
+                    class="waves-effect waves-teal btn-flat grey-text text-darken-1" aria-label="プライバシーポリシー"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                        class="bi bi-lock-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
+                    </svg></a>
+            </div>
+            <div class="col s3">
+                <a href="#!" class="modal-close waves-effect waves-green btn-flat">OK</a>
+            </div>
+        </div>
+    </div>
+    <div id="info" class="modal">
+        <div class="modal-content">
+            <h5>このアプリについて</h5>
+            <p>指定した日時までの時間をカウントダウンする、タイマーです。普通の目覚ましアプリとは違い、「日付」も指定できます。</p>
+            <p>以下のような特長があります。</p>
+            <ol>
+                <li>「あ、このカウントダウンをあの人にも感じてもらいたい」と思った時、URLを送れば、相手の画面にも、同じ日時までのカウントダウンが表示されます。</li>
+                <li>ブラウザのタブに残り時間が表示されます。</li>
+                <li>アラーム音を好きな音に変更できます。</li>
+                <li>時間になったら、プッシュ通知が届きます。<br>*PC版のみ。ブラウザを起動しておく必要があります。</li>
+                <li>なかなか信じてもらえないのですが、オフラインでも使えます。</li>
+            </ol>
+            <p>ほとんどの機能は、「 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor"
+                    class="icons bi bi-gear" viewBox="0 0 16 16">
+                    <path
+                        d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z" />
+                    <path
+                        d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z" />
+                </svg>設定」から使えます。困ったらとりあえず「設定」を開いてください。</p>
+            <h5>ライセンス</h5>
+            <ul>
+                <li><a href="https://otologic.jp/free/se/clock01.html">"時計　アラーム03"</a> by <a
+                        href="https://otologic.jp/">OtoLogic</a> is licensed under <a
+                        href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</a></li>
+            </ul>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">OK</a>
+        </div>
+    </div>
+    <script defer>
+        /*Service Worker*/
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", function () {
+                navigator.serviceWorker.register("sw.js").then(
+                    function (registration) {
+                        // Registration was successful
+                        console.log(
+                            "ServiceWorker registration successful with scope: ",
+                            registration.scope
+                        );
+                    },
+                    function (err) {
+                        // registration failed :(
+                        console.log("ServiceWorker registration failed: ", err);
+                    }
+                );
+            });
+        }
+    </script>
+    <script defer>
         let wavesElement = document.getElementsByClassName('waves-effect');
         for (let i = 0; i < wavesElement.length; i++) {
             var element = wavesElement[i];
