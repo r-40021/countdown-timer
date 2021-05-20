@@ -8,7 +8,7 @@ var timerStatus = 0;
 /*初期アラーム音設定*/
 var alarm = new Audio("alarm.mp3");
 alarm.loop = true;
-alarm.volume = document.getElementById("audioVolume").value /100 ;
+alarm.volume = document.getElementById("audioVolume").value / 100;
 var noSleep = new NoSleep();
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -202,6 +202,8 @@ function onload() {
         document.title = "やまだのタイマー";
       } else {
         timerStatus = 1;
+        document.getElementById("stopTimer").style.display = "inline-flex";
+        document.getElementById("setTimer").style.display = "none";
         if (display != oldDisplay) {
           displayPlace.innerHTML = display;
           document.title = display;
@@ -286,6 +288,8 @@ function stop() {
 
 function audiostop() {
   timerStatus = 0;
+  document.getElementById("stopTimer").style.display = "";
+  document.getElementById("setTimer").style.display = "";
 
   document
     .getElementById("audioInput")
@@ -330,7 +334,7 @@ window.addEventListener("load", () => {
     reader.onload = () => {
       alarm = new Audio(reader.result);
       alarm.loop = true;
-      alarm.volume = document.getElementById("audioVolume").value /100 ;
+      alarm.volume = document.getElementById("audioVolume").value / 100;
       M.toast({
         html: "アラーム音を設定しました。<br>このページから離れると、アラーム音はリセットされます。",
       });
@@ -345,7 +349,7 @@ window.addEventListener("load", () => {
   dropbox = document.getElementById("droppable");
   dropbox.addEventListener("dragenter", dragenter, false);
   dropbox.addEventListener("dragover", dragover, false);
-  dropbox.addEventListener("dragleave",dragleave,false);
+  dropbox.addEventListener("dragleave", dragleave, false);
   dropbox.addEventListener("drop", drop, false);
   function dragenter(e) {
     dropbox.style.backgroundColor = bgColor;

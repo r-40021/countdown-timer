@@ -257,9 +257,15 @@ body:not(.timer) {
   margin-inline-end: 0.5em;
   vertical-align: middle;
 }
+.setBtns a {
+  display: inline-flex;
+}
 .setBtns{
   letter-spacing: 0.3em;
-  
+  width: 100%;
+}
+#stopTimer{
+  display: none;
 }
 
 
