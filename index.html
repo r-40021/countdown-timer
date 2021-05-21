@@ -60,7 +60,7 @@
     <!--SEO-->
     <meta content="目覚まし時計とタイマーのいいとこ取りをした、オープンソースのちょっと変わったタイマーです。インストール不要で、いろんな用途に使えます。" name="description">
     <!-- Chrome, Firefox OS and Opera -->
-    <meta name="theme-color" content="#4285f4">
+    <meta name="theme-color" content="#f8f9fa">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>やまだのタイマー</title>
     <link rel="stylesheet" type="text/css" href="materialize.min.css">
@@ -68,6 +68,11 @@
 </head>
 
 <body ontouchstart="" onload="focus()">
+    <script>
+        if ((localStorage.getItem("theme") === "dark" || window.matchMedia("(prefers-color-scheme: dark)").matches) && localStorage.getItem("theme") !== "light") {
+            document.body.classList.add("dark");
+        }
+    </script>
     <div class="fullscreenIcons" class="noiphone">
         <div class="info modal-trigger" href="#info">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
