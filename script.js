@@ -2,6 +2,10 @@
 var down, displayEnd, oldDisplay, title, myDate, myTime;
 var useDevice = 0;
 var timerStatus = 0;
+let anime; //テーマ変更時のアニメーション(timeout)
+let themeStatus; //テーマがユーザー設定(1)なのか否か(0)
+/*Dark Theme*/
+const isDark = window.matchMedia("(prefers-color-scheme: dark)");
 
 /*初期アラーム音設定*/
 var alarm = new Audio("alarm.mp3");
@@ -14,13 +18,13 @@ document.addEventListener("DOMContentLoaded", function () {
   onload();
 });
 
-document.getElementById("nextSkip").addEventListener("click",()=>{
+document.getElementById("nextSkip").addEventListener("click", () => {
   if (document.getElementById("nextSkip").checked) {
-    localStorage.setItem("ct-skip",1);
+    localStorage.setItem("ct-skip", 1);
   } else {
     localStorage.removeItem("ct-skip");
   }
-})
+});
 document.getElementById("Date").addEventListener(
   "change",
   () => {
@@ -63,8 +67,7 @@ function device() {
       const element = elements[i];
       element.style.display = "none";
     }
-    
-  } 
+  }
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -142,11 +145,21 @@ function onload() {
       document.getElementById("title").value = title;
     }
 
-    
-
     myDate = paramObject.date;
     myTime = paramObject.time;
     var target = new Date(myDate + " " + myTime + ":00"); //設定時間
+
+    // Theme
+    if (localStorage.getItem("theme") === "dark") {
+      // ローカルストレージを読み込み、テーマを反映
+      toggleTheme("d");
+    } else if (localStorage.getItem("theme") === "light") {
+      toggleTheme("l");
+    } else if (localStorage.getItem("theme") === "auto") {
+      toggleTheme("a");
+    } else {
+      toggleTheme(isDark);
+    }
 
     /*カウントダウン（一番大事）*/
     function myCount() {
@@ -214,13 +227,14 @@ function onload() {
         displayPlace.innerHTML = display;
         document.title = "やまだのタイマー";
       } else {
-        if (countTimes===0) {
-          document.getElementById("alarmTimeValue").innerText = myDate + " " + myTime;
+        if (countTimes === 0) {
+          document.getElementById("alarmTimeValue").innerText =
+            myDate + " " + myTime;
           document.getElementById("stopTimer").style.display = "inline-flex";
           document.getElementById("setTimer").style.display = "none";
-          localStorage.setItem("ct-date",myDate);
-          localStorage.setItem("ct-time",myTime);
-          countTimes ++; 
+          localStorage.setItem("ct-date", myDate);
+          localStorage.setItem("ct-time", myTime);
+          countTimes++;
         }
         if (display != oldDisplay) {
           displayPlace.innerHTML = display;
@@ -231,7 +245,10 @@ function onload() {
     }
     down = setInterval(myCount, 200);
     let countTimes = 0;
-  } else if (localStorage.getItem("ct-date")&&localStorage.getItem("ct-time")) {
+  } else if (
+    localStorage.getItem("ct-date") &&
+    localStorage.getItem("ct-time")
+  ) {
     let localDate = localStorage.getItem("ct-date");
     let localTime = localStorage.getItem("ct-time");
     //テキストボックスに日時をセット
@@ -261,7 +278,8 @@ function onload() {
     document.getElementById("Time").value = defaultTime;
     document.getElementById("timeLabel").value =
       document.getElementById("Time").value;
-    document.getElementById("alarmTimeValue").innerText = defaultDate + " " + defaultTime;
+    document.getElementById("alarmTimeValue").innerText =
+      defaultDate + " " + defaultTime;
   }
 }
 
@@ -448,7 +466,6 @@ document.addEventListener(
   function enableNoSleep() {
     document.removeEventListener("click", enableNoSleep, false);
     noSleep.enable();
-    focus();
   },
   false
 );
@@ -468,35 +485,6 @@ document.addEventListener("DOMContentLoaded", function () {
 window.addEventListener("resize", function () {
   resize();
 });
-var addcursor;
-window.addEventListener(
-  /*カーソル隠す*/
-  "mousemove",
-  function () {
-    try {
-      document.body.classList.remove("hidecursor");
-    } catch (e) {}
-    clearTimeout(addcursor);
-    addcursor = setTimeout(() => {
-      document.body.classList.add("hidecursor");
-    }, 3000);
-  },
-  false
-);
-window.addEventListener(
-  "keypress",
-  function (e) {
-    if (e.key === "Enter") {
-      document.getElementById("setTimer").click();
-    }
-  },
-  false
-);
-
-function focus() {
-  /*Focus to the set button*/
-  document.getElementById("setTimer").focus();
-}
 
 document.getElementById("testAudio").addEventListener(
   "click",
@@ -525,28 +513,183 @@ document.getElementById("audioVolume").addEventListener(
 );
 document.getElementById("title").addEventListener("input", () => {
   title = document.getElementById("title").value;
-  localStorage.setItem("ct-title",title);
+  localStorage.setItem("ct-title", title);
   changeURL();
 });
 document.addEventListener("DOMContentLoaded", function () {
-  if (!localStorage.getItem("ct-skip")){
+  if (!localStorage.getItem("ct-skip")) {
     document.getElementById("openWelcome").click();
   } else {
     document.getElementById("nextSkip").checked = true;
   }
 });
-function showVolume (){
-  document.getElementById("volumeStatusValue").innerText = alarm.volume * 100 + "%";
+function showVolume() {
+  document.getElementById("volumeStatusValue").innerText =
+    alarm.volume * 100 + "%";
 }
-document.getElementById("alarmTimeValue").addEventListener("click",()=>{
-  document.getElementById("openSettings").click();
-  setTimeout(() => {
-    document.getElementById("timeTab").click();
-  },200);
-},false);
-document.getElementById("volumeStatusValue").addEventListener("click",()=>{
-  document.getElementById("openSettings").click();
-  setTimeout(() => {
-    document.getElementById("audioTab").click();
-  },200);
-},false);
+document.getElementById("alarmTimeValue").addEventListener(
+  "click",
+  () => {
+    document.getElementById("openSettings").click();
+    setTimeout(() => {
+      document.getElementById("timeTab").click();
+    }, 200);
+  },
+  false
+);
+document.getElementById("volumeStatusValue").addEventListener(
+  "click",
+  () => {
+    document.getElementById("openSettings").click();
+    setTimeout(() => {
+      document.getElementById("audioTab").click();
+    }, 200);
+  },
+  false
+);
+
+/*テーマ切り替え*/
+document.addEventListener(
+  "DOMContentLoaded",
+  function () {
+    let auto = document.getElementById("auto"); //「システムに従う」ボタン
+    let light = document.getElementById("light"); //「ライトモード」ボタン
+    let dark = document.getElementById("dark"); //「ダークモード」ボタン
+    auto.addEventListener(
+      "click",
+      () => {
+        if (auto.checked) {
+          toggleTheme("a");
+        }
+      },
+      false
+    );
+    light.addEventListener(
+      "click",
+      () => {
+        if (light.checked) {
+          toggleTheme("l");
+        }
+      },
+      false
+    );
+    dark.addEventListener(
+      "click",
+      () => {
+        if (dark.checked) {
+          toggleTheme("d");
+        }
+      },
+      false
+    );
+  },
+  false
+);
+function toggleTheme(mql) {
+  clearInterval(anime); //1秒後にbodyのトランジョン解除のタイマーを解除
+  document.body.classList.add("anime"); //bodyのトランジョンを有効化
+  let auto = document.getElementById("auto"); //「システムに従う」ボタン
+  let light = document.getElementById("light"); //「ライトモード」ボタン
+  let dark = document.getElementById("dark"); //「ダークモード」ボタン
+  if (themeStatus) {
+    // ユーザーがボタンを押した(2回目以降)
+    if (mql === "d") {
+      // 「ダークモード」選択時
+      document.body.classList.add("dark"); //ダークモードにする
+      changeThemeColor("dark"); //フッターのアイコンを変更
+      noActive();
+      dark.setAttribute("checked", null); //選択中のボタンを目立たせる
+      localStorage.setItem("theme", "dark"); //Local Storageに保存
+    } else if (mql === "l") {
+      // 「ライトモード」選択時
+      document.body.classList.remove("dark"); //ダークモード解除
+      changeThemeColor("light"); //フッターのアイコンを変更
+      noActive();
+      light.setAttribute("checked", null); //選択中のボタンを目立たせる
+      localStorage.setItem("theme", "light"); //Local Storageに保存
+    } else if (mql === "a") {
+      // 「システムに任せる」選択時
+      if (isDark.matches) {
+        /* ダークテーマの時 */
+        document.body.classList.add("dark"); //ダークモードにする
+        changeThemeColor("dark"); //フッターのアイコンを変更
+        localStorage.setItem("theme", "auto"); //Local Storageに保存
+      } else {
+        /* ライトテーマの時 */
+        document.body.classList.remove("dark");
+        changeThemeColor("light");
+        localStorage.setItem("theme", "auto"); //Local Storageに保存
+      }
+      noActive();
+      auto.setAttribute("checked", null); //選択中のボタンを目立たせる
+    }
+  } else {
+    /*現時点でオート設定の時*/
+    if ((isDark.matches || mql === "d") && mql !== "l") {
+      /* ダークテーマの時 */
+      document.body.classList.add("dark"); //ダークモードにする
+      changeThemeColor("dark"); //フッターのアイコンを変更
+      if (mql === "d") {
+        noActive();
+        dark.setAttribute("checked", null); //選択中のボタンを目立たせる
+        localStorage.setItem("theme", "dark"); //Local Storageに保存
+      } else {
+        localStorage.setItem("theme", "auto"); //Local Storageに保存
+      }
+    } else {
+      /* ライトテーマの時 */
+      document.body.classList.remove("dark"); //ダークモード解除
+      changeThemeColor("light"); //フッターのアイコンを変更
+      if (mql === "l") {
+        noActive();
+        light.setAttribute("checked", null); //選択中のボタンを目立たせる
+        localStorage.setItem("theme", "light"); //Local Storageに保存
+      } else {
+        localStorage.setItem("theme", "auto"); //Local Storageに保存
+      }
+    }
+  }
+  if (mql === "d" || mql === "l") {
+    themeStatus = 1; //手動でダークorライト
+  } else if (mql === "a") {
+    themeStatus = 0; //システムに従うを選択時
+  }
+  anime = setInterval(() => {
+    document.body.classList.remove("anime");
+  }, 1000); //1秒後、bodyのトランジョンを解除
+  function changeThemeColor(type) {
+    let color;
+    if (type === "dark") {
+      color = "#333";
+    } else {
+      color = "#f8f9fa";
+    }
+    let head = document.head.children;
+    for (let index = 0; index < head.length; index++) {
+      const element = head[index].getAttribute("name");
+      if (element === "theme-color") {
+        head[index].setAttribute("content", color);
+        break;
+      }
+    }
+  }
+}
+function noActive() {
+  //すべてのボタンを非アクティブにする
+  let list = document.querySelectorAll("#settings-3 .radio input");
+  list.forEach(function (element) {
+    element.removeAttribute("checked");
+  });
+}
+try {
+  //システムのテーマが変更されたときに発動
+  // Chrome & Firefox
+  isDark.addEventListener("change", toggleTheme);
+} catch (e1) {
+  try {
+    // Safari
+    isDark.addListener(toggleTheme);
+  } catch (e2) {
+    console.error(e2);
+  }
+}
