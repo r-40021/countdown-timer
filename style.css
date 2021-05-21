@@ -169,7 +169,7 @@ body {
   margin-bottom: 4em;
 }
 .modal {
-  max-height: 90vh;
+  max-height: 80vh;
 }
 #settings .modal-footer {
   display: flex;
