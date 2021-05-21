@@ -5,7 +5,6 @@
   --bgColor: #f7f7f7;
   --fontColor: rgb(75, 75, 75);
   --green: #4db6ac;
-  --grayText: #666;
 }
 input {
   -webkit-user-select: text;
@@ -14,11 +13,13 @@ input {
   user-select: text;
 }
 .title {
+  position: fixed;
+  top: 7%;
+  left: 0;
   width: 100%;
   height: auto;
 }
 #title {
-  margin-top: 8vh;
   text-align: center;
   font-size: 7vh;
   padding-bottom: 0.3em;
@@ -29,8 +30,13 @@ input {
   -webkit-text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
 }
+@media screen and (max-width: 480px) {
+  #title {
+    font-size: 5vh;
+  }
+}
 .myBtn-circle {
-  border: var(--grayText) solid 1px;
+  border: #666 solid 1px;
   color: var(--fontColor);
   position: relative;
   line-height: 12vh;
@@ -45,12 +51,9 @@ input {
   height: 12vh;
   cursor: pointer;
 }
-.myBtn-circle:not(.nohover):hover {
+.myBtn-circle:hover {
   color: var(--green);
   border-color: var(--green);
-}
-.nohover{
-  cursor: auto;
 }
 .myBtn-small {
   line-height: 5vh;
@@ -146,18 +149,15 @@ body {
   src: local("YoGothic-Bold"), local("Yu Gothic");
 }
 .timer {
-  flex: 1;
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
   font-family: "Open Sans", -apple-system, blinkMacSystemFont, "Helvetica Neue",
     "Segoe UI", "Arial", "Roboto", sans-serif;
-    font-weight: 500;
-    line-height: 1.2;
 }
 #Date,
-#Time,
-#openWelcome {
+#Time {
   display: none;
 }
 #settings .section {
@@ -166,7 +166,7 @@ body {
   padding: 0.1em 1em;
 }
 #settings .section p {
-  color: var(--grayText);
+  color: #666;
   margin-inline-start: 1em;
 }
 #settings .section:not(:last-child) {
@@ -194,18 +194,6 @@ body {
   width: auto;
 }
 .volume {
-  flex: 1;
-  display: flex;
-  padding-left: 1em;
-  align-items: center;
-  justify-content: center;
-}
-.volume .bi-volume-up{
-  width: auto;
-  text-align: right;
-  color: var(--grayText);
-}
-.volume .range-field{
   flex: 1;
 }
 .volume,
@@ -258,6 +246,7 @@ input[type="text"]:not(.browser-default)[readonly="readonly"] {
   flex-shrink: 0;
   transition: background-color 250ms ease-in-out;
   pointer-events: none;
+  padding: 30px 30px 50px;
 }
 .flex {
   display: flex;
@@ -284,46 +273,17 @@ input[type="text"]:not(.browser-default)[readonly="readonly"] {
 #stopTimer {
   display: none;
 }
+#click {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
+}
 .timer a {
   pointer-events: auto;
 }
 .hidecursor * {
   cursor: none !important;
-}
-.howTo{
-  display: flex;
-  width: 100%;
-  height: auto;
-  align-items: center;
-}
-.howTo .case,.howTo .answer{
-  margin: 1em 0;
-}
-.howTo .case{
-  width: 50%;
-}
-.howTo .answer{
-  flex: 1;
-  margin-left: 0.7em;
-}
-.status{
-  position: absolute;
-  bottom: 0;
-  color: var(--grayText);
-  font-size: small;
-  width: 100%;
-  text-align: center;
-}
-.timerSet{
-  position: relative;
-  margin-bottom: 2em;
-}
-/* Smartphone */
-@media screen and (max-width: 480px) {
-  #title {
-    font-size: 5vh;
-  }
-  .timer{
-    line-height: 1.8;
-  }
 }
