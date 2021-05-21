@@ -15,10 +15,11 @@
         {
           "src": "favicon-512×512.png",
           "sizes": "512x512",
-          "type": "image/png"
+          "type": "image/png",
+          "purpose": "maskable"
         }
     ],
-    "theme_color": "#4db6ac",
+    "theme_color": "#f8f9fa",
     "background_color": "#00C2BC",
     "display": "standalone",
     "start_url":"../index.html",

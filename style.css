@@ -21,6 +21,7 @@ input {
   margin-top: 8vh;
   text-align: center;
   font-size: 7vh;
+  color: var(--fontColor);
   padding-bottom: 0.3em;
   height: auto;
   white-space: nowrap;
@@ -38,7 +39,6 @@ input {
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  letter-spacing: 0.15em;
   padding: 0.1rem 0.1rem;
   border-radius: 50%;
   width: 12vh;
@@ -49,7 +49,7 @@ input {
   color: var(--green);
   border-color: var(--green);
 }
-.nohover{
+.nohover {
   cursor: auto;
 }
 .myBtn-small {
@@ -62,9 +62,6 @@ input {
   transform: scale(0.9);
 }
 #file1 {
-  display: none;
-}
-#audioInput {
   display: none;
 }
 #droppable {
@@ -152,8 +149,8 @@ body {
   flex-direction: column;
   font-family: "Open Sans", -apple-system, blinkMacSystemFont, "Helvetica Neue",
     "Segoe UI", "Arial", "Roboto", sans-serif;
-    font-weight: 500;
-    line-height: 1.2;
+  font-weight: 500;
+  line-height: 1.2;
 }
 #Date,
 #Time,
@@ -169,11 +166,16 @@ body {
   color: var(--grayText);
   margin-inline-start: 1em;
 }
+#settings .section p.radio label {
+  color: var(--fontColor);
+  font-size: 12px;
+  margin-inline-start: 1em;
+}
 #settings .section:not(:last-child) {
   margin-bottom: 4em;
 }
 .modal {
-  max-height: 90vh;
+  max-height: 80vh;
 }
 #settings .modal-footer {
   display: flex;
@@ -200,12 +202,12 @@ body {
   align-items: center;
   justify-content: center;
 }
-.volume .bi-volume-up{
+.volume .bi-volume-up {
   width: auto;
   text-align: right;
   color: var(--grayText);
 }
-.volume .range-field{
+.volume .range-field {
   flex: 1;
 }
 .volume,
@@ -287,43 +289,92 @@ input[type="text"]:not(.browser-default)[readonly="readonly"] {
 .timer a {
   pointer-events: auto;
 }
-.hidecursor * {
-  cursor: none !important;
-}
-.howTo{
+.howTo {
   display: flex;
   width: 100%;
   height: auto;
   align-items: center;
 }
-.howTo .case,.howTo .answer{
-  margin: 1em 0;
+.howTo .case,
+.howTo .answer {
+  margin: 1.5em 0;
 }
-.howTo .case{
+.howTo .case {
   width: 50%;
 }
-.howTo .answer{
+.howTo .answer {
   flex: 1;
   margin-left: 0.7em;
 }
-.status{
-  position: absolute;
-  bottom: 0;
+.status {
   color: var(--grayText);
   font-size: small;
   width: 100%;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.timerSet{
+.status a {
+  color: var(--grayText);
+}
+.status a:hover {
+  text-decoration: underline;
+}
+.status div {
+  display: inline-flex;
+  margin: 0 1em;
+}
+.status .alarmTime {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+}
+.timerSet {
   position: relative;
   margin-bottom: 2em;
 }
 /* Smartphone */
 @media screen and (max-width: 480px) {
   #title {
-    font-size: 5vh;
+    font-size: 4vh;
   }
-  .timer{
+  .timer {
     line-height: 1.8;
   }
+}
+body.dark {
+  --bgColor: rgb(32, 32, 32);
+  --fontColor: rgb(232, 232, 232);
+  --green: #4db6ac;
+  --grayText: rgb(216, 215, 215);
+}
+body.dark .modal .modal-content,
+body.dark .modal .modal-footer,
+body.dark .tabs {
+  background-color: var(--bgColor);
+}
+body.dark .modal .modal-footer * {
+  color: var(--fontColor);
+}
+body.dark #settings .section {
+  background-color: rgb(51, 51, 51);
+}
+body.dark .timepicker-plate {
+  background-color: rgb(51, 51, 51);
+}
+body.dark .timepicker-tick {
+  color: var(--fontColor);
+}
+body.anime,
+body.anime .modal .modal-content,
+body.anime .modal .modal-footer,
+body.anime .tabs,
+body.anime .modal .modal-footer *,
+body.anime #settings .section,
+body.anime .timepicker-plate,
+body.anime .timepicker-tick {
+  transition: background-color 0.2s ease-in-out;
 }
