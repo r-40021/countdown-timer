@@ -113,7 +113,7 @@
                             class="icons bi bi-bell-fill" viewBox="0 0 16 16">
                             <path
                                 d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
-                        </svg><span id="alarmTimeValue">未設定</span>
+                        </svg><a id="alarmTimeValue">未設定</a>
                     </div>
                     <div class="volumeStatus noiphone">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="icons bi bi-volume-up-fill" viewBox="0 0 16 16">
@@ -121,7 +121,7 @@
                             <path d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.483 5.483 0 0 1 11.025 8a5.483 5.483 0 0 1-1.61 3.89l.706.706z"/>
                             <path d="M8.707 11.182A4.486 4.486 0 0 0 10.025 8a4.486 4.486 0 0 0-1.318-3.182L8 5.525A3.489 3.489 0 0 1 9.025 8 3.49 3.49 0 0 1 8 10.475l.707.707zM6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06z"/>
                           </svg>
-                        <span id="volumeStatusValue"></span>%
+                        <a id="volumeStatusValue"></a>
                     </div>
                 </div>
             </div>
@@ -144,7 +144,7 @@
                                         d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z" />
                                 </svg>
                             </a>
-                            <a class="myBtn-circle modal-trigger" href="#settings">
+                            <a class="myBtn-circle modal-trigger" id="openSettings" href="#settings">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
                                     class="bi bi-gear" viewBox="0 0 16 16">
                                     <path
@@ -167,7 +167,7 @@
     <div id="settings" class="modal">
         <div class="modal-content">
             <ul id="settings" class="tabs">
-                <li class="tab col s3"><a class="active" href="#settings-1">
+                <li class="tab col s3"><a class="active" href="#settings-1" id="timeTab">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="icons bi bi-calendar-event" viewBox="0 0 16 16">
                             <path
@@ -175,7 +175,7 @@
                             <path
                                 d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
                         </svg>日時設定</a></li>
-                <li class="tab col s3 noiphone" id="audioInput"><a href="#settings-2"><svg xmlns="http://www.w3.org/2000/svg"
+                <li class="tab col s3 noiphone" id="audioInput"><a href="#settings-2" id="audioTab"><svg xmlns="http://www.w3.org/2000/svg"
                             width="16" height="16" fill="currentColor" class="icons bi bi-music-note-beamed"
                             viewBox="0 0 16 16">
                             <path

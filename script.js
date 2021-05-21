@@ -116,6 +116,7 @@ function onload() {
   /*パラメータ取得*/
   var param = location.search;
   var paramObject = new Object();
+  showVolume();
 
   if (param) {
     param = param.substring(1);
@@ -140,6 +141,8 @@ function onload() {
       title = decodeURIComponent(paramObject.title);
       document.getElementById("title").value = title;
     }
+
+    
 
     myDate = paramObject.date;
     myTime = paramObject.time;
@@ -211,9 +214,12 @@ function onload() {
         displayPlace.innerHTML = display;
         document.title = "やまだのタイマー";
       } else {
-        timerStatus = 1;
-        document.getElementById("stopTimer").style.display = "inline-flex";
-        document.getElementById("setTimer").style.display = "none";
+        if (countTimes===0) {
+          document.getElementById("alarmTimeValue").innerText = myDate + " " + myTime;
+          document.getElementById("stopTimer").style.display = "inline-flex";
+          document.getElementById("setTimer").style.display = "none";
+          countTimes ++; 
+        }
         if (display != oldDisplay) {
           displayPlace.innerHTML = display;
           document.title = display;
@@ -222,6 +228,7 @@ function onload() {
       }
     }
     down = setInterval(myCount, 200);
+    let countTimes = 0;
   } else {
     /*パラメータがなかったら*/
     let date = new Date();
@@ -237,6 +244,7 @@ function onload() {
     document.getElementById("Time").value = defaultTime;
     document.getElementById("timeLabel").value =
       document.getElementById("Time").value;
+    document.getElementById("alarmTimeValue").innerText = defaultDate + " " + defaultTime;
   }
 }
 
@@ -494,6 +502,7 @@ document.getElementById("audioVolume").addEventListener(
   "input",
   (e) => {
     alarm.volume = document.getElementById("audioVolume").value / 100;
+    showVolume();
   },
   false
 );
@@ -508,3 +517,18 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("nextSkip").checked = true;
   }
 });
+function showVolume (){
+  document.getElementById("volumeStatusValue").innerText = alarm.volume * 100 + "%";
+}
+document.getElementById("alarmTimeValue").addEventListener("click",()=>{
+  document.getElementById("openSettings").click();
+  setTimeout(() => {
+    document.getElementById("timeTab").click();
+  },200);
+},false);
+document.getElementById("volumeStatusValue").addEventListener("click",()=>{
+  document.getElementById("openSettings").click();
+  setTimeout(() => {
+    document.getElementById("audioTab").click();
+  },200);
+},false);

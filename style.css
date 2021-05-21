@@ -38,7 +38,6 @@ input {
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  letter-spacing: 0.15em;
   padding: 0.1rem 0.1rem;
   border-radius: 50%;
   width: 12vh;
@@ -312,8 +311,22 @@ input[type="text"]:not(.browser-default)[readonly="readonly"] {
   justify-content: center;
   align-items: center;
 }
+.status a{
+  color: var(--grayText);
+}
+.status a:hover{
+  text-decoration: underline;
+}
+.status div{
+ display: inline-flex;
+ margin: 0 1em;
+}
 .status .alarmTime{
-  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
 }
 .timerSet{
   position: relative;
@@ -322,7 +335,7 @@ input[type="text"]:not(.browser-default)[readonly="readonly"] {
 /* Smartphone */
 @media screen and (max-width: 480px) {
   #title {
-    font-size: 5vh;
+    font-size: 4vh;
   }
   .timer{
     line-height: 1.8;
