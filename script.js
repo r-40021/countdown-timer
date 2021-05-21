@@ -58,15 +58,13 @@ function device() {
     (userAgent.indexOf("mac os x") != -1 && "ontouchend" in document)
   ) {
     /*iPhone/iPad除く*/ /*iPhone/iPadのときは、アラーム音関連・全画面表示関連を非表示*/
-    const dateField = document.getElementById("DateField");
-    const timeField = document.getElementById("TimeField");
-    dateField.classList.replace("s5", "s6");
-    timeField.classList.replace("s5", "s6");
-    document.getElementById("fullscreen").style.display = "none";
-    document.getElementById("escFullscreen").style.display = "none";
-  } else {
-    document.getElementById("audioInput").style.display = "inline-block";
-  }
+    const elements = document.getElementsByClassName("noiphone");
+    for (let i = 0; i < elements.length; i++) {
+      const element = elements[i];
+      element.style.display = "none";
+    }
+    
+  } 
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -442,15 +440,8 @@ document.addEventListener("DOMContentLoaded", function () {
   action.observe(element, config);
 });
 
-function flex() {
-  /*スマホのURLバーに隠されないように*/
-  var height = window.innerHeight;
-  document.getElementsByClassName("flex")[0].style.height = height + "px";
-  document.body.style.height = height + "px";
-}
 window.addEventListener("resize", function () {
   resize();
-  flex();
 });
 var addcursor;
 window.addEventListener(

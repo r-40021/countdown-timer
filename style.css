@@ -64,9 +64,6 @@ input {
 #file1 {
   display: none;
 }
-#audioInput {
-  display: none;
-}
 #droppable {
   border: rgb(165, 165, 165) dashed 0.3em;
   text-align: center;
@@ -307,12 +304,16 @@ input[type="text"]:not(.browser-default)[readonly="readonly"] {
   margin-left: 0.7em;
 }
 .status{
-  position: absolute;
-  bottom: 0;
   color: var(--grayText);
   font-size: small;
   width: 100%;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.status .alarmTime{
+  flex: 1;
 }
 .timerSet{
   position: relative;
