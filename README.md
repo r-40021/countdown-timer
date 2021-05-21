@@ -29,7 +29,8 @@ For privacy reasons, we do not have an access analysis for this web app. If you 
 - Google Chrome v.89
 - Microsoft Edge(Chromium) v.89
 - Firefox 87.0
-# OSS
+# Authors
 - (c) 2014-2019 Materialize
 - Copyright (c) 2016 Tyler Nickerson
 - Copyright (c) Rich Tibbett
+- ["時計　アラーム03"](https://otologic.jp/free/se/clock01.html) by [OtoLogic](https://otologic.jp/) is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/legalcode)

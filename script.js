@@ -14,6 +14,13 @@ document.addEventListener("DOMContentLoaded", function () {
   onload();
 });
 
+document.getElementById("nextSkip").addEventListener("click",()=>{
+  if (document.getElementById("nextSkip").checked) {
+    localStorage.setItem("ct-skip",1);
+  } else {
+    localStorage.removeItem("ct-skip");
+  }
+})
 document.getElementById("Date").addEventListener(
   "change",
   () => {
@@ -227,7 +234,11 @@ function onload() {
     let originalDefaultTime = defaultSet[1].split(":");
     const defaultTime = originalDefaultTime[0] + ":" + originalDefaultTime[1];
     document.getElementById("Date").value = defaultDate;
+    document.getElementById("dateLabel").value =
+      document.getElementById("Date").value;
     document.getElementById("Time").value = defaultTime;
+    document.getElementById("timeLabel").value =
+      document.getElementById("Time").value;
   }
 }
 
@@ -498,4 +509,11 @@ document.getElementById("audioVolume").addEventListener(
 document.getElementById("title").addEventListener("input", () => {
   title = document.getElementById("title").value;
   changeURL();
+});
+document.addEventListener("DOMContentLoaded", function () {
+  if (!localStorage.getItem("ct-skip")){
+    document.getElementById("openWelcome").click();
+  } else {
+    document.getElementById("nextSkip").checked = true;
+  }
 });

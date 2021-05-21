@@ -5,6 +5,7 @@
   --bgColor: #f7f7f7;
   --fontColor: rgb(75, 75, 75);
   --green: #4db6ac;
+  --grayText: #666;
 }
 input {
   -webkit-user-select: text;
@@ -13,13 +14,11 @@ input {
   user-select: text;
 }
 .title {
-  position: fixed;
-  top: 7%;
-  left: 0;
   width: 100%;
   height: auto;
 }
 #title {
+  margin-top: 8vh;
   text-align: center;
   font-size: 7vh;
   padding-bottom: 0.3em;
@@ -30,15 +29,8 @@ input {
   -webkit-text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
 }
-@media screen and (max-width: 480px) {
-  #title {
-    font-size: 5vh;
-  }
-}
-
-
 .myBtn-circle {
-  border: #666 solid 1px;
+  border: var(--grayText) solid 1px;
   color: var(--fontColor);
   position: relative;
   line-height: 12vh;
@@ -53,29 +45,28 @@ input {
   height: 12vh;
   cursor: pointer;
 }
-.myBtn-circle:hover {
+.myBtn-circle:not(.nohover):hover {
   color: var(--green);
   border-color: var(--green);
+}
+.nohover{
+  cursor: auto;
 }
 .myBtn-small {
   line-height: 5vh;
   width: 5vh;
   height: 5vh;
 }
-
 .class input[type="text"] {
   font-size: 16px;
   transform: scale(0.9);
 }
-
 #file1 {
   display: none;
 }
-
 #audioInput {
   display: none;
 }
-
 #droppable {
   border: rgb(165, 165, 165) dashed 0.3em;
   text-align: center;
@@ -86,51 +77,41 @@ input {
   justify-content: center;
   margin-bottom: 1em;
 }
-
 #audioicon,
 #fullscreen,
 #escFullscreen {
   cursor: pointer;
 }
-
 body:fullscreen #fullscreen {
   display: none;
 }
-
 body:not(:fullscreen) #escFullscreen {
   display: none;
 }
-
 .noevent {
   pointer-events: none;
 }
-
 .autoevent {
   pointer-events: auto;
 }
-
 .share .btn-flat {
   padding: 0 7px;
 }
-
 ::-webkit-scrollbar {
   width: 5px;
   height: 5px;
 }
-
 ::-webkit-scrollbar-track {
   background: #fff;
   border: none;
   border-radius: 10px;
   box-shadow: inset 0 0 2px #777;
 }
-
 ::-webkit-scrollbar-thumb {
   background: #ccc;
   border-radius: 10px;
   box-shadow: none;
 }
-
 html,
 body {
   width: 100%;
@@ -164,18 +145,19 @@ body {
   font-weight: bold;
   src: local("YoGothic-Bold"), local("Yu Gothic");
 }
-
 .timer {
+  flex: 1;
   display: flex;
   align-items: center;
-  justify-content: center;
   flex-direction: column;
   font-family: "Open Sans", -apple-system, blinkMacSystemFont, "Helvetica Neue",
-    "Segoe UI", "Arial", "Roboto" ,sans-serif;
+    "Segoe UI", "Arial", "Roboto", sans-serif;
+    font-weight: 500;
+    line-height: 1.2;
 }
-
 #Date,
-#Time {
+#Time,
+#openWelcome {
   display: none;
 }
 #settings .section {
@@ -184,7 +166,7 @@ body {
   padding: 0.1em 1em;
 }
 #settings .section p {
-  color: #666;
+  color: var(--grayText);
   margin-inline-start: 1em;
 }
 #settings .section:not(:last-child) {
@@ -212,6 +194,18 @@ body {
   width: auto;
 }
 .volume {
+  flex: 1;
+  display: flex;
+  padding-left: 1em;
+  align-items: center;
+  justify-content: center;
+}
+.volume .bi-volume-up{
+  width: auto;
+  text-align: right;
+  color: var(--grayText);
+}
+.volume .range-field{
   flex: 1;
 }
 .volume,
@@ -258,16 +252,13 @@ input[type="text"]:not(.browser-default)[readonly="readonly"] {
 #settings .modal-content {
   padding: 0 5px;
 }
-
 #bigtimer {
   flex: 1;
   z-index: 0;
   flex-shrink: 0;
   transition: background-color 250ms ease-in-out;
   pointer-events: none;
-  padding: 30px 30px 50px;
 }
-
 .flex {
   display: flex;
   flex-direction: column;
@@ -278,7 +269,6 @@ input[type="text"]:not(.browser-default)[readonly="readonly"] {
   background-color: var(--bgColor);
   color: var(--fontColor);
 }
-
 .icons {
   white-space: nowrap;
   margin-inline-end: 0.5em;
@@ -294,18 +284,46 @@ input[type="text"]:not(.browser-default)[readonly="readonly"] {
 #stopTimer {
   display: none;
 }
-
-#click {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  pointer-events: auto;
-}
 .timer a {
   pointer-events: auto;
 }
 .hidecursor * {
   cursor: none !important;
+}
+.howTo{
+  display: flex;
+  width: 100%;
+  height: auto;
+  align-items: center;
+}
+.howTo .case,.howTo .answer{
+  margin: 1em 0;
+}
+.howTo .case{
+  width: 50%;
+}
+.howTo .answer{
+  flex: 1;
+  margin-left: 0.7em;
+}
+.status{
+  position: absolute;
+  bottom: 0;
+  color: var(--grayText);
+  font-size: small;
+  width: 100%;
+  text-align: center;
+}
+.timerSet{
+  position: relative;
+  margin-bottom: 2em;
+}
+/* Smartphone */
+@media screen and (max-width: 480px) {
+  #title {
+    font-size: 5vh;
+  }
+  .timer{
+    line-height: 1.8;
+  }
 }
