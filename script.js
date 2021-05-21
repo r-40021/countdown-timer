@@ -218,6 +218,8 @@ function onload() {
           document.getElementById("alarmTimeValue").innerText = myDate + " " + myTime;
           document.getElementById("stopTimer").style.display = "inline-flex";
           document.getElementById("setTimer").style.display = "none";
+          localStorage.setItem("ct-date",myDate);
+          localStorage.setItem("ct-time",myTime);
           countTimes ++; 
         }
         if (display != oldDisplay) {
@@ -229,6 +231,21 @@ function onload() {
     }
     down = setInterval(myCount, 200);
     let countTimes = 0;
+  } else if (localStorage.getItem("ct-date")&&localStorage.getItem("ct-time")) {
+    let localDate = localStorage.getItem("ct-date");
+    let localTime = localStorage.getItem("ct-time");
+    //テキストボックスに日時をセット
+    document.getElementById("Date").value = localDate;
+    document.getElementById("dateLabel").value =
+      document.getElementById("Date").value;
+    document.getElementById("Time").value = localTime;
+    document.getElementById("timeLabel").value =
+      document.getElementById("Time").value;
+    if (localStorage.getItem("ct-title")) {
+      title = localStorage.getItem("ct-title");
+      document.getElementById("title").value = title;
+    }
+    document.getElementById("setTimer").click();
   } else {
     /*パラメータがなかったら*/
     let date = new Date();
@@ -508,6 +525,7 @@ document.getElementById("audioVolume").addEventListener(
 );
 document.getElementById("title").addEventListener("input", () => {
   title = document.getElementById("title").value;
+  localStorage.setItem("ct-title",title);
   changeURL();
 });
 document.addEventListener("DOMContentLoaded", function () {
