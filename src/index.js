@@ -1,3 +1,6 @@
+require("materialize-css");
+var Push = require("push.js");
+import NoSleep from "nosleep.js";
 /*変数の定義*/
 var down, displayEnd, oldDisplay, title, myDate, myTime;
 var useDevice = 0;
@@ -8,9 +11,12 @@ let themeStatus; //テーマがユーザー設定(1)なのか否か(0)
 const isDark = window.matchMedia("(prefers-color-scheme: dark)");
 
 /*初期アラーム音設定*/
-var alarm = new Audio("alarm.mp3");
+var alarm = new Audio("../alarm.mp3");
 alarm.loop = true;
 alarm.volume = document.getElementById("audioVolume").value / 100;
+var testAlarm = new Audio("../alarm.mp3");
+testAlarm.loop = true;
+testAlarm.volume = document.getElementById("audioVolume").value / 100;
 var noSleep = new NoSleep();
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -168,7 +174,7 @@ function onload() {
     /*カウントダウン（一番大事）*/
     function myCount() {
       var displayPlace = document.getElementById("displayTime");
-      date = new Date();
+      var date = new Date();
       var diffTime = target.getTime() - date.getTime(); //時間の差を計算
       var diffHour = Math.floor(diffTime / (1000 * 60 * 60)); //時間に変換
       var diffMinute = Math.floor(
@@ -239,7 +245,7 @@ function onload() {
           localStorage.setItem("ct-date", myDate);
           localStorage.setItem("ct-time", myTime);
           if (title) {
-            localStorage.setItem("ct-title", title); 
+            localStorage.setItem("ct-title", title);
           } else {
             localStorage.removeItem("ct-title");
           }
@@ -424,6 +430,9 @@ window.addEventListener("load", () => {
       alarm = new Audio(reader.result);
       alarm.loop = true;
       alarm.volume = document.getElementById("audioVolume").value / 100;
+      testAlarm = new Audio(reader.result);
+      testAlarm.loop = true;
+      testAlarm.volume = document.getElementById("audioVolume").value / 100;
       M.toast({
         html: "アラーム音を設定しました。<br>このページから離れると、アラーム音はリセットされます。",
       });
@@ -501,13 +510,14 @@ window.addEventListener("resize", function () {
 document.getElementById("testAudio").addEventListener(
   "click",
   (e) => {
-    alarm.play();
+    testAlarm.play();
     e.stopPropagation();
     document.addEventListener(
       "click",
       (e) => {
         if (e.target.id !== "audioVolume") {
-          stopAlarm();
+          testAlarm.pause();
+          testAlarm.currentTime = 0; //音停止
         }
       },
       false
@@ -519,6 +529,7 @@ document.getElementById("audioVolume").addEventListener(
   "input",
   (e) => {
     alarm.volume = document.getElementById("audioVolume").value / 100;
+    testAlarm.volume = document.getElementById("audioVolume").value / 100;
     showVolume();
   },
   false
@@ -526,10 +537,10 @@ document.getElementById("audioVolume").addEventListener(
 document.getElementById("title").addEventListener("input", () => {
   title = document.getElementById("title").value;
   if (title) {
-    localStorage.setItem("ct-title", title);  
+    localStorage.setItem("ct-title", title);
   } else {
     localStorage.removeItem("ct-title");
-  }  
+  }
   changeURL();
 });
 document.addEventListener("DOMContentLoaded", function () {
@@ -737,3 +748,9 @@ function tweet() {
   }
   return url;
 }
+window.set = set;
+window.stop = stop;
+window.audiostop = audiostop;
+window.toggleTheme = toggleTheme;
+window.copy = copy;
+window.Push = Push;

@@ -1,3 +1,4 @@
+@import "../node_modules/materialize-css/sass/materialize.scss";
 .modal-overlay {
   overflow: hidden;
 }
@@ -336,6 +337,9 @@ input[type="text"]:not(.browser-default)[readonly="readonly"] {
 .timerSet {
   position: relative;
   margin-bottom: 2em;
+}
+a {
+  cursor: pointer;
 }
 /* Smartphone */
 @media screen and (max-width: 480px) {

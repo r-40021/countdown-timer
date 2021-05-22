@@ -1,0 +1,35 @@
+{
+  "name": "countdown-timer",
+  "version": "4.0.1",
+  "description": "This is a timer that can be timed semi-permanently. 半永久的に計れるカウントダウンタイマーです。",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "start": "webpack serve",
+    "watch": "webpack --watch",
+    "css": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/r-40021/countdown-timer.git"
+  },
+  "author": "Kenichi Yamada",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/r-40021/countdown-timer/issues"
+  },
+  "homepage": "https://github.com/r-40021/countdown-timer#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-sass": "^4.1.0",
+    "materialize-css": "^1.0.0-rc.2",
+    "nosleep.js": "^0.12.0",
+    "webpack": "^5.37.1",
+    "webpack-cli": "^4.7.0",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "push.js": "^1.0.12"
+  }
+}
