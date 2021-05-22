@@ -56,7 +56,7 @@ function device() {
     (userAgent.indexOf("windows") != -1 ||
       (userAgent.indexOf("mac os x") != -1 &&
         "ontouchend" in document ===
-          false) /*mac os xが含まれていて、かつマウスデバイス*/ ||
+        false) /*mac os xが含まれていて、かつマウスデバイス*/ ||
       userAgent.indexOf("cros") != -1 ||
       (userAgent.indexOf("linux") != -1 && "ontouchend" in document === false))
   ) {
@@ -212,7 +212,7 @@ function onload() {
         } catch (error) {
           console.log("error");
         }
-        
+
         alarm.play();
         stop();
         document.title = "やまだのタイマー";
@@ -235,10 +235,20 @@ function onload() {
         display = "0:00:00";
         displayPlace.innerHTML = display;
         document.title = "やまだのタイマー";
+        noParams();
       } else {
         if (countTimes === 0) {
-          document.getElementById("alarmTimeValue").innerText =
-            myDate + " " + myTime;
+          let newMyDate = new Date(myDate);
+          if (newMyDate.getFullYear() === date.getFullYear()) {
+            if (newMyDate.getMonth() === date.getMonth() && newMyDate.getDate() === date.getDate()) {
+              document.getElementById("alarmTimeValue").innerText = myTime;
+            } else {
+              document.getElementById("alarmTimeValue").innerText = newMyDate.getMonth() + 1 + "/" + newMyDate.getDate() + " " + myTime;
+            }
+          } else {
+            document.getElementById("alarmTimeValue").innerText =
+              myDate + " " + myTime;
+          }
           document.getElementById("stopTimer").style.display = "inline-flex";
           document.getElementById("setTimer").style.display = "none";
           localStorage.setItem("ct-date", myDate);
@@ -299,7 +309,7 @@ function onload() {
     document.getElementById("timeLabel").value =
       document.getElementById("Time").value;
     document.getElementById("alarmTimeValue").innerText =
-      defaultDate + " " + defaultTime;
+      defaultTime + " (自動設定)";
   }
 }
 
@@ -382,7 +392,7 @@ function audiostop() {
   document.getElementById("stopTimer").style.display = "";
   document.getElementById("setTimer").style.display = "";
 
- 
+
 
   stopAlarm();
   clearInterval(displayEnd);
