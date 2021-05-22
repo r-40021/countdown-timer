@@ -1,15 +1,11 @@
-var CACHE_NAME = 'ct-20210522v4';
+var CACHE_NAME = 'ct-20210522v5';
 var urlsToCache = [
   './index.html',
-  './style.css',
-  './script.js',
-  './materialize.min.css',
-  './materialize.min.js',
+  './dist/style.css',
+  './dist/main.min.js',
   './alarm.mp3',
   './favicon/favicon.ico',
-  './push.min.js',
-  './push.min.js.map',
-  './nosleep.min.js'
+  './favicon/site.webmanifest'
 ];
 self.addEventListener("install", (function(event) {
     event.waitUntil(caches.open(CACHE_NAME).then((function(cache) {
