@@ -31,6 +31,10 @@ input {
   -webkit-text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
 }
+input.valid[type=text]:not(.browser-default){
+  border-bottom: 1px solid #9e9e9e;
+  box-shadow: none;
+}
 .myBtn-circle {
   border: var(--grayText) solid 1px;
   color: var(--fontColor);
@@ -88,6 +92,7 @@ body:not(:fullscreen) #escFullscreen {
 }
 .share .btn-flat {
   padding: 0 7px;
+  color: var(--grayText);
 }
 ::-webkit-scrollbar {
   width: 5px;
@@ -168,9 +173,6 @@ body {
 }
 #settings .section:not(:last-child) {
   margin-bottom: 4em;
-}
-.modal {
-  max-height: 80vh;
 }
 #settings .modal-footer {
   display: flex;
@@ -356,6 +358,7 @@ body.dark {
   --green: #4db6ac;
   --grayText: rgb(216, 215, 215);
 }
+body.dark .modal,
 body.dark .modal .modal-content,
 body.dark .modal .modal-footer,
 body.dark .tabs {
