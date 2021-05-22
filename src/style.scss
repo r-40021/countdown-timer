@@ -86,12 +86,6 @@ body:fullscreen #fullscreen {
 body:not(:fullscreen) #escFullscreen {
   display: none;
 }
-.noevent {
-  pointer-events: none;
-}
-.autoevent {
-  pointer-events: auto;
-}
 .share .btn-flat {
   padding: 0 7px;
 }
@@ -151,7 +145,7 @@ body {
   font-family: "Open Sans", -apple-system, blinkMacSystemFont, "Helvetica Neue",
     "Segoe UI", "Arial", "Roboto", sans-serif;
   font-weight: 500;
-  line-height: 1.2;
+  line-height: 1;
 }
 #Date,
 #Time,
@@ -309,7 +303,6 @@ input[type="text"]:not(.browser-default)[readonly="readonly"] {
 }
 .status {
   color: var(--grayText);
-  font-size: small;
   width: 100%;
   text-align: center;
   display: flex;
@@ -341,13 +334,20 @@ input[type="text"]:not(.browser-default)[readonly="readonly"] {
 a {
   cursor: pointer;
 }
-/* Smartphone */
+/*Tablet*/
+@media screen and (max-width: 768px) {
+  #title{
+    font-size: 5vh;
+  }
+ }
+ /* Smartphone */
 @media screen and (max-width: 480px) {
   #title {
     font-size: 4vh;
   }
   .timer {
-    line-height: 1.8;
+    line-height: 1.2;
+    font-size: small;
   }
 }
 body.dark {

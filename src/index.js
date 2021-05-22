@@ -2,7 +2,7 @@ require("materialize-css");
 var Push = require("push.js");
 import NoSleep from "nosleep.js";
 /*変数の定義*/
-var down, displayEnd, oldDisplay, title, myDate, myTime;
+var down, displayEnd, oldDisplay, title, myDate, myTime, kiduke;
 var useDevice = 0;
 var timerStatus = 0;
 let anime; //テーマ変更時のアニメーション(timeout)
@@ -11,10 +11,10 @@ let themeStatus; //テーマがユーザー設定(1)なのか否か(0)
 const isDark = window.matchMedia("(prefers-color-scheme: dark)");
 
 /*初期アラーム音設定*/
-var alarm = new Audio("../alarm.mp3");
+var alarm = new Audio("https://r-40021.github.io/countdown-timer/alarm.mp3");
 alarm.loop = true;
 alarm.volume = document.getElementById("audioVolume").value / 100;
-var testAlarm = new Audio("../alarm.mp3");
+var testAlarm = new Audio("https://r-40021.github.io/countdown-timer/alarm.mp3");
 testAlarm.loop = true;
 testAlarm.volume = document.getElementById("audioVolume").value / 100;
 var noSleep = new NoSleep();
@@ -212,8 +212,7 @@ function onload() {
         } catch (error) {
           console.log("error");
         }
-        document.getElementById("audioInput").classList.add("noevent");
-        document.getElementById("audioInput").classList.remove("autoevent");
+        
         alarm.play();
         stop();
         document.title = "やまだのタイマー";
@@ -221,7 +220,7 @@ function onload() {
           document.title = "時間です！";
           displayPlace.style.color = "rgb(255 38 111)";
           displayPlace.style.visibility = "hidden";
-          setTimeout(function () {
+          kiduke = setTimeout(function () {
             document.title = "気付け！！";
             displayPlace.style.visibility = "";
           }, 500);
@@ -383,12 +382,11 @@ function audiostop() {
   document.getElementById("stopTimer").style.display = "";
   document.getElementById("setTimer").style.display = "";
 
-  document
-    .getElementById("audioInput")
-    .classList.replace("noevent", "autoevent");
+ 
 
   stopAlarm();
   clearInterval(displayEnd);
+  clearTimeout(kiduke);
   var timerbox = document.getElementById("displayTime");
   timerbox.style.color = "";
   timerbox.style.visibility = "";
@@ -552,7 +550,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 function showVolume() {
   document.getElementById("volumeStatusValue").innerText =
-    alarm.volume * 100 + "%";
+    Math.floor(alarm.volume * 100) + "%";
 }
 document.getElementById("alarmTimeValue").addEventListener(
   "click",
@@ -754,3 +752,4 @@ window.audiostop = audiostop;
 window.toggleTheme = toggleTheme;
 window.copy = copy;
 window.Push = Push;
+window.tweet = tweet;
