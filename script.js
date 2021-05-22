@@ -234,6 +234,7 @@ function onload() {
           document.getElementById("setTimer").style.display = "none";
           localStorage.setItem("ct-date", myDate);
           localStorage.setItem("ct-time", myTime);
+          localStorage.setItem("ct-title", title);
           countTimes++;
         }
         if (display != oldDisplay) {
@@ -692,4 +693,16 @@ try {
   } catch (e2) {
     console.error(e2);
   }
+}
+function tweet(){
+  let base = "https://twitter.com/intent/tweet?";
+  let hashtags = "やまだのタイマー,やまだけんいち";
+  let text = "10万年先まで計れるやまだのタイマーでカウントダウン！";
+  let url
+  if (title) {
+    url = base + "text=" + text + "「" + title + "」%0a&hashtags=" + hashtags + "&url=" + encodeURIComponent(window.location.href);
+  } else {
+    url = base + "text=" + text + "%0a&hashtags=" + hashtags + "&url=" + encodeURIComponent(window.location.href);
+  }
+  return url;
 }

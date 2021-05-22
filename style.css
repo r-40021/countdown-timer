@@ -20,7 +20,7 @@ input {
 #title {
   margin-top: 8vh;
   text-align: center;
-  font-size: 7vh;
+  font-size: 6.5vh;
   color: var(--fontColor);
   padding-bottom: 0.3em;
   height: auto;
@@ -34,15 +34,15 @@ input {
   border: var(--grayText) solid 1px;
   color: var(--fontColor);
   position: relative;
-  line-height: 12vh;
+  line-height: 80px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
   padding: 0.1rem 0.1rem;
   border-radius: 50%;
-  width: 12vh;
-  height: 12vh;
+  width: 80px;
+  height: 80px;
   cursor: pointer;
 }
 .myBtn-circle:not(.nohover):hover {
@@ -53,9 +53,9 @@ input {
   cursor: auto;
 }
 .myBtn-small {
-  line-height: 5vh;
-  width: 5vh;
-  height: 5vh;
+  line-height: 40px;
+  width: 40px;
+  height: 40px;
 }
 .class input[type="text"] {
   font-size: 16px;
@@ -323,6 +323,7 @@ input[type="text"]:not(.browser-default)[readonly="readonly"] {
 }
 .status div {
   display: inline-flex;
+  align-items: center;
   margin: 0 1em;
 }
 .status .alarmTime {
@@ -365,8 +366,11 @@ body.dark #settings .section {
 body.dark .timepicker-plate {
   background-color: rgb(51, 51, 51);
 }
-body.dark .timepicker-tick {
+body.dark .timepicker-tick, body.dark .datepicker-controls * {
   color: var(--fontColor);
+}
+body.dark .timepicker-tick, body.dark .datepicker-controls svg {
+  fill: var(--fontColor);
 }
 body.anime,
 body.anime .modal .modal-content,
@@ -375,6 +379,7 @@ body.anime .tabs,
 body.anime .modal .modal-footer *,
 body.anime #settings .section,
 body.anime .timepicker-plate,
-body.anime .timepicker-tick {
+body.anime .timepicker-tick,
+.datepicker-controls *  {
   transition: background-color 0.2s ease-in-out;
 }
