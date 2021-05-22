@@ -694,3 +694,15 @@ try {
     console.error(e2);
   }
 }
+function tweet(){
+  let base = "https://twitter.com/intent/tweet?";
+  let hashtags = "やまだのタイマー,やまだけんいち";
+  let text = "10万年先まで計れるやまだのタイマーでカウントダウン！";
+  let url
+  if (title) {
+    url = base + "text=" + text + "「" + title + "」%0a&hashtags=" + hashtags + "&url=" + encodeURIComponent(window.location.href);
+  } else {
+    url = base + "text=" + text + "%0a&hashtags=" + hashtags + "&url=" + encodeURIComponent(window.location.href);
+  }
+  return url;
+}
