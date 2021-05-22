@@ -152,7 +152,7 @@ function onload() {
   if (paramObject.title) {
     title = decodeURIComponent(paramObject.title);
     document.getElementById("title").value = title;
-  } else if (localStorage.getItem("ct-title")) {
+  } else if (localStorage.getItem("ct-title") && !paramObject.date && !paramObject.time) {
     title = localStorage.getItem("ct-title");
     document.getElementById("title").value = title;
   }
@@ -373,13 +373,13 @@ function copy() {
   M.toast({ html: "URLをコピーしました" });
 }
 
-function resize(params) {
+function resize() {
   const place = document.getElementById("displayTime");
   let count = place.innerHTML.length;
   if (window.innerWidth <= 775) {
     place.style.fontSize = 150 / count + "vmin"; //文字サイズ調整(Tablet&SP)
   } else {
-    place.style.fontSize = 195 / count + "vmin"; //文字サイズ調整
+    place.style.fontSize = 185 / count + "vmin"; //文字サイズ調整
   }
 }
 
