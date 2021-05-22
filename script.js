@@ -68,6 +68,7 @@ function device() {
       element.style.display = "none";
     }
   }
+  pushrequest();
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -120,19 +121,37 @@ function onload() {
   var param = location.search;
   var paramObject = new Object();
   showVolume();
+  // Theme
+  if (localStorage.getItem("theme") === "dark") {
+    // ローカルストレージを読み込み、テーマを反映
+    toggleTheme("d");
+  } else if (localStorage.getItem("theme") === "light") {
+    toggleTheme("l");
+  } else if (localStorage.getItem("theme") === "auto") {
+    toggleTheme("a");
+  } else {
+    toggleTheme(isDark);
+  }
+  param = param.substring(1);
+  var parameters = param.split("&");
 
-  if (param) {
-    param = param.substring(1);
-    var parameters = param.split("&");
+  for (var i = 0; i < parameters.length; i++) {
+    var element = parameters[i].split("=");
 
-    for (var i = 0; i < parameters.length; i++) {
-      var element = parameters[i].split("=");
+    var paramName = decodeURIComponent(element[0]);
+    var paramValue = decodeURIComponent(element[1]);
 
-      var paramName = decodeURIComponent(element[0]);
-      var paramValue = decodeURIComponent(element[1]);
+    paramObject[paramName] = paramValue;
+  }
+  if (paramObject.title) {
+    title = decodeURIComponent(paramObject.title);
+    document.getElementById("title").value = title;
+  } else if (localStorage.getItem("ct-title")) {
+    title = localStorage.getItem("ct-title");
+    document.getElementById("title").value = title;
+  }
 
-      paramObject[paramName] = paramValue;
-    }
+  if (paramObject.date && paramObject.time) {
     //テキストボックスに日時をセット
     document.getElementById("Date").value = paramObject.date;
     document.getElementById("dateLabel").value =
@@ -140,26 +159,11 @@ function onload() {
     document.getElementById("Time").value = paramObject.time;
     document.getElementById("timeLabel").value =
       document.getElementById("Time").value;
-    if (paramObject.title) {
-      title = decodeURIComponent(paramObject.title);
-      document.getElementById("title").value = title;
-    }
-
     myDate = paramObject.date;
     myTime = paramObject.time;
     var target = new Date(myDate + " " + myTime + ":00"); //設定時間
-
-    // Theme
-    if (localStorage.getItem("theme") === "dark") {
-      // ローカルストレージを読み込み、テーマを反映
-      toggleTheme("d");
-    } else if (localStorage.getItem("theme") === "light") {
-      toggleTheme("l");
-    } else if (localStorage.getItem("theme") === "auto") {
-      toggleTheme("a");
-    } else {
-      toggleTheme(isDark);
-    }
+    down = setInterval(myCount, 200);
+    let countTimes = 0;
 
     /*カウントダウン（一番大事）*/
     function myCount() {
@@ -244,27 +248,33 @@ function onload() {
         }
       }
     }
-    down = setInterval(myCount, 200);
-    let countTimes = 0;
   } else if (
     localStorage.getItem("ct-date") &&
     localStorage.getItem("ct-time")
   ) {
     let localDate = localStorage.getItem("ct-date");
     let localTime = localStorage.getItem("ct-time");
-    //テキストボックスに日時をセット
-    document.getElementById("Date").value = localDate;
-    document.getElementById("dateLabel").value =
-      document.getElementById("Date").value;
-    document.getElementById("Time").value = localTime;
-    document.getElementById("timeLabel").value =
-      document.getElementById("Time").value;
-    if (localStorage.getItem("ct-title")) {
-      title = localStorage.getItem("ct-title");
-      document.getElementById("title").value = title;
+    let localTarget = new Date(localDate + " " + localTime + ":00");
+    if (localTarget.getTime() > Date.now()) {
+      //テキストボックスに日時をセット
+      document.getElementById("Date").value = localDate;
+      document.getElementById("dateLabel").value =
+        document.getElementById("Date").value;
+      document.getElementById("Time").value = localTime;
+      document.getElementById("timeLabel").value =
+        document.getElementById("Time").value;
+
+      document.getElementById("setTimer").click();
+    } else {
+      localStorage.removeItem("ct-date");
+      localStorage.removeItem("ct-time");
+      noParams();
+      return;
     }
-    document.getElementById("setTimer").click();
   } else {
+    noParams();
+  }
+  function noParams() {
     /*パラメータがなかったら*/
     let date = new Date();
     let after = new Date();
@@ -297,23 +307,20 @@ function set() {
 }
 
 function changeURL() {
+  let newURL = "?";
+  if (myDate && myTime) {
+    newURL = newURL + "date=" + myDate + "&time=" + myTime;
+    go();
+  }
   if (title) {
-    history.replaceState(
-      null,
-      "やまだのタイマー",
-      "index.html?date=" +
-        myDate +
-        "&time=" +
-        myTime +
-        "&title=" +
-        encodeURIComponent(title)
-    ); //パラメータセット（リロードなし）
-  } else {
-    history.replaceState(
-      null,
-      "やまだのタイマー",
-      "index.html?date=" + myDate + "&time=" + myTime
-    ); //パラメータセット（リロードなし）
+    if (newURL.match("date")) {
+      newURL = newURL + "&";
+    }
+    newURL = newURL + "title=" + encodeURIComponent(title);
+    go();
+  }
+  function go() {
+    history.pushState(null, "やまだのタイマー", newURL);
   }
 }
 
@@ -694,15 +701,31 @@ try {
     console.error(e2);
   }
 }
-function tweet(){
+function tweet() {
   let base = "https://twitter.com/intent/tweet?";
   let hashtags = "やまだのタイマー,やまだけんいち";
   let text = "10万年先まで計れるやまだのタイマーでカウントダウン！";
-  let url
+  let url;
   if (title) {
-    url = base + "text=" + text + "「" + title + "」%0a&hashtags=" + hashtags + "&url=" + encodeURIComponent(window.location.href);
+    url =
+      base +
+      "text=" +
+      text +
+      "「" +
+      title +
+      "」%0a&hashtags=" +
+      hashtags +
+      "&url=" +
+      encodeURIComponent(window.location.href);
   } else {
-    url = base + "text=" + text + "%0a&hashtags=" + hashtags + "&url=" + encodeURIComponent(window.location.href);
+    url =
+      base +
+      "text=" +
+      text +
+      "%0a&hashtags=" +
+      hashtags +
+      "&url=" +
+      encodeURIComponent(window.location.href);
   }
   return url;
 }
