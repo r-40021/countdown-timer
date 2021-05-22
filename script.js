@@ -234,6 +234,7 @@ function onload() {
           document.getElementById("setTimer").style.display = "none";
           localStorage.setItem("ct-date", myDate);
           localStorage.setItem("ct-time", myTime);
+          localStorage.setItem("ct-title", title);
           countTimes++;
         }
         if (display != oldDisplay) {

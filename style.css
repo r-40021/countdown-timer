@@ -323,6 +323,7 @@ input[type="text"]:not(.browser-default)[readonly="readonly"] {
 }
 .status div {
   display: inline-flex;
+  align-items: center;
   margin: 0 1em;
 }
 .status .alarmTime {
@@ -365,8 +366,11 @@ body.dark #settings .section {
 body.dark .timepicker-plate {
   background-color: rgb(51, 51, 51);
 }
-body.dark .timepicker-tick {
+body.dark .timepicker-tick, body.dark .datepicker-controls * {
   color: var(--fontColor);
+}
+body.dark .timepicker-tick, body.dark .datepicker-controls svg {
+  fill: var(--fontColor);
 }
 body.anime,
 body.anime .modal .modal-content,
@@ -375,6 +379,7 @@ body.anime .tabs,
 body.anime .modal .modal-footer *,
 body.anime #settings .section,
 body.anime .timepicker-plate,
-body.anime .timepicker-tick {
+body.anime .timepicker-tick,
+.datepicker-controls *  {
   transition: background-color 0.2s ease-in-out;
 }
