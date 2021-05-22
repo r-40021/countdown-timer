@@ -238,7 +238,11 @@ function onload() {
           document.getElementById("setTimer").style.display = "none";
           localStorage.setItem("ct-date", myDate);
           localStorage.setItem("ct-time", myTime);
-          localStorage.setItem("ct-title", title);
+          if (title) {
+            localStorage.setItem("ct-title", title); 
+          } else {
+            localStorage.removeItem("ct-title");
+          }
           countTimes++;
         }
         if (display != oldDisplay) {
@@ -521,7 +525,11 @@ document.getElementById("audioVolume").addEventListener(
 );
 document.getElementById("title").addEventListener("input", () => {
   title = document.getElementById("title").value;
-  localStorage.setItem("ct-title", title);
+  if (title) {
+    localStorage.setItem("ct-title", title);  
+  } else {
+    localStorage.removeItem("ct-title");
+  }  
   changeURL();
 });
 document.addEventListener("DOMContentLoaded", function () {

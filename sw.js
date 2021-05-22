@@ -1,4 +1,4 @@
-var CACHE_NAME = 'ct-20210522v3';
+var CACHE_NAME = 'ct-20210522v4';
 var urlsToCache = [
   './index.html',
   './style.css',
