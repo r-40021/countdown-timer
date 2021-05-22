@@ -1,4 +1,4 @@
-var CACHE_NAME = 'ct-20210522v6';
+var CACHE_NAME = 'ct-20210522v7';
 var urlsToCache = [
   './index.html',
   './dist/style.css',
@@ -15,7 +15,7 @@ self.addEventListener("install", (function(event) {
     var cacheAllowlist = [CACHE_NAME];
     event.waitUntil(caches.keys().then((function(cacheNames) {
         return Promise.all(cacheNames.map((function(cacheName) {
-            if (-1 === cacheAllowlist.indexOf(cacheName)) return caches.delete(cacheName)
+            if (-1 === cacheAllowlist.indexOf(cacheName)&&-1 !== cacheName.indexOf("ct")) return caches.delete(cacheName)
         })))
     })))
 })), self.addEventListener("fetch", (function(event) {
