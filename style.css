@@ -34,15 +34,15 @@ input {
   border: var(--grayText) solid 1px;
   color: var(--fontColor);
   position: relative;
-  line-height: 12vh;
+  line-height: 80px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
   padding: 0.1rem 0.1rem;
   border-radius: 50%;
-  width: 12vh;
-  height: 12vh;
+  width: 80px;
+  height: 80px;
   cursor: pointer;
 }
 .myBtn-circle:not(.nohover):hover {
@@ -53,9 +53,9 @@ input {
   cursor: auto;
 }
 .myBtn-small {
-  line-height: 5vh;
-  width: 5vh;
-  height: 5vh;
+  line-height: 40px;
+  width: 40px;
+  height: 40px;
 }
 .class input[type="text"] {
   font-size: 16px;
