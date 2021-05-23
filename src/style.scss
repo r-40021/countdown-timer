@@ -391,6 +391,9 @@ body.dark .timepicker-tick, body.dark .datepicker-controls svg {
 body.dark .dropdown-content{
   background-color: var(--bgColor);
 }
+body.dark input::-webkit-input-placeholder{
+  color:rgb(80, 80, 80);
+}
 body.anime * {
   transition: background-color 0.3s ease-in-out;
 }
