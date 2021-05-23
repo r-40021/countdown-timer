@@ -192,7 +192,7 @@ function onload() {
       var display = diffHour + ":" + diffMinute + ":" + diffSecond;
       if (display === "0:00:00") {
         display = "0:00:00";
-        displayPlace.innerHTML = display;
+        displayPlace.textContent = display;
         document.title = "やまだのタイマー";
         /*通知(タッチデバイスとIEはなし)*/
         try {
@@ -233,7 +233,7 @@ function onload() {
           M.toast({ html: "むむ？" });
         }
         display = "0:00:00";
-        displayPlace.innerHTML = display;
+        displayPlace.textContent = display;
         document.title = "やまだのタイマー";
         noParams();
       } else {
@@ -241,12 +241,12 @@ function onload() {
           let newMyDate = new Date(myDate);
           if (newMyDate.getFullYear() === date.getFullYear()) {
             if (newMyDate.getMonth() === date.getMonth() && newMyDate.getDate() === date.getDate()) {
-              document.getElementById("alarmTimeValue").innerText = myTime;
+              document.getElementById("alarmTimeValue").textContent = myTime;
             } else {
-              document.getElementById("alarmTimeValue").innerText = newMyDate.getMonth() + 1 + "/" + newMyDate.getDate() + " " + myTime;
+              document.getElementById("alarmTimeValue").textContent = newMyDate.getMonth() + 1 + "/" + newMyDate.getDate() + " " + myTime;
             }
           } else {
-            document.getElementById("alarmTimeValue").innerText =
+            document.getElementById("alarmTimeValue").textContent =
               myDate + " " + myTime;
           }
           document.getElementById("stopTimer").style.display = "inline-flex";
@@ -261,7 +261,7 @@ function onload() {
           countTimes++;
         }
         if (display != oldDisplay) {
-          displayPlace.innerHTML = display;
+          displayPlace.textContent = display;
           document.title = display;
           oldDisplay = display;
         }
@@ -308,7 +308,7 @@ function onload() {
     document.getElementById("Time").value = defaultTime;
     document.getElementById("timeLabel").value =
       document.getElementById("Time").value;
-    document.getElementById("alarmTimeValue").innerText =
+    document.getElementById("alarmTimeValue").textContent =
       defaultTime + " (自動設定)";
   }
 }
@@ -375,7 +375,7 @@ function copy() {
 
 function resize() {
   const place = document.getElementById("displayTime");
-  let count = place.innerHTML.length;
+  let count = place.textContent.length;
   if (window.innerWidth <= 775) {
     place.style.fontSize = 150 / count + "vmin"; //文字サイズ調整(Tablet&SP)
   } else {
@@ -489,15 +489,13 @@ var move = function (e) {
   e.returnValue = "";
 };
 
-/*NoSleep & Focus*/
-document.addEventListener(
-  "click",
-  function enableNoSleep() {
-    document.removeEventListener("click", enableNoSleep, false);
-    noSleep.enable();
-  },
-  false
-);
+// Enable wake lock.
+// (must be wrapped in a user input event handler e.g. a mouse or touch handler)
+document.addEventListener('click', function enableNoSleep() {
+  document.removeEventListener('click', enableNoSleep, false);
+  noSleep.enable();
+}, false);
+
 
 document.addEventListener("DOMContentLoaded", function () {
   //残り時間が変わったら、文字サイズ調整
@@ -559,7 +557,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 function showVolume() {
-  document.getElementById("volumeStatusValue").innerText =
+  document.getElementById("volumeStatusValue").textContent =
     Math.floor(alarm.volume * 100) + "%";
 }
 document.getElementById("alarmTimeValue").addEventListener(
@@ -621,7 +619,7 @@ document.addEventListener(
   false
 );
 function toggleTheme(mql) {
-  clearInterval(anime); //1秒後にbodyのトランジョン解除のタイマーを解除
+  clearInterval(anime); //0.4秒後にbodyのトランジョン解除のタイマーを解除
   document.body.classList.add("anime"); //bodyのトランジョンを有効化
   let auto = document.getElementById("auto"); //「システムに従う」ボタン
   let light = document.getElementById("light"); //「ライトモード」ボタン
@@ -691,7 +689,7 @@ function toggleTheme(mql) {
   }
   anime = setInterval(() => {
     document.body.classList.remove("anime");
-  }, 1000); //1秒後、bodyのトランジョンを解除
+  }, 400); //0.4秒後、bodyのトランジョンを解除
   function changeThemeColor(type) {
     let color;
     if (type === "dark") {

@@ -336,6 +336,15 @@ input[type="text"]:not(.browser-default)[readonly="readonly"] {
 a {
   cursor: pointer;
 }
+#title:-webkit-autofill,
+#title:-webkit-autofill:hover, 
+#title:-webkit-autofill:focus, 
+#title:-webkit-autofill:active
+{
+ box-shadow: 0 0 0 30px var(--bgColor) inset !important;
+ -webkit-box-shadow: 0 0 0 30px var(--bgColor) inset !important;
+ -webkit-text-fill-color: var(--fontColor) !important;
+}
 /*Tablet*/
 @media screen and (max-width: 768px) {
   #title{
@@ -379,14 +388,9 @@ body.dark .timepicker-tick, body.dark .datepicker-controls * {
 body.dark .timepicker-tick, body.dark .datepicker-controls svg {
   fill: var(--fontColor);
 }
-body.anime,
-body.anime .modal .modal-content,
-body.anime .modal .modal-footer,
-body.anime .tabs,
-body.anime .modal .modal-footer *,
-body.anime #settings .section,
-body.anime .timepicker-plate,
-body.anime .timepicker-tick,
-.datepicker-controls *  {
-  transition: background-color 0.2s ease-in-out;
+body.dark .dropdown-content{
+  background-color: var(--bgColor);
+}
+body.anime * {
+  transition: background-color 0.3s ease-in-out;
 }
