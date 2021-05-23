@@ -451,31 +451,31 @@ window.addEventListener("load", () => {
   }
   // Drug & Drop
   let dropbox;
-  let bgColor = "#cbf3fa";
   dropbox = document.getElementById("droppable");
   dropbox.addEventListener("dragenter", dragenter, false);
   dropbox.addEventListener("dragover", dragover, false);
   dropbox.addEventListener("dragleave", dragleave, false);
   dropbox.addEventListener("drop", drop, false);
   function dragenter(e) {
-    dropbox.style.backgroundColor = bgColor;
+    dropbox.style.borderWidth = "0.7em";
     e.stopPropagation();
     e.preventDefault();
   }
 
   function dragover(e) {
-    dropbox.style.backgroundColor = bgColor;
+    dropbox.style.borderWidth = "0.7em";
     e.stopPropagation();
     e.preventDefault();
   }
   function dragleave(e) {
-    dropbox.style.backgroundColor = "";
+    dropbox.style.borderWidth = "";
     e.stopPropagation();
     e.preventDefault();
   }
   function drop(e) {
     e.stopPropagation();
     e.preventDefault();
+    dropbox.style.borderWidth = "";
     const dt = e.dataTransfer;
     const files = dt.files;
     selectFile(files);
