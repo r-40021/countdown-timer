@@ -7,6 +7,7 @@ var useDevice = 0;
 var timerStatus = 0;
 let anime; //テーマ変更時のアニメーション(timeout)
 let themeStatus; //テーマがユーザー設定(1)なのか否か(0)
+var paramStatus = 1;
 /*Dark Theme*/
 const isDark = window.matchMedia("(prefers-color-scheme: dark)");
 
@@ -21,6 +22,10 @@ var noSleep = new NoSleep();
 
 document.addEventListener("DOMContentLoaded", function () {
   device();
+  let params = new URL(window.location.href).searchParams;
+  if (params.get("date") && params.get("time")) {
+    paramStatus = 0;
+  }
   onload();
 });
 
@@ -124,8 +129,6 @@ document.addEventListener("DOMContentLoaded", function () {
 function onload() {
   resize(); //文字サイズ調整
   /*パラメータ取得*/
-  var param = location.search;
-  var paramObject = new Object();
   showVolume();
   // Theme
   if (localStorage.getItem("theme") === "dark") {
@@ -138,6 +141,8 @@ function onload() {
   } else {
     toggleTheme(isDark);
   }
+  var param = location.search;
+  var paramObject = new Object();
   param = param.substring(1);
   var parameters = param.split("&");
 
@@ -251,12 +256,16 @@ function onload() {
           }
           document.getElementById("stopTimer").style.display = "inline-flex";
           document.getElementById("setTimer").style.display = "none";
-          localStorage.setItem("ct-date", myDate);
-          localStorage.setItem("ct-time", myTime);
-          if (title) {
-            localStorage.setItem("ct-title", title);
+          if (paramStatus) {
+            localStorage.setItem("ct-date", myDate);
+            localStorage.setItem("ct-time", myTime);
+            if (title) {
+              localStorage.setItem("ct-title", title);
+            } else {
+              localStorage.removeItem("ct-title");
+            }
           } else {
-            localStorage.removeItem("ct-title");
+            paramStatus = 1;
           }
           countTimes++;
         }
@@ -329,18 +338,17 @@ function changeURL() {
   let newURL = "?";
   if (myDate && myTime) {
     newURL = newURL + "date=" + myDate + "&time=" + myTime;
-    go();
   }
   if (title) {
     if (newURL.match("date")) {
       newURL = newURL + "&";
     }
     newURL = newURL + "title=" + encodeURIComponent(title);
-    go();
   }
-  function go() {
-    history.pushState(null, "やまだのタイマー", newURL);
+  if (!(myDate || myTime || title)) {
+    newURL = "./";
   }
+  history.replaceState(null, "やまだのタイマー", newURL);
 }
 
 document.addEventListener("DOMContentLoaded", function () {
