@@ -192,7 +192,7 @@ function onload() {
       var display = diffHour + ":" + diffMinute + ":" + diffSecond;
       if (display === "0:00:00") {
         display = "0:00:00";
-        displayPlace.innerHTML = display;
+        displayPlace.textContent = display;
         document.title = "やまだのタイマー";
         /*通知(タッチデバイスとIEはなし)*/
         try {
@@ -233,7 +233,7 @@ function onload() {
           M.toast({ html: "むむ？" });
         }
         display = "0:00:00";
-        displayPlace.innerHTML = display;
+        displayPlace.textContent = display;
         document.title = "やまだのタイマー";
         noParams();
       } else {
@@ -241,12 +241,12 @@ function onload() {
           let newMyDate = new Date(myDate);
           if (newMyDate.getFullYear() === date.getFullYear()) {
             if (newMyDate.getMonth() === date.getMonth() && newMyDate.getDate() === date.getDate()) {
-              document.getElementById("alarmTimeValue").innerText = myTime;
+              document.getElementById("alarmTimeValue").textContent = myTime;
             } else {
-              document.getElementById("alarmTimeValue").innerText = newMyDate.getMonth() + 1 + "/" + newMyDate.getDate() + " " + myTime;
+              document.getElementById("alarmTimeValue").textContent = newMyDate.getMonth() + 1 + "/" + newMyDate.getDate() + " " + myTime;
             }
           } else {
-            document.getElementById("alarmTimeValue").innerText =
+            document.getElementById("alarmTimeValue").textContent =
               myDate + " " + myTime;
           }
           document.getElementById("stopTimer").style.display = "inline-flex";
@@ -308,7 +308,7 @@ function onload() {
     document.getElementById("Time").value = defaultTime;
     document.getElementById("timeLabel").value =
       document.getElementById("Time").value;
-    document.getElementById("alarmTimeValue").innerText =
+    document.getElementById("alarmTimeValue").textContent =
       defaultTime + " (自動設定)";
   }
 }
@@ -557,7 +557,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 function showVolume() {
-  document.getElementById("volumeStatusValue").innerText =
+  document.getElementById("volumeStatusValue").textContent =
     Math.floor(alarm.volume * 100) + "%";
 }
 document.getElementById("alarmTimeValue").addEventListener(
