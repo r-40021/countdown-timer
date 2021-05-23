@@ -489,15 +489,13 @@ var move = function (e) {
   e.returnValue = "";
 };
 
-/*NoSleep & Focus*/
-document.addEventListener(
-  "click",
-  function enableNoSleep() {
-    document.removeEventListener("click", enableNoSleep, false);
-    noSleep.enable();
-  },
-  false
-);
+// Enable wake lock.
+// (must be wrapped in a user input event handler e.g. a mouse or touch handler)
+document.addEventListener('click', function enableNoSleep() {
+  document.removeEventListener('click', enableNoSleep, false);
+  noSleep.enable();
+}, false);
+
 
 document.addEventListener("DOMContentLoaded", function () {
   //残り時間が変わったら、文字サイズ調整
@@ -621,7 +619,7 @@ document.addEventListener(
   false
 );
 function toggleTheme(mql) {
-  clearInterval(anime); //1秒後にbodyのトランジョン解除のタイマーを解除
+  clearInterval(anime); //0.4秒後にbodyのトランジョン解除のタイマーを解除
   document.body.classList.add("anime"); //bodyのトランジョンを有効化
   let auto = document.getElementById("auto"); //「システムに従う」ボタン
   let light = document.getElementById("light"); //「ライトモード」ボタン
@@ -691,7 +689,7 @@ function toggleTheme(mql) {
   }
   anime = setInterval(() => {
     document.body.classList.remove("anime");
-  }, 1000); //1秒後、bodyのトランジョンを解除
+  }, 400); //0.4秒後、bodyのトランジョンを解除
   function changeThemeColor(type) {
     let color;
     if (type === "dark") {
