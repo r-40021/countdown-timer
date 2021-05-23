@@ -261,7 +261,7 @@ function onload() {
           countTimes++;
         }
         if (display != oldDisplay) {
-          displayPlace.innerHTML = display;
+          displayPlace.textContent = display;
           document.title = display;
           oldDisplay = display;
         }
@@ -375,7 +375,7 @@ function copy() {
 
 function resize() {
   const place = document.getElementById("displayTime");
-  let count = place.innerHTML.length;
+  let count = place.textContent.length;
   if (window.innerWidth <= 775) {
     place.style.fontSize = 150 / count + "vmin"; //文字サイズ調整(Tablet&SP)
   } else {
