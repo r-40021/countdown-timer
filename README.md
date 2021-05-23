@@ -4,10 +4,18 @@
 
 This is a timer that can be timed semi-permanently.
 # Screenshots
-![screenshot](https://user-images.githubusercontent.com/75155258/113495588-d5533880-952d-11eb-90de-b302e0cc1fd2.png)
-<figcaption>Month and Date Setting</figcaption><img src="https://user-images.githubusercontent.com/75155258/113495782-9f628400-952e-11eb-9683-34d22e1e57ca.png" width ="200px">
-<figcaption>Time Setting</figcaption><img src="https://user-images.githubusercontent.com/75155258/113495777-9a053980-952e-11eb-8a63-d1df30c9ec10.png" width ="200px">
-<figcaption>The Notification</figcaption><img src="https://user-images.githubusercontent.com/75155258/112742132-ad605400-8fc6-11eb-8dac-4398403d9435.png" width ="200px">
+#### Light Mode
+![timer_light](https://user-images.githubusercontent.com/75155258/119243911-1bc82980-bba6-11eb-8c65-58bcde69464f.jpg)
+#### Dark Mode
+![timer_dark](https://user-images.githubusercontent.com/75155258/119243910-1a96fc80-bba6-11eb-9604-9dc577197dcd.jpg)
+#### Date Setting
+<img src="https://user-images.githubusercontent.com/75155258/119243992-f12aa080-bba6-11eb-80b5-a2bcaa66dfc3.jpg" width ="400px">
+
+#### Time Setting
+<img src="https://user-images.githubusercontent.com/75155258/119244001-fa1b7200-bba6-11eb-801a-ab61b74c66b7.jpg" width ="400px">
+
+#### Push Notifications
+<img src="https://user-images.githubusercontent.com/75155258/119244154-867a6480-bba8-11eb-9fda-981a9bb42d80.jpg" width ="400px">
 
 # How to Use
 **Only 2 steps!!**  
@@ -15,20 +23,18 @@ This is a timer that can be timed semi-permanently.
 2. Press the SET button.
 # Features
 1. This app is a good combination of an alarm clock and a timer.
-2. The set time is stored in the parameter.
+2. The set time is stored in the parameter and in the local storage.
 3. The remaining time will be reflected in the page title in real time, so you will know how much time is left even if you are working on something else.
 4. You can change the alarm sound to whatever you want.
 5. You will receive a push notification when the time is up. (PC only)
 6. The device will not sleep while you are using this app.
-7. You can start and stop the timer by simply clicking on the remaining time area.
-8. You can make this app full screen.
+7. You can make this app full screen. So, it is suitable for projecting this application on a display.
 # Please
 For privacy reasons, we do not have an access analysis for this web app. If you would like to help us, please click on the share button on the screen and tweet us with the "#やまだのタイマー" and "#やまだけんいち" on Twitter so that we can get a rough idea of the number of accesses.
 # Execution Check Environment
 - Windows 10 (64bit)
-- Google Chrome v.89
-- Microsoft Edge(Chromium) v.89
-- Firefox 87.0
+- Google Chrome v.90
+- Microsoft Edge(Chromium) v.90
 # Authors
 - (c) 2014-2019 Materialize
 - Copyright (c) 2016 Tyler Nickerson
