@@ -35,6 +35,7 @@ For privacy reasons, we do not have an access analysis for this web app. If you 
 - Windows 10 (64bit)
 - Google Chrome v.90
 - Microsoft Edge(Chromium) v.90
+- Safari on iOS 14.5.1 (The full screen display function and alarm sound function are not available.)
 # Authors
 - (c) 2014-2019 Materialize
 - Copyright (c) 2016 Tyler Nickerson
