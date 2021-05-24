@@ -162,7 +162,7 @@ body {
   margin-top: 0.5em;
   padding: 0.1em 1em;
 }
-#settings .section p {
+#settings .section p,#settings .section .content {
   color: var(--grayText);
   margin-inline-start: 1em;
 }
@@ -183,6 +183,12 @@ body {
 }
 #settings .modal-footer div:last-child {
   flex: 3;
+}
+.duration{
+  display: inline-flex;
+  width: 50px;
+  font-size: 16px;
+  max-width: 30%;
 }
 .audioFlex {
   display: flex;
@@ -390,6 +396,9 @@ body.dark .timepicker-tick, body.dark .datepicker-controls svg {
 }
 body.dark .dropdown-content{
   background-color: var(--bgColor);
+}
+body.dark input{
+  color: var(--fontColor);
 }
 body.dark input::-webkit-input-placeholder{
   color:rgb(80, 80, 80);
