@@ -161,6 +161,40 @@ function onload() {
     title = localStorage.getItem("ct-title");
     document.getElementById("title").value = title;
   }
+  if (document.getElementById("duration") || localStorage.getItem("ct-lastType")) {
+    myDate = null;
+    myTime = null;
+    changeURL();
+    if (localStorage.getItem("ct-lastType")) {
+      let duration = localStorage.getItem("ct-lastDuration").split(":");
+      document.getElementById("hour").value = Number(duration[0]);
+      document.getElementById("minute").value = Number(duration[1]);
+      document.getElementById("seconds").value = Number(duration[2]);
+      let set = localStorage.getItem("ct-lastSet").split(" ");
+      myDate = set[0];
+      myTime = set[1];
+      var target = new Date(myDate + " " + myTime); //設定時間
+    } else {
+    let elementList = document.getElementsByClassName("durationSet");
+    for (let i = 0; i < elementList.length; i++) {
+      const element = elementList[i].value;
+      if (!element) {
+        element = 0;
+      }
+    }
+     let now = new Date();
+     now.setHours( now.getHours() + Number(document.getElementById("hour").value)); 
+     now.setMinutes( now.getMinutes() + Number(document.getElementById("minute").value));
+     now.setSeconds( now.getSeconds() + Number(document.getElementById("seconds").value));
+     myDate = now.getFullYear + "/" + (now.getMonth + 1) + "/" + now.getDate;
+     myTime = now.getHours + ":" + now.getMinutes + ":" + now.getSeconds;
+     var target = new Date(myDate + " " + myTime); //設定時間
+     localStorage.setItem("ct-lastType",1);
+     localStorage.setItem("ct-lastDuration", document.getElementById("hour").value + ":" + document.getElementById("minute").value + ":" +document.getElementById("seconds").value);
+  }
+    
+
+  }
 
   if (paramObject.date && paramObject.time) {
     //テキストボックスに日時をセット
@@ -324,10 +358,13 @@ function onload() {
 
 function set() {
   /*SETボタンを押したときの挙動*/
-  var url = new URL(window.location.href);
+  if (document.getElementById("duration").style.display === "block"){
+
+  } else {
   myDate = document.getElementById("Date").value;
   myTime = document.getElementById("Time").value;
   changeURL();
+  }
   stop();
   onload();
   audiostop();
@@ -372,6 +409,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // tab
   elems = document.querySelectorAll(".tabs");
   instances = M.Tabs.init(elems);
+  // collapsible
+  var elems = document.querySelectorAll('.collapsible');
+    var instances = M.Collapsible.init(elems, options);
 });
 
 function copy() {

@@ -157,10 +157,16 @@ body {
 #openWelcome {
   display: none;
 }
+.modal#settings{
+  max-height: 77vh;
+}
 #settings .section {
   background-color: #fff;
   margin-top: 0.5em;
   padding: 0.1em 1em;
+}
+.collapsible-body{
+  padding: 0.5rem;
 }
 #settings .section p,#settings .section .content {
   color: var(--grayText);
@@ -186,9 +192,12 @@ body {
 }
 .duration{
   display: inline-flex;
-  width: 50px;
+  width: 40px;
   font-size: 16px;
   max-width: 30%;
+}
+.duration input{
+  text-align: right;
 }
 .audioFlex {
   display: flex;
@@ -342,10 +351,10 @@ input[type="text"]:not(.browser-default)[readonly="readonly"] {
 a {
   cursor: pointer;
 }
-#title:-webkit-autofill,
-#title:-webkit-autofill:hover, 
-#title:-webkit-autofill:focus, 
-#title:-webkit-autofill:active
+input[type=text]:-webkit-autofill,input[type=number]:-webkit-autofill,
+input[type=text]:-webkit-autofill:hover, input[type=number]:-webkit-autofill:hover, 
+input[type=text]:-webkit-autofill:focus, input[type=number]:-webkit-autofill:focus, 
+input[type=text]:-webkit-autofill:active,input[type=number]:-webkit-autofill:active
 {
  box-shadow: 0 0 0 30px var(--bgColor) inset !important;
  -webkit-box-shadow: 0 0 0 30px var(--bgColor) inset !important;
@@ -390,6 +399,12 @@ body.dark .timepicker-plate {
 }
 body.dark .timepicker-tick, body.dark .datepicker-controls * {
   color: var(--fontColor);
+}
+body.dark .collapsible,body.dark .collapsible-header,body.dark .collapsible-body{
+  border-color: rgb(75, 75, 75);
+}
+body.dark .collapsible-header{
+  background-color: var(--bgColor);
 }
 body.dark .timepicker-tick, body.dark .datepicker-controls svg {
   fill: var(--fontColor);
