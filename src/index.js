@@ -161,42 +161,47 @@ function onload() {
     title = localStorage.getItem("ct-title");
     document.getElementById("title").value = title;
   }
-  if (document.getElementById("duration") || localStorage.getItem("ct-lastType")) {
+  if (document.getElementById("durationLi").classList.contains("active") || localStorage.getItem("ct-lastType")) {
+    console.log("GO")
     myDate = null;
     myTime = null;
     changeURL();
     if (localStorage.getItem("ct-lastType")) {
-      let duration = localStorage.getItem("ct-lastDuration").split(":");
+      let localDuration = localStorage.getItem("ct-lastDuration");
+      console.log(localDuration);
+      let duration = localDuration.split(":");
       document.getElementById("hour").value = Number(duration[0]);
       document.getElementById("minute").value = Number(duration[1]);
       document.getElementById("seconds").value = Number(duration[2]);
-      let set = localStorage.getItem("ct-lastSet").split(" ");
-      myDate = set[0];
-      myTime = set[1];
-      var target = new Date(myDate + " " + myTime); //設定時間
+      let localSet = localStorage.getItem("ct-lastSet");
+      let set = localSet.split(":");
+      afterTime(set[0], set[1], set[2]);
     } else {
-    let elementList = document.getElementsByClassName("durationSet");
-    for (let i = 0; i < elementList.length; i++) {
-      const element = elementList[i].value;
-      if (!element) {
-        element = 0;
+      let elementList = document.getElementsByClassName("durationSet");
+      for (let i = 0; i < elementList.length; i++) {
+        const element = elementList[i].value;
+        if (!element) {
+          element = 0;
+        }
       }
+      afterTime(document.getElementById("hour").value, document.getElementById("minute").value, document.getElementById("seconds").value);
     }
-     let now = new Date();
-     now.setHours( now.getHours() + Number(document.getElementById("hour").value)); 
-     now.setMinutes( now.getMinutes() + Number(document.getElementById("minute").value));
-     now.setSeconds( now.getSeconds() + Number(document.getElementById("seconds").value));
-     myDate = now.getFullYear + "/" + (now.getMonth + 1) + "/" + now.getDate;
-     myTime = now.getHours + ":" + now.getMinutes + ":" + now.getSeconds;
-     var target = new Date(myDate + " " + myTime); //設定時間
-     localStorage.setItem("ct-lastType",1);
-     localStorage.setItem("ct-lastDuration", document.getElementById("hour").value + ":" + document.getElementById("minute").value + ":" +document.getElementById("seconds").value);
-  }
-    
+    localStorage.setItem("ct-lastType", 1);
+    localStorage.setItem("ct-lastDuration", document.getElementById("hour").value + ":" + document.getElementById("minute").value + ":" + document.getElementById("seconds").value);
+    down = setInterval(myCount, 200);
+    function afterTime(hour, minute, second) {
+      let now = new Date();
+      now.setHours(now.getHours() + Number(hour));
+      now.setMinutes(now.getMinutes() + Number(minute));
+      now.setSeconds(now.getSeconds() + Number(second));
+      myDate = now.getFullYear + "/" + (now.getMonth + 1) + "/" + now.getDate;
+      myTime = now.getHours + ":" + now.getMinutes + ":" + now.getSeconds;
+      target = new Date(myDate + " " + myTime); //設定時間
+      localStorage.setItem("ct-durationTarget",myDate + " " + myTime);
+      localStorage.setItem("ct-lastSet",hour + ":" + minute + ":" + second);
+    }
 
-  }
-
-  if (paramObject.date && paramObject.time) {
+  } else if (paramObject.date && paramObject.time) {
     //テキストボックスに日時をセット
     document.getElementById("Date").value = paramObject.date;
     document.getElementById("dateLabel").value =
@@ -358,12 +363,12 @@ function onload() {
 
 function set() {
   /*SETボタンを押したときの挙動*/
-  if (document.getElementById("duration").style.display === "block"){
+  if (document.getElementById("durationLi").classList.contains("active")) {
 
   } else {
-  myDate = document.getElementById("Date").value;
-  myTime = document.getElementById("Time").value;
-  changeURL();
+    myDate = document.getElementById("Date").value;
+    myTime = document.getElementById("Time").value;
+    changeURL();
   }
   stop();
   onload();
@@ -411,7 +416,7 @@ document.addEventListener("DOMContentLoaded", function () {
   instances = M.Tabs.init(elems);
   // collapsible
   var elems = document.querySelectorAll('.collapsible');
-    var instances = M.Collapsible.init(elems, options);
+  var instances = M.Collapsible.init(elems, options);
 });
 
 function copy() {
@@ -530,12 +535,12 @@ window.addEventListener("load", () => {
   }
 });
 
-var move = function (e) {
+function move(e) {
   //ページ離脱時に警告
   e.preventDefault();
   // Chrome では returnValue を設定する必要がある
   e.returnValue = "";
-};
+}
 
 // Enable wake lock.
 // (must be wrapped in a user input event handler e.g. a mouse or touch handler)
