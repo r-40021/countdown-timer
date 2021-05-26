@@ -2,7 +2,7 @@ require("materialize-css");
 var Push = require("push.js");
 import NoSleep from "nosleep.js";
 /*変数の定義*/
-var down, displayEnd, oldDisplay, title, myDate, myTime, kiduke;
+var down, displayEnd, oldDisplay, title, myDate, myTime, target, kiduke;
 var useDevice = 0;
 var timerStatus = 0;
 let anime; //テーマ変更時のアニメーション(timeout)
@@ -162,7 +162,7 @@ function onload() {
     document.getElementById("title").value = title;
   }
   if (document.getElementById("durationLi").classList.contains("active") || localStorage.getItem("ct-lastType")) {
-    console.log("GO")
+    console.log("GO");
     myDate = null;
     myTime = null;
     changeURL();
@@ -194,8 +194,8 @@ function onload() {
       now.setHours(now.getHours() + Number(hour));
       now.setMinutes(now.getMinutes() + Number(minute));
       now.setSeconds(now.getSeconds() + Number(second));
-      myDate = now.getFullYear + "/" + (now.getMonth + 1) + "/" + now.getDate;
-      myTime = now.getHours + ":" + now.getMinutes + ":" + now.getSeconds;
+      myDate = now.getFullYear() + "/" + (now.getMonth() + 1) + "/" + now.getDate();
+      myTime = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
       target = new Date(myDate + " " + myTime); //設定時間
       localStorage.setItem("ct-durationTarget",myDate + " " + myTime);
       localStorage.setItem("ct-lastSet",hour + ":" + minute + ":" + second);
@@ -211,7 +211,7 @@ function onload() {
       document.getElementById("Time").value;
     myDate = paramObject.date;
     myTime = paramObject.time;
-    var target = new Date(myDate + " " + myTime + ":00"); //設定時間
+    target = new Date(myDate + " " + myTime + ":00"); //設定時間
     down = setInterval(myCount, 200);
     let countTimes = 0;
 
@@ -488,12 +488,8 @@ window.addEventListener("load", () => {
     }
     const reader = new FileReader();
     reader.onload = () => {
-      alarm = new Audio(reader.result);
-      alarm.loop = true;
-      alarm.volume = document.getElementById("audioVolume").value / 100;
-      testAlarm = new Audio(reader.result);
-      testAlarm.loop = true;
-      testAlarm.volume = document.getElementById("audioVolume").value / 100;
+      alarm.src = reader.result;
+      testAlarm.src = reader.result;
       M.toast({
         html: "アラーム音を設定しました。<br>このページから離れると、アラーム音はリセットされます。",
       });
