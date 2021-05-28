@@ -222,13 +222,10 @@ function onload() {
     document.getElementById("durationHeader").click();
     localStorage.setItem("ct-lastType", 1);
     changeURL();
-    if (((localStorage.getItem("ct-lastType") && !firstLoad) || (durationStop)) && localStorage.getItem("ct-durationTarget").getTime() > Date.now()) {
-      let localSet = localStorage.getItem("ct-durationTarget");
-      let SplitLocalSet = localSet.split(" ");
-      myDate = SplitLocalSet[0];
-      myTime = SplitLocalSet[1];
-      target = new Date(localSet);
-      localStorage.setItem("ct-durationTarget", myDate + " " + myTime);
+    if (((localStorage.getItem("ct-lastType") && !firstLoad) && (localStorage.getItem("ct-lastSet") !== "0:00:00")) || durationStop) {
+      let localSet = localStorage.getItem("ct-lastSet");
+      let SplitLocalSet = localSet.split(":");
+      afterTime(SplitLocalSet[0],SplitLocalSet[1],SplitLocalSet[2])
     } else {
       let elementList = document.getElementsByClassName("durationSet");
       for (let i = 0; i < elementList.length; i++) {
@@ -250,7 +247,6 @@ function onload() {
       myDate = now.getFullYear() + "/" + (now.getMonth() + 1) + "/" + now.getDate();
       myTime = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
       target = new Date(myDate + " " + myTime); //設定時間
-      localStorage.setItem("ct-durationTarget", myDate + " " + myTime);
     }
 
   } else if (paramObject.date && paramObject.time) {
@@ -487,10 +483,6 @@ function stop() {
 function audiostop() {
   document.getElementById("stopTimer").style.display = "";
   document.getElementById("setTimer").style.display = "";
-  if (durationStatus){
-    durationStop = true;
-  }
-
   stopAlarm();
   clearInterval(displayEnd);
   clearTimeout(kiduke);
@@ -498,6 +490,9 @@ function audiostop() {
   timerbox.style.color = "";
   timerbox.style.visibility = "";
   document.title = "やまだのタイマー";
+  if (durationStatus) {
+    durationStop = true; 
+  }
 }
 
 function stopAlarm() {
