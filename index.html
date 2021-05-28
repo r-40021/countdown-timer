@@ -198,7 +198,7 @@
                             </div>
                         </li>
                         <li id="durationLi">
-                            <div class="collapsible-header"><svg xmlns="http://www.w3.org/2000/svg" width="20"
+                            <div class="collapsible-header" id="durationHeader"><svg xmlns="http://www.w3.org/2000/svg" width="20"
                                     height="20" fill="currentColor" class="icons bi bi-clock-history"
                                      viewBox="0 0 16 16">
                                     <path
@@ -209,17 +209,17 @@
                                 </svg>経過時間で設定</div>
                             <div class="collapsible-body" id="duration">
                                 <div class="input-field duration content">
-                                    <input id="hour" type="number" class="validate durationSet" pattern="\d*" min="0" value="0">
+                                    <input id="hour" type="number" class="validate durationSet" pattern="\d*" min="0" value="0" maxlength="20">
                                     <label for="hour">時間</label>
                                 </div> :
                                 <div class="input-field duration content">
                                     <input id="minute" type="number" class="validate durationSet" pattern="\d*" min="0" max="59"
-                                        value="5">
+                                        value="5" maxlength="2">
                                     <label for="minute">分</label>
                                 </div> :
                                 <div class="input-field duration content">
                                     <input id="seconds" type="number" class="validate durationSet" pattern="\d*" min="0" max="59"
-                                        value="0">
+                                        value="0" maxlength="2">
                                     <label for="seconds">秒</label>
                                 </div>
                                 <p><a class="waves-effect waves-light btn modal-close"

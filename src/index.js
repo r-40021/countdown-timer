@@ -4,13 +4,13 @@ import NoSleep from "nosleep.js";
 /*変数の定義*/
 var down, displayEnd, oldDisplay, title, myDate, myTime, target, kiduke;
 var useDevice = 0;
-var timerStatus = 0;
 let firstLoad = 0;
 let anime; //テーマ変更時のアニメーション(timeout)
 let themeStatus; //テーマがユーザー設定(1)なのか否か(0)
 var paramStatus = 1;
 var durationStatus = 0;
 let countTimes = 0;
+var durationStop = false;
 /*Dark Theme*/
 const isDark = window.matchMedia("(prefers-color-scheme: dark)");
 
@@ -186,7 +186,6 @@ function onload() {
   /*パラメータ取得*/
   showVolume();
   countTimes = 0;
-  localStorage.setItem("ct-lastType", 0);
   // Theme
   if (localStorage.getItem("theme") === "dark") {
     // ローカルストレージを読み込み、テーマを反映
@@ -220,12 +219,16 @@ function onload() {
   }
   if ((document.getElementById("durationLi").classList.contains("active")) || (firstLoad === 0 && localStorage.getItem("ct-lastType") == "1")) {
     durationStatus = 1;
+    document.getElementById("durationHeader").click();
     localStorage.setItem("ct-lastType", 1);
     changeURL();
-    if ((localStorage.getItem("ct-lastType")) && !firstLoad) {
-      let localSet = localStorage.getItem("ct-lastSet");
-      let set = localSet.split(":");
-      afterTime(set[0], set[1], set[2]);
+    if (((localStorage.getItem("ct-lastType") && !firstLoad) || (durationStop)) && localStorage.getItem("ct-durationTarget").getTime() > Date.now()) {
+      let localSet = localStorage.getItem("ct-durationTarget");
+      let SplitLocalSet = localSet.split(" ");
+      myDate = SplitLocalSet[0];
+      myTime = SplitLocalSet[1];
+      target = new Date(localSet);
+      localStorage.setItem("ct-durationTarget", myDate + " " + myTime);
     } else {
       let elementList = document.getElementsByClassName("durationSet");
       for (let i = 0; i < elementList.length; i++) {
@@ -237,6 +240,7 @@ function onload() {
       afterTime(document.getElementById("hour").value, document.getElementById("minute").value, document.getElementById("seconds").value);
     }
     localStorage.setItem("ct-lastDuration", document.getElementById("hour").value + ":" + document.getElementById("minute").value + ":" + document.getElementById("seconds").value);
+    durationStop = false;
     down = setInterval(myCount, 200);
     function afterTime(hour, minute, second) {
       let now = new Date();
@@ -247,20 +251,22 @@ function onload() {
       myTime = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
       target = new Date(myDate + " " + myTime); //設定時間
       localStorage.setItem("ct-durationTarget", myDate + " " + myTime);
-      localStorage.setItem("ct-lastSet", hour + ":" + minute + ":" + second);
     }
 
   } else if (paramObject.date && paramObject.time) {
+    localStorage.setItem("ct-lastType", 0);
     durationStatus = 0;
     myDate = paramObject.date;
     myTime = paramObject.time;
     target = new Date(myDate + " " + myTime + ":00"); //設定時間
     down = setInterval(myCount, 200);
   } else {
+    localStorage.setItem("ct-lastType", 0);
     durationStatus = 0;
     noParams();
   }
   firstLoad = 1;
+  durationStop = false;
 }
 
 
@@ -479,11 +485,11 @@ function stop() {
 }
 
 function audiostop() {
-  timerStatus = 0;
   document.getElementById("stopTimer").style.display = "";
   document.getElementById("setTimer").style.display = "";
-
-
+  if (durationStatus){
+    durationStop = true;
+  }
 
   stopAlarm();
   clearInterval(displayEnd);
