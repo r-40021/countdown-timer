@@ -12,6 +12,7 @@ var durationStatus = 0;
 let countTimes = 0;
 var durationStop = false;
 let durationChange = false;
+let setType;
 /*Dark Theme*/
 const isDark = window.matchMedia("(prefers-color-scheme: dark)");
 
@@ -50,13 +51,14 @@ document.addEventListener("DOMContentLoaded", function () {
       durationChange = true;
     })
   }
-  if ((document.getElementById("durationLi").classList.contains("active")) || (firstLoad === 0 && localStorage.getItem("ct-lastType") == "1")) {
+  if ((setType === "duration") || (firstLoad === 0 && localStorage.getItem("ct-lastType") == "1")) {
     let localDuration = localStorage.getItem("ct-lastDuration");
     console.log(localDuration);
     let duration = localDuration.split(":");
     document.getElementById("hour").value = Number(duration[0]);
     document.getElementById("minute").value = Number(duration[1]);
     document.getElementById("seconds").value = Number(duration[2]);
+    setType = "duration";
   }
   if (paramObject.date && paramObject.time) {
     //テキストボックスに日時をセット
@@ -82,33 +84,16 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("timeLabel").value =
         document.getElementById("Time").value;
     }
-  }
-});
-window.addEventListener("load", onload, false);
-
-document.getElementById("nextSkip").addEventListener("click", () => {
-  if (document.getElementById("nextSkip").checked) {
-    localStorage.setItem("ct-skip", 1);
   } else {
-    localStorage.removeItem("ct-skip");
+    noParams();
   }
+  onload();
 });
-document.getElementById("Date").addEventListener(
-  "change",
-  () => {
-    document.getElementById("dateLabel").value =
-      document.getElementById("Date").value;
-  },
-  false
-);
-document.getElementById("Time").addEventListener(
-  "change",
-  () => {
-    document.getElementById("timeLabel").value =
-      document.getElementById("Time").value;
-  },
-  false
-);
+function clickHeader(){
+  document.getElementById("durationHeader").click();
+}
+
+
 
 function device() {
   var userAgent = window.navigator.userAgent.toLowerCase(); //ブラウザ情報取得
@@ -180,7 +165,7 @@ document.addEventListener("DOMContentLoaded", function () {
       } else if (document.msExitFullscreen) {
         document.msExitFullscreen();
       }
-    });
+    },false);
 });
 
 function onload() {
@@ -219,11 +204,14 @@ function onload() {
     title = localStorage.getItem("ct-title");
     document.getElementById("title").value = title;
   }
-  if ((document.getElementById("durationLi").classList.contains("active")) || (firstLoad === 0 && localStorage.getItem("ct-lastType") == "1")) {
+  console.log(setType);
+  console.log(firstLoad);
+  console.log(myDate + myTime);
+  if ((setType === "duration") || (firstLoad === 0 && localStorage.getItem("ct-lastType") == "1")) {
     durationStatus = 1;
     console.log("GO");
-    if (!document.getElementById("durationLi").classList.contains("active")) {
-      document.getElementById("durationHeader").click();
+    if (!document.getElementById("durationHeader").classList.contains("active")) {
+      window.addEventListener("load",clickHeader,false);
     }
     localStorage.setItem("ct-lastType", 1);
     changeURL();
@@ -256,7 +244,12 @@ function onload() {
       myTime = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
       target = new Date(myDate + " " + myTime); //設定時間
     }
-
+  } else if (setType === "target"){
+    localStorage.setItem("ct-lastType", 0);
+    durationStatus = 0;
+    target = new Date(myDate + " " + myTime + ":00"); //設定時間
+    changeURL();
+    down = setInterval(myCount, 200);
   } else if (paramObject.date && paramObject.time) {
     localStorage.setItem("ct-lastType", 0);
     durationStatus = 0;
@@ -282,10 +275,13 @@ function onload() {
   } else {
     localStorage.setItem("ct-lastType", 0);
     durationStatus = 0;
-    noParams();
+    console.log(autoSet);
   }
   firstLoad = 1;
   durationStop = false;
+  if (setType === "target") {
+    setType = null;
+  }
 }
 
 
@@ -430,7 +426,7 @@ function noParams() {
 }
 function set() {
   /*SETボタンを押したときの挙動*/
-  if (document.getElementById("durationLi").classList.contains("active")) {
+  if (setType === "duration") {
 
   } else {
     myDate = document.getElementById("Date").value;
@@ -871,13 +867,46 @@ function tweet() {
   return url;
 }
 document.getElementById("durationSetBtn").addEventListener("click", () => {
-  durationChange = true; 
-  document.getElementById('setTimer').click();
+  durationChange = true;
+  setType = "duration";
+  set();
 }, false);
-window.set = set;
-window.stop = stop;
-window.audiostop = audiostop;
+document.getElementById("targetSetBtn").addEventListener("click", () => {
+  if (setType === "duration") {
+    setType = "target"; 
+  }
+  set();
+},false);
+document.getElementById("setTimer").addEventListener("click",set,false);
+document.getElementById("stopTimer").addEventListener("click", () => {
+  stop();
+  audiostop();
+  Push.clear();
+},false);
+document.getElementById("nextSkip").addEventListener("click", () => {
+  if (document.getElementById("nextSkip").checked) {
+    localStorage.setItem("ct-skip", 1);
+  } else {
+    localStorage.removeItem("ct-skip");
+  }
+});
+document.getElementById("Date").addEventListener(
+  "change",
+  () => {
+    document.getElementById("dateLabel").value =
+      document.getElementById("Date").value;
+  },
+  false
+);
+document.getElementById("Time").addEventListener(
+  "change",
+  () => {
+    document.getElementById("timeLabel").value =
+      document.getElementById("Time").value;
+  },
+  false
+);
+
 window.toggleTheme = toggleTheme;
 window.copy = copy;
-window.Push = Push;
 window.tweet = tweet;
