@@ -325,6 +325,7 @@ input[type="text"]:not(.browser-default)[readonly="readonly"] {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 0.1em;
 }
 .status a {
   color: var(--grayText);
@@ -346,7 +347,7 @@ input[type="text"]:not(.browser-default)[readonly="readonly"] {
 }
 .timerSet {
   position: relative;
-  margin-bottom: 2em;
+  margin-bottom: 0.3em;
 }
 a {
   cursor: pointer;
@@ -373,7 +374,6 @@ input[type=text]:-webkit-autofill:active,input[type=number]:-webkit-autofill:act
   }
   .timer {
     line-height: 1.2;
-    font-size: small;
   }
 }
 body.dark {

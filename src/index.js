@@ -53,7 +53,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   if ((setType === "duration") || (firstLoad === 0 && localStorage.getItem("ct-lastType") == "1")) {
     let localDuration = localStorage.getItem("ct-lastDuration");
-    console.log(localDuration);
     let duration = localDuration.split(":");
     document.getElementById("hour").value = Number(duration[0]);
     document.getElementById("minute").value = Number(duration[1]);
@@ -87,12 +86,12 @@ document.addEventListener("DOMContentLoaded", function () {
   } else {
     noParams();
   }
-  if(localStorage.getItem("volume"))
-  onload();
+  if (localStorage.getItem("volume"))
+    onload();
   alarm.volume = localStorage.getItem("volume");
   showVolume();
 });
-function clickHeader(){
+function clickHeader() {
   document.getElementById("durationHeader").click();
 }
 
@@ -168,7 +167,7 @@ document.addEventListener("DOMContentLoaded", function () {
       } else if (document.msExitFullscreen) {
         document.msExitFullscreen();
       }
-    },false);
+    }, false);
 });
 
 function onload() {
@@ -207,14 +206,10 @@ function onload() {
     title = localStorage.getItem("ct-title");
     document.getElementById("title").value = title;
   }
-  console.log(setType);
-  console.log(firstLoad);
-  console.log(myDate + myTime);
   if ((setType === "duration") || (firstLoad === 0 && localStorage.getItem("ct-lastType") == "1")) {
     durationStatus = 1;
-    console.log("GO");
     if (!document.getElementById("durationHeader").classList.contains("active")) {
-      window.addEventListener("load",clickHeader,false);
+      window.addEventListener("load", clickHeader, false);
     }
     localStorage.setItem("ct-lastType", 1);
     changeURL();
@@ -227,9 +222,9 @@ function onload() {
     } else {
       let elementList = document.getElementsByClassName("durationSet");
       for (let i = 0; i < elementList.length; i++) {
-        let element = elementList[i].value;
-        if (!element) {
-          element = 0;
+        let element = elementList[i];
+        if (!element.value) {
+          element.value = 0;
         }
       }
       afterTime(document.getElementById("hour").value, document.getElementById("minute").value, document.getElementById("seconds").value);
@@ -247,7 +242,7 @@ function onload() {
       myTime = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
       target = new Date(myDate + " " + myTime); //設定時間
     }
-  } else if (setType === "target"){
+  } else if (setType === "target") {
     localStorage.setItem("ct-lastType", 0);
     durationStatus = 0;
     target = new Date(myDate + " " + myTime + ":00"); //設定時間
@@ -278,7 +273,6 @@ function onload() {
   } else {
     localStorage.setItem("ct-lastType", 0);
     durationStatus = 0;
-    console.log(autoSet);
   }
   firstLoad = 1;
   durationStop = false;
@@ -496,9 +490,9 @@ function resize() {
   const place = document.getElementById("displayTime");
   let count = place.textContent.length;
   if (window.innerWidth <= 775) {
-    place.style.fontSize = 150 / count + "vmin"; //文字サイズ調整(Tablet&SP)
+    document.getElementById("timerSet").style.fontSize = 150 / count + "vmin"; //文字サイズ調整(Tablet&SP)
   } else {
-    place.style.fontSize = 185 / count + "vmin"; //文字サイズ調整
+    document.getElementById("timerSet").style.fontSize = 185 / count + "vmin"; //文字サイズ調整
   }
 }
 
@@ -675,7 +669,7 @@ document.addEventListener("DOMContentLoaded", function () {
 function showVolume() {
   document.getElementById("volumeStatusValue").textContent =
     Math.floor(alarm.volume * 100) + "%";
-    localStorage.setItem("volume",alarm.volume)
+  localStorage.setItem("volume", alarm.volume)
 }
 document.getElementById("alarmTimeValue").addEventListener(
   "click",
@@ -878,16 +872,16 @@ document.getElementById("durationSetBtn").addEventListener("click", () => {
 }, false);
 document.getElementById("targetSetBtn").addEventListener("click", () => {
   if (setType === "duration") {
-    setType = "target"; 
+    setType = "target";
   }
   set();
-},false);
-document.getElementById("setTimer").addEventListener("click",set,false);
+}, false);
+document.getElementById("setTimer").addEventListener("click", set, false);
 document.getElementById("stopTimer").addEventListener("click", () => {
   stop();
   audiostop();
   Push.clear();
-},false);
+}, false);
 document.getElementById("nextSkip").addEventListener("click", () => {
   if (document.getElementById("nextSkip").checked) {
     localStorage.setItem("ct-skip", 1);
@@ -911,6 +905,12 @@ document.getElementById("Time").addEventListener(
   },
   false
 );
+document.getElementById("seconds").addEventListener("input", () => {
+  let element = document.getElementById("seconds");
+  if (element.value < 10) {
+    element.value = "0" + element.value;
+  }
+}, false);
 
 window.toggleTheme = toggleTheme;
 window.copy = copy;
