@@ -11,6 +11,7 @@ var paramStatus = 1;
 var durationStatus = 0;
 let countTimes = 0;
 var durationStop = false;
+let durationChange = false;
 /*Dark Theme*/
 const isDark = window.matchMedia("(prefers-color-scheme: dark)");
 
@@ -41,6 +42,13 @@ document.addEventListener("DOMContentLoaded", function () {
     var paramValue = decodeURIComponent(element[1]);
 
     paramObject[paramName] = paramValue;
+  }
+  let durationSettingElements = document.getElementsByClassName("durationSet");
+  for (let i = 0; i < durationSettingElements.length; i++) {
+    const element = durationSettingElements[i];
+    element.addEventListener("change", () => {
+      durationChange = true;
+    })
   }
   if ((document.getElementById("durationLi").classList.contains("active")) || (firstLoad === 0 && localStorage.getItem("ct-lastType") == "1")) {
     let localDuration = localStorage.getItem("ct-lastDuration");
@@ -73,16 +81,10 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("Time").value = localTime;
       document.getElementById("timeLabel").value =
         document.getElementById("Time").value;
-
-      document.getElementById("setTimer").click();
-    } else {
-      localStorage.removeItem("ct-date");
-      localStorage.removeItem("ct-time");
-      noParams();
     }
   }
-  onload();
 });
+window.addEventListener("load", onload, false);
 
 document.getElementById("nextSkip").addEventListener("click", () => {
   if (document.getElementById("nextSkip").checked) {
@@ -219,13 +221,18 @@ function onload() {
   }
   if ((document.getElementById("durationLi").classList.contains("active")) || (firstLoad === 0 && localStorage.getItem("ct-lastType") == "1")) {
     durationStatus = 1;
-    document.getElementById("durationHeader").click();
+    console.log("GO");
+    if (!document.getElementById("durationLi").classList.contains("active")) {
+      document.getElementById("durationHeader").click();
+    }
     localStorage.setItem("ct-lastType", 1);
     changeURL();
-    if (((localStorage.getItem("ct-lastType") && !firstLoad) && (localStorage.getItem("ct-lastSet") !== "0:00:00")) || durationStop) {
+    if ((((localStorage.getItem("ct-lastType") && !firstLoad) && (localStorage.getItem("ct-lastSet") !== "0")) || durationStop) && !durationChange) {
       let localSet = localStorage.getItem("ct-lastSet");
-      let SplitLocalSet = localSet.split(":");
-      afterTime(SplitLocalSet[0],SplitLocalSet[1],SplitLocalSet[2])
+      let localSetHour = Math.floor(localSet / (1000 * 60 * 60));
+      let localSetMin = Math.floor((localSet - localSetHour * 1000 * 60 * 60) / (1000 * 60));
+      let localSetSec = (localSet - localSetHour * 1000 * 60 * 60 - localSetMin * 1000 * 60) / 1000;
+      afterTime(localSetHour, localSetMin, localSetSec);
     } else {
       let elementList = document.getElementsByClassName("durationSet");
       for (let i = 0; i < elementList.length; i++) {
@@ -238,6 +245,7 @@ function onload() {
     }
     localStorage.setItem("ct-lastDuration", document.getElementById("hour").value + ":" + document.getElementById("minute").value + ":" + document.getElementById("seconds").value);
     durationStop = false;
+    durationChange = false;
     down = setInterval(myCount, 200);
     function afterTime(hour, minute, second) {
       let now = new Date();
@@ -256,6 +264,21 @@ function onload() {
     myTime = paramObject.time;
     target = new Date(myDate + " " + myTime + ":00"); //設定時間
     down = setInterval(myCount, 200);
+  } else if (
+    localStorage.getItem("ct-date") &&
+    localStorage.getItem("ct-time")
+  ) {
+    localStorage.setItem("ct-lastType", 0);
+    let localDate = localStorage.getItem("ct-date");
+    let localTime = localStorage.getItem("ct-time");
+    let localTarget = new Date(localDate + " " + localTime + ":00");
+    if (localTarget.getTime() > Date.now()) {
+      document.getElementById("setTimer").click();
+    } else {
+      localStorage.removeItem("ct-date");
+      localStorage.removeItem("ct-time");
+      noParams();
+    }
   } else {
     localStorage.setItem("ct-lastType", 0);
     durationStatus = 0;
@@ -274,6 +297,9 @@ function myCount() {
   var displayPlace = document.getElementById("displayTime");
   var date = new Date();
   var diffTime = target.getTime() - date.getTime(); //時間の差を計算
+  if (diffTime) {
+    localStorage.setItem("ct-lastSet", diffTime);
+  }
   var diffHour = Math.floor(diffTime / (1000 * 60 * 60)); //時間に変換
   var diffMinute = Math.floor(
     (diffTime - diffHour * 1000 * 60 * 60) / (1000 * 60)
@@ -372,13 +398,14 @@ function myCount() {
       } else {
         paramStatus = 1;
       }
-      countTimes++;
+
     }
-    if (display != oldDisplay) {
+    if (display != oldDisplay || countTimes === 0) {
       displayPlace.textContent = display;
       document.title = display;
       oldDisplay = display;
     }
+    countTimes++;
   }
 }
 
@@ -411,8 +438,8 @@ function set() {
     changeURL();
   }
   stop();
-  onload();
   audiostop();
+  onload();
   Push.clear(); //通知削除
 }
 
@@ -491,7 +518,8 @@ function audiostop() {
   timerbox.style.visibility = "";
   document.title = "やまだのタイマー";
   if (durationStatus) {
-    durationStop = true; 
+    durationStop = true;
+
   }
 }
 
@@ -842,6 +870,10 @@ function tweet() {
   }
   return url;
 }
+document.getElementById("durationSetBtn").addEventListener("click", () => {
+  durationChange = true; 
+  document.getElementById('setTimer').click();
+}, false);
 window.set = set;
 window.stop = stop;
 window.audiostop = audiostop;
