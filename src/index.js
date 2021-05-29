@@ -87,7 +87,10 @@ document.addEventListener("DOMContentLoaded", function () {
   } else {
     noParams();
   }
+  if(localStorage.getItem("volume"))
   onload();
+  alarm.volume = localStorage.getItem("volume");
+  showVolume();
 });
 function clickHeader(){
   document.getElementById("durationHeader").click();
@@ -515,7 +518,8 @@ function audiostop() {
   document.title = "やまだのタイマー";
   if (durationStatus) {
     durationStop = true;
-
+    document.getElementById("alarmTimeValue").textContent = "一時停止中";
+    document.title = "一時停止中";
   }
 }
 
@@ -671,6 +675,7 @@ document.addEventListener("DOMContentLoaded", function () {
 function showVolume() {
   document.getElementById("volumeStatusValue").textContent =
     Math.floor(alarm.volume * 100) + "%";
+    localStorage.setItem("volume",alarm.volume)
 }
 document.getElementById("alarmTimeValue").addEventListener(
   "click",
