@@ -49,6 +49,16 @@ input.valid[type=text]:not(.browser-default){
   width: 80px;
   height: 80px;
   cursor: pointer;
+  &.myBtn-tiny{
+    width: auto;
+    height: auto;
+    line-height: 1.1;
+    border-radius: 100vh;
+    padding: 0.5em 0.8em;
+  }
+}
+.easySet a{
+  margin: 0.4em 0.3em;
 }
 .myBtn-circle:not(.nohover):hover {
   color: var(--green);

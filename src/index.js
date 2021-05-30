@@ -868,6 +868,7 @@ function tweet() {
   }
   return url;
 }
+document.addEventListener("DOMContentLoaded",()=>{
 document.getElementById("durationSetBtn").addEventListener("click", () => {
   durationChange = true;
   setType = "duration";
@@ -914,6 +915,26 @@ document.getElementById("seconds").addEventListener("change", () => {
     element.value = "0" + element.value;
   }
 }, false);
+let easySetElements = document.getElementsByClassName("easySetBtn");
+for (let i = 0; i < easySetElements.length; i++) {
+  const element = easySetElements[i];
+  element.addEventListener("click", (e)=>{
+  const setTime = e.target.getAttribute("setTime");
+  let durationSettingElements = document.getElementsByClassName("durationSet");
+  for (let i = 0; i < durationSettingElements.length; i++) {
+    const element = durationSettingElements[i];
+    element.value = 0;
+  }
+  if(setTime.indexOf("min") !== -1){
+    document.getElementById("minute").value = setTime.match(/\d{1,2}/);
+  } else if(setTime.indexOf("h") !== -1){
+    document.getElementById("hour").value = setTime.match(/\d{1,2}/);
+  }
+  document.getElementById("durationSetBtn").click();
+  })
+}
+},false);
+
 
 window.toggleTheme = toggleTheme;
 window.copy = copy;
