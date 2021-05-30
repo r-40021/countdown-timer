@@ -2,12 +2,17 @@ require("materialize-css");
 var Push = require("push.js");
 import NoSleep from "nosleep.js";
 /*変数の定義*/
-var down, displayEnd, oldDisplay, title, myDate, myTime, kiduke;
+var down, displayEnd, oldDisplay, title, myDate, myTime, target, kiduke;
 var useDevice = 0;
-var timerStatus = 0;
+let firstLoad = 0;
 let anime; //テーマ変更時のアニメーション(timeout)
 let themeStatus; //テーマがユーザー設定(1)なのか否か(0)
 var paramStatus = 1;
+var durationStatus = 0;
+let countTimes = 0;
+var durationStop = false;
+let durationChange = false;
+let setType;
 /*Dark Theme*/
 const isDark = window.matchMedia("(prefers-color-scheme: dark)");
 
@@ -26,32 +31,75 @@ document.addEventListener("DOMContentLoaded", function () {
   if (params.get("date") && params.get("time")) {
     paramStatus = 0;
   }
-  onload();
-});
+  var param = location.search;
+  var paramObject = new Object();
+  param = param.substring(1);
+  var parameters = param.split("&");
 
-document.getElementById("nextSkip").addEventListener("click", () => {
-  if (document.getElementById("nextSkip").checked) {
-    localStorage.setItem("ct-skip", 1);
-  } else {
-    localStorage.removeItem("ct-skip");
+  for (var i = 0; i < parameters.length; i++) {
+    var element = parameters[i].split("=");
+
+    var paramName = decodeURIComponent(element[0]);
+    var paramValue = decodeURIComponent(element[1]);
+
+    paramObject[paramName] = paramValue;
   }
-});
-document.getElementById("Date").addEventListener(
-  "change",
-  () => {
+  let durationSettingElements = document.getElementsByClassName("durationSet");
+  for (let i = 0; i < durationSettingElements.length; i++) {
+    const element = durationSettingElements[i];
+    element.addEventListener("change", () => {
+      durationChange = true;
+    })
+  }
+  if ((setType === "duration") || (firstLoad === 0 && localStorage.getItem("ct-lastType") == "1")) {
+    let localDuration = localStorage.getItem("ct-lastDuration");
+    let duration = localDuration.split(":");
+    document.getElementById("hour").value = Number(duration[0]);
+    document.getElementById("minute").value = Number(duration[1]);
+    document.getElementById("seconds").value = Number(duration[2]);
+    setType = "duration";
+  }
+  if (paramObject.date && paramObject.time) {
+    //テキストボックスに日時をセット
+    document.getElementById("Date").value = paramObject.date;
     document.getElementById("dateLabel").value =
       document.getElementById("Date").value;
-  },
-  false
-);
-document.getElementById("Time").addEventListener(
-  "change",
-  () => {
+    document.getElementById("Time").value = paramObject.time;
     document.getElementById("timeLabel").value =
       document.getElementById("Time").value;
-  },
-  false
-);
+  } else if (
+    localStorage.getItem("ct-date") &&
+    localStorage.getItem("ct-time")
+  ) {
+    let localDate = localStorage.getItem("ct-date");
+    let localTime = localStorage.getItem("ct-time");
+    let localTarget = new Date(localDate + " " + localTime + ":00");
+    if (localTarget.getTime() > Date.now()) {
+      //テキストボックスに日時をセット
+      document.getElementById("Date").value = localDate;
+      document.getElementById("dateLabel").value =
+        document.getElementById("Date").value;
+      document.getElementById("Time").value = localTime;
+      document.getElementById("timeLabel").value =
+        document.getElementById("Time").value;
+    }
+  } else {
+    noParams();
+  }
+  if (localStorage.getItem("volume")) {
+    let localVolume = localStorage.getItem("volume");
+    alarm.volume = localVolume;
+    testAlarm.volume = localVolume;
+    showVolume();
+    document.getElementById("audioVolume").value = localVolume * 100;
+  }
+  onload();
+});
+function clickHeader() {
+  document.getElementById("durationHeader").click();
+}
+
+
 
 function device() {
   var userAgent = window.navigator.userAgent.toLowerCase(); //ブラウザ情報取得
@@ -123,13 +171,14 @@ document.addEventListener("DOMContentLoaded", function () {
       } else if (document.msExitFullscreen) {
         document.msExitFullscreen();
       }
-    });
+    }, false);
 });
 
 function onload() {
   resize(); //文字サイズ調整
   /*パラメータ取得*/
   showVolume();
+  countTimes = 0;
   // Theme
   if (localStorage.getItem("theme") === "dark") {
     // ローカルストレージを読み込み、テーマを反映
@@ -161,182 +210,239 @@ function onload() {
     title = localStorage.getItem("ct-title");
     document.getElementById("title").value = title;
   }
-
-  if (paramObject.date && paramObject.time) {
-    //テキストボックスに日時をセット
-    document.getElementById("Date").value = paramObject.date;
-    document.getElementById("dateLabel").value =
-      document.getElementById("Date").value;
-    document.getElementById("Time").value = paramObject.time;
-    document.getElementById("timeLabel").value =
-      document.getElementById("Time").value;
+  if ((setType === "duration") || (firstLoad === 0 && localStorage.getItem("ct-lastType") == "1")) {
+    durationStatus = 1;
+    if (!document.getElementById("durationHeader").classList.contains("active")) {
+      window.addEventListener("load", clickHeader, false);
+    }
+    localStorage.setItem("ct-lastType", 1);
+    changeURL();
+    if ((((localStorage.getItem("ct-lastType") && !firstLoad) && (localStorage.getItem("ct-lastSet") !== "0")) || durationStop) && !durationChange) {
+      let localSet = localStorage.getItem("ct-lastSet");
+      let localSetHour = Math.floor(localSet / (1000 * 60 * 60));
+      let localSetMin = Math.floor((localSet - localSetHour * 1000 * 60 * 60) / (1000 * 60));
+      let localSetSec = (localSet - localSetHour * 1000 * 60 * 60 - localSetMin * 1000 * 60) / 1000;
+      afterTime(localSetHour, localSetMin, localSetSec);
+    } else {
+      let elementList = document.getElementsByClassName("durationSet");
+      for (let i = 0; i < elementList.length; i++) {
+        let element = elementList[i];
+        if (!element.value) {
+          element.value = 0;
+        }
+      }
+      afterTime(document.getElementById("hour").value, document.getElementById("minute").value, document.getElementById("seconds").value);
+    }
+    localStorage.setItem("ct-lastDuration", document.getElementById("hour").value + ":" + document.getElementById("minute").value + ":" + document.getElementById("seconds").value);
+    durationStop = false;
+    durationChange = false;
+    down = setInterval(myCount, 200);
+    function afterTime(hour, minute, second) {
+      let now = new Date();
+      now.setHours(now.getHours() + Number(hour));
+      now.setMinutes(now.getMinutes() + Number(minute));
+      now.setSeconds(now.getSeconds() + Number(second));
+      myDate = now.getFullYear() + "/" + (now.getMonth() + 1) + "/" + now.getDate();
+      myTime = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
+      target = new Date(myDate + " " + myTime); //設定時間
+    }
+  } else if (setType === "target") {
+    localStorage.setItem("ct-lastType", 0);
+    durationStatus = 0;
+    target = new Date(myDate + " " + myTime + ":00"); //設定時間
+    changeURL();
+    down = setInterval(myCount, 200);
+  } else if (paramObject.date && paramObject.time) {
+    localStorage.setItem("ct-lastType", 0);
+    durationStatus = 0;
     myDate = paramObject.date;
     myTime = paramObject.time;
-    var target = new Date(myDate + " " + myTime + ":00"); //設定時間
+    target = new Date(myDate + " " + myTime + ":00"); //設定時間
     down = setInterval(myCount, 200);
-    let countTimes = 0;
-
-    /*カウントダウン（一番大事）*/
-    function myCount() {
-      var displayPlace = document.getElementById("displayTime");
-      var date = new Date();
-      var diffTime = target.getTime() - date.getTime(); //時間の差を計算
-      var diffHour = Math.floor(diffTime / (1000 * 60 * 60)); //時間に変換
-      var diffMinute = Math.floor(
-        (diffTime - diffHour * 1000 * 60 * 60) / (1000 * 60)
-      ); //分に変換
-      var diffSecond = Math.floor(
-        (diffTime - diffHour * 1000 * 60 * 60 - diffMinute * 1000 * 60) / 1000
-      ); //秒に変換
-      if (diffMinute < 10) {
-        diffMinute = "0" + diffMinute;
-      }
-      if (diffSecond < 10) {
-        diffSecond = "0" + diffSecond;
-      }
-      var display = diffHour + ":" + diffMinute + ":" + diffSecond;
-      if (display === "0:00:00") {
-        display = "0:00:00";
-        displayPlace.textContent = display;
-        document.title = "やまだのタイマー";
-        /*通知(タッチデバイスとIEはなし)*/
-        try {
-          if (useDevice) {
-            Push.create("時間です！", {
-              body: "くっ...時の流れが疾風迅雷の俺に追いついたようだ......",
-              icon: "./favicon/favicon.ico", //アイコン
-              requireInteraction: true, // 永遠に通知
-              onClick: function () {
-                window.focus();
-                this.close();
-                stop();
-                audiostop();
-              },
-            });
-          }
-        } catch (error) {
-          console.log("error");
-        }
-
-        alarm.play();
-        stop();
-        document.title = "やまだのタイマー";
-        displayEnd = setInterval(function () {
-          document.title = "時間です！";
-          displayPlace.style.color = "rgb(255 38 111)";
-          displayPlace.style.visibility = "hidden";
-          kiduke = setTimeout(function () {
-            document.title = "気付け！！";
-            displayPlace.style.visibility = "";
-          }, 500);
-        }, 1000);
-      } /*計算結果が負orNaNのときの処理*/ else if (display.match("-|NaN")) {
-        stop();
-        if (display.match("-")) {
-          M.toast({ html: "過去の日時はセットできません" });
-        } else if (display.match("NaN")) {
-          M.toast({ html: "むむ？" });
-        }
-        display = "0:00:00";
-        displayPlace.textContent = display;
-        document.title = "やまだのタイマー";
-        noParams();
-      } else {
-        if (countTimes === 0) {
-          let newMyDate = new Date(myDate);
-          if (newMyDate.getFullYear() === date.getFullYear()) {
-            if (newMyDate.getMonth() === date.getMonth() && newMyDate.getDate() === date.getDate()) {
-              document.getElementById("alarmTimeValue").textContent = myTime;
-            } else {
-              document.getElementById("alarmTimeValue").textContent = newMyDate.getMonth() + 1 + "/" + newMyDate.getDate() + " " + myTime;
-            }
-          } else {
-            document.getElementById("alarmTimeValue").textContent =
-              myDate + " " + myTime;
-          }
-          document.getElementById("stopTimer").style.display = "inline-flex";
-          document.getElementById("setTimer").style.display = "none";
-          if (paramStatus) {
-            localStorage.setItem("ct-date", myDate);
-            localStorage.setItem("ct-time", myTime);
-            if (title) {
-              localStorage.setItem("ct-title", title);
-            } else {
-              localStorage.removeItem("ct-title");
-            }
-          } else {
-            paramStatus = 1;
-          }
-          countTimes++;
-        }
-        if (display != oldDisplay) {
-          displayPlace.textContent = display;
-          document.title = display;
-          oldDisplay = display;
-        }
-      }
-    }
   } else if (
     localStorage.getItem("ct-date") &&
     localStorage.getItem("ct-time")
   ) {
+    localStorage.setItem("ct-lastType", 0);
     let localDate = localStorage.getItem("ct-date");
     let localTime = localStorage.getItem("ct-time");
     let localTarget = new Date(localDate + " " + localTime + ":00");
     if (localTarget.getTime() > Date.now()) {
-      //テキストボックスに日時をセット
-      document.getElementById("Date").value = localDate;
-      document.getElementById("dateLabel").value =
-        document.getElementById("Date").value;
-      document.getElementById("Time").value = localTime;
-      document.getElementById("timeLabel").value =
-        document.getElementById("Time").value;
-
       document.getElementById("setTimer").click();
     } else {
       localStorage.removeItem("ct-date");
       localStorage.removeItem("ct-time");
       noParams();
-      return;
     }
   } else {
-    noParams();
+    localStorage.setItem("ct-lastType", 0);
+    durationStatus = 0;
   }
-  function noParams() {
-    /*パラメータがなかったら*/
-    let date = new Date();
-    let after = new Date();
-    after.setHours(date.getHours() + 1);
-    let defaultSet = after.toLocaleString().split(" ");
-    const defaultDate = defaultSet[0];
-    let originalDefaultTime = defaultSet[1].split(":");
-    const defaultTime = originalDefaultTime[0] + ":" + originalDefaultTime[1];
-    document.getElementById("Date").value = defaultDate;
-    document.getElementById("dateLabel").value =
-      document.getElementById("Date").value;
-    document.getElementById("Time").value = defaultTime;
-    document.getElementById("timeLabel").value =
-      document.getElementById("Time").value;
-    document.getElementById("alarmTimeValue").textContent =
-      defaultTime + " (自動設定)";
+  firstLoad = 1;
+  durationStop = false;
+  if (setType === "target") {
+    setType = null;
   }
 }
 
+
+
+
+
+/*カウントダウン（一番大事）*/
+function myCount() {
+  var displayPlace = document.getElementById("displayTime");
+  var date = new Date();
+  var diffTime = target.getTime() - date.getTime(); //時間の差を計算
+  if (diffTime) {
+    localStorage.setItem("ct-lastSet", diffTime);
+  }
+  var diffHour = Math.floor(diffTime / (1000 * 60 * 60)); //時間に変換
+  var diffMinute = Math.floor(
+    (diffTime - diffHour * 1000 * 60 * 60) / (1000 * 60)
+  ); //分に変換
+  var diffSecond = Math.floor(
+    (diffTime - diffHour * 1000 * 60 * 60 - diffMinute * 1000 * 60) / 1000
+  ); //秒に変換
+  if (diffMinute < 10) {
+    diffMinute = "0" + diffMinute;
+  }
+  if (diffSecond < 10) {
+    diffSecond = "0" + diffSecond;
+  }
+  var display = diffHour + ":" + diffMinute + ":" + diffSecond;
+  if (display === "0:00:00") {
+    display = "0:00:00";
+    displayPlace.textContent = display;
+    document.title = "やまだのタイマー";
+    /*通知(タッチデバイスとIEはなし)*/
+    try {
+      if (useDevice) {
+        Push.create("時間です！", {
+          body: "くっ...時の流れが疾風迅雷の俺に追いついたようだ......",
+          icon: "./favicon/favicon.ico", //アイコン
+          requireInteraction: true, // 永遠に通知
+          onClick: function () {
+            window.focus();
+            this.close();
+            stop();
+            audiostop();
+          },
+        });
+      }
+    } catch (error) {
+      console.log("error");
+    }
+
+    alarm.play();
+    stop();
+    document.title = "やまだのタイマー";
+    displayEnd = setInterval(function () {
+      document.title = "時間です！";
+      displayPlace.style.color = "rgb(255 38 111)";
+      displayPlace.style.visibility = "hidden";
+      kiduke = setTimeout(function () {
+        document.title = "気付け！！";
+        displayPlace.style.visibility = "";
+      }, 500);
+    }, 1000);
+  } /*計算結果が負orNaNのときの処理*/ else if (display.match("-|NaN")) {
+    stop();
+    if (display.match("-")) {
+      M.toast({ html: "過去の日時はセットできません" });
+    } else if (display.match("NaN")) {
+      M.toast({ html: "むむ？" });
+    }
+    display = "0:00:00";
+    displayPlace.textContent = display;
+    document.title = "やまだのタイマー";
+    noParams();
+  } else {
+    if (countTimes === 0) {
+      let newMyDate = new Date(myDate);
+      let myDisplayTime;
+      if (durationStatus) {
+        let myTimeSplit = myTime.split(":");
+        if (Number(myTimeSplit[1]) < 10) {
+          myTimeSplit[1] = "0" + myTimeSplit[1];
+        }
+        myDisplayTime = myTimeSplit[0] + ":" + myTimeSplit[1];
+      } else {
+        myDisplayTime = myTime;
+      }
+      if (newMyDate.getFullYear() === date.getFullYear()) {
+        if (newMyDate.getMonth() === date.getMonth() && newMyDate.getDate() === date.getDate()) {
+          document.getElementById("alarmTimeValue").textContent = myDisplayTime;
+        } else {
+          document.getElementById("alarmTimeValue").textContent = newMyDate.getMonth() + 1 + "/" + newMyDate.getDate() + " " + myDisplayTime;
+        }
+      } else {
+        document.getElementById("alarmTimeValue").textContent =
+          myDate + " " + myDisplayTime;
+      }
+      document.getElementById("stopTimer").style.display = "inline-flex";
+      document.getElementById("setTimer").style.display = "none";
+      if (paramStatus) {
+        if (!durationStatus) {
+          localStorage.setItem("ct-date", myDate);
+          localStorage.setItem("ct-time", myTime);
+        }
+        if (title) {
+          localStorage.setItem("ct-title", title);
+        } else {
+          localStorage.removeItem("ct-title");
+        }
+      } else {
+        paramStatus = 1;
+      }
+
+    }
+    if (display != oldDisplay || countTimes === 0) {
+      displayPlace.textContent = display;
+      document.title = display;
+      oldDisplay = display;
+    }
+    countTimes++;
+  }
+}
+
+
+function noParams() {
+  /*パラメータがなかったら*/
+  let date = new Date();
+  let after = new Date();
+  after.setHours(date.getHours() + 1);
+  let defaultSet = after.toLocaleString().split(" ");
+  const defaultDate = defaultSet[0];
+  let originalDefaultTime = defaultSet[1].split(":");
+  const defaultTime = originalDefaultTime[0] + ":" + originalDefaultTime[1];
+  document.getElementById("Date").value = defaultDate;
+  document.getElementById("dateLabel").value =
+    document.getElementById("Date").value;
+  document.getElementById("Time").value = defaultTime;
+  document.getElementById("timeLabel").value =
+    document.getElementById("Time").value;
+  document.getElementById("alarmTimeValue").textContent =
+    defaultTime + " (自動設定)";
+}
 function set() {
   /*SETボタンを押したときの挙動*/
-  var url = new URL(window.location.href);
-  myDate = document.getElementById("Date").value;
-  myTime = document.getElementById("Time").value;
-  changeURL();
+  if (setType === "duration") {
+
+  } else {
+    myDate = document.getElementById("Date").value;
+    myTime = document.getElementById("Time").value;
+    changeURL();
+  }
   stop();
-  onload();
   audiostop();
+  onload();
   Push.clear(); //通知削除
 }
 
 function changeURL() {
   let newURL = "?";
-  if (myDate && myTime) {
+  if (myDate && myTime && !durationStatus) {
     newURL = newURL + "date=" + myDate + "&time=" + myTime;
   }
   if (title) {
@@ -372,6 +478,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // tab
   elems = document.querySelectorAll(".tabs");
   instances = M.Tabs.init(elems);
+  // collapsible
+  var elems = document.querySelectorAll('.collapsible');
+  var instances = M.Collapsible.init(elems, options);
 });
 
 function copy() {
@@ -385,9 +494,10 @@ function resize() {
   const place = document.getElementById("displayTime");
   let count = place.textContent.length;
   if (window.innerWidth <= 775) {
-    place.style.fontSize = 150 / count + "vmin"; //文字サイズ調整(Tablet&SP)
+    document.getElementById("timerSet").style.fontSize = "min(" + 150 / count + "vmin ,225px)"; //文字サイズ調整(Tablet&SP)  
+
   } else {
-    place.style.fontSize = 185 / count + "vmin"; //文字サイズ調整
+    document.getElementById("timerSet").style.fontSize = "min(" + 185 / count + "vmin ,225px)"; //文字サイズ調整
   }
 }
 
@@ -396,12 +506,8 @@ function stop() {
 }
 
 function audiostop() {
-  timerStatus = 0;
   document.getElementById("stopTimer").style.display = "";
   document.getElementById("setTimer").style.display = "";
-
-
-
   stopAlarm();
   clearInterval(displayEnd);
   clearTimeout(kiduke);
@@ -409,6 +515,13 @@ function audiostop() {
   timerbox.style.color = "";
   timerbox.style.visibility = "";
   document.title = "やまだのタイマー";
+  if (durationStatus) {
+    durationStop = true;
+    document.getElementById("alarmTimeValue").textContent = "一時停止中";
+    if (document.getElementById("displayTime").textContent !== "0:00:00") {
+      document.title = "一時停止中";
+    }
+  }
 }
 
 function stopAlarm() {
@@ -443,12 +556,8 @@ window.addEventListener("load", () => {
     }
     const reader = new FileReader();
     reader.onload = () => {
-      alarm = new Audio(reader.result);
-      alarm.loop = true;
-      alarm.volume = document.getElementById("audioVolume").value / 100;
-      testAlarm = new Audio(reader.result);
-      testAlarm.loop = true;
-      testAlarm.volume = document.getElementById("audioVolume").value / 100;
+      alarm.src = reader.result;
+      testAlarm.src = reader.result;
       M.toast({
         html: "アラーム音を設定しました。<br>このページから離れると、アラーム音はリセットされます。",
       });
@@ -490,12 +599,12 @@ window.addEventListener("load", () => {
   }
 });
 
-var move = function (e) {
+function move(e) {
   //ページ離脱時に警告
   e.preventDefault();
   // Chrome では returnValue を設定する必要がある
   e.returnValue = "";
-};
+}
 
 // Enable wake lock.
 // (must be wrapped in a user input event handler e.g. a mouse or touch handler)
@@ -567,6 +676,7 @@ document.addEventListener("DOMContentLoaded", function () {
 function showVolume() {
   document.getElementById("volumeStatusValue").textContent =
     Math.floor(alarm.volume * 100) + "%";
+  localStorage.setItem("volume", alarm.volume)
 }
 document.getElementById("alarmTimeValue").addEventListener(
   "click",
@@ -762,10 +872,74 @@ function tweet() {
   }
   return url;
 }
-window.set = set;
-window.stop = stop;
-window.audiostop = audiostop;
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("durationSetBtn").addEventListener("click", () => {
+    durationChange = true;
+    setType = "duration";
+    set();
+  }, false);
+  document.getElementById("targetSetBtn").addEventListener("click", () => {
+    if (setType === "duration") {
+      setType = "target";
+    }
+    set();
+  }, false);
+  document.getElementById("setTimer").addEventListener("click", set, false);
+  document.getElementById("stopTimer").addEventListener("click", () => {
+    stop();
+    audiostop();
+    Push.clear();
+  }, false);
+  document.getElementById("nextSkip").addEventListener("click", () => {
+    if (document.getElementById("nextSkip").checked) {
+      localStorage.setItem("ct-skip", 1);
+    } else {
+      localStorage.removeItem("ct-skip");
+    }
+  });
+  document.getElementById("Date").addEventListener(
+    "change",
+    () => {
+      document.getElementById("dateLabel").value =
+        document.getElementById("Date").value;
+    },
+    false
+  );
+  document.getElementById("Time").addEventListener(
+    "change",
+    () => {
+      document.getElementById("timeLabel").value =
+        document.getElementById("Time").value;
+    },
+    false
+  );
+  document.getElementById("seconds").addEventListener("change", () => {
+    let element = document.getElementById("seconds");
+    if (element.value < 10 && (element.value.length < 2 || element.value === 0)) {
+      element.value = "0" + element.value;
+    }
+  }, false);
+  let easySetElements = document.getElementsByClassName("easySetBtn");
+  for (let i = 0; i < easySetElements.length; i++) {
+    const element = easySetElements[i];
+    element.addEventListener("click", (e) => {
+      const setTime = e.target.getAttribute("setTime");
+      let durationSettingElements = document.getElementsByClassName("durationSet");
+      for (let i = 0; i < durationSettingElements.length; i++) {
+        const element = durationSettingElements[i];
+        element.value = 0;
+      }
+      if (setTime.indexOf("min") !== -1) {
+        document.getElementById("minute").value = setTime.match(/\d{1,2}/);
+      } else if (setTime.indexOf("h") !== -1) {
+        document.getElementById("hour").value = setTime.match(/\d{1,2}/);
+      }
+      document.getElementById("durationSetBtn").click();
+    })
+  }
+}, false);
+
+
 window.toggleTheme = toggleTheme;
 window.copy = copy;
-window.Push = Push;
 window.tweet = tweet;
