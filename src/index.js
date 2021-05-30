@@ -490,9 +490,10 @@ function resize() {
   const place = document.getElementById("displayTime");
   let count = place.textContent.length;
   if (window.innerWidth <= 775) {
-    document.getElementById("timerSet").style.fontSize = 150 / count + "vmin"; //文字サイズ調整(Tablet&SP)
+    document.getElementById("timerSet").style.fontSize = "min(" + 150 / count + "vmin ,225px)"; //文字サイズ調整(Tablet&SP)  
+
   } else {
-    document.getElementById("timerSet").style.fontSize = 185 / count + "vmin"; //文字サイズ調整
+    document.getElementById("timerSet").style.fontSize = "min(" + 185 / count + "vmin ,225px)"; //文字サイズ調整
   }
 }
 

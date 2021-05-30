@@ -325,7 +325,7 @@ input[type="text"]:not(.browser-default)[readonly="readonly"] {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 0.1em;
+  font-size: medium;
 }
 .status a {
   color: var(--grayText);
@@ -347,7 +347,8 @@ input[type="text"]:not(.browser-default)[readonly="readonly"] {
 }
 .timerSet {
   position: relative;
-  margin-bottom: 0.3em;
+  margin-bottom: 0.2em;
+  font-size: 20vmin;
 }
 a {
   cursor: pointer;
@@ -374,6 +375,13 @@ input[type=text]:-webkit-autofill:active,input[type=number]:-webkit-autofill:act
   }
   .timer {
     line-height: 1.2;
+  }
+  .status {
+    font-size: 10px;
+  }
+  .setBtns .center{
+    transform: scale(0.6);
+    transform-origin: center top 0;
   }
 }
 body.dark {
