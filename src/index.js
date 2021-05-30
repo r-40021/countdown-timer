@@ -514,7 +514,9 @@ function audiostop() {
   if (durationStatus) {
     durationStop = true;
     document.getElementById("alarmTimeValue").textContent = "一時停止中";
+    if(document.getElementById("displayTime").textContent !== "0:00:00"){
     document.title = "一時停止中";
+    }
   }
 }
 
@@ -906,9 +908,9 @@ document.getElementById("Time").addEventListener(
   },
   false
 );
-document.getElementById("seconds").addEventListener("input", () => {
+document.getElementById("seconds").addEventListener("change", () => {
   let element = document.getElementById("seconds");
-  if (element.value < 10) {
+  if (element.value < 10 && (element.value.length < 2 || element.value === 0)) {
     element.value = "0" + element.value;
   }
 }, false);

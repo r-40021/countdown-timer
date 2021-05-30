@@ -208,6 +208,7 @@
                                         d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z" />
                                 </svg>経過時間で設定</div>
                             <div class="collapsible-body" id="duration">
+                                <form onsubmit="document.getElementById('durationSetBtn').click();return false;">
                                 <div class="input-field duration content">
                                     <input id="hour" type="number" class="validate durationSet" pattern="\d*" min="0" value="0" maxlength="20">
                                     <label for="hour">時間</label>
@@ -222,7 +223,9 @@
                                         value="0" maxlength="2">
                                     <label for="seconds">秒</label>
                                 </div>
+                                <input type="submit" style="display: none;">
                                 <p><a class="waves-effect waves-light btn modal-close" id="durationSetBtn">セット</a></p>
+                                </form>
                                 <p>ここで設定した場合は、パラメータに格納されません。<br>※アラームを鳴らすには、ブラウザを起動しておく必要があります。</p>
                             </div>
                         </li>
