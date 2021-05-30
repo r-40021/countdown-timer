@@ -106,7 +106,7 @@ body:not(:fullscreen) #escFullscreen {
 }
 ::-webkit-scrollbar {
   width: 5px;
-  height: 5px;
+  height: 3px;
 }
 ::-webkit-scrollbar-track {
   background: rgba($color: #fff, $alpha: 0);
