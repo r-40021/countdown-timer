@@ -3,9 +3,9 @@
 <img src="../snsicon/OGP.png" width="300px">
 # スクリーンショット
 #### ライトモード
-![timer_light](https://user-images.githubusercontent.com/75155258/119243911-1bc82980-bba6-11eb-8c65-58bcde69464f.jpg)
+![ライトモード](https://user-images.githubusercontent.com/75155258/120090124-0f5e4680-c13b-11eb-912f-e28257acaecb.jpg)
 #### ダークモード
-![timer_dark](https://user-images.githubusercontent.com/75155258/119243910-1a96fc80-bba6-11eb-9604-9dc577197dcd.jpg)
+![ダークモード](https://user-images.githubusercontent.com/75155258/120090129-1422fa80-c13b-11eb-9a00-a0a297299fcc.jpg)
 #### 日付の設定
 <img src="https://user-images.githubusercontent.com/75155258/119243992-f12aa080-bba6-11eb-80b5-a2bcaa66dfc3.jpg" width ="400px">
 
@@ -13,7 +13,7 @@
 <img src="https://user-images.githubusercontent.com/75155258/119244001-fa1b7200-bba6-11eb-801a-ab61b74c66b7.jpg" width ="400px">
 
 #### プッシュ通知
-<img src="https://user-images.githubusercontent.com/75155258/119244154-867a6480-bba8-11eb-9fda-981a9bb42d80.jpg" width ="400px">
+<img src="https://user-images.githubusercontent.com/75155258/120090149-2b61e800-c13b-11eb-9000-db90b30da313.jpg" width ="400px">
 
 # How to Use
 **使い方は超シンプル**
@@ -27,6 +27,7 @@
 2. このアプリを使っている間、パソコンやスマートフォンがスリープすることはありません。
 3. 時間になったらプッシュ通知が届きます。(PC)
 4. 全画面表示モードを搭載。
+5. 普通のタイマーのようにも使えます。
 # お願い
 このWEBアプリには、プライバシーの観点からアクセス解析をつけていません。画面上のシェアボタンから、Twitterで"#やまだのタイマー"と"#やまだけんいち"をつけてツイートして頂ければ、こちらも大体のアクセス数を把握できますので、もしよろしければご協力ください。
 # 動作確認済み環境
