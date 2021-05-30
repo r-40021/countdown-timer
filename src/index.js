@@ -67,6 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("Time").value = paramObject.time;
     document.getElementById("timeLabel").value =
       document.getElementById("Time").value;
+      setType = null;
   } else if (
     localStorage.getItem("ct-date") &&
     localStorage.getItem("ct-time")
@@ -82,9 +83,14 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("Time").value = localTime;
       document.getElementById("timeLabel").value =
         document.getElementById("Time").value;
+        setType = null;
+    } else {
+      noParams();
+      setType = null;
     }
   } else {
     noParams();
+    setType = null;
   }
   if (localStorage.getItem("volume")) {
     let localVolume = localStorage.getItem("volume");
@@ -210,7 +216,7 @@ function onload() {
     title = localStorage.getItem("ct-title");
     document.getElementById("title").value = title;
   }
-  if ((setType === "duration") || (firstLoad === 0 && localStorage.getItem("ct-lastType") == "1")) {
+  if ((setType === "duration") || (firstLoad === 0 && localStorage.getItem("ct-lastType") == "1") && !paramObject.date && !paramObject.time) {
     durationStatus = 1;
     if (!document.getElementById("durationHeader").classList.contains("active")) {
       window.addEventListener("load", clickHeader, false);
@@ -268,7 +274,7 @@ function onload() {
     let localTime = localStorage.getItem("ct-time");
     let localTarget = new Date(localDate + " " + localTime + ":00");
     if (localTarget.getTime() > Date.now()) {
-      document.getElementById("setTimer").click();
+      window.addEventListener("load",()=>{document.getElementById("targetSetBtn").click();},false);
     } else {
       localStorage.removeItem("ct-date");
       localStorage.removeItem("ct-time");
