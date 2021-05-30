@@ -109,13 +109,13 @@ body:not(:fullscreen) #escFullscreen {
   height: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: #fff;
+  background: rgba($color: #fff, $alpha: 0);
   border: none;
   border-radius: 10px;
-  box-shadow: inset 0 0 2px #777;
+  box-shadow: none;
 }
 ::-webkit-scrollbar-thumb {
-  background: #ccc;
+  background: rgba($color: gray, $alpha: 0.5);
   border-radius: 10px;
   box-shadow: none;
 }
@@ -199,6 +199,16 @@ body {
 }
 #settings .modal-footer div:last-child {
   flex: 3;
+}
+.kome{
+  position: relative;
+  padding-left: 1em;
+  &::before{
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "※";
+  }
 }
 .duration{
   display: inline-flex;
