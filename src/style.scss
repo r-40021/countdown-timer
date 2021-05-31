@@ -100,6 +100,14 @@ body:fullscreen #fullscreen {
 body:not(:fullscreen) #escFullscreen {
   display: none;
 }
+.share{
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+  white-space: nowrap;
+}
 .share .btn-flat {
   padding: 0 7px;
   color: var(--grayText);
@@ -282,6 +290,7 @@ input[type="text"]:not(.browser-default)[readonly="readonly"] {
 .fullscreenIcons div {
   display: inline-block;
   cursor: pointer;
+  margin: 0 0.5em;
 }
 #settings .modal-content {
   padding: 0 5px;
