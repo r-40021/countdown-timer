@@ -347,6 +347,9 @@ input[type="text"]:not(.browser-default)[readonly="readonly"] {
   align-items: center;
   font-size: medium;
 }
+#durationIcon {
+  display: none;
+}
 .status a {
   color: var(--grayText);
 }
