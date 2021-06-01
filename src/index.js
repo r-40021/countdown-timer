@@ -692,6 +692,7 @@ document.getElementById("title").addEventListener("input", () => {
 document.addEventListener("DOMContentLoaded", function () {
   if (!localStorage.getItem("ct-skip")) {
     document.getElementById("openWelcome").click();
+    document.getElementById("howToCheck").checked = true;
   } else {
     document.getElementById("nextSkip").checked = true;
   }
@@ -914,10 +915,21 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("nextSkip").addEventListener("click", () => {
     if (document.getElementById("nextSkip").checked) {
       localStorage.setItem("ct-skip", 1);
+      document.getElementById("howToCheck").checked = false;
     } else {
       localStorage.removeItem("ct-skip");
+      document.getElementById("howToCheck").checked = true;
     }
-  });
+  }, false);
+  document.getElementById("howToCheck").addEventListener("click", () => {
+    if (document.getElementById("howToCheck").checked) {
+      localStorage.removeItem("ct-skip");
+      document.getElementById("nextSkip").checked = false;
+    } else {
+      localStorage.setItem("ct-skip", 1);
+      document.getElementById("nextSkip").checked = true;
+    }
+  }, false);
   document.getElementById("Date").addEventListener(
     "change",
     () => {
