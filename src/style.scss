@@ -160,6 +160,12 @@ body {
   font-weight: bold;
   src: local("YoGothic-Bold"), local("Yu Gothic");
 }
+.displayTimeWrap{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  min-height: 35vmin;
+}
 .timer {
   flex: 1;
   display: flex;

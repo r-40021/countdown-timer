@@ -216,8 +216,6 @@ function onload() {
     title = localStorage.getItem("ct-title");
     document.getElementById("title").value = title;
   }
-  console.log(myDate + " " + myTime);
-  console.log(setType);
   if ((setType === "duration") || ((firstLoad === 0 && localStorage.getItem("ct-lastType") == "1") && !paramObject.date && !paramObject.time)) {
     durationStatus = 1;
     if (!document.getElementById("durationHeader").classList.contains("active")) {
@@ -369,7 +367,7 @@ function myCount() {
         });
       }
     } catch (error) {
-      console.log("error");
+      console.error("Cannot make a notification.");
     }
 
     alarm.play();
@@ -419,8 +417,14 @@ function myCount() {
 
     }
     if (display != oldDisplay || countTimes === 0) {
-      displayPlace.textContent = display;
-      document.title = display;
+      let realDisplay;
+      if (diffHour === 0){
+        realDisplay = display.split(":")[1] + ":" + display.split(":")[2];
+      } else {
+        realDisplay = display;
+      }
+      displayPlace.textContent = realDisplay;
+      document.title = realDisplay;
       oldDisplay = display;
     }
     countTimes++;
@@ -517,10 +521,10 @@ function resize() {
   const place = document.getElementById("displayTime");
   let count = place.textContent.length;
   if (window.innerWidth <= 775) {
-    document.getElementById("timerSet").style.fontSize = "min(" + 150 / count + "vmin ,225px)"; //文字サイズ調整(Tablet&SP)  
+    document.getElementById("timerSet").style.fontSize = "min(" + 150 / count + "vmin ,225px, 26vh)"; //文字サイズ調整(Tablet&SP)  
 
   } else {
-    document.getElementById("timerSet").style.fontSize = "min(" + 185 / count + "vmin ,225px)"; //文字サイズ調整
+    document.getElementById("timerSet").style.fontSize = "min(" + 185 / count + "vmin ,225px, 28vh)"; //文字サイズ調整
   }
 }
 
