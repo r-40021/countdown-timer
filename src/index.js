@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
       durationChange = true;
     })
   }
-  if ((setType === "duration") || (firstLoad === 0 && localStorage.getItem("ct-lastType") == "1")) {
+  if (localStorage.getItem("ct-lastDuration")) {
     let localDuration = localStorage.getItem("ct-lastDuration");
     let duration = localDuration.split(":");
     document.getElementById("hour").value = Number(duration[0]);
@@ -348,7 +348,7 @@ function myCount() {
       document.getElementById("setTimer").style.display = "none";
   }
   if (display === "0:00:00") {
-    display = "0:00:00";
+    display = "00:00";
     displayPlace.textContent = display;
     document.title = "やまだのタイマー";
     /*通知(タッチデバイスとIEはなし)*/
@@ -393,7 +393,7 @@ function myCount() {
     } else if (display.match("NaN")) {
       M.toast({ html: "むむ？" });
     }
-    display = "0:00:00";
+    display = "00:00";
     displayPlace.textContent = display;
     document.title = "やまだのタイマー";
     noParams();
@@ -545,7 +545,7 @@ function audiostop() {
   if (durationStatus) {
     durationStop = true;
     document.getElementById("alarmTimeValue").textContent = "一時停止中";
-    if (document.getElementById("displayTime").textContent !== "0:00:00") {
+    if (document.getElementById("displayTime").textContent !== "00:00") {
       document.title = "一時停止中";
     }
   }
