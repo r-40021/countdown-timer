@@ -8,6 +8,13 @@
   --green: #4db6ac;
   --grayText: #666;
 }
+p{
+  text-align: justify;
+  line-height: 1.5;
+}
+ol > li{
+  margin-bottom: 0.8em;
+}
 input {
   -webkit-user-select: text;
   -moz-user-select: text;
@@ -160,6 +167,12 @@ body {
   font-weight: bold;
   src: local("YoGothic-Bold"), local("Yu Gothic");
 }
+.displayTimeWrap{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  min-height: 35vmin;
+}
 .timer {
   flex: 1;
   display: flex;
@@ -191,7 +204,7 @@ body {
   margin-inline-start: 1em;
 }
 #settings .section p.radio label {
-  color: var(--fontColor);
+  color: var(--grayText);
   font-size: 12px;
   margin-inline-start: 1em;
 }

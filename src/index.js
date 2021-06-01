@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
       durationChange = true;
     })
   }
-  if ((setType === "duration") || (firstLoad === 0 && localStorage.getItem("ct-lastType") == "1")) {
+  if (localStorage.getItem("ct-lastDuration")) {
     let localDuration = localStorage.getItem("ct-lastDuration");
     let duration = localDuration.split(":");
     document.getElementById("hour").value = Number(duration[0]);
@@ -216,8 +216,6 @@ function onload() {
     title = localStorage.getItem("ct-title");
     document.getElementById("title").value = title;
   }
-  console.log(myDate + " " + myTime);
-  console.log(setType);
   if ((setType === "duration") || ((firstLoad === 0 && localStorage.getItem("ct-lastType") == "1") && !paramObject.date && !paramObject.time)) {
     durationStatus = 1;
     if (!document.getElementById("durationHeader").classList.contains("active")) {
@@ -309,13 +307,6 @@ function myCount() {
   var diffTime = target.getTime() - date.getTime(); //時間の差を計算
   if (diffTime || diffTime === 0) {
     localStorage.setItem("ct-lastSet", diffTime);
-    if (setType === "duration") {
-      document.getElementById("durationIcon").style.display = "inline";
-      document.getElementById("targetIcon").style.display = "none";
-    } else {
-      document.getElementById("durationIcon").style.display = "";
-      document.getElementById("targetIcon").style.display = "";
-    }
       let newMyDate = new Date(myDate);
       let myDisplayTime;
       if (durationStatus) {
@@ -357,7 +348,7 @@ function myCount() {
       document.getElementById("setTimer").style.display = "none";
   }
   if (display === "0:00:00") {
-    display = "0:00:00";
+    display = "00:00";
     displayPlace.textContent = display;
     document.title = "やまだのタイマー";
     /*通知(タッチデバイスとIEはなし)*/
@@ -376,7 +367,7 @@ function myCount() {
         });
       }
     } catch (error) {
-      console.log("error");
+      console.error("Cannot make a notification.");
     }
 
     alarm.play();
@@ -402,7 +393,7 @@ function myCount() {
     } else if (display.match("NaN")) {
       M.toast({ html: "むむ？" });
     }
-    display = "0:00:00";
+    display = "00:00";
     displayPlace.textContent = display;
     document.title = "やまだのタイマー";
     noParams();
@@ -426,8 +417,14 @@ function myCount() {
 
     }
     if (display != oldDisplay || countTimes === 0) {
-      displayPlace.textContent = display;
-      document.title = display;
+      let realDisplay;
+      if (diffHour === 0){
+        realDisplay = display.split(":")[1] + ":" + display.split(":")[2];
+      } else {
+        realDisplay = display;
+      }
+      displayPlace.textContent = realDisplay;
+      document.title = realDisplay;
       oldDisplay = display;
     }
     countTimes++;
@@ -524,10 +521,10 @@ function resize() {
   const place = document.getElementById("displayTime");
   let count = place.textContent.length;
   if (window.innerWidth <= 775) {
-    document.getElementById("timerSet").style.fontSize = "min(" + 150 / count + "vmin ,225px)"; //文字サイズ調整(Tablet&SP)  
+    document.getElementById("timerSet").style.fontSize = "min(" + 150 / count + "vmin ,225px, 26vh)"; //文字サイズ調整(Tablet&SP)  
 
   } else {
-    document.getElementById("timerSet").style.fontSize = "min(" + 185 / count + "vmin ,225px)"; //文字サイズ調整
+    document.getElementById("timerSet").style.fontSize = "min(" + 185 / count + "vmin ,225px, 28vh)"; //文字サイズ調整
   }
 }
 
@@ -548,7 +545,7 @@ function audiostop() {
   if (durationStatus) {
     durationStop = true;
     document.getElementById("alarmTimeValue").textContent = "一時停止中";
-    if (document.getElementById("displayTime").textContent !== "0:00:00") {
+    if (document.getElementById("displayTime").textContent !== "00:00") {
       document.title = "一時停止中";
     }
   }
@@ -699,6 +696,7 @@ document.getElementById("title").addEventListener("input", () => {
 document.addEventListener("DOMContentLoaded", function () {
   if (!localStorage.getItem("ct-skip")) {
     document.getElementById("openWelcome").click();
+    document.getElementById("howToCheck").checked = true;
   } else {
     document.getElementById("nextSkip").checked = true;
   }
@@ -921,10 +919,21 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("nextSkip").addEventListener("click", () => {
     if (document.getElementById("nextSkip").checked) {
       localStorage.setItem("ct-skip", 1);
+      document.getElementById("howToCheck").checked = false;
     } else {
       localStorage.removeItem("ct-skip");
+      document.getElementById("howToCheck").checked = true;
     }
-  });
+  }, false);
+  document.getElementById("howToCheck").addEventListener("click", () => {
+    if (document.getElementById("howToCheck").checked) {
+      localStorage.removeItem("ct-skip");
+      document.getElementById("nextSkip").checked = false;
+    } else {
+      localStorage.setItem("ct-skip", 1);
+      document.getElementById("nextSkip").checked = true;
+    }
+  }, false);
   document.getElementById("Date").addEventListener(
     "change",
     () => {
