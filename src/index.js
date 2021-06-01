@@ -309,13 +309,6 @@ function myCount() {
   var diffTime = target.getTime() - date.getTime(); //時間の差を計算
   if (diffTime || diffTime === 0) {
     localStorage.setItem("ct-lastSet", diffTime);
-    if (setType === "duration") {
-      document.getElementById("durationIcon").style.display = "inline";
-      document.getElementById("targetIcon").style.display = "none";
-    } else {
-      document.getElementById("durationIcon").style.display = "";
-      document.getElementById("targetIcon").style.display = "";
-    }
       let newMyDate = new Date(myDate);
       let myDisplayTime;
       if (durationStatus) {
