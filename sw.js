@@ -1,11 +1,12 @@
-var CACHE_NAME = 'ct-20210601';
+var CACHE_NAME = 'ct-20210602';
 var urlsToCache = [
   './index.html',
   './dist/style.css',
   './dist/main.min.js',
   './alarm.mp3',
   './favicon/favicon.ico',
-  './favicon/site.webmanifest'
+  './favicon/site.webmanifest',
+  './favicon/favicon-32x32.png'
 ];
 self.addEventListener("install", (function(event) {
     event.waitUntil(caches.open(CACHE_NAME).then((function(cache) {

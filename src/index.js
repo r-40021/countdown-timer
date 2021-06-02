@@ -27,7 +27,7 @@ var noSleep = new NoSleep();
 
 document.addEventListener("DOMContentLoaded", function () {
   device();
-      // Theme
+  // Theme
   if (localStorage.getItem("theme") === "dark") {
     // ローカルストレージを読み込み、テーマを反映
     toggleTheme("d");
@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("Time").value = paramObject.time;
     document.getElementById("timeLabel").value =
       document.getElementById("Time").value;
-      setType = null;
+    setType = null;
   } else if (
     localStorage.getItem("ct-date") &&
     localStorage.getItem("ct-time")
@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("Time").value = localTime;
       document.getElementById("timeLabel").value =
         document.getElementById("Time").value;
-        setType = null;
+      setType = null;
     } else {
       noParams();
       setType = null;
@@ -239,12 +239,12 @@ function onload() {
       afterTime(document.getElementById("hour").value, document.getElementById("minute").value, document.getElementById("seconds").value);
     }
     if (((((localStorage.getItem("ct-lastType") === "1" && !firstLoad) && (Number(localStorage.getItem("ct-lastSet")) >= 1000)) || durationStop) && !durationChange) || firstLoad) {
-    localStorage.setItem("ct-lastDuration", document.getElementById("hour").value + ":" + document.getElementById("minute").value + ":" + document.getElementById("seconds").value);
-    durationStop = false;
-    durationChange = false;
-    localStorage.setItem("ct-lastType", 1);
-    setType = "duration";
-    down = setInterval(myCount, 200);
+      localStorage.setItem("ct-lastDuration", document.getElementById("hour").value + ":" + document.getElementById("minute").value + ":" + document.getElementById("seconds").value);
+      durationStop = false;
+      durationChange = false;
+      localStorage.setItem("ct-lastType", 1);
+      setType = "duration";
+      down = setInterval(myCount, 200);
     } else {
       noParams();
     }
@@ -279,7 +279,7 @@ function onload() {
     let localTime = localStorage.getItem("ct-time");
     let localTarget = new Date(localDate + " " + localTime + ":00");
     if (localTarget.getTime() > Date.now()) {
-      window.addEventListener("load",()=>{document.getElementById("targetSetBtn").click();},false);
+      window.addEventListener("load", () => { document.getElementById("targetSetBtn").click(); }, false);
     } else {
       localStorage.removeItem("ct-date");
       localStorage.removeItem("ct-time");
@@ -307,27 +307,27 @@ function myCount() {
   var diffTime = target.getTime() - date.getTime(); //時間の差を計算
   if (diffTime || diffTime === 0) {
     localStorage.setItem("ct-lastSet", diffTime);
-      let newMyDate = new Date(myDate);
-      let myDisplayTime;
-      if (durationStatus) {
-        let myTimeSplit = myTime.split(":");
-        if (Number(myTimeSplit[1]) < 10) {
-          myTimeSplit[1] = "0" + myTimeSplit[1];
-        }
-        myDisplayTime = myTimeSplit[0] + ":" + myTimeSplit[1];
-      } else {
-        myDisplayTime = myTime;
+    let newMyDate = new Date(myDate);
+    let myDisplayTime;
+    if (durationStatus) {
+      let myTimeSplit = myTime.split(":");
+      if (Number(myTimeSplit[1]) < 10) {
+        myTimeSplit[1] = "0" + myTimeSplit[1];
       }
-      if (newMyDate.getFullYear() === date.getFullYear()) {
-        if (newMyDate.getMonth() === date.getMonth() && newMyDate.getDate() === date.getDate()) {
-          document.getElementById("alarmTimeValue").textContent = myDisplayTime;
-        } else {
-          document.getElementById("alarmTimeValue").textContent = newMyDate.getMonth() + 1 + "/" + newMyDate.getDate() + " " + myDisplayTime;
-        }
+      myDisplayTime = myTimeSplit[0] + ":" + myTimeSplit[1];
+    } else {
+      myDisplayTime = myTime;
+    }
+    if (newMyDate.getFullYear() === date.getFullYear()) {
+      if (newMyDate.getMonth() === date.getMonth() && newMyDate.getDate() === date.getDate()) {
+        document.getElementById("alarmTimeValue").textContent = myDisplayTime;
       } else {
-        document.getElementById("alarmTimeValue").textContent =
-          myDate + " " + myDisplayTime;
+        document.getElementById("alarmTimeValue").textContent = newMyDate.getMonth() + 1 + "/" + newMyDate.getDate() + " " + myDisplayTime;
       }
+    } else {
+      document.getElementById("alarmTimeValue").textContent =
+        myDate + " " + myDisplayTime;
+    }
   }
   var diffHour = Math.floor(diffTime / (1000 * 60 * 60)); //時間に変換
   var diffMinute = Math.floor(
@@ -345,7 +345,7 @@ function myCount() {
   var display = diffHour + ":" + diffMinute + ":" + diffSecond;
   if (countTimes === 0) {
     document.getElementById("stopTimer").style.display = "inline-flex";
-      document.getElementById("setTimer").style.display = "none";
+    document.getElementById("setTimer").style.display = "none";
   }
   if (display === "0:00:00") {
     display = "00:00";
@@ -354,9 +354,12 @@ function myCount() {
     /*通知(タッチデバイスとIEはなし)*/
     try {
       if (useDevice) {
+        let pushBody = ["時間になりました…見よ、我が悪しき闇を！","「時間に風は止み、海は荒れ、大地は腐ってゆきる」と預言書にあった────！","時間になり……世界は温かな光に包まれました……つけあがるなよ小娘ッ！","タイムになり、社会に貢献しました、君も見習った方がいい。","時間にイコール関係が成立しました！"];
+        let min = Math.ceil(0);
+        let max = Math.floor(pushBody.length);
         Push.create("時間です！", {
-          body: "くっ...時の流れが疾風迅雷の俺に追いついたようだ......",
-          icon: "./favicon/favicon.ico", //アイコン
+          body: pushBody[Math.floor(Math.random() * (max - min) + min)],
+          icon: "../favicon/favicon-32x32.png", //アイコン
           requireInteraction: true, // 永遠に通知
           onClick: function () {
             window.focus();
@@ -399,8 +402,8 @@ function myCount() {
     noParams();
   } else {
     if (countTimes === 0) {
-      
-      
+
+
       if (paramStatus) {
         if (!durationStatus) {
           localStorage.setItem("ct-date", myDate);
@@ -418,7 +421,7 @@ function myCount() {
     }
     if (display != oldDisplay || countTimes === 0) {
       let realDisplay;
-      if (diffHour === 0){
+      if (diffHour === 0) {
         realDisplay = display.split(":")[1] + ":" + display.split(":")[2];
       } else {
         realDisplay = display;
@@ -449,8 +452,8 @@ function noParams() {
     document.getElementById("Time").value;
   document.getElementById("alarmTimeValue").textContent =
     defaultTime + " (自動設定)";
-    localStorage.setItem("ct-lastType", 0);
-    durationStatus = 0;
+  localStorage.setItem("ct-lastType", 0);
+  durationStatus = 0;
 }
 function set() {
   /*SETボタンを押したときの挙動*/
@@ -975,7 +978,6 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   }
 }, false);
-
 
 window.toggleTheme = toggleTheme;
 window.copy = copy;
