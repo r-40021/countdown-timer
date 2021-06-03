@@ -169,9 +169,17 @@ body {
 }
 .displayTimeWrap{
   display: flex;
+  font-size: inherit;
   width: 100%;
   align-items: center;
   min-height: 20vmin;
+  border: 0;
+  padding: 0;
+  line-height: inherit;
+  transition:
+    border         .2s ease-out,
+    padding        .2s ease-out,
+    font-size .2s ease-out;
 }
 .timer {
   flex: 1;
