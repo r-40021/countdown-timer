@@ -1,4 +1,4 @@
-var CACHE_NAME = 'ct-20210604';
+var CACHE_NAME = 'ct-20210604v2';
 var urlsToCache = [
   './index.html',
   './dist/style.css',
@@ -7,6 +7,9 @@ var urlsToCache = [
   './favicon/favicon.ico',
   './favicon/site.webmanifest',
   './favicon/favicon-32x32.png'
+
+
+
 ];
 self.addEventListener("install", (function(event) {
     event.waitUntil(caches.open(CACHE_NAME).then((function(cache) {
