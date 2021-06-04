@@ -527,10 +527,12 @@ function resize() {
     count = 7;
   }
   if (window.innerWidth <= 775) {
-    document.getElementById("timerSet").style.fontSize = "min(" + 150 / count + "vmin ," + window.innerWidth * 0.8 / count * 1.5 + "px)"; //文字サイズ調整(Tablet&SP)  
+    document.getElementById("timerSetforOld").style.fontSize = 150 / count + "vmin";
+    document.getElementById("timerSet").style.fontSize = "min(" + 150 / count + "vmin ," + window.innerWidth / count * 1.5 + "px)"; //文字サイズ調整(Tablet&SP)  
 
   } else {
-    document.getElementById("timerSet").style.fontSize = "min(" + 185 / count + "vmin ," + window.innerWidth * 0.8 / count * 1.5 + "px)"; //文字サイズ調整
+    document.getElementById("timerSetforOld").style.fontSize = 185 / count + "vmin";
+    document.getElementById("timerSet").style.fontSize = "min(" + 185 / count + "vmin ," + window.innerWidth * 0.95 / count * 1.5 + "px)"; //文字サイズ調整
   }
 }
 
