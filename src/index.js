@@ -378,7 +378,7 @@ function myCount() {
         let max = Math.floor(pushBody.length);
         Push.create("時間です！", {
           body: pushBody[Math.floor(Math.random() * (max - min) + min)],
-          icon: "../favicon/favicon-32x32.png", //アイコン
+          icon: "https://r-40021.github.io/countdown-timer/favicon/favicon-32x32.png", //アイコン
           requireInteraction: true, // 永遠に通知
           onClick: function () {
             window.focus();
