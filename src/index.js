@@ -1,26 +1,27 @@
-require("materialize-css");
-var Push = require("push.js");
-import NoSleep from "nosleep.js";
+require("materialize-css");// Materialize読み込み
+var Push = require("push.js");// プッシュ通知のライブラリを読み込み
+import NoSleep from "nosleep.js";// スリープしないように
 /*変数の定義*/
 var down, displayEnd, oldDisplay, title, myDate, myTime, target, kiduke;
 var useDevice = 0;
 let firstLoad = 0;
 let anime; //テーマ変更時のアニメーション(timeout)
 let themeStatus; //テーマがユーザー設定(1)なのか否か(0)
-var paramStatus = 1;
-var durationStatus = 0;
-let countTimes = 0;
-var durationStop = false;
-let durationChange = false;
-let setType;
+var paramStatus = 1;//パラメータがあるか
+var durationStatus = 0;//「経過時間」で設定か
+let countTimes = 0;//SETボタン押下後すぐか
+var durationStop = false;//「経過時間」でせっていし、一時停止中か
+let durationChange = false;//「経過時間」の設定が変わったか
+let setType;//「経過時間」or「経過時間→日時設定」
 /*Dark Theme*/
-const isDark = window.matchMedia("(prefers-color-scheme: dark)");
+const isDark = window.matchMedia("(prefers-color-scheme: dark)");//ダークモード？
 
 /*初期アラーム音設定*/
 var alarm = new Audio("https://r-40021.github.io/countdown-timer/alarm.mp3");
 alarm.loop = true;
 alarm.volume = document.getElementById("audioVolume").value / 100;
 var testAlarm = new Audio("https://r-40021.github.io/countdown-timer/alarm.mp3");
+/*アラーム音の視聴用 */
 testAlarm.loop = true;
 testAlarm.volume = document.getElementById("audioVolume").value / 100;
 var noSleep = new NoSleep();
@@ -38,6 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
   } else {
     toggleTheme(isDark);
   }
+  //パラメータを取得
   let params = new URL(window.location.href).searchParams;
   if (params.get("date") && params.get("time")) {
     paramStatus = 0;
@@ -55,6 +57,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     paramObject[paramName] = paramValue;
   }
+
+  //経過時間設定が変わったら
   let durationSettingElements = document.getElementsByClassName("durationSet");
   for (let i = 0; i < durationSettingElements.length; i++) {
     const element = durationSettingElements[i];
@@ -62,6 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
       durationChange = true;
     })
   }
+  //最後の設定をテキストボックスに代入
   if (localStorage.getItem("ct-lastDuration")) {
     let localDuration = localStorage.getItem("ct-lastDuration");
     let duration = localDuration.split(":");
@@ -83,6 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
     localStorage.getItem("ct-date") &&
     localStorage.getItem("ct-time")
   ) {
+    //「日時設定」のLocalStorageから取得・テキストボックスにセット
     let localDate = localStorage.getItem("ct-date");
     let localTime = localStorage.getItem("ct-time");
     let localTarget = new Date(localDate + " " + localTime + ":00");
@@ -96,10 +102,12 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("Time").value;
       setType = null;
     } else {
+      // Local Storageの時間が過去だったら
       noParams();
       setType = null;
     }
   } else {
+    //パラメータ＆Local Storageなし
     noParams();
     setType = null;
   }
@@ -108,12 +116,12 @@ document.addEventListener("DOMContentLoaded", function () {
     alarm.volume = localVolume;
     testAlarm.volume = localVolume;
     showVolume();
-    document.getElementById("audioVolume").value = localVolume * 100;
+    document.getElementById("audioVolume").value = localVolume * 100;//前回の音量を取得しセット
   }
   onload();
 });
 function clickHeader() {
-  document.getElementById("durationHeader").click();
+  document.getElementById("durationHeader").click();//「経過時間で設定」の項目を表示させる
 }
 
 
@@ -196,6 +204,8 @@ function onload() {
   /*パラメータ取得*/
   showVolume();
   countTimes = 0;
+
+  /*パラメータを取得し、オブジェクト化*/
   var param = location.search;
   var paramObject = new Object();
   param = param.substring(1);
@@ -221,8 +231,9 @@ function onload() {
     if (!document.getElementById("durationHeader").classList.contains("active")) {
       window.addEventListener("load", clickHeader, false);
     }
-    changeURL();
+    changeURL();//URL変更
     if ((((localStorage.getItem("ct-lastType") === "1" && !firstLoad) && (Number(localStorage.getItem("ct-lastSet")) >= 1000)) || durationStop) && !durationChange) {
+      // 「経過時間」でセット
       let localSet = localStorage.getItem("ct-lastSet");
       let localSetHour = Math.floor(localSet / (1000 * 60 * 60));
       let localSetMin = Math.floor((localSet - localSetHour * 1000 * 60 * 60) / (1000 * 60));
@@ -239,6 +250,7 @@ function onload() {
       afterTime(document.getElementById("hour").value, document.getElementById("minute").value, document.getElementById("seconds").value);
     }
     if (((((localStorage.getItem("ct-lastType") === "1" && !firstLoad) && (Number(localStorage.getItem("ct-lastSet")) >= 1000)) || durationStop) && !durationChange) || firstLoad) {
+      // Local Storageに保存されていた場合
       localStorage.setItem("ct-lastDuration", document.getElementById("hour").value + ":" + document.getElementById("minute").value + ":" + document.getElementById("seconds").value);
       durationStop = false;
       durationChange = false;
@@ -246,9 +258,11 @@ function onload() {
       setType = "duration";
       down = setInterval(myCount, 200);
     } else {
+      // 保存されていない
       noParams();
     }
     function afterTime(hour, minute, second) {
+      /* 〇時間〇分〇秒後を取得 */
       let now = new Date();
       now.setHours(now.getHours() + Number(hour));
       now.setMinutes(now.getMinutes() + Number(minute));
@@ -258,12 +272,14 @@ function onload() {
       target = new Date(myDate + " " + myTime); //設定時間
     }
   } else if (setType === "target") {
+    // 「日時」で設定
     localStorage.setItem("ct-lastType", 0);
     durationStatus = 0;
     target = new Date(myDate + " " + myTime + ":00"); //設定時間
     changeURL();
     down = setInterval(myCount, 200);
   } else if (paramObject.date && paramObject.time) {
+    // パラメータが存在
     localStorage.setItem("ct-lastType", 0);
     durationStatus = 0;
     myDate = paramObject.date;
@@ -274,6 +290,7 @@ function onload() {
     localStorage.getItem("ct-date") &&
     localStorage.getItem("ct-time")
   ) {
+    // Local Storageから「日時で設定」
     localStorage.setItem("ct-lastType", 0);
     let localDate = localStorage.getItem("ct-date");
     let localTime = localStorage.getItem("ct-time");
@@ -286,6 +303,7 @@ function onload() {
       noParams();
     }
   } else {
+    // 初めて
     localStorage.setItem("ct-lastType", 0);
     durationStatus = 0;
   }
@@ -308,6 +326,7 @@ function myCount() {
   if (diffTime || diffTime === 0) {
     localStorage.setItem("ct-lastSet", diffTime);
     let newMyDate = new Date(myDate);
+    /* ステータスにアラームが鳴る時刻を表示 */
     let myDisplayTime;
     if (durationStatus) {
       let myTimeSplit = myTime.split(":");
@@ -320,9 +339,9 @@ function myCount() {
     }
     if (newMyDate.getFullYear() === date.getFullYear()) {
       if (newMyDate.getMonth() === date.getMonth() && newMyDate.getDate() === date.getDate()) {
-        document.getElementById("alarmTimeValue").textContent = myDisplayTime;
+        document.getElementById("alarmTimeValue").textContent = myDisplayTime;// 今日(日付を省略)
       } else {
-        document.getElementById("alarmTimeValue").textContent = newMyDate.getMonth() + 1 + "/" + newMyDate.getDate() + " " + myDisplayTime;
+        document.getElementById("alarmTimeValue").textContent = newMyDate.getMonth() + 1 + "/" + newMyDate.getDate() + " " + myDisplayTime;// 同じ年(年を省略)
       }
     } else {
       document.getElementById("alarmTimeValue").textContent =
@@ -354,12 +373,12 @@ function myCount() {
     /*通知(タッチデバイスとIEはなし)*/
     try {
       if (useDevice) {
-        let pushBody = ["時間になりました…見よ、我が悪しき闇を！","「時間に風は止み、海は荒れ、大地は腐ってゆきる」と預言書にあった────！","時間になり……世界は温かな光に包まれました……つけあがるなよ小娘ッ！","タイムになり、社会に貢献しました、君も見習った方がいい。","時間にイコール関係が成立しました！"];
+        let pushBody = ["時間になりました…見よ、我が悪しき闇を！","「時間に風は止み、海は荒れ、大地は腐ってゆきる」と預言書にあった────！","時間になり……世界は温かな光に包まれました……つけあがるなよ小娘ッ！","タイムになり、社会に貢献しました、君も見習った方がいい。","時間にイコール関係が成立しました！"];//プッシュ通知の本文の候補
         let min = Math.ceil(0);
         let max = Math.floor(pushBody.length);
         Push.create("時間です！", {
           body: pushBody[Math.floor(Math.random() * (max - min) + min)],
-          icon: "../favicon/favicon-32x32.png", //アイコン
+          icon: "https://r-40021.github.io/countdown-timer/favicon/favicon-32x32.png", //アイコン
           requireInteraction: true, // 永遠に通知
           onClick: function () {
             window.focus();
@@ -402,7 +421,7 @@ function myCount() {
     noParams();
   } else {
     if (countTimes === 0) {
-
+      // Local Storageにセット
 
       if (paramStatus) {
         if (!durationStatus) {
@@ -420,6 +439,7 @@ function myCount() {
 
     }
     if (display != oldDisplay || countTimes === 0) {
+      // 残り時間を更新
       let realDisplay;
       if (diffHour === 0) {
         realDisplay = display.split(":")[1] + ":" + display.split(":")[2];
@@ -471,11 +491,13 @@ function set() {
 }
 
 function changeURL() {
+  // URLを変更
   let newURL = "?";
   if (myDate && myTime && !durationStatus) {
-    newURL = newURL + "date=" + myDate + "&time=" + myTime;
+    newURL = newURL + "date=" + myDate + "&time=" + myTime;//設定時刻
   }
   if (title) {
+    /*タイトル*/
     if (newURL.match("date")) {
       newURL = newURL + "&";
     }
@@ -549,9 +571,10 @@ function audiostop() {
   var timerbox = document.getElementById("displayTime");
   timerbox.style.color = "";
   timerbox.style.visibility = "";
-  document.title = "やまだのタイマー";
+  document.title = "やまだのタイマー";//点滅・タイトルを初期化
   if (durationStatus) {
     durationStop = true;
+    /*一時停止中の表示*/
     document.getElementById("alarmTimeValue").textContent = "一時停止中";
     if (document.getElementById("displayTime").textContent !== "00:00") {
       document.title = "一時停止中";
@@ -685,6 +708,7 @@ document.getElementById("testAudio").addEventListener(
 document.getElementById("audioVolume").addEventListener(
   "input",
   (e) => {
+    // 音量を変更
     alarm.volume = document.getElementById("audioVolume").value / 100;
     testAlarm.volume = document.getElementById("audioVolume").value / 100;
     showVolume();
@@ -692,23 +716,25 @@ document.getElementById("audioVolume").addEventListener(
   false
 );
 document.getElementById("title").addEventListener("input", () => {
+  // タイトルを変更
   title = document.getElementById("title").value;
   if (title) {
     localStorage.setItem("ct-title", title);
   } else {
     localStorage.removeItem("ct-title");
   }
-  changeURL();
+  changeURL();// URLを変更
 });
 document.addEventListener("DOMContentLoaded", function () {
   if (!localStorage.getItem("ct-skip")) {
-    document.getElementById("openWelcome").click();
+    document.getElementById("openWelcome").click();// 「ようこそ」画面を表示
     document.getElementById("howToCheck").checked = true;
   } else {
     document.getElementById("nextSkip").checked = true;
   }
 });
 function showVolume() {
+  // 現在の音量をステータスに表示
   document.getElementById("volumeStatusValue").textContent =
     Math.floor(alarm.volume * 100) + "%";
   localStorage.setItem("volume", alarm.volume)
@@ -716,6 +742,7 @@ function showVolume() {
 document.getElementById("alarmTimeValue").addEventListener(
   "click",
   () => {
+    // アラーム日時のステータスをクリックすると、日時の設定が開く
     document.getElementById("openSettings").click();
     setTimeout(() => {
       document.getElementById("timeTab").click();
@@ -726,6 +753,7 @@ document.getElementById("alarmTimeValue").addEventListener(
 document.getElementById("volumeStatusValue").addEventListener(
   "click",
   () => {
+    // 音量のステータスをクリックすると、アラーム音の設定が開く
     document.getElementById("openSettings").click();
     setTimeout(() => {
       document.getElementById("audioTab").click();
@@ -880,6 +908,7 @@ try {
   }
 }
 function tweet() {
+  // ツイート文を作成
   let base = "https://twitter.com/intent/tweet?";
   let hashtags = "やまだのタイマー,やまだけんいち";
   let text = "10万年先まで計れるやまだのタイマーでカウントダウン！";
@@ -909,30 +938,35 @@ function tweet() {
 }
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("durationSetBtn").addEventListener("click", () => {
+    // 「経過時間」でセット
     durationChange = true;
     setType = "duration";
     set();
   }, false);
   document.getElementById("targetSetBtn").addEventListener("click", () => {
+    // 「日時」でセット
     setType = "target";
     set();
   }, false);
   document.getElementById("setTimer").addEventListener("click", set, false);
   document.getElementById("stopTimer").addEventListener("click", () => {
+    // ストップボタンをクリックしたとき
     stop();
     audiostop();
     Push.clear();
   }, false);
   document.getElementById("nextSkip").addEventListener("click", () => {
+    // ようこそ画面の「今後は表示しない」をクリックしたとき
     if (document.getElementById("nextSkip").checked) {
-      localStorage.setItem("ct-skip", 1);
-      document.getElementById("howToCheck").checked = false;
+      localStorage.setItem("ct-skip", 1);// Local Storageにセット
+      document.getElementById("howToCheck").checked = false;//設定画面のチェックボックスを外す
     } else {
-      localStorage.removeItem("ct-skip");
-      document.getElementById("howToCheck").checked = true;
+      localStorage.removeItem("ct-skip");// Local Storageにセット
+      document.getElementById("howToCheck").checked = true;//設定画面のチェックボックスを入れる
     }
   }, false);
   document.getElementById("howToCheck").addEventListener("click", () => {
+    // 設定画面の「使い方を表示」をクリックしたとき
     if (document.getElementById("howToCheck").checked) {
       localStorage.removeItem("ct-skip");
       document.getElementById("nextSkip").checked = false;
@@ -941,6 +975,8 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("nextSkip").checked = true;
     }
   }, false);
+
+  /*隠しテキストボックスと設定画面のテキストボックスを同期*/
   document.getElementById("Date").addEventListener(
     "change",
     () => {
@@ -957,13 +993,17 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     false
   );
+
+
   document.getElementById("seconds").addEventListener("change", () => {
+    // 設定画面の「秒」の項目を変えたとき、0を埋める
     let element = document.getElementById("seconds");
     if (element.value < 10 && (element.value.length < 2 || element.value === 0)) {
       element.value = "0" + element.value;
     }
   }, false);
   let easySetElements = document.getElementsByClassName("easySetBtn");
+  // 「クイックセットボタン」をクリックしたとき
   for (let i = 0; i < easySetElements.length; i++) {
     const element = easySetElements[i];
     element.addEventListener("click", (e) => {
