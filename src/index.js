@@ -594,7 +594,7 @@ window.addEventListener("load", () => {
       alarm.src = reader.result;
       testAlarm.src = reader.result;
       M.toast({
-        html: "アラーム音を設定しました。<br>このページから離れると、アラーム音はリセットされます。",
+        html: "アラーム音を設定しました。<br>※このページから離れると、アラーム音はリセットされます。",
       });
       window.addEventListener("beforeunload", move, false);
     };
@@ -609,25 +609,24 @@ window.addEventListener("load", () => {
   dropbox.addEventListener("dragleave", dragleave, false);
   dropbox.addEventListener("drop", drop, false);
   function dragenter(e) {
-    dropbox.style.borderWidth = "0.7em";
     e.stopPropagation();
     e.preventDefault();
   }
 
   function dragover(e) {
-    dropbox.style.borderWidth = "0.7em";
+    dropbox.style.backgroundColor = "#4db6ac8e";
     e.stopPropagation();
     e.preventDefault();
   }
   function dragleave(e) {
-    dropbox.style.borderWidth = "";
+    dropbox.style.backgroundColor = "";
     e.stopPropagation();
     e.preventDefault();
   }
   function drop(e) {
     e.stopPropagation();
     e.preventDefault();
-    dropbox.style.borderWidth = "";
+    dropbox.style.backgroundColor = "";
     const dt = e.dataTransfer;
     const files = dt.files;
     selectFile(files);
