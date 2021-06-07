@@ -1,6 +1,6 @@
 require("materialize-css");// Materialize読み込み
 var Push = require("push.js");// プッシュ通知のライブラリを読み込み
-import NoSleep from "nosleep.js";// スリープしないように
+import NoSleep from "../node_modules/nosleep.js/dist/NoSleep";// スリープしないように
 /*変数の定義*/
 var down, displayEnd, oldDisplay, title, myDate, myTime, target, kiduke;
 var useDevice = 0;
@@ -17,10 +17,10 @@ let setType;//「経過時間」or「経過時間→日時設定」
 const isDark = window.matchMedia("(prefers-color-scheme: dark)");//ダークモード？
 
 /*初期アラーム音設定*/
-var alarm = new Audio("https://r-40021.github.io/countdown-timer/alarm.mp3");
+var alarm = new Audio("/countdown-timer/alarm.mp3");
 alarm.loop = true;
 alarm.volume = document.getElementById("audioVolume").value / 100;
-var testAlarm = new Audio("https://r-40021.github.io/countdown-timer/alarm.mp3");
+var testAlarm = new Audio("/countdown-timer/alarm.mp3");
 /*アラーム音の視聴用 */
 testAlarm.loop = true;
 testAlarm.volume = document.getElementById("audioVolume").value / 100;
@@ -378,7 +378,7 @@ function myCount() {
         let max = Math.floor(pushBody.length);
         Push.create("時間です！", {
           body: pushBody[Math.floor(Math.random() * (max - min) + min)],
-          icon: "https://r-40021.github.io/countdown-timer/favicon/favicon-32x32.png", //アイコン
+          icon: "/countdown-timer/favicon/favicon-32x32.png", //アイコン
           requireInteraction: true, // 永遠に通知
           onClick: function () {
             window.focus();
