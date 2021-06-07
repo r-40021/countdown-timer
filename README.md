@@ -17,7 +17,7 @@ This is a timer that can be timed semi-permanently.
 <img src="https://user-images.githubusercontent.com/75155258/119244001-fa1b7200-bba6-11eb-801a-ab61b74c66b7.jpg" width ="400px">
 
 #### Push Notifications
-<img src="https://user-images.githubusercontent.com/75155258/120090149-2b61e800-c13b-11eb-9000-db90b30da313.jpg" width ="400px">
+<img src="https://user-images.githubusercontent.com/75155258/120913712-130e4200-c6d4-11eb-87c0-de418282ffab.png" width ="400px">
 
 
 # How to Use
