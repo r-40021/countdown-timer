@@ -416,6 +416,12 @@ input[type=text]:-webkit-autofill:active,input[type=number]:-webkit-autofill:act
  -webkit-box-shadow: 0 0 0 30px var(--bgColor) inset !important;
  -webkit-text-fill-color: var(--fontColor) !important;
 }
+/*Big PC*/
+@media screen and (min-width: 1440px) {
+  .title{
+    padding: 0 7vw;
+  }
+ }
 /*Tablet*/
 @media screen and (max-width: 768px) {
   #title{
