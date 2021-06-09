@@ -382,7 +382,7 @@ function myCount() {
         let max = Math.floor(pushBody.length);
         Push.create("時間です！", {
           body: pushBody[Math.floor(Math.random() * (max - min) + min)],
-          icon: "/countdown-timer/favicon/favicon-32x32.png", //アイコン
+          icon: "/countdown-timer/favicon/android-chrome-192x192.png", //アイコン
           requireInteraction: true, // 永遠に通知
           onClick: function () {
             window.focus();
@@ -697,6 +697,7 @@ window.addEventListener("resize", function () {
 document.getElementById("testAudio").addEventListener(
   "click",
   (e) => {
+    testAlarm.stop();
     testAlarm.play();
     e.stopPropagation();
     document.addEventListener(
