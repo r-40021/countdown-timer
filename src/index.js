@@ -450,7 +450,11 @@ function myCount() {
         realDisplay = display;
       }
       displayPlace.textContent = realDisplay;
+      if (title) {
+        document.title = realDisplay + "　(" + title + ")";
+      } else {
       document.title = realDisplay;
+      }
       oldDisplay = display;
     }
     countTimes++;
