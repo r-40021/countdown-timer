@@ -16,14 +16,12 @@ let setType;//「経過時間」or「経過時間→日時設定」
 /*Dark Theme*/
 const isDark = window.matchMedia("(prefers-color-scheme: dark)");//ダークモード？
 
+const {Howl, Howler} = require('howler');
+
 /*初期アラーム音設定*/
-var alarm = new Audio("/countdown-timer/alarm.mp3");
-alarm.loop = true;
-alarm.volume = document.getElementById("audioVolume").value / 100;
-var testAlarm = new Audio("/countdown-timer/alarm.mp3");
+var alarm;
+var testAlarm;
 /*アラーム音の視聴用 */
-testAlarm.loop = true;
-testAlarm.volume = document.getElementById("audioVolume").value / 100;
 var noSleep = new NoSleep();
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -39,6 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
   } else {
     toggleTheme(isDark);
   }
+  
   //パラメータを取得
   let params = new URL(window.location.href).searchParams;
   if (params.get("date") && params.get("time")) {
@@ -57,7 +56,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     paramObject[paramName] = paramValue;
   }
-
   //経過時間設定が変わったら
   let durationSettingElements = document.getElementsByClassName("durationSet");
   for (let i = 0; i < durationSettingElements.length; i++) {
@@ -112,12 +110,19 @@ document.addEventListener("DOMContentLoaded", function () {
     setType = null;
   }
   if (localStorage.getItem("volume")) {
-    let localVolume = localStorage.getItem("volume");
-    alarm.volume = localVolume;
-    testAlarm.volume = localVolume;
-    showVolume();
+    let localVolume = Number(localStorage.getItem("volume"));
     document.getElementById("audioVolume").value = localVolume * 100;//前回の音量を取得しセット
   }
+  alarm = new Howl({
+    src: ['/countdown-timer/alarm.mp3'],
+    volume: document.getElementById("audioVolume").value / 100,
+    loop: true
+  });
+  testAlarm = new Howl({
+    src: ['/countdown-timer/alarm.mp3'],
+    volume: document.getElementById("audioVolume").value / 100,
+    loop: true
+  });
   onload();
 });
 function clickHeader() {
@@ -202,9 +207,8 @@ document.addEventListener("DOMContentLoaded", function () {
 function onload() {
   resize(); //文字サイズ調整
   /*パラメータ取得*/
-  showVolume();
   countTimes = 0;
-
+  showVolume();
   /*パラメータを取得し、オブジェクト化*/
   var param = location.search;
   var paramObject = new Object();
@@ -378,7 +382,7 @@ function myCount() {
         let max = Math.floor(pushBody.length);
         Push.create("時間です！", {
           body: pushBody[Math.floor(Math.random() * (max - min) + min)],
-          icon: "/countdown-timer/favicon/favicon-32x32.png", //アイコン
+          icon: "/countdown-timer/favicon/android-chrome-192x192.png", //アイコン
           requireInteraction: true, // 永遠に通知
           onClick: function () {
             window.focus();
@@ -391,7 +395,6 @@ function myCount() {
     } catch (error) {
       console.error("Cannot make a notification.");
     }
-
     alarm.play();
     stop();
     if (setType === "duration") {
@@ -447,7 +450,11 @@ function myCount() {
         realDisplay = display;
       }
       displayPlace.textContent = realDisplay;
+      if (title) {
+        document.title = realDisplay + "　(" + title + ")";
+      } else {
       document.title = realDisplay;
+      }
       oldDisplay = display;
     }
     countTimes++;
@@ -565,7 +572,7 @@ function stop() {
 function audiostop() {
   document.getElementById("stopTimer").style.display = "";
   document.getElementById("setTimer").style.display = "";
-  stopAlarm();
+  alarm.stop();
   clearInterval(displayEnd);
   clearTimeout(kiduke);
   var timerbox = document.getElementById("displayTime");
@@ -582,10 +589,8 @@ function audiostop() {
   }
 }
 
-function stopAlarm() {
-  alarm.pause();
-  alarm.currentTime = 0; //音停止
-}
+
+
 
 function pushrequest() {
   if (useDevice) {
@@ -614,8 +619,16 @@ window.addEventListener("load", () => {
     }
     const reader = new FileReader();
     reader.onload = () => {
-      alarm.src = reader.result;
-      testAlarm.src = reader.result;
+      alarm = new Howl({
+        src: [reader.result],
+        volume: document.getElementById("audioVolume").value / 100,
+        loop: true
+      });
+      testAlarm = new Howl({
+        src: [reader.result],
+        volume: document.getElementById("audioVolume").value / 100,
+        loop: true
+      });
       M.toast({
         html: "アラーム音を設定しました。<br>※このページから離れると、アラーム音はリセットされます。",
       });
@@ -663,12 +676,6 @@ function move(e) {
   e.returnValue = "";
 }
 
-// Enable wake lock.
-// (must be wrapped in a user input event handler e.g. a mouse or touch handler)
-document.addEventListener('click', function enableNoSleep() {
-  document.removeEventListener('click', enableNoSleep, false);
-  noSleep.enable();
-}, false);
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -690,14 +697,14 @@ window.addEventListener("resize", function () {
 document.getElementById("testAudio").addEventListener(
   "click",
   (e) => {
+    testAlarm.stop();
     testAlarm.play();
     e.stopPropagation();
     document.addEventListener(
       "click",
       (e) => {
         if (e.target.id !== "audioVolume") {
-          testAlarm.pause();
-          testAlarm.currentTime = 0; //音停止
+          testAlarm.stop(); //音停止
         }
       },
       false
@@ -709,8 +716,8 @@ document.getElementById("audioVolume").addEventListener(
   "input",
   (e) => {
     // 音量を変更
-    alarm.volume = document.getElementById("audioVolume").value / 100;
-    testAlarm.volume = document.getElementById("audioVolume").value / 100;
+    alarm.volume(document.getElementById("audioVolume").value / 100);
+    testAlarm.volume(document.getElementById("audioVolume").value / 100);
     showVolume();
   },
   false
@@ -736,8 +743,8 @@ document.addEventListener("DOMContentLoaded", function () {
 function showVolume() {
   // 現在の音量をステータスに表示
   document.getElementById("volumeStatusValue").textContent =
-    Math.floor(alarm.volume * 100) + "%";
-  localStorage.setItem("volume", alarm.volume)
+    Math.floor(alarm.volume() * 100) + "%";
+  localStorage.setItem("volume", alarm.volume());
 }
 document.getElementById("alarmTimeValue").addEventListener(
   "click",
@@ -937,6 +944,31 @@ function tweet() {
   return url;
 }
 document.addEventListener("DOMContentLoaded", () => {
+
+// Enable wake lock.
+// (must be wrapped in a user input event handler e.g. a mouse or touch handler)
+const ID = ["flex", "welcome"];
+const CLASS_ELEMENT = document.getElementsByClassName("modal-overlay");
+for (let i = 0; i < ID.length; i++) {
+  const element = document.getElementById(ID[i]);
+  element.setAttribute("onclick", " ");
+  element.addEventListener('click', function enableNoSleep() {
+    element.removeEventListener('click', enableNoSleep, false);
+    noSleep.enable();
+  }, false);
+}
+for (let i = 0; i < CLASS_ELEMENT.length; i++) {
+  const element = CLASS_ELEMENT[i];
+  element.setAttribute("onclick", " ");
+  element.addEventListener('click', function enableNoSleep() {
+    element.removeEventListener('click', enableNoSleep, false);
+    noSleep.enable();
+  }, false);
+}
+document.addEventListener('click', function enableNoSleep() {
+  document.removeEventListener('click', enableNoSleep, false);
+  noSleep.enable();
+}, false);
   document.getElementById("durationSetBtn").addEventListener("click", () => {
     // 「経過時間」でセット
     durationChange = true;

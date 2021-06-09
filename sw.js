@@ -1,4 +1,4 @@
-var CACHE_NAME = 'ct-20210607';
+var CACHE_NAME = 'ct-20210609';
 var urlsToCache = [
   './index.html',
   './dist/style.css',
@@ -6,7 +6,7 @@ var urlsToCache = [
   './alarm.mp3',
   './favicon/favicon.ico',
   './favicon/site.webmanifest',
-  './favicon/favicon-32x32.png'
+  './favicon/android-chrome-192x192.png'
 
 
 
