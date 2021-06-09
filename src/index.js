@@ -16,14 +16,12 @@ let setType;//「経過時間」or「経過時間→日時設定」
 /*Dark Theme*/
 const isDark = window.matchMedia("(prefers-color-scheme: dark)");//ダークモード？
 
+const {Howl, Howler} = require('howler');
+
 /*初期アラーム音設定*/
-var alarm = new Audio("/countdown-timer/alarm.mp3");
-alarm.loop = true;
-alarm.volume = document.getElementById("audioVolume").value / 100;
-var testAlarm = new Audio("/countdown-timer/alarm.mp3");
+var alarm;
+var testAlarm;
 /*アラーム音の視聴用 */
-testAlarm.loop = true;
-testAlarm.volume = document.getElementById("audioVolume").value / 100;
 var noSleep = new NoSleep();
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -39,6 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
   } else {
     toggleTheme(isDark);
   }
+  
   //パラメータを取得
   let params = new URL(window.location.href).searchParams;
   if (params.get("date") && params.get("time")) {
@@ -57,7 +56,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     paramObject[paramName] = paramValue;
   }
-
   //経過時間設定が変わったら
   let durationSettingElements = document.getElementsByClassName("durationSet");
   for (let i = 0; i < durationSettingElements.length; i++) {
@@ -112,12 +110,19 @@ document.addEventListener("DOMContentLoaded", function () {
     setType = null;
   }
   if (localStorage.getItem("volume")) {
-    let localVolume = localStorage.getItem("volume");
-    alarm.volume = localVolume;
-    testAlarm.volume = localVolume;
-    showVolume();
+    let localVolume = Number(localStorage.getItem("volume"));
     document.getElementById("audioVolume").value = localVolume * 100;//前回の音量を取得しセット
   }
+  alarm = new Howl({
+    src: ['/countdown-timer/alarm.mp3'],
+    volume: document.getElementById("audioVolume").value / 100,
+    loop: true
+  });
+  testAlarm = new Howl({
+    src: ['/countdown-timer/alarm.mp3'],
+    volume: document.getElementById("audioVolume").value / 100,
+    loop: true
+  });
   onload();
 });
 function clickHeader() {
@@ -202,9 +207,8 @@ document.addEventListener("DOMContentLoaded", function () {
 function onload() {
   resize(); //文字サイズ調整
   /*パラメータ取得*/
-  showVolume();
   countTimes = 0;
-
+  showVolume();
   /*パラメータを取得し、オブジェクト化*/
   var param = location.search;
   var paramObject = new Object();
@@ -391,7 +395,6 @@ function myCount() {
     } catch (error) {
       console.error("Cannot make a notification.");
     }
-
     alarm.play();
     stop();
     if (setType === "duration") {
@@ -565,7 +568,7 @@ function stop() {
 function audiostop() {
   document.getElementById("stopTimer").style.display = "";
   document.getElementById("setTimer").style.display = "";
-  stopAlarm();
+  alarm.stop();
   clearInterval(displayEnd);
   clearTimeout(kiduke);
   var timerbox = document.getElementById("displayTime");
@@ -582,10 +585,8 @@ function audiostop() {
   }
 }
 
-function stopAlarm() {
-  alarm.pause();
-  alarm.currentTime = 0; //音停止
-}
+
+
 
 function pushrequest() {
   if (useDevice) {
@@ -614,8 +615,16 @@ window.addEventListener("load", () => {
     }
     const reader = new FileReader();
     reader.onload = () => {
-      alarm.src = reader.result;
-      testAlarm.src = reader.result;
+      alarm = new Howl({
+        src: [reader.result],
+        volume: document.getElementById("audioVolume").value / 100,
+        loop: true
+      });
+      testAlarm = new Howl({
+        src: [reader.result],
+        volume: document.getElementById("audioVolume").value / 100,
+        loop: true
+      });
       M.toast({
         html: "アラーム音を設定しました。<br>※このページから離れると、アラーム音はリセットされます。",
       });
@@ -690,8 +699,7 @@ document.getElementById("testAudio").addEventListener(
       "click",
       (e) => {
         if (e.target.id !== "audioVolume") {
-          testAlarm.pause();
-          testAlarm.currentTime = 0; //音停止
+          testAlarm.stop(); //音停止
         }
       },
       false
@@ -703,8 +711,8 @@ document.getElementById("audioVolume").addEventListener(
   "input",
   (e) => {
     // 音量を変更
-    alarm.volume = document.getElementById("audioVolume").value / 100;
-    testAlarm.volume = document.getElementById("audioVolume").value / 100;
+    alarm.volume(document.getElementById("audioVolume").value / 100);
+    testAlarm.volume(document.getElementById("audioVolume").value / 100);
     showVolume();
   },
   false
@@ -730,8 +738,8 @@ document.addEventListener("DOMContentLoaded", function () {
 function showVolume() {
   // 現在の音量をステータスに表示
   document.getElementById("volumeStatusValue").textContent =
-    Math.floor(alarm.volume * 100) + "%";
-  localStorage.setItem("volume", alarm.volume)
+    Math.floor(alarm.volume() * 100) + "%";
+  localStorage.setItem("volume", alarm.volume());
 }
 document.getElementById("alarmTimeValue").addEventListener(
   "click",
