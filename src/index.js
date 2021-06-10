@@ -949,26 +949,29 @@ document.addEventListener("DOMContentLoaded", () => {
 // (must be wrapped in a user input event handler e.g. a mouse or touch handler)
 const ID = ["flex", "welcome"];
 const CLASS_ELEMENT = document.getElementsByClassName("modal-overlay");
+let eventType;
+if (window.ontouchstart) {
+  eventType = "touchend";
+} else {
+  eventType = "click";
+}
+console.log(eventType);
 for (let i = 0; i < ID.length; i++) {
   const element = document.getElementById(ID[i]);
-  element.setAttribute("onclick", " ");
-  element.addEventListener('click', function enableNoSleep() {
-    element.removeEventListener('click', enableNoSleep, false);
-    noSleep.enable();
-  }, false);
+  element.setAttribute("on" + eventType, " ");
+  element.addEventListener(eventType, enableNoSleep , false);
 }
 for (let i = 0; i < CLASS_ELEMENT.length; i++) {
   const element = CLASS_ELEMENT[i];
-  element.setAttribute("onclick", " ");
-  element.addEventListener('click', function enableNoSleep() {
-    element.removeEventListener('click', enableNoSleep, false);
-    noSleep.enable();
-  }, false);
+  element.setAttribute("on" + eventType, " ");
+  element.addEventListener(eventType, enableNoSleep , false);
 }
-document.addEventListener('click', function enableNoSleep() {
-  document.removeEventListener('click', enableNoSleep, false);
+document.addEventListener(eventType, enableNoSleep , false);
+
+function enableNoSleep(e) {
+  noSleep.disable();
   noSleep.enable();
-}, false);
+}
   document.getElementById("durationSetBtn").addEventListener("click", () => {
     // 「経過時間」でセット
     durationChange = true;
