@@ -1,4 +1,4 @@
-var CACHE_NAME = 'ct-20210609';
+var CACHE_NAME = 'ct-20210610';
 var urlsToCache = [
   './index.html',
   './dist/style.css',
@@ -7,9 +7,6 @@ var urlsToCache = [
   './favicon/favicon.ico',
   './favicon/site.webmanifest',
   './favicon/android-chrome-192x192.png'
-
-
-
 ];
 self.addEventListener("install", (function(event) {
     event.waitUntil(caches.open(CACHE_NAME).then((function(cache) {
