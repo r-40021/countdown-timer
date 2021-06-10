@@ -13,10 +13,11 @@ let countTimes = 0;//SETボタン押下後すぐか
 var durationStop = false;//「経過時間」でせっていし、一時停止中か
 let durationChange = false;//「経過時間」の設定が変わったか
 let setType;//「経過時間」or「経過時間→日時設定」
+let stopTest
 /*Dark Theme*/
 const isDark = window.matchMedia("(prefers-color-scheme: dark)");//ダークモード？
 
-const {Howl, Howler} = require('howler');
+const { Howl, Howler } = require('howler');
 
 /*初期アラーム音設定*/
 var alarm;
@@ -37,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
   } else {
     toggleTheme(isDark);
   }
-  
+
   //パラメータを取得
   let params = new URL(window.location.href).searchParams;
   if (params.get("date") && params.get("time")) {
@@ -377,7 +378,7 @@ function myCount() {
     /*通知(タッチデバイスとIEはなし)*/
     try {
       if (useDevice) {
-        let pushBody = ["時間になりました…見よ、我が悪しき闇を！","「時間に風は止み、海は荒れ、大地は腐ってゆきる」と預言書にあった────！","時間になり……世界は温かな光に包まれました……つけあがるなよ小娘ッ！","タイムになり、社会に貢献しました、君も見習った方がいい。","時間にイコール関係が成立しました！"];//プッシュ通知の本文の候補
+        let pushBody = ["時間になりました…見よ、我が悪しき闇を！", "「時間に風は止み、海は荒れ、大地は腐ってゆきる」と預言書にあった────！", "時間になり……世界は温かな光に包まれました……つけあがるなよ小娘ッ！", "タイムになり、社会に貢献しました、君も見習った方がいい。", "時間にイコール関係が成立しました！"];//プッシュ通知の本文の候補
         let min = Math.ceil(0);
         let max = Math.floor(pushBody.length);
         Push.create("時間です！", {
@@ -453,7 +454,7 @@ function myCount() {
       if (title) {
         document.title = realDisplay + "　(" + title + ")";
       } else {
-      document.title = realDisplay;
+        document.title = realDisplay;
       }
       oldDisplay = display;
     }
@@ -700,11 +701,16 @@ document.getElementById("testAudio").addEventListener(
     testAlarm.stop();
     testAlarm.play();
     e.stopPropagation();
+    document.getElementById("testAudio").style.display = "none";
+    document.getElementById("stopTestAudio").style.display = "flex";
     document.addEventListener(
       "click",
-      (e) => {
+      stopTest = (e) => {
         if (e.target.id !== "audioVolume") {
           testAlarm.stop(); //音停止
+          document.removeEventListener("click", stopTest, false);
+          document.getElementById("testAudio").style.display = "";
+          document.getElementById("stopTestAudio").style.display = "";
         }
       },
       false
@@ -712,6 +718,13 @@ document.getElementById("testAudio").addEventListener(
   },
   false
 );
+document.getElementById("stopTestAudio").addEventListener("click", (e) => {
+  document.removeEventListener("click", stopTest, false);
+  testAlarm.stop(); //音停止
+  document.getElementById("testAudio").style.display = "";
+  document.getElementById("stopTestAudio").style.display = "";
+
+}, false);
 document.getElementById("audioVolume").addEventListener(
   "input",
   (e) => {
@@ -945,33 +958,44 @@ function tweet() {
 }
 document.addEventListener("DOMContentLoaded", () => {
 
-// Enable wake lock.
-// (must be wrapped in a user input event handler e.g. a mouse or touch handler)
-const ID = ["flex", "welcome"];
-const CLASS_ELEMENT = document.getElementsByClassName("modal-overlay");
-let eventType;
-if (window.ontouchstart) {
-  eventType = "touchend";
-} else {
-  eventType = "click";
-}
-console.log(eventType);
-for (let i = 0; i < ID.length; i++) {
-  const element = document.getElementById(ID[i]);
-  element.setAttribute("on" + eventType, " ");
-  element.addEventListener(eventType, enableNoSleep , false);
-}
-for (let i = 0; i < CLASS_ELEMENT.length; i++) {
-  const element = CLASS_ELEMENT[i];
-  element.setAttribute("on" + eventType, " ");
-  element.addEventListener(eventType, enableNoSleep , false);
-}
-document.addEventListener(eventType, enableNoSleep , false);
+  // Enable wake lock.
+  // (must be wrapped in a user input event handler e.g. a mouse or touch handler)
+  const ID = ["flex", "welcome"];
+  const CLASS_ELEMENT = document.getElementsByClassName("modal-overlay");
+  let eventType;
+  if (window.ontouchstart) {
+    eventType = "touchend";
+  } else {
+    eventType = "click";
+  }
+  let eventTime = 0;
+  for (let i = 0; i < ID.length; i++) {
+    const element = document.getElementById(ID[i]);
+    element.setAttribute("on" + eventType, " ");
+    element.addEventListener(eventType, enableNoSleep, false);
+  }
+  for (let i = 0; i < CLASS_ELEMENT.length; i++) {
+    const element = CLASS_ELEMENT[i];
+    element.setAttribute("on" + eventType, " ");
+    element.addEventListener(eventType, enableNoSleep, false);
+  }
+  document.addEventListener(eventType, enableNoSleep, false);
 
-function enableNoSleep(e) {
-  noSleep.disable();
-  noSleep.enable();
-}
+  function enableNoSleep(e) {
+    if (eventTime <= 10) {
+      noSleep.disable();
+      noSleep.enable();
+    } else {
+      for (let i = 0; i < ID.length; i++) {
+        document.getElementById(ID[i]).removeEventListener(eventType, enableNoSleep, false);
+      }
+      for (let i = 0; i < CLASS_ELEMENT.length; i++) {
+        CLASS_ELEMENT[i].removeEventListener(eventType, enableNoSleep, false);
+      }
+      document.removeEventListener(eventType, enableNoSleep, false);
+    }
+    eventTime++;
+  }
   document.getElementById("durationSetBtn").addEventListener("click", () => {
     // 「経過時間」でセット
     durationChange = true;

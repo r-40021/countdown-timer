@@ -171,6 +171,9 @@ body {
   font-weight: bold;
   src: local("YoGothic-Bold"), local("Yu Gothic");
 }
+#displayTime{
+  transition: color .2s ease-out;
+}
 .displayTimeWrap{
   display: flex;
   font-size: inherit;
@@ -254,6 +257,9 @@ body {
   display: flex;
   align-items: flex-end;
   justify-content: center;
+}
+#stopTestAudio{
+  display: none;
 }
 .play {
   width: auto;
