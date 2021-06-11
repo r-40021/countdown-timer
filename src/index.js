@@ -16,15 +16,12 @@ let setType;//「経過時間」or「経過時間→日時設定」
 let stopTest
 /*Dark Theme*/
 const isDark = window.matchMedia("(prefers-color-scheme: dark)");//ダークモード？
-
 const { Howl, Howler } = require('howler');
-
 /*初期アラーム音設定*/
 var alarm;
 var testAlarm;
 /*アラーム音の視聴用 */
 var noSleep = new NoSleep();
-
 document.addEventListener("DOMContentLoaded", function () {
   device();
   // Theme
@@ -38,7 +35,6 @@ document.addEventListener("DOMContentLoaded", function () {
   } else {
     toggleTheme(isDark);
   }
-
   //パラメータを取得
   let params = new URL(window.location.href).searchParams;
   if (params.get("date") && params.get("time")) {
@@ -48,13 +44,10 @@ document.addEventListener("DOMContentLoaded", function () {
   var paramObject = new Object();
   param = param.substring(1);
   var parameters = param.split("&");
-
   for (var i = 0; i < parameters.length; i++) {
     var element = parameters[i].split("=");
-
     var paramName = decodeURIComponent(element[0]);
     var paramValue = decodeURIComponent(element[1]);
-
     paramObject[paramName] = paramValue;
   }
   //経過時間設定が変わったら
@@ -129,9 +122,6 @@ document.addEventListener("DOMContentLoaded", function () {
 function clickHeader() {
   document.getElementById("durationHeader").click();//「経過時間で設定」の項目を表示させる
 }
-
-
-
 function device() {
   var userAgent = window.navigator.userAgent.toLowerCase(); //ブラウザ情報取得
   if (
@@ -160,28 +150,23 @@ function device() {
   }
   pushrequest();
 }
-
 document.addEventListener("DOMContentLoaded", function () {
   // フルスクリーン表示
   document.getElementById("fullscreen").addEventListener("click", function () {
     // Chrome & Firefox v64以降
     if (document.body.requestFullscreen) {
       document.body.requestFullscreen();
-
       // Firefox v63以前
     } else if (document.body.mozRequestFullScreen) {
       document.body.mozRequestFullScreen();
-
       // Safari & Edge & Chrome v68以前
     } else if (document.body.webkitRequestFullscreen) {
       document.body.webkitRequestFullscreen();
-
       // IE11
     } else if (document.body.msRequestFullscreen) {
       document.body.msRequestFullscreen();
     }
   });
-
   // フルスクリーン解除
   document
     .getElementById("escFullscreen")
@@ -189,22 +174,18 @@ document.addEventListener("DOMContentLoaded", function () {
       // Chrome & Firefox v64以降
       if (document.exitFullscreen) {
         document.exitFullscreen();
-
         // Firefox v63以前
       } else if (document.mozCancelFullScreen) {
         document.mozCancelFullScreen();
-
         // Safari & Edge & Chrome v44以前
       } else if (document.webkitCancelFullScreen) {
         document.webkitCancelFullScreen();
-
         // IE11
       } else if (document.msExitFullscreen) {
         document.msExitFullscreen();
       }
     }, false);
 });
-
 function onload() {
   resize(); //文字サイズ調整
   /*パラメータ取得*/
@@ -215,13 +196,10 @@ function onload() {
   var paramObject = new Object();
   param = param.substring(1);
   var parameters = param.split("&");
-
   for (var i = 0; i < parameters.length; i++) {
     var element = parameters[i].split("=");
-
     var paramName = decodeURIComponent(element[0]);
     var paramValue = decodeURIComponent(element[1]);
-
     paramObject[paramName] = paramValue;
   }
   if (paramObject.title) {
@@ -318,11 +296,6 @@ function onload() {
     setType = null;
   }
 }
-
-
-
-
-
 /*カウントダウン（一番大事）*/
 function myCount() {
   var displayPlace = document.getElementById("displayTime");
@@ -426,7 +399,6 @@ function myCount() {
   } else {
     if (countTimes === 0) {
       // Local Storageにセット
-
       if (paramStatus) {
         if (!durationStatus) {
           localStorage.setItem("ct-date", myDate);
@@ -440,7 +412,6 @@ function myCount() {
       } else {
         paramStatus = 1;
       }
-
     }
     if (display != oldDisplay || countTimes === 0) {
       // 残り時間を更新
@@ -461,8 +432,6 @@ function myCount() {
     countTimes++;
   }
 }
-
-
 function noParams() {
   /*パラメータがなかったら*/
   let date = new Date();
@@ -486,7 +455,6 @@ function noParams() {
 function set() {
   /*SETボタンを押したときの挙動*/
   if (setType === "duration") {
-
   } else {
     myDate = document.getElementById("Date").value;
     myTime = document.getElementById("Time").value;
@@ -497,7 +465,6 @@ function set() {
   onload();
   Push.clear(); //通知削除
 }
-
 function changeURL() {
   // URLを変更
   let newURL = "?";
@@ -516,18 +483,41 @@ function changeURL() {
   }
   history.replaceState(null, "やまだのタイマー", newURL);
 }
-
 document.addEventListener("DOMContentLoaded", function () {
   /*datepicker*/
   var elems = document.querySelectorAll(".datepicker");
   var options = {
-    format: "yyyy/m/d",
+    autoClose: true,
+    i18n: {
+      months: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+      monthsShort: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+      weekdays: ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"],
+      weekdaysShort: ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"],
+      weekdaysAbbrev: ["日", "月", "火", "水", "木", "金", "土"],
+      nextMonth: "翌月",
+      previousMonth: "前月",
+      labelMonthSelect: "月を選択",
+      labelYearSelect: "年を選択",
+      setDefaultDate: true,
+      cancel: 'キャンセル',
+      clear: 'クリア',
+      done: 'OK',
+      close: "閉じる",
+    },
+    format: "yyyy/mm/dd"
   };
   var instances = M.Datepicker.init(elems, options);
   /*timepicker*/
   elems = document.querySelectorAll(".timepicker");
   options = {
     twelveHour: false,
+    i18n: {
+      cancel: 'キャンセル',
+      clear: 'クリア',
+      done: 'OK',
+      close: "閉じる",
+    },
+    autoClose: true
   };
   instances = M.Timepicker.init(elems, options);
   /*modal*/
@@ -541,15 +531,61 @@ document.addEventListener("DOMContentLoaded", function () {
   // collapsible
   var elems = document.querySelectorAll('.collapsible');
   var instances = M.Collapsible.init(elems, options);
-});
+  
+    /** 監視対象の要素オブジェクト */
+    const obElem = document.getElementsByClassName("date-text")[0];
 
+    /** 監視時のオプション */
+    const config = { 
+      attributes: true, 
+      childList: true, 
+      characterData: true 
+    };
+   
+    var observer = new MutationObserver(function(record){
+      /** DOM変化の監視を一時停止 */
+      observer.disconnect();
+      
+      formatCal();
+      
+      /** DOM変化の監視を再開 */
+      observer.observe(obElem, config);
+    });
+    
+    observer.observe(obElem, config);
+
+  function formatCal() {
+    var elem = document.getElementsByClassName("date-text")[0];
+    if (elem.textContent.match(",")) {
+    try {
+      document.getElementById("calDate").remove();
+      document.getElementById("calDay").remove(); 
+    } catch (error) {
+      
+    }
+    let parts = elem.textContent.split(",");
+    elem.textContent = null;
+    let date = document.createElement("span");
+    date.innerText = parts[1].replace(" ", "") + "日 ";
+    date.style.display = "inline-block";
+    date.setAttribute("id","calDate");
+    elem.appendChild(date);
+
+    let day = document.createElement("span");
+    day.innerText = parts[0];
+    day.style.display = "inline-block";
+    day.setAttribute("id","calDay");
+    elem.appendChild(day);
+  }
+  }
+
+});
 function copy() {
   /*URLコピー*/
   var url = location.href;
   navigator.clipboard.writeText(url);
   M.toast({ html: "URLをコピーしました" });
 }
-
 function resize() {
   const place = document.getElementById("displayTime");
   let count = place.textContent.length;
@@ -559,17 +595,14 @@ function resize() {
   if (window.innerWidth <= 775) {
     document.getElementById("timerSetforOld").style.fontSize = 150 / count + "vmin";
     document.getElementById("timerSet").style.fontSize = "min(" + 150 / count + "vmin ," + window.innerWidth / count * 1.5 + "px)"; //文字サイズ調整(Tablet&SP)  
-
   } else {
     document.getElementById("timerSetforOld").style.fontSize = 185 / count + "vmin";
     document.getElementById("timerSet").style.fontSize = "min(" + 185 / count + "vmin ," + window.innerWidth * 0.95 / count * 1.5 + "px)"; //文字サイズ調整
   }
 }
-
 function stop() {
   clearInterval(down);
 }
-
 function audiostop() {
   document.getElementById("stopTimer").style.display = "";
   document.getElementById("setTimer").style.display = "";
@@ -589,10 +622,6 @@ function audiostop() {
     }
   }
 }
-
-
-
-
 function pushrequest() {
   if (useDevice) {
     //PCとIE以外でしか実行しない
@@ -600,7 +629,6 @@ function pushrequest() {
     Push.Permission.request();
   }
 }
-
 window.addEventListener("load", () => {
   /*アラーム音設定・プレビューも*/
   const f = document.getElementById("file1");
@@ -635,7 +663,6 @@ window.addEventListener("load", () => {
       });
       window.addEventListener("beforeunload", move, false);
     };
-
     reader.readAsDataURL(file);
   }
   // Drug & Drop
@@ -649,7 +676,6 @@ window.addEventListener("load", () => {
     e.stopPropagation();
     e.preventDefault();
   }
-
   function dragover(e) {
     dropbox.style.backgroundColor = "#4db6ac8e";
     e.stopPropagation();
@@ -669,16 +695,12 @@ window.addEventListener("load", () => {
     selectFile(files);
   }
 });
-
 function move(e) {
   //ページ離脱時に警告
   e.preventDefault();
   // Chrome では returnValue を設定する必要がある
   e.returnValue = "";
 }
-
-
-
 document.addEventListener("DOMContentLoaded", function () {
   //残り時間が変わったら、文字サイズ調整
   var element = document.getElementById("displayTime");
@@ -690,11 +712,9 @@ document.addEventListener("DOMContentLoaded", function () {
   };
   action.observe(element, config);
 });
-
 window.addEventListener("resize", function () {
   resize();
 });
-
 document.getElementById("testAudio").addEventListener(
   "click",
   (e) => {
@@ -723,7 +743,6 @@ document.getElementById("stopTestAudio").addEventListener("click", (e) => {
   testAlarm.stop(); //音停止
   document.getElementById("testAudio").style.display = "";
   document.getElementById("stopTestAudio").style.display = "";
-
 }, false);
 document.getElementById("audioVolume").addEventListener(
   "input",
@@ -781,7 +800,6 @@ document.getElementById("volumeStatusValue").addEventListener(
   },
   false
 );
-
 /*テーマ切り替え*/
 document.addEventListener(
   "DOMContentLoaded",
@@ -957,41 +975,21 @@ function tweet() {
   return url;
 }
 document.addEventListener("DOMContentLoaded", () => {
-
   // Enable wake lock.
   // (must be wrapped in a user input event handler e.g. a mouse or touch handler)
-  const ID = ["flex", "welcome"];
-  const CLASS_ELEMENT = document.getElementsByClassName("modal-overlay");
   let eventType;
   if (window.ontouchstart) {
-    eventType = "touchend";
+    eventType = "touchstart";
   } else {
     eventType = "click";
   }
   let eventTime = 0;
-  for (let i = 0; i < ID.length; i++) {
-    const element = document.getElementById(ID[i]);
-    element.setAttribute("on" + eventType, " ");
-    element.addEventListener(eventType, enableNoSleep, false);
-  }
-  for (let i = 0; i < CLASS_ELEMENT.length; i++) {
-    const element = CLASS_ELEMENT[i];
-    element.setAttribute("on" + eventType, " ");
-    element.addEventListener(eventType, enableNoSleep, false);
-  }
   document.addEventListener(eventType, enableNoSleep, false);
-
-  function enableNoSleep(e) {
+  function enableNoSleep() {
     if (eventTime <= 10) {
       noSleep.disable();
       noSleep.enable();
     } else {
-      for (let i = 0; i < ID.length; i++) {
-        document.getElementById(ID[i]).removeEventListener(eventType, enableNoSleep, false);
-      }
-      for (let i = 0; i < CLASS_ELEMENT.length; i++) {
-        CLASS_ELEMENT[i].removeEventListener(eventType, enableNoSleep, false);
-      }
       document.removeEventListener(eventType, enableNoSleep, false);
     }
     eventTime++;
@@ -1034,7 +1032,6 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("nextSkip").checked = true;
     }
   }, false);
-
   /*隠しテキストボックスと設定画面のテキストボックスを同期*/
   document.getElementById("Date").addEventListener(
     "change",
@@ -1052,8 +1049,6 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     false
   );
-
-
   document.getElementById("seconds").addEventListener("change", () => {
     // 設定画面の「秒」の項目を変えたとき、0を埋める
     let element = document.getElementById("seconds");
@@ -1081,7 +1076,6 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   }
 }, false);
-
 window.toggleTheme = toggleTheme;
 window.copy = copy;
 window.tweet = tweet;
