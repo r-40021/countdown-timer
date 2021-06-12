@@ -531,52 +531,52 @@ document.addEventListener("DOMContentLoaded", function () {
   // collapsible
   var elems = document.querySelectorAll('.collapsible');
   var instances = M.Collapsible.init(elems, options);
-  
-    /** 監視対象の要素オブジェクト */
-    const obElem = document.getElementsByClassName("date-text")[0];
 
-    /** 監視時のオプション */
-    const config = { 
-      attributes: true, 
-      childList: true, 
-      characterData: true 
-    };
-   
-    var observer = new MutationObserver(function(record){
-      /** DOM変化の監視を一時停止 */
-      observer.disconnect();
-      
-      formatCal();
-      
-      /** DOM変化の監視を再開 */
-      observer.observe(obElem, config);
-    });
-    
+  /** 監視対象の要素オブジェクト */
+  const obElem = document.getElementsByClassName("date-text")[0];
+
+  /** 監視時のオプション */
+  const config = {
+    attributes: true,
+    childList: true,
+    characterData: true
+  };
+
+  var observer = new MutationObserver(function (record) {
+    /** DOM変化の監視を一時停止 */
+    observer.disconnect();
+
+    formatCal();
+
+    /** DOM変化の監視を再開 */
     observer.observe(obElem, config);
+  });
+
+  observer.observe(obElem, config);
 
   function formatCal() {
     var elem = document.getElementsByClassName("date-text")[0];
     if (elem.textContent.match(",")) {
-    try {
-      document.getElementById("calDate").remove();
-      document.getElementById("calDay").remove(); 
-    } catch (error) {
-      
-    }
-    let parts = elem.textContent.split(",");
-    elem.textContent = null;
-    let date = document.createElement("span");
-    date.innerText = parts[1].replace(" ", "") + "日 ";
-    date.style.display = "inline-block";
-    date.setAttribute("id","calDate");
-    elem.appendChild(date);
+      try {
+        document.getElementById("calDate").remove();
+        document.getElementById("calDay").remove();
+      } catch (error) {
 
-    let day = document.createElement("span");
-    day.innerText = parts[0];
-    day.style.display = "inline-block";
-    day.setAttribute("id","calDay");
-    elem.appendChild(day);
-  }
+      }
+      let parts = elem.textContent.split(",");
+      elem.textContent = null;
+      let date = document.createElement("span");
+      date.innerText = parts[1].replace(" ", "") + "日";
+      date.style.display = "inline-block";
+      date.setAttribute("id", "calDate");
+      elem.appendChild(date);
+
+      let day = document.createElement("span");
+      day.innerText = "(" + parts[0].replace("曜日", "") + ")";
+      day.style.display = "inline-block";
+      day.setAttribute("id", "calDay");
+      elem.appendChild(day);
+    }
   }
 
 });
@@ -984,7 +984,7 @@ document.addEventListener("DOMContentLoaded", () => {
     eventType = "click";
   }
   let eventTime = 0;
-  document.addEventListener(eventType, enableNoSleep, false);
+  document.body.addEventListener(eventType, enableNoSleep, false);
   function enableNoSleep() {
     if (eventTime <= 10) {
       noSleep.disable();
