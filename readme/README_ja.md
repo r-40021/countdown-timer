@@ -37,6 +37,7 @@
 - Safari on iOS 14.5.1 (全画面表示機能・アラーム音機能は利用できません)
 # ライセンス表示
 - (c) 2014-2019 Materialize
-- Copyright (c) 2016 Tyler Nickerson
-- Copyright (c) Rich Tibbett
+- [Push.js](https://github.com/Nickersoft/push.js) Copyright (c) 2016 Tyler Nickerson
+- [NoSleep.js](https://github.com/richtr/NoSleep.js) Copyright (c) Rich Tibbett
+- [howler.js](https://github.com/goldfire/howler.js) Copyright (c) 2013-2020 James Simpson and GoldFire Studios, Inc.
 - ["時計　アラーム03"](https://otologic.jp/free/se/clock01.html) by [OtoLogic](https://otologic.jp/) is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/legalcode)
