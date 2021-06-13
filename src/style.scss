@@ -21,6 +21,9 @@ input {
   -ms-user-select: text;
   user-select: text;
 }
+input[type=range]{
+  border: 0;
+}
 .title {
   width: 100%;
   height: auto;
@@ -220,6 +223,10 @@ body {
   color: var(--grayText);
   font-size: 12px;
   margin-inline-start: 1em;
+  & span{
+  display: inline-block;
+  width: 90%;
+  }
 }
 #settings .section:not(:last-child) {
   margin-bottom: 4em;
@@ -255,7 +262,7 @@ body {
 }
 .audioFlex {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
 }
 #stopTestAudio{
@@ -263,6 +270,7 @@ body {
 }
 .play {
   width: auto;
+  height: 100%;
 }
 .volume {
   flex: 1;
@@ -270,6 +278,7 @@ body {
   padding-left: 1em;
   align-items: center;
   justify-content: center;
+  height: 100%;
 }
 .volume .bi-volume-up {
   width: auto;
