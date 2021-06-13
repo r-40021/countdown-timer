@@ -20,7 +20,6 @@ input {
   -moz-user-select: text;
   -ms-user-select: text;
   user-select: text;
-  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue","BIZ UDゴシック","BIZ UDPGothic","メイリオ","Meiryo",sans-serif;
 }
 input[type="range"] {
   border: 0;
@@ -29,6 +28,7 @@ input[type="range"] {
   width: 100%;
   height: auto;
   padding: 0 5vw;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue","BIZ UDゴシック","BIZ UDPGothic","メイリオ","Meiryo",sans-serif;
 }
 #title {
   margin-top: 8vh;
