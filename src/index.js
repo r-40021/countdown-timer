@@ -338,9 +338,17 @@ function myCount() {
   var diffMinute = Math.floor(
     (diffTime - diffHour * 1000 * 60 * 60) / (1000 * 60)
   ); //分に変換
-  var diffSecond = Math.floor(
+  var diffSecond = Math.ceil(
     (diffTime - diffHour * 1000 * 60 * 60 - diffMinute * 1000 * 60) / 1000
   ); //秒に変換
+  if (diffSecond === 60) {
+    diffMinute++;
+    diffSecond = 0;
+    if (diffMinute === 60) {
+      diffHour++;
+      diffMinute = 0;
+    }
+  }
   if (diffMinute < 10) {
     diffMinute = "0" + diffMinute;
   }
