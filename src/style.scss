@@ -507,3 +507,6 @@ body.dark input::-webkit-input-placeholder{
 body.anime * {
   transition: background-color 0.3s ease-in-out;
 }
+.flex.nocursor{
+  cursor: none;
+}
