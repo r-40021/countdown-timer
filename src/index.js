@@ -1077,7 +1077,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   let cursorTimeout;
   let flexArea = document.getElementById("flex");
-  document.addEventListener("mousemove", ()=>{
+  document.addEventListener("mousemove", () => {
     flexArea.classList.remove("nocursor");
     clearTimeout(cursorTimeout);
     cursorTimeout = setTimeout(() => {
