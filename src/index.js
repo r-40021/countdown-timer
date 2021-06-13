@@ -62,8 +62,11 @@ document.addEventListener("DOMContentLoaded", function () {
   if (localStorage.getItem("ct-lastDuration")) {
     let localDuration = localStorage.getItem("ct-lastDuration");
     let duration = localDuration.split(":");
+    document.getElementById("hour").focus();
     document.getElementById("hour").value = Number(duration[0]);
+    document.getElementById("minute").focus();
     document.getElementById("minute").value = Number(duration[1]);
+    document.getElementById("seconds").focus();
     document.getElementById("seconds").value = Number(duration[2]);
     setType = "duration";
   }
@@ -227,6 +230,7 @@ function onload() {
       for (let i = 0; i < elementList.length; i++) {
         let element = elementList[i];
         if (!element.value) {
+          element.focus();
           element.value = 0;
         }
       }
@@ -298,6 +302,10 @@ function onload() {
 }
 /*カウントダウン（一番大事）*/
 function myCount() {
+  if (countTimes === 0) {
+    document.getElementById("stopTimer").style.display = "inline-flex";
+    document.getElementById("setTimer").style.display = "none";
+  }
   var displayPlace = document.getElementById("displayTime");
   var date = new Date();
   var diffTime = target.getTime() - date.getTime(); //時間の差を計算
@@ -340,10 +348,6 @@ function myCount() {
     diffSecond = "0" + diffSecond;
   }
   var display = diffHour + ":" + diffMinute + ":" + diffSecond;
-  if (countTimes === 0) {
-    document.getElementById("stopTimer").style.display = "inline-flex";
-    document.getElementById("setTimer").style.display = "none";
-  }
   if (display === "0:00:00") {
     display = "00:00";
     displayPlace.textContent = display;
@@ -387,6 +391,8 @@ function myCount() {
     }, 1000);
   } /*計算結果が負orNaNのときの処理*/ else if (display.match("-|NaN")) {
     stop();
+    document.getElementById("stopTimer").style.display = "";
+    document.getElementById("setTimer").style.display = "";
     if (display.match("-")) {
       M.toast({ html: "過去の日時はセットできません" });
     } else if (display.match("NaN")) {
@@ -1053,6 +1059,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // 設定画面の「秒」の項目を変えたとき、0を埋める
     let element = document.getElementById("seconds");
     if (element.value < 10 && (element.value.length < 2 || element.value === 0)) {
+      element.focus();
       element.value = "0" + element.value;
     }
   }, false);
@@ -1065,6 +1072,7 @@ document.addEventListener("DOMContentLoaded", () => {
       let durationSettingElements = document.getElementsByClassName("durationSet");
       for (let i = 0; i < durationSettingElements.length; i++) {
         const element = durationSettingElements[i];
+        element.focus();
         element.value = 0;
       }
       if (setTime.indexOf("min") !== -1) {
