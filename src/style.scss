@@ -8,11 +8,11 @@
   --green: #4db6ac;
   --grayText: #666;
 }
-p{
+p {
   text-align: justify;
   line-height: 1.5;
 }
-ol > li{
+ol > li {
   margin-bottom: 0.8em;
 }
 input {
@@ -21,10 +21,14 @@ input {
   -ms-user-select: text;
   user-select: text;
 }
+input[type="range"] {
+  border: 0;
+}
 .title {
   width: 100%;
   height: auto;
   padding: 0 5vw;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue","BIZ UDゴシック","BIZ UDPGothic","メイリオ","Meiryo",sans-serif;
 }
 #title {
   margin-top: 8vh;
@@ -39,7 +43,7 @@ input {
   -webkit-text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
 }
-input.valid[type=text]:not(.browser-default){
+input.valid[type="text"]:not(.browser-default) {
   border-bottom: 1px solid #9e9e9e;
   box-shadow: none;
 }
@@ -57,7 +61,7 @@ input.valid[type=text]:not(.browser-default){
   width: 80px;
   height: 80px;
   cursor: pointer;
-  &.myBtn-tiny{
+  &.myBtn-tiny {
     width: auto;
     height: auto;
     line-height: 1.1;
@@ -65,7 +69,7 @@ input.valid[type=text]:not(.browser-default){
     padding: 0.5em 0.8em;
   }
 }
-.easySet a{
+.easySet a {
   margin: 0.4em 0.3em;
 }
 .myBtn-circle:not(.nohover):hover {
@@ -111,7 +115,7 @@ body:fullscreen #fullscreen {
 body:not(:fullscreen) #escFullscreen {
   display: none;
 }
-.share{
+.share {
   width: 100%;
   height: 100%;
   margin: 0;
@@ -171,10 +175,10 @@ body {
   font-weight: bold;
   src: local("YoGothic-Bold"), local("Yu Gothic");
 }
-#displayTime{
-  transition: color .2s ease-out;
+#displayTime {
+  transition: color 0.2s ease-out;
 }
-.displayTimeWrap{
+.displayTimeWrap {
   display: flex;
   font-size: inherit;
   width: 100%;
@@ -184,7 +188,7 @@ body {
   border: none;
   border: 0;
   padding: 0;
-  transition: font-size .2s ease-in-out;
+  transition: font-size 0.2s ease-in-out;
 }
 .timer {
   flex: 1;
@@ -201,7 +205,7 @@ body {
 #openWelcome {
   display: none;
 }
-.modal#settings{
+.modal#settings {
   max-height: 77vh;
 }
 #settings .section {
@@ -209,10 +213,11 @@ body {
   margin-top: 0.5em;
   padding: 0.1em 1em;
 }
-.collapsible-body{
+.collapsible-body {
   padding: 0.5rem;
 }
-#settings .section p,#settings .section .content {
+#settings .section p,
+#settings .section .content {
   color: var(--grayText);
   margin-inline-start: 1em;
 }
@@ -220,6 +225,10 @@ body {
   color: var(--grayText);
   font-size: 12px;
   margin-inline-start: 1em;
+  & span {
+    display: inline-block;
+    width: 90%;
+  }
 }
 #settings .section:not(:last-child) {
   margin-bottom: 4em;
@@ -234,35 +243,36 @@ body {
 #settings .modal-footer div:last-child {
   flex: 3;
 }
-.kome{
+.kome {
   position: relative;
   padding-left: 1em;
-  &::before{
+  &::before {
     position: absolute;
     top: 0;
     left: 0;
     content: "※";
   }
 }
-.duration{
+.duration {
   display: inline-flex;
   width: 40px;
   font-size: 16px;
   max-width: 30%;
 }
-.duration input{
+.duration input {
   text-align: right;
 }
 .audioFlex {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
 }
-#stopTestAudio{
+#stopTestAudio {
   display: none;
 }
 .play {
   width: auto;
+  height: 100%;
 }
 .volume {
   flex: 1;
@@ -270,6 +280,7 @@ body {
   padding-left: 1em;
   align-items: center;
   justify-content: center;
+  height: 100%;
 }
 .volume .bi-volume-up {
   width: auto;
@@ -413,31 +424,34 @@ input[type="text"]:not(.browser-default)[readonly="readonly"] {
 a {
   cursor: pointer;
 }
-input[type=text]:-webkit-autofill,input[type=number]:-webkit-autofill,
-input[type=text]:-webkit-autofill:hover, input[type=number]:-webkit-autofill:hover, 
-input[type=text]:-webkit-autofill:focus, input[type=number]:-webkit-autofill:focus, 
-input[type=text]:-webkit-autofill:active,input[type=number]:-webkit-autofill:active
-{
- box-shadow: 0 0 0 30px var(--bgColor) inset !important;
- -webkit-box-shadow: 0 0 0 30px var(--bgColor) inset !important;
- -webkit-text-fill-color: var(--fontColor) !important;
+input[type="text"]:-webkit-autofill,
+input[type="number"]:-webkit-autofill,
+input[type="text"]:-webkit-autofill:hover,
+input[type="number"]:-webkit-autofill:hover,
+input[type="text"]:-webkit-autofill:focus,
+input[type="number"]:-webkit-autofill:focus,
+input[type="text"]:-webkit-autofill:active,
+input[type="number"]:-webkit-autofill:active {
+  box-shadow: 0 0 0 30px var(--bgColor) inset !important;
+  -webkit-box-shadow: 0 0 0 30px var(--bgColor) inset !important;
+  -webkit-text-fill-color: var(--fontColor) !important;
 }
 .confirmation-btns {
   text-align: right;
 }
 /*Big PC*/
 @media screen and (min-width: 1440px) {
-  .title{
+  .title {
     padding: 0 7vw;
   }
- }
+}
 /*Tablet*/
 @media screen and (max-width: 768px) {
-  #title{
+  #title {
     font-size: 5vmin;
   }
- }
- /* Smartphone */
+}
+/* Smartphone */
 @media screen and (max-width: 480px) {
   #title {
     font-size: 6vmin;
@@ -448,7 +462,7 @@ input[type=text]:-webkit-autofill:active,input[type=number]:-webkit-autofill:act
   .status {
     font-size: 10px;
   }
-  .setBtns .center{
+  .setBtns .center {
     transform: scale(0.8);
     transform-origin: center top 0;
   }
@@ -474,27 +488,34 @@ body.dark #settings .section {
 body.dark .timepicker-plate {
   background-color: rgb(51, 51, 51);
 }
-body.dark .timepicker-tick, body.dark .datepicker-controls * {
+body.dark .timepicker-tick,
+body.dark .datepicker-controls * {
   color: var(--fontColor);
 }
-body.dark .collapsible,body.dark .collapsible-header,body.dark .collapsible-body{
+body.dark .collapsible,
+body.dark .collapsible-header,
+body.dark .collapsible-body {
   border-color: rgb(75, 75, 75);
 }
-body.dark .collapsible-header{
+body.dark .collapsible-header {
   background-color: var(--bgColor);
 }
-body.dark .timepicker-tick, body.dark .datepicker-controls svg {
+body.dark .timepicker-tick,
+body.dark .datepicker-controls svg {
   fill: var(--fontColor);
 }
-body.dark .dropdown-content{
+body.dark .dropdown-content {
   background-color: var(--bgColor);
 }
-body.dark input{
+body.dark input {
   color: var(--fontColor);
 }
-body.dark input::-webkit-input-placeholder{
-  color:rgb(80, 80, 80);
+body.dark input::-webkit-input-placeholder {
+  color: rgb(80, 80, 80);
 }
 body.anime * {
   transition: background-color 0.3s ease-in-out;
+}
+.flex.nocursor {
+  cursor: none;
 }

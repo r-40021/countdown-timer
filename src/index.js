@@ -1075,6 +1075,15 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("durationSetBtn").click();
     })
   }
+  let cursorTimeout;
+  let flexArea = document.getElementById("flex");
+  document.addEventListener("mousemove", () => {
+    flexArea.classList.remove("nocursor");
+    clearTimeout(cursorTimeout);
+    cursorTimeout = setTimeout(() => {
+      flexArea.classList.add("nocursor");
+    }, 3000);
+  })
 }, false);
 window.toggleTheme = toggleTheme;
 window.copy = copy;
