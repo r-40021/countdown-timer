@@ -13,7 +13,8 @@ let countTimes = 0;//SETボタン押下後すぐか
 var durationStop = false;//「経過時間」でせっていし、一時停止中か
 let durationChange = false;//「経過時間」の設定が変わったか
 let setType;//「経過時間」or「経過時間→日時設定」
-let stopTest
+let stopTest;
+let displayWelcome;
 /*Dark Theme*/
 const isDark = window.matchMedia("(prefers-color-scheme: dark)");//ダークモード？
 const { Howl, Howler } = require('howler');
@@ -214,7 +215,7 @@ function onload() {
   }
   if ((setType === "duration") || ((firstLoad === 0 && localStorage.getItem("ct-lastType") == "1") && !paramObject.date && !paramObject.time)) {
     durationStatus = 1;
-    if (!document.getElementById("durationHeader").classList.contains("active")) {
+    if (!document.getElementById("durationLi").classList.contains("active")) {
       window.addEventListener("load", clickHeader, false);
     }
     changeURL();//URL変更
@@ -409,7 +410,12 @@ function myCount() {
     display = "00:00";
     displayPlace.textContent = display;
     document.title = "やまだのタイマー";
-    noParams();
+    if (!displayWelcome) {
+      openTimeSetting();
+      if (!document.getElementById("targetLi").classList.contains("active")) {
+        document.getElementById("targetHeader").click();
+      }
+    }
   } else {
     if (countTimes === 0) {
       // Local Storageにセット
@@ -445,6 +451,7 @@ function myCount() {
     }
     countTimes++;
   }
+  displayWelcome = false;
 }
 function noParams() {
   /*パラメータがなかったら*/
@@ -781,6 +788,7 @@ document.getElementById("title").addEventListener("input", () => {
 document.addEventListener("DOMContentLoaded", function () {
   if (!localStorage.getItem("ct-skip")) {
     document.getElementById("openWelcome").click();// 「ようこそ」画面を表示
+    displayWelcome = true;
     document.getElementById("howToCheck").checked = true;
   } else {
     document.getElementById("nextSkip").checked = true;
@@ -792,17 +800,14 @@ function showVolume() {
     Math.floor(alarm.volume() * 100) + "%";
   localStorage.setItem("volume", alarm.volume());
 }
-document.getElementById("alarmTimeValue").addEventListener(
-  "click",
-  () => {
-    // アラーム日時のステータスをクリックすると、日時の設定が開く
-    document.getElementById("openSettings").click();
-    setTimeout(() => {
-      document.getElementById("timeTab").click();
-    }, 200);
-  },
-  false
-);
+document.getElementById("alarmTimeValue").addEventListener("click", openTimeSetting, false);
+function openTimeSetting() {
+  // アラーム日時のステータスをクリックすると、日時の設定が開く
+  document.getElementById("openSettings").click();
+  setTimeout(() => {
+    document.getElementById("timeTab").click();
+  }, 200);
+}
 document.getElementById("volumeStatusValue").addEventListener(
   "click",
   () => {
