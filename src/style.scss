@@ -28,12 +28,12 @@ input[type="range"] {
   width: 100%;
   height: auto;
   padding: 0 5vw;
-  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue","BIZ UDゴシック","BIZ UDPGothic","メイリオ","Meiryo",sans-serif;
 }
 #title {
   margin-top: 8vh;
   text-align: center;
   font-size: 6.5vmin;
+  font-family: "BIZ UDPゴシック","BIZ UDPGothic","メイリオ","Meiryo",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
   color: var(--fontColor);
   padding-bottom: 0.3em;
   height: auto;
