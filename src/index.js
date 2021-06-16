@@ -357,7 +357,41 @@ function myCount() {
     diffSecond = "0" + diffSecond;
   }
   var display = diffHour + ":" + diffMinute + ":" + diffSecond;
-  if (display === "0:00:00") {
+  if (display !== "0:00:00" && !display.match("-|NaN") ) {
+      if (countTimes === 0) {
+      // Local Storageにセット
+      if (paramStatus) {
+        if (!durationStatus) {
+          localStorage.setItem("ct-date", myDate);
+          localStorage.setItem("ct-time", myTime);
+        }
+        if (title) {
+          localStorage.setItem("ct-title", title);
+        } else {
+          localStorage.removeItem("ct-title");
+        }
+      } else {
+        paramStatus = 1;
+      }
+    }
+    if (display != oldDisplay || countTimes === 0) {
+      // 残り時間を更新
+      let realDisplay;
+      if (diffHour === 0) {
+        realDisplay = display.split(":")[1] + ":" + display.split(":")[2];
+      } else {
+        realDisplay = display;
+      }
+      displayPlace.textContent = realDisplay;
+      if (title) {
+        document.title = realDisplay + "　(" + title + ")";
+      } else {
+        document.title = realDisplay;
+      }
+      oldDisplay = display;
+    }
+    countTimes++;
+  } else if (display === "0:00:00") {
     display = "00:00";
     displayPlace.textContent = display;
     document.title = "やまだのタイマー";
@@ -371,6 +405,7 @@ function myCount() {
           body: pushBody[Math.floor(Math.random() * (max - min) + min)],
           icon: "/countdown-timer/favicon/android-chrome-192x192.png", //アイコン
           requireInteraction: true, // 永遠に通知
+          link: "/countdown-timer",
           onClick: function () {
             window.focus();
             this.close();
@@ -416,40 +451,6 @@ function myCount() {
         document.getElementById("targetHeader").click();
       }
     }
-  } else {
-    if (countTimes === 0) {
-      // Local Storageにセット
-      if (paramStatus) {
-        if (!durationStatus) {
-          localStorage.setItem("ct-date", myDate);
-          localStorage.setItem("ct-time", myTime);
-        }
-        if (title) {
-          localStorage.setItem("ct-title", title);
-        } else {
-          localStorage.removeItem("ct-title");
-        }
-      } else {
-        paramStatus = 1;
-      }
-    }
-    if (display != oldDisplay || countTimes === 0) {
-      // 残り時間を更新
-      let realDisplay;
-      if (diffHour === 0) {
-        realDisplay = display.split(":")[1] + ":" + display.split(":")[2];
-      } else {
-        realDisplay = display;
-      }
-      displayPlace.textContent = realDisplay;
-      if (title) {
-        document.title = realDisplay + "　(" + title + ")";
-      } else {
-        document.title = realDisplay;
-      }
-      oldDisplay = display;
-    }
-    countTimes++;
   }
   displayWelcome = false;
 }
@@ -1098,11 +1099,14 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   let cursorTimeout;
   let flexArea = document.getElementById("flex");
+  cursorTimeout = setTimeout(() => {
+    flexArea.style.cursor = "none";
+  }, 3000);
   document.addEventListener("mousemove", () => {
-    flexArea.classList.remove("nocursor");
+    flexArea.style.cursor = "auto";
     clearTimeout(cursorTimeout);
     cursorTimeout = setTimeout(() => {
-      flexArea.classList.add("nocursor");
+      flexArea.style.cursor = "none";
     }, 3000);
   })
 }, false);
