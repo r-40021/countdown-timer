@@ -98,7 +98,7 @@ input.valid[type="text"]:not(.browser-default) {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1em;
+  margin-bottom: 0.7em;
   width: 100%;
   height: auto;
   padding: 1em;
@@ -266,6 +266,7 @@ body {
 #stopTestAudio {
   display: none;
 }
+
 .play {
   width: auto;
   height: 100%;
@@ -388,10 +389,14 @@ input[type="text"]:not(.browser-default)[readonly="readonly"] {
   color: var(--grayText);
   width: 100%;
   text-align: center;
+  font-size: 14px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: medium;
+  &.leftside{
+    justify-content: flex-start;
+  }
 }
 #durationIcon {
   display: none;
@@ -413,6 +418,22 @@ input[type="text"]:not(.browser-default)[readonly="readonly"] {
   text-overflow: ellipsis;
   -webkit-text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
+}
+.audioFileStatus{
+  display: none;
+  font-size: 14px;
+  margin-bottom: 1em;
+  text-align: left;
+  width: 100%;
+  & .audioFile{
+    width: 100%;
+  }
+  & #audioFileName{
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
 .timerSet {
   position: relative;
@@ -457,7 +478,7 @@ input[type="number"]:-webkit-autofill:active {
     line-height: 1.2;
   }
   .status {
-    font-size: 10px;
+    font-size: 12px;
   }
   .setBtns .center {
     transform: scale(0.8);

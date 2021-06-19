@@ -63,11 +63,8 @@ document.addEventListener("DOMContentLoaded", function () {
   if (localStorage.getItem("ct-lastDuration")) {
     let localDuration = localStorage.getItem("ct-lastDuration");
     let duration = localDuration.split(":");
-    document.getElementById("hour").focus();
     document.getElementById("hour").value = Number(duration[0]);
-    document.getElementById("minute").focus();
     document.getElementById("minute").value = Number(duration[1]);
-    document.getElementById("seconds").focus();
     document.getElementById("seconds").value = Number(duration[2]);
     setType = "duration";
   }
@@ -510,6 +507,8 @@ document.addEventListener("DOMContentLoaded", function () {
   var elems = document.querySelectorAll(".datepicker");
   var options = {
     autoClose: true,
+    defaultDate: new Date(),
+    minDate: new Date(),
     i18n: {
       months: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
       monthsShort: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
@@ -544,12 +543,12 @@ document.addEventListener("DOMContentLoaded", function () {
   instances = M.Timepicker.init(elems, options);
   /*modal*/
   elems = document.querySelectorAll(".modal");
-  instances = M.Modal.init(elems);
+  instances = M.Modal.init(elems,{});
   elems = document.querySelectorAll(".tooltipped");
-  instances = M.Tooltip.init(elems);
+  instances = M.Tooltip.init(elems,{});
   // tab
   elems = document.querySelectorAll(".tabs");
-  instances = M.Tabs.init(elems);
+  instances = M.Tabs.init(elems,{});
   // collapsible
   var elems = document.querySelectorAll('.collapsible');
   var instances = M.Collapsible.init(elems, options);
@@ -680,6 +679,8 @@ window.addEventListener("load", () => {
         volume: document.getElementById("audioVolume").value / 100,
         loop: true
       });
+      document.getElementById("audioFileName").textContent = file.name;
+      document.getElementById("audioFileStatus").style.display = "flex";
       M.toast({
         html: "アラーム音を設定しました。<br>※このページから離れると、アラーム音はリセットされます。",
       });
@@ -1073,7 +1074,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // 設定画面の「秒」の項目を変えたとき、0を埋める
     let element = document.getElementById("seconds");
     if (element.value < 10 && (element.value.length < 2 || element.value === 0)) {
-      element.focus();
+      if (!element.value) {
+        element.focus();
+        element.value = "0" + element.value;
+      }
       element.value = "0" + element.value;
     }
   }, false);
@@ -1086,7 +1090,9 @@ document.addEventListener("DOMContentLoaded", () => {
       let durationSettingElements = document.getElementsByClassName("durationSet");
       for (let i = 0; i < durationSettingElements.length; i++) {
         const element = durationSettingElements[i];
-        element.focus();
+        if (!element.value) {
+          element.focus(); 
+        }
         element.value = 0;
       }
       if (setTime.indexOf("min") !== -1) {
