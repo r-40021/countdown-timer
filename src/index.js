@@ -507,6 +507,8 @@ document.addEventListener("DOMContentLoaded", function () {
   var elems = document.querySelectorAll(".datepicker");
   var options = {
     autoClose: true,
+    defaultDate: new Date(),
+    minDate: new Date(),
     i18n: {
       months: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
       monthsShort: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
