@@ -543,12 +543,12 @@ document.addEventListener("DOMContentLoaded", function () {
   instances = M.Timepicker.init(elems, options);
   /*modal*/
   elems = document.querySelectorAll(".modal");
-  instances = M.Modal.init(elems);
+  instances = M.Modal.init(elems,{});
   elems = document.querySelectorAll(".tooltipped");
-  instances = M.Tooltip.init(elems);
+  instances = M.Tooltip.init(elems,{});
   // tab
   elems = document.querySelectorAll(".tabs");
-  instances = M.Tabs.init(elems);
+  instances = M.Tabs.init(elems,{});
   // collapsible
   var elems = document.querySelectorAll('.collapsible');
   var instances = M.Collapsible.init(elems, options);
@@ -679,6 +679,8 @@ window.addEventListener("load", () => {
         volume: document.getElementById("audioVolume").value / 100,
         loop: true
       });
+      document.getElementById("audioFileName").textContent = file.name;
+      document.getElementById("audioFileStatus").style.display = "flex";
       M.toast({
         html: "アラーム音を設定しました。<br>※このページから離れると、アラーム音はリセットされます。",
       });
