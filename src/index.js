@@ -63,11 +63,8 @@ document.addEventListener("DOMContentLoaded", function () {
   if (localStorage.getItem("ct-lastDuration")) {
     let localDuration = localStorage.getItem("ct-lastDuration");
     let duration = localDuration.split(":");
-    document.getElementById("hour").focus();
     document.getElementById("hour").value = Number(duration[0]);
-    document.getElementById("minute").focus();
     document.getElementById("minute").value = Number(duration[1]);
-    document.getElementById("seconds").focus();
     document.getElementById("seconds").value = Number(duration[2]);
     setType = "duration";
   }
@@ -1073,7 +1070,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // 設定画面の「秒」の項目を変えたとき、0を埋める
     let element = document.getElementById("seconds");
     if (element.value < 10 && (element.value.length < 2 || element.value === 0)) {
-      element.focus();
+      if (!element.value) {
+        element.focus();
+        element.value = "0" + element.value;
+      }
       element.value = "0" + element.value;
     }
   }, false);
@@ -1086,7 +1086,9 @@ document.addEventListener("DOMContentLoaded", () => {
       let durationSettingElements = document.getElementsByClassName("durationSet");
       for (let i = 0; i < durationSettingElements.length; i++) {
         const element = durationSettingElements[i];
-        element.focus();
+        if (!element.value) {
+          element.focus(); 
+        }
         element.value = 0;
       }
       if (setTime.indexOf("min") !== -1) {

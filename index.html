@@ -506,17 +506,6 @@
             });
         }
     </script>
-    <script defer>
-        let wavesElement = document.getElementsByClassName('waves-effect');
-        for (let i = 0; i < wavesElement.length; i++) {
-            var element = wavesElement[i];
-            element.addEventListener('touchstart', function (e) {
-                if (e.touches.length >= 2) {
-                    e.stopImmediatePropagation();
-                }
-            }, false);
-        }
-    </script>
     <script src="./dist/main.min.js"></script>
 </body>
 
