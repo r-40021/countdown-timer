@@ -97,12 +97,20 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       // Local Storageの時間が過去だったら
       noParams();
-      setType = null;
+      if (setType === "duration") {
+        localStorage.setItem("ct-lastType", 1);
+      } else {
+        setType = null;
+      }
     }
   } else {
     //パラメータ＆Local Storageなし
     noParams();
-    setType = null;
+    if (setType === "duration") {
+      localStorage.setItem("ct-lastType", 1);
+    } else {
+      setType = null;
+    }
   }
   if (localStorage.getItem("volume")) {
     let localVolume = Number(localStorage.getItem("volume"));
@@ -212,6 +220,7 @@ function onload() {
   }
   if ((setType === "duration") || ((firstLoad === 0 && localStorage.getItem("ct-lastType") == "1") && !paramObject.date && !paramObject.time)) {
     durationStatus = 1;
+    console.log("GO");
     if (!document.getElementById("durationLi").classList.contains("active")) {
       window.addEventListener("load", clickHeader, false);
     }
@@ -234,16 +243,20 @@ function onload() {
       }
       afterTime(document.getElementById("hour").value, document.getElementById("minute").value, document.getElementById("seconds").value);
     }
+    console.log(firstLoad);
+    console.log(localStorage.getItem("ct-lastType"));
     if (((((localStorage.getItem("ct-lastType") === "1" && !firstLoad) && (Number(localStorage.getItem("ct-lastSet")) >= 1000)) || durationStop) && !durationChange) || firstLoad) {
       // Local Storageに保存されていた場合
       localStorage.setItem("ct-lastDuration", document.getElementById("hour").value + ":" + document.getElementById("minute").value + ":" + document.getElementById("seconds").value);
       durationStop = false;
+      console.log("1");
       durationChange = false;
       localStorage.setItem("ct-lastType", 1);
       setType = "duration";
       down = setInterval(myCount, 200);
     } else {
       // 保存されていない
+      console.log("aaaa");
       noParams();
     }
     function afterTime(hour, minute, second) {
@@ -354,8 +367,8 @@ function myCount() {
     diffSecond = "0" + diffSecond;
   }
   var display = diffHour + ":" + diffMinute + ":" + diffSecond;
-  if (display !== "0:00:00" && !display.match("-|NaN") ) {
-      if (countTimes === 0) {
+  if (display !== "0:00:00" && !display.match("-|NaN")) {
+    if (countTimes === 0) {
       // Local Storageにセット
       if (paramStatus) {
         if (!durationStatus) {
@@ -452,6 +465,7 @@ function myCount() {
   displayWelcome = false;
 }
 function noParams() {
+  console.log("noprms");
   /*パラメータがなかったら*/
   let date = new Date();
   let after = new Date();
@@ -543,12 +557,12 @@ document.addEventListener("DOMContentLoaded", function () {
   instances = M.Timepicker.init(elems, options);
   /*modal*/
   elems = document.querySelectorAll(".modal");
-  instances = M.Modal.init(elems,{});
+  instances = M.Modal.init(elems, {});
   elems = document.querySelectorAll(".tooltipped");
-  instances = M.Tooltip.init(elems,{});
+  instances = M.Tooltip.init(elems, {});
   // tab
   elems = document.querySelectorAll(".tabs");
-  instances = M.Tabs.init(elems,{});
+  instances = M.Tabs.init(elems, {});
   // collapsible
   var elems = document.querySelectorAll('.collapsible');
   var instances = M.Collapsible.init(elems, options);
@@ -1091,7 +1105,7 @@ document.addEventListener("DOMContentLoaded", () => {
       for (let i = 0; i < durationSettingElements.length; i++) {
         const element = durationSettingElements[i];
         if (!element.value) {
-          element.focus(); 
+          element.focus();
         }
         element.value = 0;
       }
