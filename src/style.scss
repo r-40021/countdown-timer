@@ -522,6 +522,9 @@ body.dark .timepicker-tick,
 body.dark .datepicker-controls svg {
   fill: var(--fontColor);
 }
+body.dark .datepicker-table td.is-outside-current-month, .datepicker-table td.is-disabled{
+  color: rgba(255,255,255,0.3);
+}
 body.dark .dropdown-content {
   background-color: var(--bgColor);
 }
