@@ -220,7 +220,6 @@ function onload() {
   }
   if ((setType === "duration") || ((firstLoad === 0 && localStorage.getItem("ct-lastType") == "1") && !paramObject.date && !paramObject.time)) {
     durationStatus = 1;
-    console.log("GO");
     if (!document.getElementById("durationLi").classList.contains("active")) {
       window.addEventListener("load", clickHeader, false);
     }
@@ -244,20 +243,16 @@ function onload() {
       }
       afterTime(document.getElementById("hour").value, document.getElementById("minute").value, document.getElementById("seconds").value);
     }
-    console.log(firstLoad);
-    console.log(localStorage.getItem("ct-lastType"));
     if (((((localStorage.getItem("ct-lastType") === "1" && !firstLoad) && (Number(localStorage.getItem("ct-lastSet")) >= 1000)) || durationStop) && !durationChange) || firstLoad) {
       // Local Storageに保存されていた場合
       localStorage.setItem("ct-lastDuration", document.getElementById("hour").value + ":" + document.getElementById("minute").value + ":" + document.getElementById("seconds").value);
       durationStop = false;
-      console.log("1");
       durationChange = false;
       localStorage.setItem("ct-lastType", 1);
       setType = "duration";
       down = setInterval(myCount, 200);
     } else {
       // 保存されていない
-      console.log("aaaa");
       noParams();
     }
     function afterTime(hour, minute, second) {
@@ -466,14 +461,16 @@ function myCount() {
   displayWelcome = false;
 }
 function noParams() {
-  console.log("noprms");
   /*パラメータがなかったら*/
   let date = new Date();
   let after = new Date();
   after.setHours(date.getHours() + 1);
-  let defaultSet = after.toLocaleString().split(" ");
   const defaultDate = after.getFullYear() + "/" + (after.getMonth() + 1) + "/" + after.getDate();
-  const defaultTime = after.getHours() + ":" + after.getMinutes();
+  let afterMin = after.getMinutes();
+  if (afterMin < 10) {
+    afterMin = "0" + afterMin;
+  }
+  const defaultTime = after.getHours() + ":" + afterMin;
   document.getElementById("Date").value = defaultDate;
   document.getElementById("dateLabel").value =
     document.getElementById("Date").value;
