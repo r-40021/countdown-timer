@@ -239,6 +239,7 @@ function onload() {
         if (!element.value) {
           element.focus();
           element.value = 0;
+          element.blur();
         }
       }
       afterTime(document.getElementById("hour").value, document.getElementById("minute").value, document.getElementById("seconds").value);
@@ -471,9 +472,8 @@ function noParams() {
   let after = new Date();
   after.setHours(date.getHours() + 1);
   let defaultSet = after.toLocaleString().split(" ");
-  const defaultDate = defaultSet[0];
-  let originalDefaultTime = defaultSet[1].split(":");
-  const defaultTime = originalDefaultTime[0] + ":" + originalDefaultTime[1];
+  const defaultDate = after.getFullYear() + "/" + (after.getMonth() + 1) + "/" + after.getDate();
+  const defaultTime = after.getHours() + ":" + after.getMinutes();
   document.getElementById("Date").value = defaultDate;
   document.getElementById("dateLabel").value =
     document.getElementById("Date").value;
@@ -1091,6 +1091,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!element.value) {
         element.focus();
         element.value = "0" + element.value;
+        element.blur();
       }
       element.value = "0" + element.value;
     }
@@ -1108,6 +1109,7 @@ document.addEventListener("DOMContentLoaded", () => {
           element.focus();
         }
         element.value = 0;
+        element.blur();
       }
       if (setTime.indexOf("min") !== -1) {
         document.getElementById("minute").value = setTime.match(/\d{1,2}/);
