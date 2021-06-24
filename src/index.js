@@ -2,7 +2,7 @@ require("materialize-css");// Materialize読み込み
 var Push = require("push.js");// プッシュ通知のライブラリを読み込み
 import NoSleep from "../node_modules/nosleep.js/dist/NoSleep";// スリープしないように
 /*変数の定義*/
-var down, displayEnd, oldDisplay, title, myDate, myTime, target, kiduke;
+var down, displayEnd, oldDisplay, title, myDate, myTime, target, kiduke, defaultZone;
 var useDevice = 0;
 let firstLoad = 0;
 let anime; //テーマ変更時のアニメーション(timeout)
@@ -15,6 +15,8 @@ let durationChange = false;//「経過時間」の設定が変わったか
 let setType;//「経過時間」or「経過時間→日時設定」
 let stopTest;
 let displayWelcome;
+const myTimezone = new Date().getTimezoneOffset();
+let stayZone = false;
 /*Dark Theme*/
 const isDark = window.matchMedia("(prefers-color-scheme: dark)");//ダークモード？
 const { Howl, Howler } = require('howler');
@@ -85,6 +87,11 @@ document.addEventListener("DOMContentLoaded", function () {
     let localDate = localStorage.getItem("ct-date");
     let localTime = localStorage.getItem("ct-time");
     let localTarget = new Date(localDate + " " + localTime + ":00");
+    if (localStorage.getItem("ct-zone")) {
+      let localDate = localStorage.getItem("ct-date");
+    let localTime = localStorage.getItem("ct-time");
+    let localTarget = new Date(localDate + " " + localTime + ":00");
+    }
     if (localTarget.getTime() > Date.now()) {
       //テキストボックスに日時をセット
       document.getElementById("Date").value = localDate;
@@ -264,6 +271,7 @@ function onload() {
       myDate = now.getFullYear() + "/" + (now.getMonth() + 1) + "/" + now.getDate();
       myTime = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
       target = new Date(myDate + " " + myTime); //設定時間
+      stayZone = false;
     }
   } else if (setType === "target") {
     // 「日時」で設定
@@ -278,17 +286,37 @@ function onload() {
     durationStatus = 0;
     myDate = paramObject.date;
     myTime = paramObject.time;
-    target = new Date(myDate + " " + myTime + ":00"); //設定時間
+    target = new Date(paramObject.date + " " + paramObject.time + ":00"); //設定時間
+    if (stayZone) {
+      defaultZone = paramObject.timezone;
+    } else {
+      defaultZone = myTimezone;
+    }
+    var min = target.getMinutes();
+    target.setMinutes(min + defaultZone - myTimezone );
+    if (min < 10) {
+      min = "0" + min;
+    }
+    myDate = target.getFullYear() + "/" + (target.getMonth() + 1) + "/" + target.getDate();
+    myTime = target.getHours() + ":" + min;
     down = setInterval(myCount, 200);
   } else if (
     localStorage.getItem("ct-date") &&
     localStorage.getItem("ct-time")
   ) {
     // Local Storageから「日時で設定」
+
     localStorage.setItem("ct-lastType", 0);
-    let localDate = localStorage.getItem("ct-date");
-    let localTime = localStorage.getItem("ct-time");
-    let localTarget = new Date(localDate + " " + localTime + ":00");
+    let localTarget = new Date(localStorage.getItem("ct-date") + " " + localStorage.getItem("ct-time") + ":00");
+    var localMin = localTarget.getMinutes();
+    if (localStorage.getItem("ct-zone")) {
+      localTarget.setMinutes(min + Number(localStorage.getItem("ct-zone") -myTimezone));
+    }
+    if (localMin < 10) {
+      localMin = "0" + localMin;
+    }
+    let localDate = localTarget.getFullYear() + "/" + (localTarget.getMonth() + 1) + "/" + localTarget.getDate();
+    let localTime = localTarget.getHours() + ":" + min;
     if (localTarget.getTime() > Date.now()) {
       window.addEventListener("load", () => { document.getElementById("targetSetBtn").click(); }, false);
     } else {
@@ -370,6 +398,7 @@ function myCount() {
         if (!durationStatus) {
           localStorage.setItem("ct-date", myDate);
           localStorage.setItem("ct-time", myTime);
+          localStorage.setItem("timezone", defaultZone);
         }
         if (title) {
           localStorage.setItem("ct-title", title);
@@ -486,6 +515,7 @@ function set() {
   /*SETボタンを押したときの挙動*/
   if (setType === "duration") {
   } else {
+    stayZone = false;
     myDate = document.getElementById("Date").value;
     myTime = document.getElementById("Time").value;
     changeURL();
@@ -498,8 +528,11 @@ function set() {
 function changeURL() {
   // URLを変更
   let newURL = "?";
+  if (!stayZone) {
+    defaultZone = myTimezone;
+  }
   if (myDate && myTime && !durationStatus) {
-    newURL = newURL + "date=" + myDate + "&time=" + myTime;//設定時刻
+    newURL = newURL + "date=" + myDate + "&time=" + myTime + "&timezone=" + defaultZone;//設定時刻
   }
   if (title) {
     /*タイトル*/
