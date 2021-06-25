@@ -97,7 +97,9 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("Time").value = localTime;
       document.getElementById("timeLabel").value =
         document.getElementById("Time").value;
-      setType = null;
+      if (setType !== "duration") {
+        setType = null;
+      }
     } else {
       // Local Storageの時間が過去だったら
       noParams();
@@ -323,7 +325,11 @@ function myCount() {
   var date = new Date();
   var diffTime = target.getTime() - date.getTime(); //時間の差を計算
   if (diffTime || diffTime === 0) {
-    localStorage.setItem("ct-lastSet", diffTime);
+    if (setType === "duration") {
+      localStorage.setItem("ct-lastSet", diffTime);
+    } else {
+      localStorage.removeItem("ct-lastSet");
+    }
     let newMyDate = new Date(myDate);
     /* ステータスにアラームが鳴る時刻を表示 */
     let myDisplayTime;
