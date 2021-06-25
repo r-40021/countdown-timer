@@ -22,7 +22,7 @@
   "homepage": "https://github.com/r-40021/countdown-timer#readme",
   "devDependencies": {
     "gulp": "^4.0.2",
-    "gulp-sass": "^4.1.0",
+    "gulp-sass": "^4.1.1",
     "howler": "^2.2.1",
     "materialize-css": "^1.0.0",
     "nosleep.js": "^0.12.0",
