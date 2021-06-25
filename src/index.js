@@ -700,12 +700,26 @@ window.addEventListener("load", () => {
       document.getElementById("audioFileName").textContent = file.name;
       document.getElementById("audioFileStatus").style.display = "flex";
       M.toast({
-        html: "アラーム音を設定しました。<br>※このページから離れると、アラーム音はリセットされます。",
+        html: "アラーム音を設定しました",
       });
       window.addEventListener("beforeunload", move, false);
     };
     reader.readAsDataURL(file);
   }
+  document.getElementById("audioReset").addEventListener("click",()=>{
+    alarm = new Howl({
+      src: ['/countdown-timer/alarm.mp3'],
+      volume: document.getElementById("audioVolume").value / 100,
+      loop: true
+    });
+    testAlarm = new Howl({
+      src: ['/countdown-timer/alarm.mp3'],
+      volume: document.getElementById("audioVolume").value / 100,
+      loop: true
+    });
+    document.getElementById("audioFileStatus").style.display = "none";
+    window.removeEventListener("beforeunload", move, false);
+  },false);
   // Drug & Drop
   let dropbox;
   dropbox = document.getElementById("droppable");
