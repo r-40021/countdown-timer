@@ -308,15 +308,9 @@ function onload() {
 
     localStorage.setItem("ct-lastType", 0);
     let localTarget = new Date(localStorage.getItem("ct-date") + " " + localStorage.getItem("ct-time") + ":00");
-    var localMin = localTarget.getMinutes();
     if (localStorage.getItem("ct-zone")) {
-      localTarget.setMinutes(min + Number(localStorage.getItem("ct-zone") -myTimezone));
+      localTarget.setMinutes(min + Number(localStorage.getItem("ct-zone") - myTimezone));
     }
-    if (localMin < 10) {
-      localMin = "0" + localMin;
-    }
-    let localDate = localTarget.getFullYear() + "/" + (localTarget.getMonth() + 1) + "/" + localTarget.getDate();
-    let localTime = localTarget.getHours() + ":" + min;
     if (localTarget.getTime() > Date.now()) {
       window.addEventListener("load", () => { document.getElementById("targetSetBtn").click(); }, false);
     } else {
