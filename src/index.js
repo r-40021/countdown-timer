@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("minute").value = Number(duration[1]);
     document.getElementById("seconds").value = Number(duration[2]);
     if (localStorage.getItem("ct-lastType") === "1") {
-      setType = "duration"; 
+      setType = "duration";
     } else {
       setType = null;
     }
@@ -314,6 +314,8 @@ function onload() {
 /*カウントダウン（一番大事）*/
 function myCount() {
   if (countTimes === 0) {
+    document.getElementById("playTimer").style.display = "";
+    document.getElementById("reTimer").style.display = "none";
     document.getElementById("stopTimer").style.display = "inline-flex";
     document.getElementById("setTimer").style.display = "none";
   }
@@ -445,6 +447,8 @@ function myCount() {
     }, 1000);
   } /*計算結果が負orNaNのときの処理*/ else if (display.match("-|NaN")) {
     stop();
+    document.getElementById("playTimer").style.display = "";
+    document.getElementById("reTimer").style.display = "none";
     document.getElementById("stopTimer").style.display = "";
     document.getElementById("setTimer").style.display = "";
     if (display.match("-")) {
@@ -643,6 +647,10 @@ function stop() {
   clearInterval(down);
 }
 function audiostop() {
+  if (setType === "duration" && document.getElementById("displayTime").textContent === "00:00") {
+    document.getElementById("playTimer").style.display = "none";
+    document.getElementById("reTimer").style.display = "";
+  }
   document.getElementById("stopTimer").style.display = "";
   document.getElementById("setTimer").style.display = "";
   alarm.stop();
@@ -706,7 +714,7 @@ window.addEventListener("load", () => {
     };
     reader.readAsDataURL(file);
   }
-  document.getElementById("audioReset").addEventListener("click",()=>{
+  document.getElementById("audioReset").addEventListener("click", () => {
     alarm = new Howl({
       src: ['/countdown-timer/alarm.mp3'],
       volume: document.getElementById("audioVolume").value / 100,
@@ -719,7 +727,7 @@ window.addEventListener("load", () => {
     });
     document.getElementById("audioFileStatus").style.display = "none";
     window.removeEventListener("beforeunload", move, false);
-  },false);
+  }, false);
   // Drug & Drop
   let dropbox;
   dropbox = document.getElementById("droppable");
