@@ -485,6 +485,9 @@ function noParams() {
     defaultTime + " (自動設定)";
   localStorage.setItem("ct-lastType", 0);
   durationStatus = 0;
+  if (!displayWelcome) {
+    openTimeSetting();
+  }
 }
 function set() {
   /*SETボタンを押したときの挙動*/
