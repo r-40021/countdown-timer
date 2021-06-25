@@ -21,8 +21,9 @@
   },
   "homepage": "https://github.com/r-40021/countdown-timer#readme",
   "devDependencies": {
+    "glob-parent": ">=5.1.2",
     "gulp": "^4.0.2",
-    "gulp-sass": "^4.1.1",
+    "gulp-sass": "^5.0.0",
     "howler": "^2.2.1",
     "materialize-css": "^1.0.0",
     "nosleep.js": "^0.12.0",
