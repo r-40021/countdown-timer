@@ -66,7 +66,11 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("hour").value = Number(duration[0]);
     document.getElementById("minute").value = Number(duration[1]);
     document.getElementById("seconds").value = Number(duration[2]);
-    setType = "duration";
+    if (localStorage.getItem("ct-lastType") === "1") {
+      setType = "duration"; 
+    } else {
+      setType = null;
+    }
   }
   if (paramObject.date && paramObject.time) {
     //テキストボックスに日時をセット
