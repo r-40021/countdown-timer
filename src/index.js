@@ -1184,6 +1184,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 3000);
   })
 }, false);
+document.addEventListener("keydown",(e)=>{
+  if (/^[1-9]{1}/.test(e.key)) {
+    if (document.activeElement.tagName.toLocaleLowerCase() !== "input" && !e.repeat){
+      let durationSettingElements = document.getElementsByClassName("durationSet");
+      for (let i = 0; i < durationSettingElements.length; i++) {
+        const element = durationSettingElements[i];
+        if (!element.value) {
+          element.focus();
+        }
+        element.value = 0;
+        element.blur();
+      }
+      document.getElementById("minute").value = Number(e.key);
+      document.getElementById("durationSetBtn").click();
+    }
+  }
+})
 window.toggleTheme = toggleTheme;
 window.copy = copy;
 window.tweet = tweet;
