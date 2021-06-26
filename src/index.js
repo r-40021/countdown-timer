@@ -152,6 +152,9 @@ function device() {
     //PCとIE以外でしか実行しない
     useDevice = 1;
   }
+  if (!'onkeydown' in document) {
+    document.getElementById("nophone").remove();
+  }
   if (
     userAgent.indexOf("iphone") != -1 ||
     (userAgent.indexOf("mac os x") != -1 && "ontouchend" in document)
