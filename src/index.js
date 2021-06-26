@@ -152,6 +152,9 @@ function device() {
     //PCとIE以外でしか実行しない
     useDevice = 1;
   }
+  if (!'onkeydown' in document) {
+    document.getElementById("nophone").remove();
+  }
   if (
     userAgent.indexOf("iphone") != -1 ||
     (userAgent.indexOf("mac os x") != -1 && "ontouchend" in document)
@@ -675,6 +678,10 @@ function audiostop() {
     }
   }
 }
+function doubleAlarmStop (){
+  alarm.stop();
+  testAlarm.stop();
+}
 function pushrequest() {
   if (useDevice) {
     //PCとIE以外でしか実行しない
@@ -701,6 +708,11 @@ window.addEventListener("load", () => {
     }
     const reader = new FileReader();
     reader.onload = () => {
+      let playing = false;
+      if (alarm.playing()) {
+        playing = true;
+      }
+      doubleAlarmStop();
       alarm = new Howl({
         src: [reader.result],
         volume: document.getElementById("audioVolume").value / 100,
@@ -717,10 +729,18 @@ window.addEventListener("load", () => {
         html: "アラーム音を設定しました",
       });
       window.addEventListener("beforeunload", move, false);
+      if (playing) {
+        alarm.play();
+      }
     };
     reader.readAsDataURL(file);
   }
   document.getElementById("audioReset").addEventListener("click", () => {
+    let playing = false;
+      if (alarm.playing()) {
+        playing = true;
+      }
+    doubleAlarmStop();
     alarm = new Howl({
       src: ['/countdown-timer/alarm.mp3'],
       volume: document.getElementById("audioVolume").value / 100,
@@ -733,6 +753,9 @@ window.addEventListener("load", () => {
     });
     document.getElementById("audioFileStatus").style.display = "none";
     window.removeEventListener("beforeunload", move, false);
+    if (playing) {
+      alarm.play();
+    }
   }, false);
   // Drug & Drop
   let dropbox;
@@ -1164,6 +1187,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 3000);
   })
 }, false);
+document.addEventListener("keydown",(e)=>{
+  if (/^[1-9]{1}/.test(e.key)) {
+    if (document.activeElement.tagName.toLocaleLowerCase() !== "input" && !e.repeat){
+      let durationSettingElements = document.getElementsByClassName("durationSet");
+      for (let i = 0; i < durationSettingElements.length; i++) {
+        const element = durationSettingElements[i];
+        if (!element.value) {
+          element.focus();
+        }
+        element.value = 0;
+        element.blur();
+      }
+      document.getElementById("minute").value = Number(e.key);
+      document.getElementById("durationSetBtn").click();
+    }
+  }
+})
 window.toggleTheme = toggleTheme;
 window.copy = copy;
 window.tweet = tweet;
