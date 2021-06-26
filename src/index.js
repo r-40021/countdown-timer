@@ -675,6 +675,10 @@ function audiostop() {
     }
   }
 }
+function doubleAlarmStop (){
+  alarm.stop();
+  testAlarm.stop();
+}
 function pushrequest() {
   if (useDevice) {
     //PCとIE以外でしか実行しない
@@ -701,6 +705,11 @@ window.addEventListener("load", () => {
     }
     const reader = new FileReader();
     reader.onload = () => {
+      let playing = false;
+      if (alarm.playing()) {
+        playing = true;
+      }
+      doubleAlarmStop();
       alarm = new Howl({
         src: [reader.result],
         volume: document.getElementById("audioVolume").value / 100,
@@ -717,10 +726,18 @@ window.addEventListener("load", () => {
         html: "アラーム音を設定しました",
       });
       window.addEventListener("beforeunload", move, false);
+      if (playing) {
+        alarm.play();
+      }
     };
     reader.readAsDataURL(file);
   }
   document.getElementById("audioReset").addEventListener("click", () => {
+    let playing = false;
+      if (alarm.playing()) {
+        playing = true;
+      }
+    doubleAlarmStop();
     alarm = new Howl({
       src: ['/countdown-timer/alarm.mp3'],
       volume: document.getElementById("audioVolume").value / 100,
@@ -733,6 +750,9 @@ window.addEventListener("load", () => {
     });
     document.getElementById("audioFileStatus").style.display = "none";
     window.removeEventListener("beforeunload", move, false);
+    if (playing) {
+      alarm.play();
+    }
   }, false);
   // Drug & Drop
   let dropbox;
