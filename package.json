@@ -24,7 +24,7 @@
     "glob-parent": ">=6.0.0",
     "gulp": "^4.0.2",
     "gulp-sass": "^5.0.0",
-    "howler": "^2.2.1",
+    "howler": "^2.2.2",
     "materialize-css": "^1.0.0",
     "nosleep.js": "^0.12.0",
     "webpack": "^5.40.0",
