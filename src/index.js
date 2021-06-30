@@ -271,12 +271,13 @@ function device() {
     userAgent.indexOf("iphone") != -1 ||
     (userAgent.indexOf("mac os x") != -1 && "ontouchend" in document)
   ) {
-    /*iPhone/iPad除く*/ /*iPhone/iPadのときは、アラーム音関連・全画面表示関連を非表示*/
+    /*iPhone/iPad除く*/ /*iPhone/iPadのときは全画面表示関連を非表示*/
     const elements = document.getElementsByClassName("noiphone");
     for (let i = 0; i < elements.length; i++) {
       const element = elements[i];
       element.style.display = "none";
     }
+    document.getElementById("file1").setAttribute("accept",".mp3,.m4a,.aac,.wav,.flac");
   }
   pushrequest();
 }
