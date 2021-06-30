@@ -264,8 +264,7 @@ function device() {
   ) {
     //PCとIE以外でしか実行しない
     useDevice = 1;
-  }
-  if (!'onkeydown' in document) {
+  } else {
     document.getElementById("nophone").remove();
   }
   if (
