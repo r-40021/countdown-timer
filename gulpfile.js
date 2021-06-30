@@ -1,7 +1,7 @@
 // gulpプラグインを読み込みます
 const { src, dest, watch } = require("gulp");
 // Sassをコンパイルするプラグインを読み込みます
-const sass = require("gulp-sass");
+var sass = require('gulp-sass')(require('sass'));
 
 /**
  * Sassをコンパイルするタスクです

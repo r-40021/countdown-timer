@@ -23,7 +23,8 @@ var alarm;
 var testAlarm;
 /*アラーム音の視聴用 */
 var noSleep = new NoSleep();
-document.addEventListener("DOMContentLoaded", function () {
+first();
+function first() {
   /*datepicker*/
   var elems = document.querySelectorAll(".datepicker");
   var options = {
@@ -122,8 +123,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-});
-document.addEventListener("DOMContentLoaded", function () {
+}
+function second() {
   if (!localStorage.getItem("ct-skip")) {   
     M.Modal.getInstance(document.getElementById("welcome")).open();// 「ようこそ」画面を表示
     displayWelcome = true;
@@ -131,8 +132,9 @@ document.addEventListener("DOMContentLoaded", function () {
   } else {
     document.getElementById("nextSkip").checked = true;
   }
-});
-document.addEventListener("DOMContentLoaded", function () {
+}
+second();
+function third(){
   device();
   // Theme
   if (localStorage.getItem("theme") === "dark") {
@@ -242,7 +244,8 @@ document.addEventListener("DOMContentLoaded", function () {
     loop: true
   });
   onload();
-});
+}
+third();
 function clickHeader() {
   M.Collapsible.getInstance(document.querySelector(".collapsible")).open(1);//「経過時間で設定」の項目を表示させる
 }
@@ -277,7 +280,7 @@ function device() {
   }
   pushrequest();
 }
-document.addEventListener("DOMContentLoaded", function () {
+function fourth() {
   // フルスクリーン表示
   document.getElementById("fullscreen").addEventListener("click", function () {
     // Chrome & Firefox v64以降
@@ -314,7 +317,8 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       M.Tabs.getInstance(document.getElementById("settingsTab")).updateTabIndicator();
     }, false);
-});
+}
+fourth();
 function onload() {
   resize(); //文字サイズ調整
   /*パラメータ取得*/
@@ -340,9 +344,7 @@ function onload() {
   }
   if ((setType === "duration") || ((firstLoad === 0 && localStorage.getItem("ct-lastType") == "1") && !paramObject.date && !paramObject.time)) {
     durationStatus = 1;
-    if (!document.getElementById("durationLi").classList.contains("active")) {
-      window.addEventListener("load", clickHeader, false);
-    }
+      clickHeader();
     changeURL();//URL変更
     if ((((localStorage.getItem("ct-lastType") === "1" && !firstLoad) && (Number(localStorage.getItem("ct-lastSet")) >= 1000)) || durationStop) && !durationChange) {
       // 「経過時間」でセット
@@ -410,7 +412,7 @@ function onload() {
     let localTime = localStorage.getItem("ct-time");
     let localTarget = new Date(localDate + " " + localTime + ":00");
     if (localTarget.getTime() > Date.now()) {
-      window.addEventListener("load", () => { document.getElementById("targetSetBtn").click(); }, false);
+      document.getElementById("targetSetBtn").click();
     } else {
       localStorage.removeItem("ct-date");
       localStorage.removeItem("ct-time");
@@ -703,7 +705,7 @@ function pushrequest() {
     Push.Permission.request();
   }
 }
-window.addEventListener("load", () => {
+function load1(){
   /*アラーム音設定・プレビューも*/
   const f = document.getElementById("file1");
   f.addEventListener("change", formatNode, false);
@@ -800,14 +802,15 @@ window.addEventListener("load", () => {
     const files = dt.files;
     selectFile(files);
   }
-});
+}
+load1();
 function move(e) {
   //ページ離脱時に警告
   e.preventDefault();
   // Chrome では returnValue を設定する必要がある
   e.returnValue = "";
 }
-document.addEventListener("DOMContentLoaded", function () {
+function fifth() {
   //残り時間が変わったら、文字サイズ調整
   var element = document.getElementById("displayTime");
   var action = new MutationObserver(function (record, observer) {
@@ -817,7 +820,8 @@ document.addEventListener("DOMContentLoaded", function () {
     childList: true,
   };
   action.observe(element, config);
-});
+}
+fifth();
 window.addEventListener("resize", function () {
   resize();
 });
@@ -898,9 +902,7 @@ document.getElementById("volumeStatusValue").addEventListener(
   false
 );
 /*テーマ切り替え*/
-document.addEventListener(
-  "DOMContentLoaded",
-  function () {
+  function sixth() {
     let auto = document.getElementById("auto"); //「システムに従う」ボタン
     let light = document.getElementById("light"); //「ライトモード」ボタン
     let dark = document.getElementById("dark"); //「ダークモード」ボタン
@@ -931,9 +933,8 @@ document.addEventListener(
       },
       false
     );
-  },
-  false
-);
+  }
+  sixth();
 function toggleTheme(mql) {
   clearInterval(anime); //0.4秒後にbodyのトランジョン解除のタイマーを解除
   document.body.classList.add("anime"); //bodyのトランジョンを有効化
@@ -1071,7 +1072,7 @@ function tweet() {
   }
   return url;
 }
-document.addEventListener("DOMContentLoaded", () => {
+function seventh(){
   // Enable wake lock.
   // (must be wrapped in a user input event handler e.g. a mouse or touch handler)
   let eventType;
@@ -1193,7 +1194,8 @@ document.addEventListener("DOMContentLoaded", () => {
       flexArea.style.cursor = "none";
     }, 3000);
   })
-}, false);
+}
+seventh();
 document.addEventListener("keydown",(e)=>{
   if (/^[1-9]{1}/.test(e.key)) {
     if (document.activeElement.tagName.toLocaleLowerCase() !== "input" && !e.repeat){
