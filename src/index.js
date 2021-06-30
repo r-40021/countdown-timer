@@ -23,7 +23,119 @@ var alarm;
 var testAlarm;
 /*アラーム音の視聴用 */
 var noSleep = new NoSleep();
-document.addEventListener("DOMContentLoaded", function () {
+document.getElementById("loader").remove();
+first();
+function first() {
+  /*datepicker*/
+  var elems = document.querySelectorAll(".datepicker");
+  var options = {
+    autoClose: true,
+    defaultDate: new Date(),
+    minDate: new Date(),
+    i18n: {
+      months: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+      monthsShort: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+      weekdays: ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"],
+      weekdaysShort: ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"],
+      weekdaysAbbrev: ["日", "月", "火", "水", "木", "金", "土"],
+      nextMonth: "翌月",
+      previousMonth: "前月",
+      labelMonthSelect: "月を選択",
+      labelYearSelect: "年を選択",
+      setDefaultDate: true,
+      cancel: 'キャンセル',
+      clear: 'クリア',
+      done: 'OK',
+      close: "閉じる",
+    },
+    format: "yyyy/mm/dd"
+  };
+  var instances = M.Datepicker.init(elems, options);
+  /*timepicker*/
+  elems = document.querySelectorAll(".timepicker");
+  options = {
+    twelveHour: false,
+    i18n: {
+      cancel: 'キャンセル',
+      clear: 'クリア',
+      done: 'OK',
+      close: "閉じる",
+    },
+    autoClose: true
+  };
+  instances = M.Timepicker.init(elems, options);
+  /*modal*/
+  elems = document.querySelectorAll(".modal");
+  instances = M.Modal.init(elems, {});
+  elems = document.querySelectorAll(".tooltipped");
+  instances = M.Tooltip.init(elems, {});
+  // tab
+  elems = document.querySelectorAll(".tabs");
+  instances = M.Tabs.init(elems, {});
+  M.Tabs.getInstance(document.getElementById("settingsTab")).updateTabIndicator();
+  // collapsible
+  var elems = document.querySelectorAll('.collapsible');
+  var instances = M.Collapsible.init(elems, options);
+
+  /** 監視対象の要素オブジェクト */
+  const obElem = document.getElementsByClassName("date-text")[0];
+
+  /** 監視時のオプション */
+  const config = {
+    attributes: true,
+    childList: true,
+    characterData: true
+  };
+
+  var observer = new MutationObserver(function (record) {
+    /** DOM変化の監視を一時停止 */
+    observer.disconnect();
+
+    formatCal();
+
+    /** DOM変化の監視を再開 */
+    observer.observe(obElem, config);
+  });
+
+  observer.observe(obElem, config);
+
+  function formatCal() {
+    var elem = document.getElementsByClassName("date-text")[0];
+    if (elem.textContent.match(",")) {
+      try {
+        document.getElementById("calDate").remove();
+        document.getElementById("calDay").remove();
+      } catch (error) {
+
+      }
+      let parts = elem.textContent.split(",");
+      elem.textContent = null;
+      let date = document.createElement("span");
+      date.innerText = parts[1].replace(" ", "") + "日";
+      date.style.display = "inline-block";
+      date.setAttribute("id", "calDate");
+      elem.appendChild(date);
+
+      let day = document.createElement("span");
+      day.innerText = "(" + parts[0].replace("曜日", "") + ")";
+      day.style.display = "inline-block";
+      day.setAttribute("id", "calDay");
+      elem.appendChild(day);
+    }
+  }
+
+}
+function second() {
+  if (!localStorage.getItem("ct-skip")) {   
+    M.Modal.getInstance(document.getElementById("welcome")).open();// 「ようこそ」画面を表示
+    displayWelcome = true;
+    document.getElementById("howToCheck").checked = true;
+  } else {
+    document.getElementById("nextSkip").checked = true;
+  }
+}
+second();
+function third(){
   device();
   // Theme
   if (localStorage.getItem("theme") === "dark") {
@@ -133,9 +245,10 @@ document.addEventListener("DOMContentLoaded", function () {
     loop: true
   });
   onload();
-});
+}
+third();
 function clickHeader() {
-  document.getElementById("durationHeader").click();//「経過時間で設定」の項目を表示させる
+  M.Collapsible.getInstance(document.querySelector(".collapsible")).open(1);//「経過時間で設定」の項目を表示させる
 }
 function device() {
   var userAgent = window.navigator.userAgent.toLowerCase(); //ブラウザ情報取得
@@ -167,7 +280,7 @@ function device() {
   }
   pushrequest();
 }
-document.addEventListener("DOMContentLoaded", function () {
+function fourth() {
   // フルスクリーン表示
   document.getElementById("fullscreen").addEventListener("click", function () {
     // Chrome & Firefox v64以降
@@ -183,6 +296,7 @@ document.addEventListener("DOMContentLoaded", function () {
     } else if (document.body.msRequestFullscreen) {
       document.body.msRequestFullscreen();
     }
+    M.Tabs.getInstance(document.getElementById("settingsTab")).updateTabIndicator();
   });
   // フルスクリーン解除
   document
@@ -201,8 +315,10 @@ document.addEventListener("DOMContentLoaded", function () {
       } else if (document.msExitFullscreen) {
         document.msExitFullscreen();
       }
+      M.Tabs.getInstance(document.getElementById("settingsTab")).updateTabIndicator();
     }, false);
-});
+}
+fourth();
 function onload() {
   resize(); //文字サイズ調整
   /*パラメータ取得*/
@@ -228,9 +344,7 @@ function onload() {
   }
   if ((setType === "duration") || ((firstLoad === 0 && localStorage.getItem("ct-lastType") == "1") && !paramObject.date && !paramObject.time)) {
     durationStatus = 1;
-    if (!document.getElementById("durationLi").classList.contains("active")) {
-      window.addEventListener("load", clickHeader, false);
-    }
+      clickHeader();
     changeURL();//URL変更
     if ((((localStorage.getItem("ct-lastType") === "1" && !firstLoad) && (Number(localStorage.getItem("ct-lastSet")) >= 1000)) || durationStop) && !durationChange) {
       // 「経過時間」でセット
@@ -298,7 +412,7 @@ function onload() {
     let localTime = localStorage.getItem("ct-time");
     let localTarget = new Date(localDate + " " + localTime + ":00");
     if (localTarget.getTime() > Date.now()) {
-      window.addEventListener("load", () => { document.getElementById("targetSetBtn").click(); }, false);
+      document.getElementById("targetSetBtn").click();
     } else {
       localStorage.removeItem("ct-date");
       localStorage.removeItem("ct-time");
@@ -470,7 +584,7 @@ function myCount() {
     if (!displayWelcome) {
       openTimeSetting();
       if (!document.getElementById("targetLi").classList.contains("active")) {
-        document.getElementById("targetHeader").click();
+        M.Collapsible.getInstance(document.querySelector("#selectSettings")).open(0);
       }
     }
   }
@@ -532,105 +646,7 @@ function changeURL() {
   }
   history.replaceState(null, "やまだのタイマー", newURL);
 }
-document.addEventListener("DOMContentLoaded", function () {
-  /*datepicker*/
-  var elems = document.querySelectorAll(".datepicker");
-  var options = {
-    autoClose: true,
-    defaultDate: new Date(),
-    minDate: new Date(),
-    i18n: {
-      months: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
-      monthsShort: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
-      weekdays: ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"],
-      weekdaysShort: ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"],
-      weekdaysAbbrev: ["日", "月", "火", "水", "木", "金", "土"],
-      nextMonth: "翌月",
-      previousMonth: "前月",
-      labelMonthSelect: "月を選択",
-      labelYearSelect: "年を選択",
-      setDefaultDate: true,
-      cancel: 'キャンセル',
-      clear: 'クリア',
-      done: 'OK',
-      close: "閉じる",
-    },
-    format: "yyyy/mm/dd"
-  };
-  var instances = M.Datepicker.init(elems, options);
-  /*timepicker*/
-  elems = document.querySelectorAll(".timepicker");
-  options = {
-    twelveHour: false,
-    i18n: {
-      cancel: 'キャンセル',
-      clear: 'クリア',
-      done: 'OK',
-      close: "閉じる",
-    },
-    autoClose: true
-  };
-  instances = M.Timepicker.init(elems, options);
-  /*modal*/
-  elems = document.querySelectorAll(".modal");
-  instances = M.Modal.init(elems, {});
-  elems = document.querySelectorAll(".tooltipped");
-  instances = M.Tooltip.init(elems, {});
-  // tab
-  elems = document.querySelectorAll(".tabs");
-  instances = M.Tabs.init(elems, {});
-  // collapsible
-  var elems = document.querySelectorAll('.collapsible');
-  var instances = M.Collapsible.init(elems, options);
 
-  /** 監視対象の要素オブジェクト */
-  const obElem = document.getElementsByClassName("date-text")[0];
-
-  /** 監視時のオプション */
-  const config = {
-    attributes: true,
-    childList: true,
-    characterData: true
-  };
-
-  var observer = new MutationObserver(function (record) {
-    /** DOM変化の監視を一時停止 */
-    observer.disconnect();
-
-    formatCal();
-
-    /** DOM変化の監視を再開 */
-    observer.observe(obElem, config);
-  });
-
-  observer.observe(obElem, config);
-
-  function formatCal() {
-    var elem = document.getElementsByClassName("date-text")[0];
-    if (elem.textContent.match(",")) {
-      try {
-        document.getElementById("calDate").remove();
-        document.getElementById("calDay").remove();
-      } catch (error) {
-
-      }
-      let parts = elem.textContent.split(",");
-      elem.textContent = null;
-      let date = document.createElement("span");
-      date.innerText = parts[1].replace(" ", "") + "日";
-      date.style.display = "inline-block";
-      date.setAttribute("id", "calDate");
-      elem.appendChild(date);
-
-      let day = document.createElement("span");
-      day.innerText = "(" + parts[0].replace("曜日", "") + ")";
-      day.style.display = "inline-block";
-      day.setAttribute("id", "calDay");
-      elem.appendChild(day);
-    }
-  }
-
-});
 function copy() {
   /*URLコピー*/
   var url = location.href;
@@ -650,6 +666,7 @@ function resize() {
     document.getElementById("timerSetforOld").style.fontSize = 185 / count + "vmin";
     document.getElementById("timerSet").style.fontSize = "min(" + 185 / count + "vmin ," + window.innerWidth * 0.95 / count * 1.5 + "px)"; //文字サイズ調整
   }
+  M.Tabs.getInstance(document.getElementById("settingsTab")).updateTabIndicator();
 }
 function stop() {
   clearInterval(down);
@@ -688,7 +705,7 @@ function pushrequest() {
     Push.Permission.request();
   }
 }
-window.addEventListener("load", () => {
+function load1(){
   /*アラーム音設定・プレビューも*/
   const f = document.getElementById("file1");
   f.addEventListener("change", formatNode, false);
@@ -785,14 +802,15 @@ window.addEventListener("load", () => {
     const files = dt.files;
     selectFile(files);
   }
-});
+}
+load1();
 function move(e) {
   //ページ離脱時に警告
   e.preventDefault();
   // Chrome では returnValue を設定する必要がある
   e.returnValue = "";
 }
-document.addEventListener("DOMContentLoaded", function () {
+function fifth() {
   //残り時間が変わったら、文字サイズ調整
   var element = document.getElementById("displayTime");
   var action = new MutationObserver(function (record, observer) {
@@ -802,7 +820,8 @@ document.addEventListener("DOMContentLoaded", function () {
     childList: true,
   };
   action.observe(element, config);
-});
+}
+fifth();
 window.addEventListener("resize", function () {
   resize();
 });
@@ -855,15 +874,6 @@ document.getElementById("title").addEventListener("input", () => {
   }
   changeURL();// URLを変更
 });
-document.addEventListener("DOMContentLoaded", function () {
-  if (!localStorage.getItem("ct-skip")) {
-    document.getElementById("openWelcome").click();// 「ようこそ」画面を表示
-    displayWelcome = true;
-    document.getElementById("howToCheck").checked = true;
-  } else {
-    document.getElementById("nextSkip").checked = true;
-  }
-});
 function showVolume() {
   // 現在の音量をステータスに表示
   document.getElementById("volumeStatusValue").textContent =
@@ -873,26 +883,26 @@ function showVolume() {
 document.getElementById("alarmTimeValue").addEventListener("click", openTimeSetting, false);
 function openTimeSetting() {
   // アラーム日時のステータスをクリックすると、日時の設定が開く
-  document.getElementById("openSettings").click();
+  M.Modal.getInstance(document.getElementById("settings")).open();
+  let settingsTab = M.Tabs.getInstance(document.getElementById("settingsTab"));
   setTimeout(() => {
-    document.getElementById("timeTab").click();
+    settingsTab.select("settings-1");
   }, 200);
 }
 document.getElementById("volumeStatusValue").addEventListener(
   "click",
   () => {
     // 音量のステータスをクリックすると、アラーム音の設定が開く
-    document.getElementById("openSettings").click();
+    M.Modal.getInstance(document.getElementById("settings")).open();
+    let settingsTab = M.Tabs.getInstance(document.getElementById("settingsTab"));
     setTimeout(() => {
-      document.getElementById("audioTab").click();
+      settingsTab.select("settings-2");
     }, 200);
   },
   false
 );
 /*テーマ切り替え*/
-document.addEventListener(
-  "DOMContentLoaded",
-  function () {
+  function sixth() {
     let auto = document.getElementById("auto"); //「システムに従う」ボタン
     let light = document.getElementById("light"); //「ライトモード」ボタン
     let dark = document.getElementById("dark"); //「ダークモード」ボタン
@@ -923,9 +933,8 @@ document.addEventListener(
       },
       false
     );
-  },
-  false
-);
+  }
+  sixth();
 function toggleTheme(mql) {
   clearInterval(anime); //0.4秒後にbodyのトランジョン解除のタイマーを解除
   document.body.classList.add("anime"); //bodyのトランジョンを有効化
@@ -1063,7 +1072,7 @@ function tweet() {
   }
   return url;
 }
-document.addEventListener("DOMContentLoaded", () => {
+function seventh(){
   // Enable wake lock.
   // (must be wrapped in a user input event handler e.g. a mouse or touch handler)
   let eventType;
@@ -1185,7 +1194,8 @@ document.addEventListener("DOMContentLoaded", () => {
       flexArea.style.cursor = "none";
     }, 3000);
   })
-}, false);
+}
+seventh();
 document.addEventListener("keydown",(e)=>{
   if (/^[1-9]{1}/.test(e.key)) {
     if (document.activeElement.tagName.toLocaleLowerCase() !== "input" && !e.repeat){
