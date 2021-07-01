@@ -24,6 +24,10 @@ var testAlarm;
 /*アラーム音の視聴用 */
 var noSleep = new NoSleep();
 document.getElementById("loader").remove();
+document.getElementById("loadingBlur").style.backdropFilter = "blur(0px)";
+setTimeout(() => {
+  document.getElementById("loadingBlur").remove();
+}, 500);
 first();
 function first() {
   /*datepicker*/
