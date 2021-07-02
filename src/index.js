@@ -417,7 +417,8 @@ function onload() {
     let localTime = localStorage.getItem("ct-time");
     let localTarget = new Date(localDate + " " + localTime + ":00");
     if (localTarget.getTime() > Date.now()) {
-      document.getElementById("targetSetBtn").click();
+      setType = "target";
+    set();
     } else {
       localStorage.removeItem("ct-date");
       localStorage.removeItem("ct-time");
