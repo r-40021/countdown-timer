@@ -76,7 +76,6 @@ function first() {
   // tab
   elems = document.querySelectorAll(".tabs");
   instances = M.Tabs.init(elems, {});
-  M.Tabs.getInstance(document.getElementById("settingsTab")).updateTabIndicator();
   // collapsible
   var elems = document.querySelectorAll('.collapsible');
   var instances = M.Collapsible.init(elems, options);
@@ -672,7 +671,6 @@ function resize() {
     document.getElementById("timerSetforOld").style.fontSize = 185 / count + "vmin";
     document.getElementById("timerSet").style.fontSize = "min(" + 185 / count + "vmin ," + window.innerWidth * 0.95 / count * 1.5 + "px)"; //文字サイズ調整
   }
-  M.Tabs.getInstance(document.getElementById("settingsTab")).updateTabIndicator();
 }
 function stop() {
   clearInterval(down);
