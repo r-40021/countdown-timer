@@ -48,7 +48,7 @@
     <div class="fullscreenIcons" class="noiphone">
         <div class="info modal-trigger" href="#info">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                class="icons bi bi-info-circle" viewBox="0 0 16 16">
+                class="icons bi bi-info-circle" viewBox="0 0 16 16" aria-label="このアプリについて">
                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
                 <path
                     d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
@@ -56,14 +56,14 @@
         </div>
         <span id="fullscreen" class="noiphone">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                class="icons bi bi-fullscreen" viewBox="0 0 16 16">
+                class="icons bi bi-fullscreen" viewBox="0 0 16 16" aria-label="全画面表示">
                 <path
                     d="M1.5 1a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4A1.5 1.5 0 0 1 1.5 0h4a.5.5 0 0 1 0 1h-4zM10 .5a.5.5 0 0 1 .5-.5h4A1.5 1.5 0 0 1 16 1.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 1-.5-.5zM.5 10a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 0 14.5v-4a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5z" />
             </svg>
         </span>
         <span id="escFullscreen" class="noiphone">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                class="icons bi bi-fullscreen-exit" viewBox="0 0 16 16">
+                class="icons bi bi-fullscreen-exit" viewBox="0 0 16 16" aria-label="全画面解除">
                 <path
                     d="M5.5 0a.5.5 0 0 1 .5.5v4A1.5 1.5 0 0 1 4.5 6h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5zm5 0a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 10 4.5v-4a.5.5 0 0 1 .5-.5zM0 10.5a.5.5 0 0 1 .5-.5h4A1.5 1.5 0 0 1 6 11.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 1-.5-.5zm10 1a1.5 1.5 0 0 1 1.5-1.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4z" />
             </svg>
@@ -86,14 +86,14 @@
                     <div class="status">
                         <div class="alarmTime">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="icons bi bi-bell-fill" viewBox="0 0 16 16">
+                                class="icons bi bi-bell-fill" viewBox="0 0 16 16" aria-label="アラーム日時">
                                 <path
                                     d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
                             </svg><a id="alarmTimeValue">未設定</a>
                         </div>
                         <div class="volumeStatus">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="icons bi bi-volume-up-fill" viewBox="0 0 16 16">
+                                class="icons bi bi-volume-up-fill" viewBox="0 0 16 16" aria-label="アラーム音量">
                                 <path
                                     d="M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.473 8.473 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z" />
                                 <path
@@ -114,25 +114,25 @@
                         <div class="center">
                             <a class="myBtn-circle" id="setTimer">
                                 <svg id="playTimer" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
-                                    class="bi bi-play" viewBox="0 0 16 16">
+                                    class="bi bi-play" viewBox="0 0 16 16" aria-label="セット">
                                     <path
                                         d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z" />
                                 </svg>
-                                <svg id="reTimer" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16" style="display: none;">
+                                <svg id="reTimer" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16" style="display: none;" aria-label="もう一度">
                                     <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
                                     <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
                                   </svg>
                             </a>
                             <a class="myBtn-circle" id="stopTimer">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
-                                    class="bi bi-pause" viewBox="0 0 16 16">
+                                    class="bi bi-pause" viewBox="0 0 16 16" aria-label="ストップ">
                                     <path
                                         d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z" />
                                 </svg>
                             </a>
                             <a class="myBtn-circle modal-trigger" id="openSettings" href="#settings">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
-                                    class="bi bi-gear" viewBox="0 0 16 16">
+                                    class="bi bi-gear" viewBox="0 0 16 16" aria-label="設定を開く">
                                     <path
                                         d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z" />
                                     <path
@@ -283,7 +283,7 @@
                     <div class="audioFlex">
                         <div class="play">
                             <a class="myBtn-circle myBtn-small" id="testAudio"><svg xmlns="http://www.w3.org/2000/svg"
-                                    width="24" height="24" fill="currentColor" class="bi bi-play" viewBox="0 0 16 16">
+                                    width="24" height="24" fill="currentColor" class="bi bi-play" viewBox="0 0 16 16" aria-label="アラーム音を試聴">
                                     <path
                                         d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z" />
                                 </svg></a>
@@ -357,7 +357,7 @@
                 <!--URL-->
                 <a onclick="copy()" class="btn-flat grey-text text-darken-1 waves-effect waves-teal">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
-                        class="bi bi-link-45deg" viewBox="0 0 16 16">
+                        class="bi bi-link-45deg" viewBox="0 0 16 16" aria-label="URLをコピー">
                         <path
                             d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z" />
                         <path
@@ -367,7 +367,7 @@
                 <a onClick="window.open(tweet(), 'tweetwindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;"
                     rel="noopener" class="twitter-link waves-effect waves-teal btn-flat grey-text text-darken-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
-                        class="bi bi-twitter" viewBox="0 0 16 16">
+                        class="bi bi-twitter" viewBox="0 0 16 16" aria-label="ツイート">
                         <path
                             d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" />
                     </svg>
@@ -376,7 +376,7 @@
                 <a href="https://github.com/r-40021/countdown-timer" target="_blank" rel="noopener"
                     class="waves-effect waves-teal btn-flat grey-text text-darken-1"><svg
                         xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
-                        class="bi bi-github" viewBox="0 0 16 16">
+                        class="bi bi-github" viewBox="0 0 16 16" aria-label="ソースコードを見る">
                         <path
                             d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
                     </svg></a>
@@ -384,7 +384,7 @@
                 <a onclick="window.open('https://social-plugins.line.me/lineit/share?url='+encodeURIComponent(window.location.href), 'LINE', 'width=650, height=550, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;"
                     rel="noopener" class="waves-effect waves-teal btn-flat grey-text text-darken-1">
                     <svg class="nomargin" xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor"
-                        viewBox="0 0 448 512">
+                        viewBox="0 0 448 512" aria-label="LINEで送る">
                         <!-- Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) -->
                         <path
                             d="M272.1 204.2v71.1c0 1.8-1.4 3.2-3.2 3.2h-11.4c-1.1 0-2.1-.6-2.6-1.3l-32.6-44v42.2c0 1.8-1.4 3.2-3.2 3.2h-11.4c-1.8 0-3.2-1.4-3.2-3.2v-71.1c0-1.8 1.4-3.2 3.2-3.2H219c1 0 2.1.5 2.6 1.4l32.6 44v-42.2c0-1.8 1.4-3.2 3.2-3.2h11.4c1.8-.1 3.3 1.4 3.3 3.1zm-82-3.2h-11.4c-1.8 0-3.2 1.4-3.2 3.2v71.1c0 1.8 1.4 3.2 3.2 3.2h11.4c1.8 0 3.2-1.4 3.2-3.2v-71.1c0-1.7-1.4-3.2-3.2-3.2zm-27.5 59.6h-31.1v-56.4c0-1.8-1.4-3.2-3.2-3.2h-11.4c-1.8 0-3.2 1.4-3.2 3.2v71.1c0 .9.3 1.6.9 2.2.6.5 1.3.9 2.2.9h45.7c1.8 0 3.2-1.4 3.2-3.2v-11.4c0-1.7-1.4-3.2-3.1-3.2zM332.1 201h-45.7c-1.7 0-3.2 1.4-3.2 3.2v71.1c0 1.7 1.4 3.2 3.2 3.2h45.7c1.8 0 3.2-1.4 3.2-3.2v-11.4c0-1.8-1.4-3.2-3.2-3.2H301v-12h31.1c1.8 0 3.2-1.4 3.2-3.2V234c0-1.8-1.4-3.2-3.2-3.2H301v-12h31.1c1.8 0 3.2-1.4 3.2-3.2v-11.4c-.1-1.7-1.5-3.2-3.2-3.2zM448 113.7V399c-.1 44.8-36.8 81.1-81.7 81H81c-44.8-.1-81.1-36.9-81-81.7V113c.1-44.8 36.9-81.1 81.7-81H367c44.8.1 81.1 36.8 81 81.7zm-61.6 122.6c0-73-73.2-132.4-163.1-132.4-89.9 0-163.1 59.4-163.1 132.4 0 65.4 58 120.2 136.4 130.6 19.1 4.1 16.9 11.1 12.6 36.8-.7 4.1-3.3 16.1 14.1 8.8 17.4-7.3 93.9-55.3 128.2-94.7 23.6-26 34.9-52.3 34.9-81.5z" />
@@ -394,7 +394,7 @@
                 <a onclick="window.open(encodeURI('https://r-40021.github.io/privacy.html?fromApp=true'), 'privacy', 'width=650, height=550, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;"
                     rel="noopener" class="waves-effect waves-teal btn-flat grey-text text-darken-1"
                     aria-label="プライバシーポリシー"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                        fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
+                        fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16" aria-label="プライバシーポリシー">
                         <path
                             d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
                     </svg></a>
@@ -462,7 +462,7 @@
                 <div class="answer">
                     <a class="myBtn-circle myBtn-small nohover icons">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                            class="bi bi-gear" viewBox="0 0 16 16">
+                            class="bi bi-gear" viewBox="0 0 16 16" aria-label="設定を開く">
                             <path
                                 d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z" />
                             <path
@@ -476,7 +476,7 @@
                 <div class="answer">画面右上の
 
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                        class="icons bi bi-fullscreen" viewBox="0 0 16 16">
+                        class="icons bi bi-fullscreen" viewBox="0 0 16 16" aria-label="全画面表示">
                         <path
                             d="M1.5 1a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4A1.5 1.5 0 0 1 1.5 0h4a.5.5 0 0 1 0 1h-4zM10 .5a.5.5 0 0 1 .5-.5h4A1.5 1.5 0 0 1 16 1.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 1-.5-.5zM.5 10a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 0 14.5v-4a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5z" />
                     </svg>
@@ -487,7 +487,7 @@
                 <div class="case">このアプリについて</div>
                 <div class="answer">画面右上の
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                        class="icons bi bi-info-circle" viewBox="0 0 16 16">
+                        class="icons bi bi-info-circle" viewBox="0 0 16 16" aria-label="このアプリについて">
                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
                         <path
                             d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
