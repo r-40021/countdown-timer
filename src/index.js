@@ -679,6 +679,38 @@ function audiostop() {
   if (setType === "duration" && document.getElementById("displayTime").textContent === "00:00") {
     document.getElementById("playTimer").style.display = "none";
     document.getElementById("reTimer").style.display = "";
+    let h = document.getElementById("hour").value;
+    let m = document.getElementById("minute").value;
+    let s = document.getElementById("seconds").value;
+    if (h && m && s) {
+      let display;
+      if (h) {
+        display = h + ":";
+      }
+      if (m) {
+        if (m<10){
+          m = "0" + m;
+        }
+          display = m + ":";
+      } else {
+        if (h) {
+          display += "00:";
+        } else {
+          display = "00:";
+        }
+          
+        }
+        if (s) {
+          if (s < 10) {
+            s = "0" + s;
+          }
+          display += s;
+        } else {
+          display += "00";
+        }
+      document.getElementById("displayTime").textContent = display;
+      
+    }
   }
   document.getElementById("stopTimer").style.display = "";
   document.getElementById("setTimer").style.display = "";
