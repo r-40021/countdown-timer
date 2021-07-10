@@ -207,6 +207,9 @@ body {
 .modal#settings {
   max-height: 77vh;
 }
+.modal#info h5:not(:first-child){
+  margin-top: 1.8em;
+}
 #settings .section {
   background-color: #fff;
   margin-top: 0.5em;
