@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/r-40021/countdown-timer#readme",
   "devDependencies": {
+    "fibers": "^5.0.0",
     "glob-parent": ">=6.0.0",
     "gulp": "^4.0.2",
     "gulp-cli": "^2.3.0",

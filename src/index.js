@@ -24,10 +24,7 @@ var testAlarm;
 /*アラーム音の視聴用 */
 var noSleep = new NoSleep();
 document.getElementById("loader").remove();
-document.getElementById("loadingBlur").style.backdropFilter = "blur(0px)";
-setTimeout(() => {
-  document.getElementById("loadingBlur").remove();
-}, 500);
+document.getElementById("loadingBlur").remove();
 first();
 function first() {
   /*datepicker*/
@@ -129,7 +126,7 @@ function first() {
 
 }
 function second() {
-  if (!localStorage.getItem("ct-skip")) {   
+  if (!localStorage.getItem("ct-skip")) {
     M.Modal.getInstance(document.getElementById("welcome")).open();// 「ようこそ」画面を表示
     displayWelcome = true;
     document.getElementById("howToCheck").checked = true;
@@ -138,7 +135,7 @@ function second() {
   }
 }
 second();
-function third(){
+function third() {
   device();
   // Theme
   if (localStorage.getItem("theme") === "dark") {
@@ -280,7 +277,7 @@ function device() {
       const element = elements[i];
       element.style.display = "none";
     }
-    document.getElementById("file1").setAttribute("accept",".mp3,.m4a,.aac,.wav,.flac");
+    document.getElementById("file1").setAttribute("accept", ".mp3,.m4a,.aac,.wav,.flac");
   }
   pushrequest();
 }
@@ -348,7 +345,7 @@ function onload() {
   }
   if ((setType === "duration") || ((firstLoad === 0 && localStorage.getItem("ct-lastType") == "1") && !paramObject.date && !paramObject.time)) {
     durationStatus = 1;
-      clickHeader();
+    clickHeader();
     changeURL();//URL変更
     if ((((localStorage.getItem("ct-lastType") === "1" && !firstLoad) && (Number(localStorage.getItem("ct-lastSet")) >= 1000)) || durationStop) && !durationChange) {
       // 「経過時間」でセット
@@ -417,7 +414,7 @@ function onload() {
     let localTarget = new Date(localDate + " " + localTime + ":00");
     if (localTarget.getTime() > Date.now()) {
       setType = "target";
-    set();
+      set();
     } else {
       localStorage.removeItem("ct-date");
       localStorage.removeItem("ct-time");
@@ -688,28 +685,28 @@ function audiostop() {
         display = h + ":";
       }
       if (m) {
-        if (m<10){
+        if (m < 10) {
           m = "0" + m;
         }
-          display = m + ":";
+        display = m + ":";
       } else {
         if (h) {
           display += "00:";
         } else {
           display = "00:";
         }
-          
+
+      }
+      if (s) {
+        if (s < 10) {
+          s = "0" + s;
         }
-        if (s) {
-          if (s < 10) {
-            s = "0" + s;
-          }
-          display += s;
-        } else {
-          display += "00";
-        }
+        display += s;
+      } else {
+        display += "00";
+      }
       document.getElementById("displayTime").textContent = display;
-      
+
     }
   }
   document.getElementById("stopTimer").style.display = "";
@@ -730,7 +727,7 @@ function audiostop() {
     }
   }
 }
-function doubleAlarmStop (){
+function doubleAlarmStop() {
   alarm.stop();
   testAlarm.stop();
 }
@@ -741,7 +738,7 @@ function pushrequest() {
     Push.Permission.request();
   }
 }
-function load1(){
+function load1() {
   /*アラーム音設定・プレビューも*/
   const f = document.getElementById("file1");
   f.addEventListener("change", formatNode, false);
@@ -789,9 +786,9 @@ function load1(){
   }
   document.getElementById("audioReset").addEventListener("click", () => {
     let playing = false;
-      if (alarm.playing()) {
-        playing = true;
-      }
+    if (alarm.playing()) {
+      playing = true;
+    }
     doubleAlarmStop();
     alarm = new Howl({
       src: ['/countdown-timer/alarm.mp3'],
@@ -938,39 +935,39 @@ document.getElementById("volumeStatusValue").addEventListener(
   false
 );
 /*テーマ切り替え*/
-  function sixth() {
-    let auto = document.getElementById("auto"); //「システムに従う」ボタン
-    let light = document.getElementById("light"); //「ライトモード」ボタン
-    let dark = document.getElementById("dark"); //「ダークモード」ボタン
-    auto.addEventListener(
-      "click",
-      () => {
-        if (auto.checked) {
-          toggleTheme("a");
-        }
-      },
-      false
-    );
-    light.addEventListener(
-      "click",
-      () => {
-        if (light.checked) {
-          toggleTheme("l");
-        }
-      },
-      false
-    );
-    dark.addEventListener(
-      "click",
-      () => {
-        if (dark.checked) {
-          toggleTheme("d");
-        }
-      },
-      false
-    );
-  }
-  sixth();
+function sixth() {
+  let auto = document.getElementById("auto"); //「システムに従う」ボタン
+  let light = document.getElementById("light"); //「ライトモード」ボタン
+  let dark = document.getElementById("dark"); //「ダークモード」ボタン
+  auto.addEventListener(
+    "click",
+    () => {
+      if (auto.checked) {
+        toggleTheme("a");
+      }
+    },
+    false
+  );
+  light.addEventListener(
+    "click",
+    () => {
+      if (light.checked) {
+        toggleTheme("l");
+      }
+    },
+    false
+  );
+  dark.addEventListener(
+    "click",
+    () => {
+      if (dark.checked) {
+        toggleTheme("d");
+      }
+    },
+    false
+  );
+}
+sixth();
 function toggleTheme(mql) {
   clearInterval(anime); //0.4秒後にbodyのトランジョン解除のタイマーを解除
   document.body.classList.add("anime"); //bodyのトランジョンを有効化
@@ -1108,7 +1105,7 @@ function tweet() {
   }
   return url;
 }
-function seventh(){
+function seventh() {
   // Enable wake lock.
   // (must be wrapped in a user input event handler e.g. a mouse or touch handler)
   let eventType;
@@ -1232,9 +1229,9 @@ function seventh(){
   })
 }
 seventh();
-document.addEventListener("keydown",(e)=>{
+document.addEventListener("keydown", (e) => {
   if (/^[1-9]{1}/.test(e.key)) {
-    if (document.activeElement.tagName.toLocaleLowerCase() !== "input" && !e.repeat){
+    if (document.activeElement.tagName.toLocaleLowerCase() !== "input" && !e.repeat) {
       let durationSettingElements = document.getElementsByClassName("durationSet");
       for (let i = 0; i < durationSettingElements.length; i++) {
         const element = durationSettingElements[i];
