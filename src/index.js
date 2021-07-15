@@ -224,6 +224,9 @@ function third() {
   } else {
     //パラメータ＆Local Storageなし
     noParams();
+    if (!displayWelcome && setType !== "duration") {
+      openTimeSetting();
+    }
     if (setType === "duration") {
       localStorage.setItem("ct-lastType", 1);
     } else {
@@ -377,6 +380,10 @@ function onload() {
     } else {
       // 保存されていない
       noParams();
+      reTimer();
+      document.getElementById("alarmTimeValue").textContent = "一時停止中";
+      localStorage.setItem("ct-lastType",1);
+      setType = "duration";
     }
     function afterTime(hour, minute, second) {
       /* 〇時間〇分〇秒後を取得 */
@@ -419,6 +426,9 @@ function onload() {
       localStorage.removeItem("ct-date");
       localStorage.removeItem("ct-time");
       noParams();
+      if (!displayWelcome) {
+        openTimeSetting();
+      }
     }
   } else {
     // 初めて
@@ -613,9 +623,6 @@ function noParams() {
     defaultTime + " (自動設定)";
   localStorage.setItem("ct-lastType", 0);
   durationStatus = 0;
-  if (!displayWelcome) {
-    openTimeSetting();
-  }
 }
 function set() {
   /*SETボタンを押したときの挙動*/
@@ -672,9 +679,8 @@ function resize() {
 function stop() {
   clearInterval(down);
 }
-function audiostop() {
-  if (setType === "duration" && document.getElementById("displayTime").textContent === "00:00") {
-    document.getElementById("playTimer").style.display = "none";
+function reTimer(){
+  document.getElementById("playTimer").style.display = "none";
     document.getElementById("reTimer").style.display = "";
     let h = Number(document.getElementById("hour").value);
     let m = Number(document.getElementById("minute").value);
@@ -706,8 +712,11 @@ function audiostop() {
         display += "00";
       }
       document.getElementById("displayTime").textContent = display;
-
-    }
+}
+}
+function audiostop() {
+  if (setType === "duration" && document.getElementById("displayTime").textContent === "00:00") {
+      reTimer();
   }
   document.getElementById("stopTimer").style.display = "";
   document.getElementById("setTimer").style.display = "";
