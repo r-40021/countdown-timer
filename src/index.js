@@ -676,10 +676,10 @@ function audiostop() {
   if (setType === "duration" && document.getElementById("displayTime").textContent === "00:00") {
     document.getElementById("playTimer").style.display = "none";
     document.getElementById("reTimer").style.display = "";
-    let h = document.getElementById("hour").value;
-    let m = document.getElementById("minute").value;
-    let s = document.getElementById("seconds").value;
-    if (h && m && s) {
+    let h = Number(document.getElementById("hour").value);
+    let m = Number(document.getElementById("minute").value);
+    let s = Number(document.getElementById("seconds").value);
+    if (h>=0 && m>=0 && s>=0) {
       let display;
       if (h) {
         display = h + ":";
