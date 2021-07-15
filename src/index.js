@@ -23,7 +23,6 @@ var alarm;
 var testAlarm;
 /*アラーム音の視聴用 */
 var noSleep = new NoSleep();
-document.getElementById("loader").remove();
 document.getElementById("loadingBlur").remove();
 first();
 function first() {
