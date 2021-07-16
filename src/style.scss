@@ -282,7 +282,7 @@ body {
   background-color: var(--bgColor);
   padding: 0;
 }
-.myModal#info h5:not(:first-child) {
+.myModal#info h2:not(:first-child) {
   margin-top: 1.8em;
   color: var(--fontColor);
 }
@@ -295,7 +295,7 @@ body {
   padding: 0.5rem;
 }
 .myModal .section p,
-.myModal .section li,
+.myModal .section li:not(#targetLi),
 .myModal .section .content {
   color: var(--grayText);
   margin-inline-start: 1em;
@@ -647,10 +647,16 @@ body.dark {
   --green: #4db6ac;
   --grayText: rgb(216, 215, 215);
 }
-body.dark .myModal .myModal-footer * {
+body.dark .modal,
+body.dark .modal .modal-content,
+body.dark .modal .modal-footer,
+body.dark .tabs {
+  background-color: var(--bgColor);
+}
+body.dark .modal .modal-footer * {
   color: var(--fontColor);
 }
-body.dark .myModal .section {
+body.dark .modal .section {
   background-color: rgb(51, 51, 51);
 }
 body.dark .timepicker-plate {
