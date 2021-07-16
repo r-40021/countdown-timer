@@ -66,8 +66,10 @@ function first() {
   };
   instances = M.Timepicker.init(elems, options);
   // tab
+  document.getElementById("settings").style.transform = "scale(1)";
   elems = document.querySelectorAll(".tabs");
   instances = M.Tabs.init(elems, {});
+  document.getElementById("settings").style.transform = "";
   // collapsible
   var elems = document.querySelectorAll('.collapsible');
   var instances = M.Collapsible.init(elems, options);
@@ -295,7 +297,9 @@ function fourth() {
     } else if (document.body.msRequestFullscreen) {
       document.body.msRequestFullscreen();
     }
+    document.getElementById("settings").style.transform = "scale(1)";
     M.Tabs.getInstance(document.getElementById("settingsTab")).updateTabIndicator();
+    document.getElementById("settings").style.transform = "";
   });
   // フルスクリーン解除
   document
@@ -314,7 +318,9 @@ function fourth() {
       } else if (document.msExitFullscreen) {
         document.msExitFullscreen();
       }
+      document.getElementById("settings").style.transform = "scale(1)";
       M.Tabs.getInstance(document.getElementById("settingsTab")).updateTabIndicator();
+      document.getElementById("settings").style.transform = "";
     }, false);
 }
 fourth();
