@@ -2,6 +2,7 @@ require("materialize-css");// Materialize読み込み
 var Push = require("push.js");// プッシュ通知のライブラリを読み込み
 import NoSleep from "../node_modules/nosleep.js/dist/NoSleep";// スリープしないように
 import { modalTrigger, modalClose } from "./Modal";
+import { recalTabs } from "./Tabs";
 /*変数の定義*/
 var down, displayEnd, oldDisplay, title, myDate, myTime, target, kiduke;
 var useDevice = 0;
@@ -66,10 +67,9 @@ function first() {
   };
   instances = M.Timepicker.init(elems, options);
   // tab
-  document.getElementById("settings").style.transform = "scale(1)";
   elems = document.querySelectorAll(".tabs");
   instances = M.Tabs.init(elems, {});
-  document.getElementById("settings").style.transform = "";
+  recalTabs();
   // collapsible
   var elems = document.querySelectorAll('.collapsible');
   var instances = M.Collapsible.init(elems, options);
@@ -297,9 +297,7 @@ function fourth() {
     } else if (document.body.msRequestFullscreen) {
       document.body.msRequestFullscreen();
     }
-    document.getElementById("settings").style.transform = "scale(1)";
-    M.Tabs.getInstance(document.getElementById("settingsTab")).updateTabIndicator();
-    document.getElementById("settings").style.transform = "";
+    recalTabs();
   });
   // フルスクリーン解除
   document
@@ -318,9 +316,7 @@ function fourth() {
       } else if (document.msExitFullscreen) {
         document.msExitFullscreen();
       }
-      document.getElementById("settings").style.transform = "scale(1)";
-      M.Tabs.getInstance(document.getElementById("settingsTab")).updateTabIndicator();
-      document.getElementById("settings").style.transform = "";
+      recalTabs();
     }, false);
 }
 fourth();
@@ -383,7 +379,7 @@ function onload() {
       noParams();
       reTimer();
       document.getElementById("alarmTimeValue").textContent = "一時停止中";
-      localStorage.setItem("ct-lastType",1);
+      localStorage.setItem("ct-lastType", 1);
       setType = "duration";
     }
     function afterTime(hour, minute, second) {
@@ -680,44 +676,44 @@ function resize() {
 function stop() {
   clearInterval(down);
 }
-function reTimer(){
+function reTimer() {
   document.getElementById("playTimer").style.display = "none";
-    document.getElementById("reTimer").style.display = "";
-    let h = Number(document.getElementById("hour").value);
-    let m = Number(document.getElementById("minute").value);
-    let s = Number(document.getElementById("seconds").value);
-    if (h>=0 && m>=0 && s>=0) {
-      let display;
+  document.getElementById("reTimer").style.display = "";
+  let h = Number(document.getElementById("hour").value);
+  let m = Number(document.getElementById("minute").value);
+  let s = Number(document.getElementById("seconds").value);
+  if (h >= 0 && m >= 0 && s >= 0) {
+    let display;
+    if (h) {
+      display = h + ":";
+    }
+    if (m) {
+      if (m < 10) {
+        m = "0" + m;
+      }
+      display = m + ":";
+    } else {
       if (h) {
-        display = h + ":";
-      }
-      if (m) {
-        if (m < 10) {
-          m = "0" + m;
-        }
-        display = m + ":";
+        display += "00:";
       } else {
-        if (h) {
-          display += "00:";
-        } else {
-          display = "00:";
-        }
+        display = "00:";
+      }
 
+    }
+    if (s) {
+      if (s < 10) {
+        s = "0" + s;
       }
-      if (s) {
-        if (s < 10) {
-          s = "0" + s;
-        }
-        display += s;
-      } else {
-        display += "00";
-      }
-      document.getElementById("displayTime").textContent = display;
-}
+      display += s;
+    } else {
+      display += "00";
+    }
+    document.getElementById("displayTime").textContent = display;
+  }
 }
 function audiostop() {
   if (setType === "duration" && document.getElementById("displayTime").textContent === "00:00") {
-      reTimer();
+    reTimer();
   }
   document.getElementById("stopTimer").style.display = "";
   document.getElementById("setTimer").style.display = "";
@@ -1241,7 +1237,7 @@ function seventh() {
 }
 seventh();
 document.addEventListener("keydown", (e) => {
-  if (/^[1-9]{1}/.test(e.key)) {
+  if (/^[0-9]{1}/.test(e.key)) {
     if (document.activeElement.tagName.toLocaleLowerCase() !== "input" && !e.repeat) {
       let durationSettingElements = document.getElementsByClassName("durationSet");
       for (let i = 0; i < durationSettingElements.length; i++) {
@@ -1252,12 +1248,13 @@ document.addEventListener("keydown", (e) => {
         element.value = 0;
         element.blur();
       }
-      document.getElementById("minute").value = Number(e.key);
+      document.getElementById("minute").value = Number(e.key == 0 ? 10 : e.key);
       document.getElementById("durationSetBtn").click();
       document.getElementById("settings").classList.remove("activeModal");
     }
   }
-})
+},false);
+
 
 modalTrigger();
 modalClose();
