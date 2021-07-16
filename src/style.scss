@@ -42,7 +42,7 @@ input[type="range"] {
   right: 0;
   margin: auto;
   width: 60%;
-  max-height: 80vh;
+  max-height: 75vh;
   overflow-y: auto;
   background-color: var(--bgColor);
   z-index: -1;
@@ -63,7 +63,7 @@ input[type="range"] {
   padding: 0.2rem 2rem;
 }
 .myModal-footer{
-  padding: 1em 0;
+  padding: 1em 0.2em;
   text-align: end;
 }
 .myModal-overlay {
@@ -89,14 +89,14 @@ input[type="range"] {
     z-index: 1000;
   }
 }
-@media screen and (max-width: 640px) {
-  .myModal {
-    width: 90%;
-  }
-}
 @media only screen and (max-width: 992px) {
   .myModal {
     width: 80%;
+  }
+}
+@media screen and (max-width: 640px) {
+  .myModal {
+    width: 90%;
   }
 }
 #title {
@@ -295,6 +295,7 @@ body {
   padding: 0.5rem;
 }
 .myModal .section p,
+.myModal .section li,
 .myModal .section .content {
   color: var(--grayText);
   margin-inline-start: 1em;

@@ -1223,6 +1223,7 @@ function seventh() {
         document.getElementById("hour").value = setTime.match(/\d{1,2}/);
       }
       document.getElementById("durationSetBtn").click();
+      document.getElementById("settings").classList.remove("activeModal");
     })
   }
   let cursorTimeout;
@@ -1253,6 +1254,7 @@ document.addEventListener("keydown", (e) => {
       }
       document.getElementById("minute").value = Number(e.key);
       document.getElementById("durationSetBtn").click();
+      document.getElementById("settings").classList.remove("activeModal");
     }
   }
 })

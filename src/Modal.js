@@ -9,7 +9,6 @@ export function modalTrigger() {
                 leave = false;
                 element.addEventListener("touchend", (e) => {
                     if (!leave) {
-                        e.preventDefault();
                         document.getElementById(element.getAttribute("myModal-data").replace("#", "")).classList.add("activeModal");
                     }
                 })
@@ -39,7 +38,6 @@ export function modalClose() {
                 leave = false;
                 element.addEventListener("touchend", (e) => {
                     if (!leave) {
-                        e.preventDefault();
                         closeAllModal();
                     }
                 })
