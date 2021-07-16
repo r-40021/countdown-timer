@@ -1,5 +1,5 @@
 @import "../node_modules/materialize-css/sass/materialize.scss";
-.modal-overlay {
+.myModal-overlay {
   overflow: hidden;
 }
 :root {
@@ -90,7 +90,7 @@ input[type="range"] {
   }
 }
 @media screen and (max-width: 640px) {
-  .modal {
+  .myModal {
     width: 90%;
   }
 }
@@ -278,10 +278,15 @@ body {
   max-height: 77vh;
   padding: 0;
 }
-.modal#info h5:not(:first-child) {
-  margin-top: 1.8em;
+#info .section{
+  background-color: var(--bgColor);
+  padding: 0;
 }
-#settings .section {
+.myModal#info h5:not(:first-child) {
+  margin-top: 1.8em;
+  color: var(--fontColor);
+}
+.myModal .section {
   background-color: #fff;
   margin-top: 0.5em;
   padding: 0.1em 1em;
@@ -289,12 +294,12 @@ body {
 .collapsible-body {
   padding: 0.5rem;
 }
-#settings .section p,
-#settings .section .content {
+.myModal .section p,
+.myModal .section .content {
   color: var(--grayText);
   margin-inline-start: 1em;
 }
-#settings .section p.radio label {
+.myModal .section p.radio label {
   color: var(--grayText);
   font-size: 12px;
   margin-inline-start: 1em;
@@ -303,7 +308,7 @@ body {
     width: 90%;
   }
 }
-#settings .section:not(:last-child) {
+.myModal .section:not(:last-child) {
   margin-bottom: 4em;
 }
 #settings .myModal-footer {
@@ -635,10 +640,10 @@ body.dark {
   --green: #4db6ac;
   --grayText: rgb(216, 215, 215);
 }
-body.dark .modal .myModal-footer * {
+body.dark .myModal .myModal-footer * {
   color: var(--fontColor);
 }
-body.dark #settings .section {
+body.dark .myModal .section {
   background-color: rgb(51, 51, 51);
 }
 body.dark .timepicker-plate {
