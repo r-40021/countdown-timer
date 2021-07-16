@@ -1,6 +1,7 @@
 require("materialize-css");// Materialize読み込み
 var Push = require("push.js");// プッシュ通知のライブラリを読み込み
 import NoSleep from "../node_modules/nosleep.js/dist/NoSleep";// スリープしないように
+import { modalTrigger, modalClose } from "./Modal";
 /*変数の定義*/
 var down, displayEnd, oldDisplay, title, myDate, myTime, target, kiduke;
 var useDevice = 0;
@@ -64,11 +65,6 @@ function first() {
     autoClose: true
   };
   instances = M.Timepicker.init(elems, options);
-  /*modal*/
-  elems = document.querySelectorAll(".modal");
-  instances = M.Modal.init(elems, {});
-  elems = document.querySelectorAll(".tooltipped");
-  instances = M.Tooltip.init(elems, {});
   // tab
   elems = document.querySelectorAll(".tabs");
   instances = M.Tabs.init(elems, {});
@@ -126,7 +122,7 @@ function first() {
 }
 function second() {
   if (!localStorage.getItem("ct-skip")) {
-    M.Modal.getInstance(document.getElementById("welcome")).open();// 「ようこそ」画面を表示
+    document.getElementById("welcome").classList.add("activeModal");// 「ようこそ」画面を表示
     displayWelcome = true;
     document.getElementById("howToCheck").checked = true;
   } else {
@@ -924,7 +920,7 @@ function showVolume() {
 document.getElementById("alarmTimeValue").addEventListener("click", openTimeSetting, false);
 function openTimeSetting() {
   // アラーム日時のステータスをクリックすると、日時の設定が開く
-  M.Modal.getInstance(document.getElementById("settings")).open();
+  document.getElementById("settings").classList.add("activeModal");
   let settingsTab = M.Tabs.getInstance(document.getElementById("settingsTab"));
   setTimeout(() => {
     settingsTab.select("settings-1");
@@ -934,7 +930,7 @@ document.getElementById("volumeStatusValue").addEventListener(
   "click",
   () => {
     // 音量のステータスをクリックすると、アラーム音の設定が開く
-    M.Modal.getInstance(document.getElementById("settings")).open();
+    document.getElementById("settings").classList.add("activeModal");
     let settingsTab = M.Tabs.getInstance(document.getElementById("settingsTab"));
     setTimeout(() => {
       settingsTab.select("settings-2");
@@ -1254,6 +1250,10 @@ document.addEventListener("keydown", (e) => {
     }
   }
 })
+
+modalTrigger();
+modalClose();
+
 window.toggleTheme = toggleTheme;
 window.copy = copy;
 window.tweet = tweet;

@@ -29,6 +29,76 @@ input[type="range"] {
   height: auto;
   padding: 0 5vw;
 }
+
+.myModal {
+  opacity: 0;
+  transform: scale(0.8);
+  z-index: -1;
+  transform-origin: top center;
+  text-align: start;
+  position: fixed;
+  top: 10vh;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 60%;
+  max-height: 80vh;
+  overflow-y: auto;
+  background-color: var(--bgColor);
+  z-index: -1;
+  & h2 {
+    padding-bottom: 0.3em;
+  }
+  & .close {
+    position: absolute;
+    top: 0.2em;
+    right: 0.2em;
+  }
+  transition: opacity 0.2s, transform 0.2s;
+  &:not(.activeModal) {
+    transition: z-index 0.2s, opacity 0.2s, transform 0.2s;
+  }
+}
+.myModal-content{
+  padding: 0.2rem 2rem;
+}
+.myModal-footer{
+  padding: 1em 0;
+  text-align: end;
+}
+.myModal-overlay {
+  display: block;
+  cursor: default;
+  opacity: 0;
+  z-index: -2;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transition: opacity 0.2s;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.myModal.activeModal {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 1001;
+  & ~ .myModal-overlay {
+    opacity: 1;
+    z-index: 1000;
+  }
+}
+@media screen and (max-width: 640px) {
+  .modal {
+    width: 90%;
+  }
+}
+@media only screen and (max-width: 992px) {
+  .myModal {
+    width: 80%;
+  }
+}
 #title {
   margin-top: 8vh;
   text-align: center;
@@ -204,10 +274,11 @@ body {
 #openWelcome {
   display: none;
 }
-.modal#settings {
+.myModal#settings {
   max-height: 77vh;
+  padding: 0;
 }
-.modal#info h5:not(:first-child){
+.modal#info h5:not(:first-child) {
   margin-top: 1.8em;
 }
 #settings .section {
@@ -235,14 +306,14 @@ body {
 #settings .section:not(:last-child) {
   margin-bottom: 4em;
 }
-#settings .modal-footer {
+#settings .myModal-footer {
   display: flex;
 }
-#settings .modal-footer div:first-child {
+#settings .myModal-footer div:first-child {
   flex: 9;
   text-align: left;
 }
-#settings .modal-footer div:last-child {
+#settings .myModal-footer div:last-child {
   flex: 3;
 }
 .kome {
@@ -335,7 +406,7 @@ input[type="text"]:not(.browser-default)[readonly="readonly"] {
   cursor: pointer;
   margin: 0 0.5em;
 }
-#settings .modal-content {
+#settings .myModal-content {
   padding: 0 5px;
 }
 #bigtimer {
@@ -495,7 +566,7 @@ input[type="number"]:-webkit-autofill:active {
 }
 // Loading
 
-.blur{
+.blur {
   position: fixed;
   top: 0;
   left: 0;
@@ -521,21 +592,21 @@ input[type="number"]:-webkit-autofill:active {
   right: 0;
   z-index: 99999999;
   text-indent: -9999em;
-  border-top: .3em solid rgba(0, 0, 0, 0.07);
-  border-right: .3em solid rgba(0, 0, 0, 0.07);
-  border-bottom: .3em solid rgba(0, 0, 0, 0.07);
-  border-left: .3em solid #3b3b3b;
+  border-top: 0.3em solid rgba(0, 0, 0, 0.07);
+  border-right: 0.3em solid rgba(0, 0, 0, 0.07);
+  border-bottom: 0.3em solid rgba(0, 0, 0, 0.07);
+  border-left: 0.3em solid #3b3b3b;
   -webkit-transform: translateZ(0);
   -ms-transform: translateZ(0);
   transform: translateZ(0);
   -webkit-animation: load8 1.1s infinite linear;
   animation: load8 1.1s infinite linear;
 }
-body.dark .loader{
-  border-top: .3em solid rgba(255, 255, 255, 0.1);
-  border-right: .3em solid rgba(255, 255, 255, 0.1);
-  border-bottom: .3em solid rgba(255, 255, 255, 0.1);
-  border-left: .3em solid #ffffff;
+body.dark .loader {
+  border-top: 0.3em solid rgba(255, 255, 255, 0.1);
+  border-right: 0.3em solid rgba(255, 255, 255, 0.1);
+  border-bottom: 0.3em solid rgba(255, 255, 255, 0.1);
+  border-left: 0.3em solid #ffffff;
 }
 @-webkit-keyframes load8 {
   0% {
@@ -564,13 +635,7 @@ body.dark {
   --green: #4db6ac;
   --grayText: rgb(216, 215, 215);
 }
-body.dark .modal,
-body.dark .modal .modal-content,
-body.dark .modal .modal-footer,
-body.dark .tabs {
-  background-color: var(--bgColor);
-}
-body.dark .modal .modal-footer * {
+body.dark .modal .myModal-footer * {
   color: var(--fontColor);
 }
 body.dark #settings .section {

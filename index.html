@@ -45,7 +45,7 @@
     </script>
     <div class="blur" id="loadingBlur"><div class="loader" id="loader">Loading...</div></div>
     <div class="fullscreenIcons" class="noiphone">
-        <div class="info modal-trigger" href="#info">
+        <div class="info myModalTrigger" myModal-data="#info">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                 class="icons bi bi-info-circle" viewBox="0 0 16 16" aria-label="このアプリについて">
                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
@@ -129,7 +129,7 @@
                                         d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z" />
                                 </svg>
                             </a>
-                            <a class="myBtn-circle modal-trigger" id="openSettings" href="#settings">
+                            <a class="myBtn-circle myModalTrigger" id="openSettings" myModal-data="#settings">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
                                     class="bi bi-gear" viewBox="0 0 16 16" aria-label="設定を開く">
                                     <path
@@ -148,8 +148,8 @@
     </div>
     </div>
     <!-- Settings -->
-    <div id="settings" class="modal">
-        <div class="modal-content">
+    <div id="settings" class="myModal">
+        <div class="myModal-content">
             <ul id="settingsTab" class="tabs">
                 <li class="tab col s3"><a class="active" href="#settings-1" id="timeTab">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -198,7 +198,7 @@
                                             onclick="document.getElementById('Time').click();">
                                     </div>
                                 </div>
-                                <p><a class="waves-effect waves-light btn modal-close" id="targetSetBtn">セット</a></p>
+                                <p><a class="waves-effect waves-light btn myModal-close" id="targetSetBtn">セット</a></p>
                                 <p>ここで設定した日時にアラームが鳴ります。</p>
                                 <p class="kome">ブラウザを起動しておく必要があります。</p>
                             </div>
@@ -239,7 +239,7 @@
                                         <a class="myBtn-circle myBtn-tiny easySetBtn" setTime="2h">2時間</a>
                                     </div>
                                     <input type="submit" style="display: none;">
-                                    <p><a class="waves-effect waves-light btn modal-close" id="durationSetBtn">セット</a>
+                                    <p><a class="waves-effect waves-light btn myModal-close" id="durationSetBtn">セット</a>
                                     </p>
                                 </form>
                                 <p>ここで設定した場合は、URLでの共有ができません。</p>
@@ -351,7 +351,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal-footer">
+        <div class="myModal-footer">
             <div class="col s9 share">
                 <!--URL-->
                 <a onclick="copy()" class="btn-flat grey-text text-darken-1 waves-effect waves-teal">
@@ -399,13 +399,13 @@
                     </svg></a>
             </div>
             <div class="col s3">
-                <a class="modal-close waves-effect waves-green btn-flat">OK</a>
+                <a class="myModal-close waves-effect waves-green btn-flat">OK</a>
             </div>
         </div>
     </div>
     <!-- このアプリについて -->
-    <div id="info" class="modal">
-        <div class="modal-content">
+    <div id="info" class="myModal">
+        <div class="myModal-content">
             <h5>このアプリについて</h5>
             <p>指定した日時までの時間をカウントダウンする、タイマーです。普通の目覚ましアプリとは違い、「日付」も指定できます。</p>
             <p>特長：</p>
@@ -450,12 +450,12 @@
             <h5>宣伝</h5>
             <p><a href="https://r-40021.github.io/stopwatch/" target="_blank" rel="noopener">ストップウォッチ</a>も使ってみてください！</p>
         </div>
-        <div class="modal-footer">
-            <a class="modal-close waves-effect waves-green btn-flat">OK</a>
+        <div class="myModal-footer">
+            <a class="myModal-close waves-effect waves-green btn-flat">OK</a>
         </div>
     </div>
-    <div id="welcome" class="modal">
-        <div class="modal-content">
+    <div id="welcome" class="myModal">
+        <div class="myModal-content">
             <h4>ようこそ</h4>
             <p>指定した日時までの時間(10万年後も...?)をカウントダウンできるタイマーです。</p>
             <div class="howTo">
@@ -497,14 +497,15 @@
             </div>
             <p><a href="https://r-40021.github.io/stopwatch/" target="_blank" rel="noopener">ストップウォッチ</a>をお探しですか？</p>
         </div>
-        <div class="modal-footer">
+        <div class="myModal-footer">
             <label>
                 <input type="checkbox" id="nextSkip" />
                 <span>今後表示しない</span>
             </label>
-            <a class="modal-close waves-effect waves-green btn-flat">OK</a>
+            <a class="myModal-close waves-effect waves-green btn-flat">OK</a>
         </div>
     </div>
+    <a class="myModal-overlay myModal-close"></a>
     <script defer>
         /*Service Worker*/
         if ("serviceWorker" in navigator) {
