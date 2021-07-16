@@ -405,6 +405,12 @@ input[type="text"]:not(.browser-default)[readonly="readonly"] {
   height: auto;
   z-index: 999;
   color: var(--fontColor);
+  & div,& span{
+    transition: opacity 0.2s;
+    &:hover{
+      opacity: 0.5;
+    }
+  }
 }
 .fullscreenIcons div {
   display: inline-block;
