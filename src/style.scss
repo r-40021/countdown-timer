@@ -295,7 +295,7 @@ body {
   padding: 0.5rem;
 }
 .myModal .section p,
-.myModal .section li:not(#targetLi),
+.myModal .section ol,
 .myModal .section .content {
   color: var(--grayText);
   margin-inline-start: 1em;
