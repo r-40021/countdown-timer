@@ -69,7 +69,6 @@ function first() {
   // tab
   elems = document.querySelectorAll(".tabs");
   instances = M.Tabs.init(elems, {});
-  recalTabs();
   // collapsible
   var elems = document.querySelectorAll('.collapsible');
   var instances = M.Collapsible.init(elems, options);
@@ -120,7 +119,7 @@ function first() {
       elem.appendChild(day);
     }
   }
-
+  recalTabs();
 }
 function second() {
   if (!localStorage.getItem("ct-skip")) {
@@ -297,7 +296,6 @@ function fourth() {
     } else if (document.body.msRequestFullscreen) {
       document.body.msRequestFullscreen();
     }
-    recalTabs();
   });
   // フルスクリーン解除
   document
@@ -316,7 +314,6 @@ function fourth() {
       } else if (document.msExitFullscreen) {
         document.msExitFullscreen();
       }
-      recalTabs();
     }, false);
 }
 fourth();
@@ -532,6 +529,7 @@ function myCount() {
         document.title = realDisplay;
       }
       oldDisplay = display;
+      resize();
     }
     countTimes++;
   } else if (display === "0:00:00") {
@@ -849,20 +847,10 @@ function move(e) {
   // Chrome では returnValue を設定する必要がある
   e.returnValue = "";
 }
-function fifth() {
-  //残り時間が変わったら、文字サイズ調整
-  var element = document.getElementById("displayTime");
-  var action = new MutationObserver(function (record, observer) {
-    resize();
-  });
-  var config = {
-    childList: true,
-  };
-  action.observe(element, config);
-}
-fifth();
+
 window.addEventListener("resize", function () {
   resize();
+  recalTabs();
 });
 document.getElementById("testAudio").addEventListener(
   "click",

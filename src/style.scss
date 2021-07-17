@@ -8,12 +8,20 @@
   --green: #4db6ac;
   --grayText: #666;
 }
+*{
+  font-family: -apple-system, blinkMacSystemFont, "Helvetica Neue", "Segoe UI",
+    "Arial", "Roboto", "Hiragino Kaku Gothic ProN", YuGothicM, YuGothic, Meiryo,
+    sans-serif;
+}
 p {
   text-align: justify;
   line-height: 1.5;
 }
 ol > li {
   margin-bottom: 0.8em;
+}
+h1,h2,h3,h4,h5,h6{
+  font-weight: normal;
 }
 input {
   -webkit-user-select: text;
@@ -42,6 +50,7 @@ input[type="range"] {
   right: 0;
   margin: auto;
   width: 60%;
+  max-width: 800px;
   max-height: 75vh;
   overflow-y: auto;
   background-color: var(--bgColor);
@@ -56,7 +65,7 @@ input[type="range"] {
   }
   transition: opacity 0.2s, transform 0.2s;
   &:not(.activeModal) {
-    transition: z-index 0.2s, opacity 0.2s, transform 0.2s;
+    transition: opacity 0.2s, z-index 0.2s, transform 0.2s;
   }
 }
 .myModal-content{
@@ -229,9 +238,6 @@ body {
 body {
   background-color: var(--bgColor);
   color: var(--fontColor);
-  font-family: -apple-system, blinkMacSystemFont, "Helvetica Neue", "Segoe UI",
-    "Arial", "Roboto", "Hiragino Kaku Gothic ProN", YuGothicM, YuGothic, Meiryo,
-    sans-serif;
 }
 @font-face {
   font-family: YuGothicM;
@@ -264,15 +270,20 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
-  font-family: "Open Sans", -apple-system, blinkMacSystemFont, "Helvetica Neue",
-    "Segoe UI", "Arial", "Roboto", sans-serif;
   font-weight: 500;
   line-height: 1.1;
+  & *{
+  font-family: "Open Sans", -apple-system, blinkMacSystemFont, "Helvetica Neue",
+  "Segoe UI", "Arial", "Roboto", sans-serif;
+  }
 }
 #Date,
 #Time,
 #openWelcome {
   display: none;
+}
+.datepicker-date-display .date-text{
+  font-weight: normal;
 }
 .myModal#settings {
   max-height: 77vh;
