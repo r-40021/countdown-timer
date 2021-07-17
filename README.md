@@ -5,20 +5,19 @@
 This is a timer that can be timed semi-permanently.
 # Screenshots
 #### Light Mode
-![Light Mode](https://user-images.githubusercontent.com/75155258/120090124-0f5e4680-c13b-11eb-912f-e28257acaecb.jpg)
+![Light Mode](https://user-images.githubusercontent.com/75155258/126022501-8e106441-95a2-4b86-93df-af5a8a2e3a40.png)
 
 #### Dark Mode
-![Dark Mode](https://user-images.githubusercontent.com/75155258/120090129-1422fa80-c13b-11eb-9a00-a0a297299fcc.jpg)
+![Dark Mode](https://user-images.githubusercontent.com/75155258/126022509-ffa3d84f-fc04-4f57-94f6-b2b9f1944260.png)
 
 #### Date Setting
-<img src="https://user-images.githubusercontent.com/75155258/119243992-f12aa080-bba6-11eb-80b5-a2bcaa66dfc3.jpg" width ="400px">
+<img src="https://user-images.githubusercontent.com/75155258/126022523-0a7246c0-7d14-46d1-9e5b-05800cadbf95.png" width ="400px" alt="Datepicker">
 
 #### Time Setting
-<img src="https://user-images.githubusercontent.com/75155258/119244001-fa1b7200-bba6-11eb-801a-ab61b74c66b7.jpg" width ="400px">
+<img src="https://user-images.githubusercontent.com/75155258/126022544-25253941-b71a-4525-9efc-2ababbbe27b0.png" width ="400px" alt="Timepicker">
 
 #### Push Notifications
-<img src="https://user-images.githubusercontent.com/75155258/120913712-130e4200-c6d4-11eb-87c0-de418282ffab.png" width ="400px">
-
+<img src="https://user-images.githubusercontent.com/75155258/126022563-5e54db57-ed38-4987-82a5-0c045a1760f2.png" width ="400px" alt="Push Notifications">
 
 # How to Use
 **Only 2 steps!!**  
