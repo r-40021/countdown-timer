@@ -3,17 +3,17 @@
 <img src="../snsicon/OGP.png" width="300px">
 # スクリーンショット
 #### ライトモード
-![ライトモード](https://user-images.githubusercontent.com/75155258/120090124-0f5e4680-c13b-11eb-912f-e28257acaecb.jpg)
+![ライトモード](https://user-images.githubusercontent.com/75155258/126022501-8e106441-95a2-4b86-93df-af5a8a2e3a40.png)
 #### ダークモード
-![ダークモード](https://user-images.githubusercontent.com/75155258/120090129-1422fa80-c13b-11eb-9a00-a0a297299fcc.jpg)
+![ダークモード](https://user-images.githubusercontent.com/75155258/126022509-ffa3d84f-fc04-4f57-94f6-b2b9f1944260.png)
 #### 日付の設定
-<img src="https://user-images.githubusercontent.com/75155258/119243992-f12aa080-bba6-11eb-80b5-a2bcaa66dfc3.jpg" width ="400px">
+<img src="https://user-images.githubusercontent.com/75155258/126022523-0a7246c0-7d14-46d1-9e5b-05800cadbf95.png" width ="400px" alt="日付設定画面">
 
 #### 時刻の設定
-<img src="https://user-images.githubusercontent.com/75155258/119244001-fa1b7200-bba6-11eb-801a-ab61b74c66b7.jpg" width ="400px">
+<img src="https://user-images.githubusercontent.com/75155258/126022544-25253941-b71a-4525-9efc-2ababbbe27b0.png" width ="400px" alt="時刻設定画面">
 
 #### プッシュ通知
-<img src="https://user-images.githubusercontent.com/75155258/120090149-2b61e800-c13b-11eb-9000-db90b30da313.jpg" width ="400px">
+<img src="https://user-images.githubusercontent.com/75155258/126022563-5e54db57-ed38-4987-82a5-0c045a1760f2.png" width ="400px" alt="プッシュ通知">
 
 # How to Use
 **使い方は超シンプル**
