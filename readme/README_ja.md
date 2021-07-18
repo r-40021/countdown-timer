@@ -3,9 +3,11 @@
 <img src="../snsicon/OGP.png" width="300px">
 # スクリーンショット
 #### ライトモード
-![ライトモード](https://user-images.githubusercontent.com/75155258/126022501-8e106441-95a2-4b86-93df-af5a8a2e3a40.png)
+![ライトモード](https://user-images.githubusercontent.com/75155258/126065513-e5f5f01b-aa1f-4618-bfb9-7a98b956677a.png)
+
 #### ダークモード
-![ダークモード](https://user-images.githubusercontent.com/75155258/126022509-ffa3d84f-fc04-4f57-94f6-b2b9f1944260.png)
+![ダークモード](https://user-images.githubusercontent.com/75155258/126065520-311b6ac5-cd3a-4b56-b0cc-f35660326c08.png)
+
 #### 日付の設定
 <img src="https://user-images.githubusercontent.com/75155258/126022523-0a7246c0-7d14-46d1-9e5b-05800cadbf95.png" width ="400px" alt="日付設定画面">
 
