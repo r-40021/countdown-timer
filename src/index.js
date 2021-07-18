@@ -1085,10 +1085,11 @@ function tweet() {
     url =
       base +
       "text=" +
-      text +
       "「" +
       title +
-      "」%0a&hashtags=" +
+      "」%0a" +
+      text +
+      "%0a&hashtags=" +
       hashtags +
       "&url=" +
       encodeURIComponent(window.location.href);
