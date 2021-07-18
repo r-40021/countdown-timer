@@ -551,7 +551,7 @@ function myCount() {
             window.focus();
             this.close();
             stop();
-            audiostop();
+            audiostop(true);
           },
         });
       }
@@ -628,7 +628,7 @@ function set() {
     changeURL();
   }
   stop();
-  audiostop();
+  audiostop(false);
   onload();
   Push.clear(); //通知削除
 }
@@ -709,11 +709,13 @@ function reTimer() {
     document.getElementById("displayTime").textContent = display;
   }
 }
-function audiostop() {
+function audiostop(ifAction) {
   if (document.getElementById("displayTime").textContent === "00:00") {
-    openTimeSetting();
     if (setType === "duration") {
       reTimer();
+    }
+    if (ifAction) {
+      openTimeSetting();
     }
   }
   document.getElementById("stopTimer").style.display = "";
@@ -1137,7 +1139,7 @@ function seventh() {
   document.getElementById("stopTimer").addEventListener("click", () => {
     // ストップボタンをクリックしたとき
     stop();
-    audiostop();
+    audiostop(true);
     Push.clear();
   }, false);
   document.getElementById("nextSkip").addEventListener("click", () => {

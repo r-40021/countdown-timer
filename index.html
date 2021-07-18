@@ -222,7 +222,7 @@
                                         d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z" />
                                 </svg>時間幅で設定</div>
                             <div class="collapsible-body" id="duration">
-                                <form onsubmit="document.getElementById('durationSetBtn').click();return false;">
+                                <form onsubmit="document.getElementById('durationSetBtn').click();document.getElementById('settings').classList.remove('activeModal');return false;">
                                     <div class="input-field duration content">
                                         <input id="hour" type="number" class="validate durationSet" pattern="\d*"
                                             min="0" value="0" maxlength="20" onfocus="this.select()">
