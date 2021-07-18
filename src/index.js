@@ -710,8 +710,11 @@ function reTimer() {
   }
 }
 function audiostop() {
-  if (setType === "duration" && document.getElementById("displayTime").textContent === "00:00") {
-    reTimer();
+  if (document.getElementById("displayTime").textContent === "00:00") {
+    openTimeSetting();
+    if (setType === "duration") {
+      reTimer();
+    }
   }
   document.getElementById("stopTimer").style.display = "";
   document.getElementById("setTimer").style.display = "";
@@ -1241,7 +1244,7 @@ document.addEventListener("keydown", (e) => {
       document.getElementById("settings").classList.remove("activeModal");
     }
   }
-},false);
+}, false);
 
 
 modalTrigger();
