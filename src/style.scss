@@ -8,19 +8,24 @@
   --green: #4db6ac;
   --grayText: #666;
 }
-*{
+* {
   font-family: -apple-system, blinkMacSystemFont, "Helvetica Neue", "Segoe UI",
     "Arial", "Roboto", "Hiragino Kaku Gothic ProN", YuGothicM, YuGothic, Meiryo,
     sans-serif;
 }
-p {
+p, ul, ol {
   text-align: justify;
-  line-height: 1.5;
+  line-height: 1.7;
 }
 ol > li {
   margin-bottom: 0.8em;
 }
-h1,h2,h3,h4,h5,h6{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: normal;
 }
 input {
@@ -68,11 +73,11 @@ input[type="range"] {
     transition: opacity 0.2s, z-index 0.2s, transform 0.2s;
   }
 }
-.myModal-content{
+.myModal-content {
   padding: 0.2rem 2rem;
 }
-.myModal-footer{
-  padding: 1em 0.5em;
+.myModal-footer {
+  padding: 1em 0.7em;
   text-align: end;
 }
 .myModal-overlay {
@@ -272,9 +277,9 @@ body {
   flex-direction: column;
   font-weight: 500;
   line-height: 1.1;
-  & *{
-  font-family: "Open Sans", -apple-system, blinkMacSystemFont, "Helvetica Neue",
-  "Segoe UI", "Arial", "Roboto", sans-serif;
+  & * {
+    font-family: "Open Sans", -apple-system, blinkMacSystemFont,
+      "Helvetica Neue", "Segoe UI", "Arial", "Roboto", sans-serif;
   }
 }
 #Date,
@@ -282,17 +287,17 @@ body {
 #openWelcome {
   display: none;
 }
-.datepicker-date-display .date-text{
+.datepicker-date-display .date-text {
   font-weight: normal;
 }
-.timepicker-display-column{
+.timepicker-display-column {
   font-weight: normal;
 }
 .myModal#settings {
   max-height: 77vh;
   padding: 0;
 }
-#info .section{
+#info .section {
   background-color: var(--bgColor);
   padding: 0;
 }
@@ -420,9 +425,10 @@ input[type="text"]:not(.browser-default)[readonly="readonly"] {
   height: auto;
   z-index: 999;
   color: var(--fontColor);
-  & div,& span{
+  & div,
+  & span {
     transition: opacity 0.2s;
-    &:hover{
+    &:hover {
       opacity: 0.5;
     }
   }
@@ -471,6 +477,9 @@ input[type="text"]:not(.browser-default)[readonly="readonly"] {
 .timer a {
   pointer-events: auto;
 }
+#welcome{
+  line-height: 1.7;
+}
 .howTo {
   display: flex;
   width: 100%;
@@ -480,13 +489,23 @@ input[type="text"]:not(.browser-default)[readonly="readonly"] {
 .howTo .case,
 .howTo .answer {
   margin: 1.8em 0;
+  text-align: justify;
 }
 .howTo .case {
   width: 50%;
 }
 .howTo .answer {
   flex: 1;
-  margin-left: 0.7em;
+  margin-left: 1.2em;
+  & svg {
+    margin: 0.5em 0.2em;
+  }
+  & .myBtn-small {
+    margin: 0.3em;
+    & svg {
+      margin: 0;
+    }
+  }
 }
 .status {
   color: var(--grayText);
@@ -686,6 +705,9 @@ body.dark .collapsible-body {
   border-color: rgb(75, 75, 75);
 }
 body.dark .collapsible-header {
+  background-color: var(--bgColor);
+}
+body.dark .collapsible-header:focus{
   background-color: var(--bgColor);
 }
 body.dark .timepicker-tick,
