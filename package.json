@@ -31,7 +31,7 @@
     "materialize-css": "^1.0.0",
     "nosleep.js": "^0.12.0",
     "sass": "^1.36.0",
-    "webpack": "^5.46.0",
+    "webpack": "^5.47.0",
     "webpack-cli": "^4.7.2",
     "webpack-dev-server": "^3.11.2"
   },
