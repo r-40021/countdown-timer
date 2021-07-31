@@ -46,7 +46,7 @@ input[type="range"] {
 .myModal {
   opacity: 0;
   transform: scale(0.8);
-  z-index: -1;
+  z-index: 1001;
   transform-origin: top center;
   text-align: start;
   position: fixed;
@@ -59,7 +59,6 @@ input[type="range"] {
   max-height: 75vh;
   overflow-y: auto;
   background-color: var(--bgColor);
-  z-index: -1;
   & h2 {
     padding-bottom: 0.3em;
   }
@@ -69,9 +68,6 @@ input[type="range"] {
     right: 0.2em;
   }
   transition: opacity 0.2s, transform 0.2s;
-  &:not(.activeModal) {
-    transition: opacity 0.2s, z-index 0.2s, transform 0.2s;
-  }
 }
 .myModal-content {
   padding: 0.2rem 2rem;
@@ -82,9 +78,9 @@ input[type="range"] {
 }
 .myModal-overlay {
   display: block;
+  z-index: 1000;
   cursor: default;
   opacity: 0;
-  z-index: -2;
   position: fixed;
   top: 0;
   bottom: 0;
@@ -97,10 +93,8 @@ input[type="range"] {
 .myModal.activeModal {
   opacity: 1;
   transform: scale(1);
-  z-index: 1001;
   & ~ .myModal-overlay {
     opacity: 1;
-    z-index: 1000;
   }
 }
 @media only screen and (max-width: 992px) {

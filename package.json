@@ -1,6 +1,6 @@
 {
   "name": "countdown-timer",
-  "version": "4.0.1",
+  "version": "5.2.1",
   "description": "This is a timer that can be timed semi-permanently. 半永久的に計れるカウントダウンタイマーです。",
   "main": "./src/index.js",
   "scripts": {
