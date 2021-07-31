@@ -28,7 +28,6 @@ export function modalTrigger() {
 }
 
 export function modalClose() {
-    history.replaceState(null, null, "./");
     let elements = document.getElementsByClassName("myModal-close");
     for (let i = 0; i < elements.length; i++) {
         const element = elements[i];

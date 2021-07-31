@@ -403,6 +403,7 @@ function onload() {
     myDate = paramObject.date;
     myTime = paramObject.time;
     target = new Date(myDate + " " + myTime + ":00"); //設定時間
+    changeURL();
     down = setInterval(myCount, 200);
   } else if (
     localStorage.getItem("ct-date") &&
