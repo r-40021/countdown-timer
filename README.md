@@ -1,8 +1,11 @@
-[日本語(Japanese)](./readme/README_ja.md)
+[日本語(Japanese)](README_ja.md)
 # <img src="./favicon/favicon.ico" width="30px">Countdown Timer
 半永久的に計れるタイマー
 
 This is a timer that can be timed semi-permanently.
+
+[Open demo](https://r-40021.github.io/countdown-timer/index.html?date=2021/08/31&time=23:59&title=The%20End%20of%20My%20Summer%20Vacation!)
+
 # Screenshots
 #### Light Mode
 ![Light Mode](https://user-images.githubusercontent.com/75155258/126022501-8e106441-95a2-4b86-93df-af5a8a2e3a40.png)
@@ -11,13 +14,13 @@ This is a timer that can be timed semi-permanently.
 ![Dark Mode](https://user-images.githubusercontent.com/75155258/126022509-ffa3d84f-fc04-4f57-94f6-b2b9f1944260.png)
 
 #### Date Setting
-<img src="https://user-images.githubusercontent.com/75155258/126022523-0a7246c0-7d14-46d1-9e5b-05800cadbf95.png" width ="400px" alt="Datepicker">
+<img src="https://user-images.githubusercontent.com/75155258/127759896-430e7e00-c02b-4a0b-a57f-6821a8fa836e.png" width ="400px" alt="Datepicker">
 
 #### Time Setting
 <img src="https://user-images.githubusercontent.com/75155258/126022544-25253941-b71a-4525-9efc-2ababbbe27b0.png" width ="400px" alt="Timepicker">
 
 #### Push Notifications
-<img src="https://user-images.githubusercontent.com/75155258/126022563-5e54db57-ed38-4987-82a5-0c045a1760f2.png" width ="400px" alt="Push Notifications">
+<img src="https://user-images.githubusercontent.com/75155258/127759924-65264f2c-ccf1-4c24-b871-f8c4081e839e.png" width ="400px" alt="Push Notifications">
 
 # How to Use
 **Only 2 steps!!**  
