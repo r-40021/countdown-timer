@@ -6,7 +6,7 @@ import { recalTabs } from "./Tabs";
 import { materializeInit } from "./materialize";
 import { device } from "./device";
 import { fullscreen } from "./fullscreen";
-import { resize } from "./resize";
+import { resize, resizeTitleInput } from "./resize";
 import { toggleTheme } from "./theme";
 import { copy, tweet } from "./share";
 
@@ -189,9 +189,11 @@ function onload() {
   if (paramObject.title) {
     title = decodeURIComponent(paramObject.title);
     document.getElementById("title").value = title;
+    resizeTitleInput();
   } else if (localStorage.getItem("ct-title") && !paramObject.date && !paramObject.time) {
     title = localStorage.getItem("ct-title");
     document.getElementById("title").value = title;
+    resizeTitleInput();
   }
   if ((setType === "duration") || ((firstLoad === 0 && localStorage.getItem("ct-lastType") == "1") && !paramObject.date && !paramObject.time)) {
     durationStatus = 1;
@@ -684,6 +686,7 @@ function move(e) {
 window.addEventListener("resize", function () {
   resize();
   recalTabs();
+  resizeTitleInput();
 });
 document.getElementById("testAudio").addEventListener(
   "click",
@@ -726,6 +729,7 @@ document.getElementById("audioVolume").addEventListener(
 );
 document.getElementById("title").addEventListener("input", () => {
   // タイトルを変更
+  resizeTitleInput();
   title = document.getElementById("title").value;
   if (title) {
     localStorage.setItem("ct-title", title);
