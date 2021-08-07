@@ -629,6 +629,7 @@ function load1() {
       playing = true;
     }
     doubleAlarmStop();
+    document.getElementById("file1").value = null;
     alarm = new Howl({
       src: ['/countdown-timer/alarm.mp3'],
       volume: document.getElementById("audioVolume").value / 100,
