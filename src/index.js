@@ -700,7 +700,7 @@ document.getElementById("testAudio").addEventListener(
     document.addEventListener(
       "click",
       stopTest = (e) => {
-        if (e.target.id !== "audioVolume") {
+        if (!e.target.closest(".audioFlex")) {
           testAlarm.stop(); //音停止
           document.removeEventListener("click", stopTest, false);
           document.getElementById("testAudio").style.display = "";
