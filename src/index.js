@@ -8,7 +8,7 @@ import { device } from "./device";
 import { fullscreen } from "./fullscreen";
 import { resize, resizeTitleInput } from "./resize";
 import { toggleTheme } from "./theme";
-import { copy, tweet } from "./share";
+import { copy, tweet, shareAPI } from "./share";
 
 /*変数の定義*/
 var down, displayEnd, oldDisplay, title, myDate, myTime, target, kiduke;
@@ -169,6 +169,8 @@ function clickHeader() {
 }
 
 fullscreen();
+
+shareAPI();
 
 function onload() {
   resize(); //文字サイズ調整

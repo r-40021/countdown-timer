@@ -13,7 +13,9 @@
     "Arial", "Roboto", "Hiragino Kaku Gothic ProN", YuGothicM, YuGothic, Meiryo,
     sans-serif;
 }
-p, ul, ol {
+p,
+ul,
+ol {
   text-align: justify;
   line-height: 1.7;
 }
@@ -152,8 +154,8 @@ input.valid[type="text"]:not(.browser-default) {
 }
 .easySet {
   text-align: start;
-  & a{
-  margin: 0.4em 0.3em;
+  & a {
+    margin: 0.4em 0.3em;
   }
 }
 .myBtn-circle:not(.nohover):hover {
@@ -474,7 +476,7 @@ input[type="text"]:not(.browser-default)[readonly="readonly"] {
 .timer a {
   pointer-events: auto;
 }
-#welcome{
+#welcome {
   line-height: 1.7;
 }
 .howTo {
@@ -577,6 +579,24 @@ input[type="number"]:-webkit-autofill:active {
 }
 .confirmation-btns {
   text-align: right;
+}
+
+.flexMenu a.content {
+  display: flex;
+  width: 100%;
+  height: 2.8em;
+  transition: opacity .2s;
+
+  & .icon {
+    width: 2em;
+  }
+  & .text {
+    flex: 1;
+  }
+
+  &:hover{
+    opacity: 0.5;
+  }
 }
 /*Big PC*/
 @media screen and (min-width: 1440px) {
@@ -704,7 +724,7 @@ body.dark .collapsible-body {
 body.dark .collapsible-header {
   background-color: var(--bgColor);
 }
-body.dark .collapsible-header:focus{
+body.dark .collapsible-header:focus {
   background-color: var(--bgColor);
 }
 body.dark .timepicker-tick,

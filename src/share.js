@@ -1,3 +1,24 @@
+export function shareAPI (){
+    const element = document.getElementById("shareAPI");
+    if(!navigator.share){
+        element.remove();
+    }
+    element.addEventListener("click", async () => {
+        let title = document.getElementById("title").value;
+        const shareData = {
+            title: 'やまだのタイマー',
+            text: (title ? title + "\n" : "") + '10万年先まで計れるやまだのタイマーでカウントダウン！',
+            url: location.href
+          }
+
+        try {
+            await navigator.share(shareData)
+          } catch(err) {
+              console.error("Web Share API:" + err);
+          }
+    })
+}
+
 export function copy() {
     /*URLコピー*/
     var url = location.href;
