@@ -34,16 +34,16 @@
 3. 時間になったらプッシュ通知が届きます。(PC)
 4. 全画面表示モードを搭載。
 5. 普通のタイマーのようにも使えます。
-# お願い
+# プライバシー
 このWEBアプリには、プライバシーの観点からアクセス解析をつけていません。画面上のシェアボタンから、Twitterで"#やまだのタイマー"と"#やまだけんいち"をつけてツイートして頂ければ、こちらも大体のアクセス数を把握できますので、もしよろしければご協力ください。
 # 動作確認済み環境
 - Windows 10 (64bit)
-- Google Chrome v.90
-- Microsoft Edge(Chromium) v.90
-- Safari on iOS 14.5.1 (全画面表示機能・アラーム音機能は利用できません)
+- Google Chrome v.92
+- Microsoft Edge(Chromium) v.92
+- Safari on iOS 14.5.1 (全画面表示機能は利用できません)
 # ライセンス表示
-- (c) 2014-2019 Materialize
-- [Push.js](https://github.com/Nickersoft/push.js) Copyright (c) 2016 Tyler Nickerson
-- [NoSleep.js](https://github.com/richtr/NoSleep.js) Copyright (c) Rich Tibbett
-- [howler.js](https://github.com/goldfire/howler.js) Copyright (c) 2013-2020 James Simpson and GoldFire Studios, Inc.
+- [Materialize](https://github.com/dogfalo/materialize) &copy; 2014-2019 Materialize
+- [Push.js](https://github.com/Nickersoft/push.js) &copy; 2016 Tyler Nickerson
+- [NoSleep.js](https://github.com/richtr/NoSleep.js) &copy; Rich Tibbett
+- [howler.js](https://github.com/goldfire/howler.js) &copy; 2013-2020 James Simpson and GoldFire Studios, Inc.
 - ["時計　アラーム03"](https://otologic.jp/free/se/clock01.html) by [OtoLogic](https://otologic.jp/) is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/legalcode)
