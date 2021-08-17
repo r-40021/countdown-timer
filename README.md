@@ -35,16 +35,16 @@ This is a timer that can be timed semi-permanently.
 6. The device will not sleep while you are using this app.
 7. You can make this app full screen. So, it is suitable for projecting this application on a display.
 8. It can also be used like a regular timer.
-# Please
+# Privacy
 For privacy reasons, we do not have an access analysis for this web app. If you would like to help us, please click on the share button on the screen and tweet us with the "#やまだのタイマー" and "#やまだけんいち" on Twitter so that we can get a rough idea of the number of accesses.
 # Execution Check Environment
 - Windows 10 (64bit)
-- Google Chrome v.90
-- Microsoft Edge(Chromium) v.90
-- Safari on iOS 14.5.1 (The full screen display function and alarm sound function are not available.)
+- Google Chrome v.92
+- Microsoft Edge(Chromium) v.92
+- Safari on iOS 14.7.1 (The full screen display function is not available.)
 # Authors
-- (c) 2014-2019 Materialize
-- [Push.js](https://github.com/Nickersoft/push.js) Copyright (c) 2016 Tyler Nickerson
-- [NoSleep.js](https://github.com/richtr/NoSleep.js) Copyright (c) Rich Tibbett
-- [howler.js](https://github.com/goldfire/howler.js) Copyright (c) 2013-2020 James Simpson and GoldFire Studios, Inc.
+- [Materialize](https://github.com/dogfalo/materialize) &copy; 2014-2019 Materialize
+- [Push.js](https://github.com/Nickersoft/push.js) &copy; 2016 Tyler Nickerson
+- [NoSleep.js](https://github.com/richtr/NoSleep.js) &copy; Rich Tibbett
+- [howler.js](https://github.com/goldfire/howler.js) &copy; 2013-2020 James Simpson and GoldFire Studios, Inc.
 - ["時計　アラーム03"](https://otologic.jp/free/se/clock01.html) by [OtoLogic](https://otologic.jp/) is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/legalcode)
