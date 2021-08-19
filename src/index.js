@@ -969,6 +969,7 @@ export function pushrequest() {
 window.toggleTheme = toggleTheme;
 window.copy = copy;
 window.tweet = tweet;
+window.closeAllModal = closeAllModal;
 
 /*ローディング解除*/
 document.getElementById("loadingBlur").remove();
