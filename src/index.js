@@ -21,7 +21,6 @@ var durationStop = false;//「経過時間」でせっていし、一時停止�
 let durationChange = false;//「経過時間」の設定が変わったか
 let setType;//「経過時間」or「経過時間→日時設定」
 let stopTest;
-let displayWelcome;
 /*Dark Theme*/
 const isDark = window.matchMedia("(prefers-color-scheme: dark)");//ダークモード？
 const { Howl, Howler } = require('howler');
@@ -37,15 +36,8 @@ modalTrigger();
 modalClose();
 
 function second() {
-  if (!localStorage.getItem("ct-skip")) {
-    document.getElementById("myModal-overlay").style.zIndex = "";
-    let modal = document.getElementById("welcome");
-    modal.style.zIndex = "";
-    modal.classList.add("activeModal");// 「ようこそ」画面を表示
-    displayWelcome = true;
-    document.getElementById("howToCheck").checked = true;
-  } else {
-    document.getElementById("nextSkip").checked = true;
+  if (localStorage.getItem("ct-skip")) {
+    localStorage.removeItem("ct-skip");
   }
 }
 second();
@@ -138,7 +130,7 @@ function third() {
   } else {
     //パラメータ＆Local Storageなし
     noParams();
-    if (!displayWelcome && setType !== "duration") {
+    if (setType !== "duration") {
       openTimeSetting();
     }
     if (setType === "duration") {
@@ -278,9 +270,7 @@ function onload() {
       localStorage.removeItem("ct-date");
       localStorage.removeItem("ct-time");
       noParams();
-      if (!displayWelcome) {
-        openTimeSetting();
-      }
+      openTimeSetting();
     }
   } else {
     // 初めて
@@ -446,14 +436,11 @@ function myCount() {
     display = "00:00";
     displayPlace.textContent = display;
     document.title = "やまだのタイマー";
-    if (!displayWelcome) {
       openTimeSetting();
       if (!document.getElementById("targetLi").classList.contains("active")) {
         M.Collapsible.getInstance(document.querySelector("#selectSettings")).open(0);
       }
-    }
   }
-  displayWelcome = false;
 }
 function noParams() {
   /*パラメータがなかったら*/
@@ -847,26 +834,6 @@ function seventh() {
     stop();
     audiostop(true);
     Push.clear();
-  }, false);
-  document.getElementById("nextSkip").addEventListener("click", () => {
-    // ようこそ画面の「今後は表示しない」をクリックしたとき
-    if (document.getElementById("nextSkip").checked) {
-      localStorage.setItem("ct-skip", 1);// Local Storageにセット
-      document.getElementById("howToCheck").checked = false;//設定画面のチェックボックスを外す
-    } else {
-      localStorage.removeItem("ct-skip");// Local Storageにセット
-      document.getElementById("howToCheck").checked = true;//設定画面のチェックボックスを入れる
-    }
-  }, false);
-  document.getElementById("howToCheck").addEventListener("click", () => {
-    // 設定画面の「使い方を表示」をクリックしたとき
-    if (document.getElementById("howToCheck").checked) {
-      localStorage.removeItem("ct-skip");
-      document.getElementById("nextSkip").checked = false;
-    } else {
-      localStorage.setItem("ct-skip", 1);
-      document.getElementById("nextSkip").checked = true;
-    }
   }, false);
   /*隠しテキストボックスと設定画面のテキストボックスを同期*/
   document.getElementById("Date").addEventListener(
