@@ -209,11 +209,9 @@ body:not(:fullscreen) #escFullscreen {
   overflow-x: auto;
   white-space: nowrap;
 }
-.btn-flat{
-  color: var(--grayText);
-}
 .share .btn-flat {
   padding: 0 7px;
+  color: var(--grayText);
 }
 ::-webkit-scrollbar {
   width: 5px;
@@ -707,8 +705,11 @@ body.dark {
   --grayText: rgb(216, 215, 215);
 }
 body.dark .myModal,
+body.dark .modal,
 body.dark .myModal .myModal-content,
+body.dark .modal .modal-content,
 body.dark .myModal .myModal-footer,
+body.dark .myModal .modal-footer,
 body.dark .tabs {
   background-color: var(--bgColor);
 }
