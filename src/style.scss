@@ -1,4 +1,4 @@
-@import "../node_modules/materialize-css/sass/materialize.scss";
+@import "../node_modules/@materializecss/materialize/sass/materialize.scss";
 .myModal-overlay {
   overflow: hidden;
 }
@@ -29,6 +29,9 @@ h4,
 h5,
 h6 {
   font-weight: normal;
+}
+h2{
+  font-size: 1.5em;
 }
 input {
   -webkit-user-select: text;

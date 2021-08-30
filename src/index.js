@@ -1,4 +1,4 @@
-require("materialize-css");// Materialize読み込み
+require("@materializecss/materialize");// Materialize読み込み
 var Push = require("push.js");// プッシュ通知のライブラリを読み込み
 import NoSleep from "../node_modules/nosleep.js/dist/NoSleep";// スリープしないように
 import { modalTrigger, modalClose, closeAllModal } from "./Modal";
@@ -429,9 +429,9 @@ function myCount() {
     document.getElementById("stopTimer").style.display = "";
     document.getElementById("setTimer").style.display = "";
     if (display.match("-")) {
-      M.toast({ html: "過去の日時はセットできません" });
+      M.toast({ text: "過去の日時はセットできません" });
     } else if (display.match("NaN")) {
-      M.toast({ html: "むむ？" });
+      M.toast({ text: "むむ？" });
     }
     display = "00:00";
     displayPlace.textContent = display;
@@ -580,7 +580,7 @@ function load1() {
     }
     const file = e[0];
     if (!file.type.match("audio.*")) {
-      M.toast({ html: "音声ファイルを選択してください" });
+      M.toast({ text: "音声ファイルを選択してください" });
       return;
     }
     const reader = new FileReader();
@@ -602,9 +602,7 @@ function load1() {
       });
       document.getElementById("audioFileName").textContent = file.name;
       document.getElementById("audioFileStatus").style.display = "flex";
-      M.toast({
-        html: "アラーム音を設定しました",
-      });
+      M.toast({text: "アラーム音を設定しました",});
       window.addEventListener("beforeunload", move, false);
       if (playing) {
         alarm.play();
