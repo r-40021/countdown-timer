@@ -19,7 +19,7 @@ export function modalTrigger() {
                         modal.style.zIndex = "";
                         modal.classList.add("activeModal");
                     }
-                }, {passive: true})
+                }, {passive: true});
             }, {passive: true});
             element.addEventListener("touchmove", (e) => {
                 if (document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY) !== element) {
@@ -65,6 +65,11 @@ export function modalClose() {
             }, false);
         }
     }
+    document.addEventListener("keydown", (e)=>{
+        if (!e.repeat && e.key ===  "Escape" && document.querySelector(".myModal.activeModal")) {
+            closeAllModal();
+        }
+    });
 }
 let overlayTimeout;
 let activeModal = [];
