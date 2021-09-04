@@ -4,14 +4,14 @@
 
 This is a timer that can be timed semi-permanently.
 
-[Open demo](https://r-40021.github.io/countdown-timer/index.html?date=2021/08/31&time=23:59&title=The%20End%20of%20My%20Summer%20Vacation!)
+[Open demo](https://r-40021.github.io/countdown-timer/?date=2022/01/01&time=00:00&title=2022)
 
 # Screenshots
 #### Light Mode
-![Light Mode](https://user-images.githubusercontent.com/75155258/126022501-8e106441-95a2-4b86-93df-af5a8a2e3a40.png)
+![Light Mode](https://user-images.githubusercontent.com/75155258/132082653-fc37f381-e5e5-4556-9cf1-eb6c14face4e.png)
 
 #### Dark Mode
-![Dark Mode](https://user-images.githubusercontent.com/75155258/126022509-ffa3d84f-fc04-4f57-94f6-b2b9f1944260.png)
+![Dark Mode](https://user-images.githubusercontent.com/75155258/132082649-052890ea-8143-4083-914d-cd4ae9f527c6.png)
 
 #### Date Setting
 <img src="https://user-images.githubusercontent.com/75155258/127759896-430e7e00-c02b-4a0b-a57f-6821a8fa836e.png" width ="400px" alt="Datepicker">
