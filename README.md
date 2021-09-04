@@ -43,8 +43,8 @@ For privacy reasons, we do not have an access analysis for this web app. If you 
 - Microsoft Edge(Chromium) v.92
 - Safari on iOS 14.7.1 (The full screen display function is not available.)
 # Authors
-- [Materialize](https://github.com/materializecss/materialize) &copy; 2014-2019 Materialize
-- [Push.js](https://github.com/Nickersoft/push.js) &copy; 2016 Tyler Nickerson
-- [NoSleep.js](https://github.com/richtr/NoSleep.js) &copy; Rich Tibbett
-- [howler.js](https://github.com/goldfire/howler.js) &copy; 2013-2020 James Simpson and GoldFire Studios, Inc.
+- [Materialize](https://github.com/materializecss/materialize/blob/v1-dev/LICENSE) &copy; 2014-2019 Materialize
+- [Push.js](https://github.com/Nickersoft/push.js/blob/master/LICENSE.md) &copy; 2016 Tyler Nickerson
+- [NoSleep.js](https://github.com/richtr/NoSleep.js/blob/master/LICENSE) &copy; Rich Tibbett
+- [howler.js](https://github.com/goldfire/howler.js/blob/master/LICENSE.md) &copy; 2013-2020 James Simpson and GoldFire Studios, Inc.
 - ["時計　アラーム03"](https://otologic.jp/free/se/clock01.html) by [OtoLogic](https://otologic.jp/) is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/legalcode)
