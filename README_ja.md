@@ -1,16 +1,16 @@
 # <img src="./favicon/favicon.ico" width="30px">Countdown Timer
 半永久的に計れるタイマー  
 
-[デモを開く](https://r-40021.github.io/countdown-timer/index.html?date=2021/08/31&time=23:59&title=%E5%A4%8F%E4%BC%91%E3%81%BF%E3%81%AE%E7%B5%82%E3%82%8F%E3%82%8A)
+[デモを開く](https://r-40021.github.io/countdown-timer/?date=2022/01/01&time=00:00&title=2022)
 
 <img src="./snsicon/OGP.png" width="300px">
 
 # スクリーンショット
 #### ライトモード
-![ライトモード](https://user-images.githubusercontent.com/75155258/126065513-e5f5f01b-aa1f-4618-bfb9-7a98b956677a.png)
+![ライトモード](https://user-images.githubusercontent.com/75155258/132082653-fc37f381-e5e5-4556-9cf1-eb6c14face4e.png)
 
 #### ダークモード
-![ダークモード](https://user-images.githubusercontent.com/75155258/126065520-311b6ac5-cd3a-4b56-b0cc-f35660326c08.png)
+![ダークモード](https://user-images.githubusercontent.com/75155258/132082649-052890ea-8143-4083-914d-cd4ae9f527c6.png)
 
 #### 日付の設定
 <img src="https://user-images.githubusercontent.com/75155258/127759896-430e7e00-c02b-4a0b-a57f-6821a8fa836e.png" width ="400px" alt="日付設定画面">
