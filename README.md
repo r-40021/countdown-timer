@@ -42,7 +42,7 @@ For privacy reasons, we do not have an access analysis for this web app. If you 
 - Google Chrome v.92
 - Microsoft Edge(Chromium) v.92
 - Safari on iOS 14.7.1 (The full screen display function is not available.)
-# Authors
+# License
 - [Materialize](https://github.com/materializecss/materialize/blob/v1-dev/LICENSE) &copy; 2014-2019 Materialize
 - [Bootstrap Icons](https://github.com/twbs/icons/blob/main/LICENSE.md) &copy; 2019-2020 The Bootstrap Authors
 - [Push.js](https://github.com/Nickersoft/push.js/blob/master/LICENSE.md) &copy; 2016 Tyler Nickerson
