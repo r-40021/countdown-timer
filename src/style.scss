@@ -1,4 +1,8 @@
+$tabs-underline-color: lighten(#26a69a, 15%);
+$tabs-text-color: #26a69a;
+
 @import "../node_modules/@materializecss/materialize/sass/materialize.scss";
+
 .myModal-overlay {
   overflow: hidden;
 }
