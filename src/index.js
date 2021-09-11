@@ -9,6 +9,7 @@ import { fullscreen } from "./fullscreen";
 import { resize, resizeTitleInput } from "./resize";
 import { toggleTheme } from "./theme";
 import { copy, tweet, shareAPI } from "./share";
+import { registerInstallAppEvent } from "./pwa";
 
 /*変数の定義*/
 var down, displayEnd, oldDisplay, title, myDate, myTime, target, kiduke;
@@ -34,6 +35,8 @@ materializeInit();
 
 modalTrigger();
 modalClose();
+
+registerInstallAppEvent(document.getElementById("getPWA"));
 
 function second() {
   if (localStorage.getItem("ct-skip")) {
