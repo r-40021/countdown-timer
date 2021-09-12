@@ -1,4 +1,4 @@
-var CACHE_NAME = 'ct-20210912';
+var CACHE_NAME = 'ct-20210912v2';
 var urlsToCache = [
   './index.html',
   './dist/style.css',
@@ -20,6 +20,7 @@ self.addEventListener("install", (function(event) {
         })))
     })))
 })), self.addEventListener("fetch", (function(event) {
+   if (!(event.request.url.indexOf('http') === 0)) {return;}
     event.respondWith(caches.match(event.request).then((function(response) {
         if (response) return response;
         var fetchRequest = event.request.clone();
