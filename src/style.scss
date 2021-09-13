@@ -14,7 +14,7 @@ $tabs-text-color: #26a69a;
 }
 * {
   font-family: -apple-system, blinkMacSystemFont, "Helvetica Neue", "Segoe UI",
-    "Arial", "Roboto", "Hiragino Kaku Gothic ProN", YuGothicM, YuGothic, Meiryo,
+  "Roboto","Arial","Hiragino Kaku Gothic ProN", YuGothicM, YuGothic, Meiryo,
     sans-serif;
 }
 p,
@@ -285,7 +285,7 @@ body {
   line-height: 1.1;
   & * {
     font-family: "Open Sans", -apple-system, blinkMacSystemFont,
-      "Helvetica Neue", "Segoe UI", "Arial", "Roboto", sans-serif;
+      "Helvetica Neue", "Segoe UI", "Roboto", "Arial", sans-serif;
   }
 }
 #Date,
