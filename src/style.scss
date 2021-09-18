@@ -3,6 +3,8 @@ $tabs-text-color: #26a69a;
 
 @import "../node_modules/@materializecss/materialize/sass/materialize.scss";
 
+$ease-in-out: cubic-bezier(0.465, 0.183, 0.153, 0.946);
+
 .myModal-overlay {
   overflow: hidden;
 }
@@ -76,7 +78,7 @@ input[type="range"] {
     top: 0.2em;
     right: 0.2em;
   }
-  transition: opacity 0.2s, transform 0.2s;
+  transition: opacity 0.2s $ease-in-out, transform 0.2s $ease-in-out;
 }
 .myModal-content {
   padding: 0.2rem 2rem;
@@ -95,7 +97,7 @@ input[type="range"] {
   bottom: 0;
   left: 0;
   right: 0;
-  transition: opacity 0.2s;
+  transition: opacity 0.2s $ease-in-out;
   background-color: rgba(0, 0, 0, 0.5);
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
