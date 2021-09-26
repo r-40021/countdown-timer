@@ -66,7 +66,7 @@ export function modalClose() {
         }
     }
     document.addEventListener("keydown", (e)=>{
-        if (!e.repeat && e.key ===  "Escape" && document.querySelector(".myModal.activeModal")) {
+        if (!e.repeat && e.key ===  "Escape" && document.querySelector(".myModal.activeModal") && !document.getElementsByClassName("datepicker-modal")[0].classList.contains("open") && !document.getElementsByClassName("timepicker-modal")[0].classList.contains("open")) {
             closeAllModal();
         }
     });
