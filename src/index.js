@@ -742,6 +742,7 @@ function openTimeSetting() {
   let modal = document.getElementById("settings");
   modal.style.zIndex = "";
   modal.classList.add("activeModal");
+  modal.setAttribute("aria-hidden", false);
   let settingsTab = M.Tabs.getInstance(document.getElementById("settingsTab"));
   setTimeout(() => {
     settingsTab.select("settings-1");
@@ -755,6 +756,7 @@ document.getElementById("volumeStatusValue").addEventListener(
     let modal = document.getElementById("settings");
     modal.style.zIndex = "";
     modal.classList.add("activeModal");
+    modal.setAttribute("aria-hidden", false);
     let settingsTab = M.Tabs.getInstance(document.getElementById("settingsTab"));
     setTimeout(() => {
       settingsTab.select("settings-2");

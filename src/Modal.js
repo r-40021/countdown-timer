@@ -18,6 +18,7 @@ export function modalTrigger() {
                         document.getElementById("myModal-overlay").style.zIndex = "";
                         modal.style.zIndex = "";
                         modal.classList.add("activeModal");
+                        modal.setAttribute("aria-hidden", false);
                     }
                 }, {passive: true});
             }, {passive: true});
@@ -33,6 +34,7 @@ export function modalTrigger() {
                 document.getElementById("myModal-overlay").style.zIndex = "";
                 modal.style.zIndex = "";
                 modal.classList.add("activeModal");
+                modal.setAttribute("aria-hidden", false);
             }, false);
         }
     }
@@ -80,10 +82,11 @@ export function closeAllModal() {
         const element = elements[i];
         if (element.classList.contains("activeModal")) {
             element.classList.remove("activeModal");
+            element.setAttribute("aria-hidden", true);
             activeModal.push(element);
         }
     }
-    overlayTimeout = setTimeout(changeIndex, 150);
+    overlayTimeout = setTimeout(changeIndex, 200);
 }
 function changeIndex(){
     document.getElementById("myModal-overlay").style.zIndex = -2;
