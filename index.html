@@ -56,7 +56,7 @@
     <meta property="og:title" content="やまだのタイマー" />
     <meta property="og:description" content="10万年先まで計れるやまだのタイマーでカウントダウン！" />
     <meta property="og:site_name" content="やまだのタイマー" />
-    <meta property="og:image" content="https://r-40021.github.io/countdown-timer/snsicon/OGP.png" />
+    <meta property="og:image" content="https://r-40021.github.io/countdown-timer/favicon/OGP.png" />
     <link rel="manifest" href="./favicon/site.webmanifest">
     <!--SEO-->
     <meta content="目覚まし時計とタイマーのいいとこ取りをした、オープンソースのちょっと変わったタイマーです。インストール不要で、いろんな用途に使えます。" name="description">
@@ -527,6 +527,13 @@
         }
     </script>
     <script src="./dist/main.min.js" defer></script>
+    <script>
+        window.goatcounter = {
+            path: location.pathname || '/', // クエリパラメータを除去してGoatCounterへ
+        }
+    </script>
+    <script data-goatcounter="https://2vyj09dj8fxuy8uygrir.goatcounter.com/count" async
+        src="//gc.zgo.at/count.js"></script>
 </body>
 
 </html>
