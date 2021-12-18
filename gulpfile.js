@@ -2,7 +2,6 @@
 const { src, dest, watch } = require("gulp");
 // Sassをコンパイルするプラグインを読み込みます
 const sass = require('gulp-sass')(require('sass'));
-const fibers = require('fibers');
 
 /**
  * Sassをコンパイルするタスクです
@@ -11,9 +10,6 @@ const compileSass = () =>
   // style.scssファイルを取得
   src("./src/style.scss")
     // Sassのコンパイルを実行
-    .pipe(sass(
-      { fiber: fibers }
-    ))
     .pipe(
       // コンパイル後のCSSを展開
       sass({
