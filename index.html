@@ -71,7 +71,7 @@
 
 <body ontouchstart="" onclick="">
     <script>
-        if ((localStorage.getItem("theme") === "dark" || window.matchMedia("(prefers-color-scheme: dark)").matches) && localStorage.getItem("theme") !== "light") {
+        if (/*(localStorage.getItem("theme") === "dark" || window.matchMedia("(prefers-color-scheme: dark)").matches) &&*/ localStorage.getItem("theme") !== "light") {
             document.body.classList.add("dark");
         }
     </script>
