@@ -398,7 +398,7 @@ function myCount() {
           icon: "/countdown-timer/favicon/android-chrome-192x192.png", //アイコン
           requireInteraction: true, // 永遠に通知
           link: "/countdown-timer",
-          onClick: function () {
+          onClick: () => {
             window.focus();
             this.close();
             stop();
@@ -416,11 +416,11 @@ function myCount() {
       setType = "duration";
     }
     document.title = "やまだのタイマー";
-    displayEnd = setInterval(function () {
+    displayEnd = setInterval(() => {
       document.title = "時間です！";
       displayPlace.style.color = "rgb(255 38 111)";
       displayPlace.style.visibility = "hidden";
-      kiduke = setTimeout(function () {
+      kiduke = setTimeout(() => {
         document.title = "気付け！！";
         displayPlace.style.visibility = "";
       }, 500);
@@ -674,7 +674,7 @@ function move(e) {
   e.returnValue = "";
 }
 
-window.addEventListener("resize", function () {
+window.addEventListener("resize", () => {
   resize();
   recalTabs();
   resizeTitleInput();
