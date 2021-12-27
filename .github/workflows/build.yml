@@ -1,0 +1,21 @@
+name: Build
+
+on: push
+    
+jobs:
+  build:
+  
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js v14.15.4
+      uses: actions/setup-node@v1
+      with: 
+        node-version: '14.15.4'
+        
+    - run: npm install
+    - name: Webpack build
+      run: npm run build
+    - name: Gulp build
+      run: npx gulp
