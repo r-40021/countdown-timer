@@ -1,4 +1,3 @@
-import { createSnow, removeSnow } from "./snow";
 let anime; //テーマ変更時のアニメーション(timeout)
 let themeStatus; //テーマがユーザー設定(1)なのか否か(0)
 const isDark = window.matchMedia("(prefers-color-scheme: dark)");//ダークモード？
@@ -81,10 +80,8 @@ export function toggleTheme(mql) {
     function changeThemeColor(type) {
       let color;
       if (type === "dark") {
-        createSnow();
         color = "#333";
       } else {
-        removeSnow();
         color = "#f8f9fa";
       }
       let head = document.head.children;

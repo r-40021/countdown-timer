@@ -3,6 +3,7 @@ lockfileVersion: 5.3
 specifiers:
   '@materializecss/materialize': ^1.1.0-alpha
   ansi-regex: '>=6.0.1'
+  fibers: ^5.0.0
   glob-parent: '>=6.0.2'
   gulp: ^4.0.2
   gulp-cli: ^2.3.0
@@ -23,6 +24,7 @@ dependencies:
 devDependencies:
   '@materializecss/materialize': 1.1.0-alpha
   ansi-regex: 6.0.1
+  fibers: 5.0.0
   glob-parent: 6.0.2
   gulp: 4.0.2
   gulp-cli: 2.3.0
@@ -1079,6 +1081,12 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
+  /detect-libc/1.0.3:
+    resolution: {integrity: sha1-+hN8S9aY7fVc1c0CrFWfkaTEups=}
+    engines: {node: '>=0.10'}
+    hasBin: true
+    dev: true
+
   /detect-node/2.1.0:
     resolution: {integrity: sha512-T0NIuQpnTvFDATNuHN5roPwSBG83rFsuO+MXXH9/3N1eFbn4wcPjttvjMLEPWJ0RGUYgQE7cGgS3tNxbqCGM7g==}
     dev: true
@@ -1404,6 +1412,14 @@ packages:
     engines: {node: '>=0.8.0'}
     dependencies:
       websocket-driver: 0.7.4
+    dev: true
+
+  /fibers/5.0.0:
+    resolution: {integrity: sha512-UpGv/YAZp7mhKHxDvC1tColrroGRX90sSvh8RMZV9leo+e5+EkRVgCEZPlmXeo3BUNQTZxUaVdLskq1Q2FyCPg==}
+    engines: {node: '>=10.0.0'}
+    requiresBuild: true
+    dependencies:
+      detect-libc: 1.0.3
     dev: true
 
   /file-uri-to-path/1.0.0:

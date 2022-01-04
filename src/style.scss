@@ -613,32 +613,6 @@ input[type="number"]:-webkit-autofill:active {
     }
   }
 }
-
-.snow {
-  background-color: #fff;
-  border-radius: 50%;
-  position: absolute;
-  animation: snow 18s linear;
-}
-
-
-@keyframes snow {
-  0% {
-    opacity: 0;
-    top: 0;
-  }
-  10% {
-    opacity: .8;
-  }
-  90% {
-    opacity: .8;
-  }
-  100% {
-    opacity: 0;
-    top: 100vh;
-  }
-}
-
 /*Big PC*/
 @media screen and (min-width: 1440px) {
   .title {
