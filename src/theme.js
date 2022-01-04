@@ -25,27 +25,24 @@ export function toggleTheme(mql) {
         light.setAttribute("checked", null); //選択中のボタンを目立たせる
         localStorage.setItem("theme", "light"); //Local Storageに保存
       } else if (mql === "a") {
-        // // 「システムに任せる」選択時
-        // if (isDark.matches) {
-        //   /* ダークテーマの時 */
-        //   document.body.classList.add("dark"); //ダークモードにする
-        //   changeThemeColor("dark"); //フッターのアイコンを変更
-        //   localStorage.setItem("theme", "auto"); //Local Storageに保存
-        // } else {
-        //   /* ライトテーマの時 */
-        //   document.body.classList.remove("dark");
-        //   changeThemeColor("light");
-        //   localStorage.setItem("theme", "auto"); //Local Storageに保存
-        // }
-        document.body.classList.add("dark");
-        changeThemeColor("dark");
-        localStorage.setItem("theme", "auto");
+        // 「システムに任せる」選択時
+        if (isDark.matches) {
+          /* ダークテーマの時 */
+          document.body.classList.add("dark"); //ダークモードにする
+          changeThemeColor("dark"); //フッターのアイコンを変更
+          localStorage.setItem("theme", "auto"); //Local Storageに保存
+        } else {
+          /* ライトテーマの時 */
+          document.body.classList.remove("dark");
+          changeThemeColor("light");
+          localStorage.setItem("theme", "auto"); //Local Storageに保存
+        }
         noActive();
         auto.setAttribute("checked", null); //選択中のボタンを目立たせる
       }
     } else {
       /*現時点でオート設定の時*/
-      if (/*(isDark.matches || mql === "d") && */mql !== "l") {
+      if ((isDark.matches || mql === "d") && mql !== "l") {
         /* ダークテーマの時 */
         document.body.classList.add("dark"); //ダークモードにする
         changeThemeColor("dark"); //フッターのアイコンを変更
