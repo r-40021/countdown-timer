@@ -18,7 +18,7 @@ export function createSnow() {
         }, 18000);
     }
 
-    if (!snowInterval) snowInterval = setInterval(createNewSnow, 800);
+    if (!snowInterval) snowInterval = setInterval(createNewSnow, 900);
 }
 
 export function removeSnow() {
