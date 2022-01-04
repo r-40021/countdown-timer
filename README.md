@@ -4,14 +4,14 @@
 
 This is a timer that can be timed semi-permanently.
 
-[Open demo](https://r-40021.github.io/countdown-timer/?date=2022/01/01&time=00:00&title=2022)
+[Open demo](https://r-40021.github.io/countdown-timer/?date=2023/01/01&time=00:00&title=2023)
 
 # Screenshots
 #### Light Mode
-![Light Mode](https://user-images.githubusercontent.com/75155258/132082653-fc37f381-e5e5-4556-9cf1-eb6c14face4e.png)
+![Light Mode](https://user-images.githubusercontent.com/75155258/148018064-1337abf8-5f36-4698-9c2d-a26f9a9a82f2.png)
 
 #### Dark Mode
-![Dark Mode](https://user-images.githubusercontent.com/75155258/132082649-052890ea-8143-4083-914d-cd4ae9f527c6.png)
+![Dark Mode](https://user-images.githubusercontent.com/75155258/148018067-959f6cae-d18d-48b0-a7d1-240987ea1d68.png)
 
 #### Date Setting
 <img src="https://user-images.githubusercontent.com/75155258/127759896-430e7e00-c02b-4a0b-a57f-6821a8fa836e.png" width ="400px" alt="Datepicker">
@@ -19,8 +19,8 @@ This is a timer that can be timed semi-permanently.
 #### Time Setting
 <img src="https://user-images.githubusercontent.com/75155258/126022544-25253941-b71a-4525-9efc-2ababbbe27b0.png" width ="400px" alt="Timepicker">
 
-#### Push Notifications
-<img src="https://user-images.githubusercontent.com/75155258/127759924-65264f2c-ccf1-4c24-b871-f8c4081e839e.png" width ="400px" alt="Push Notifications">
+#### Push Notification
+<img src="https://user-images.githubusercontent.com/75155258/148018460-3722ee5f-7f51-4c58-8c38-252a41179cf4.png" width ="400px" alt="Push Notification">
 
 # How to Use
 **Only 2 steps!!**  
