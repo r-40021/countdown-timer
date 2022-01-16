@@ -4,6 +4,7 @@ specifiers:
   '@materializecss/materialize': ^1.1.0-alpha
   ansi-regex: ^6.0.1
   fibers: ^5.0.0
+  follow-redirects: '>=1.14.7'
   glob-parent: ^6.0.2
   gulp: ^4.0.2
   gulp-cli: ^2.3.0
@@ -25,6 +26,7 @@ devDependencies:
   '@materializecss/materialize': 1.1.0-alpha
   ansi-regex: 6.0.1
   fibers: 5.0.0
+  follow-redirects: 1.14.7
   glob-parent: 6.0.2
   gulp: 4.0.2
   gulp-cli: 2.3.0
@@ -1571,8 +1573,8 @@ packages:
       readable-stream: 2.3.7
     dev: true
 
-  /follow-redirects/1.14.6:
-    resolution: {integrity: sha512-fhUl5EwSJbbl8AR+uYL2KQDxLkdSjZGR36xy46AO7cOMTrCMON6Sa28FmAnC2tRTDbd/Uuzz3aJBv7EBN7JH8A==}
+  /follow-redirects/1.14.7:
+    resolution: {integrity: sha512-+hbxoLbFMbRKDwohX8GkTataGqO6Jb7jGwpAlwgy2bIz25XtRm7KEzJM76R1WiNT5SwZkX4Y75SwBolkpmE7iQ==}
     engines: {node: '>=4.0'}
     peerDependencies:
       debug: '*'
@@ -1978,7 +1980,7 @@ packages:
     engines: {node: '>=8.0.0'}
     dependencies:
       eventemitter3: 4.0.7
-      follow-redirects: 1.14.6
+      follow-redirects: 1.14.7
       requires-port: 1.0.0
     transitivePeerDependencies:
       - debug
