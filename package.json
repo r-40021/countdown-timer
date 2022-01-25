@@ -23,7 +23,7 @@
   "devDependencies": {
     "@materializecss/materialize": "^1.1.0-alpha",
     "ansi-regex": "^6.0.1",
-    "fibers": "^5.0.0",
+    "fibers": "^5.0.1",
     "follow-redirects": ">=1.14.7",
     "glob-parent": "^6.0.2",
     "gulp": "^4.0.2",
