@@ -16,8 +16,7 @@ $ease-in-out: cubic-bezier(0.465, 0.183, 0.153, 0.946);
 }
 * {
   font-family: -apple-system, blinkMacSystemFont, "Helvetica Neue", "Segoe UI",
-    "Roboto", "Arial", "Hiragino Kaku Gothic ProN", YuGothicM, "Yu Gothic", YuGothic, Meiryo,
-    sans-serif;
+    "Roboto", "Arial", sans-serif;
   -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
@@ -257,17 +256,6 @@ body {
   background-color: var(--bgColor);
   color: var(--fontColor);
 }
-@font-face {
-  font-family: YuGothicM;
-  font-weight: normal;
-  src: local("YuGothic-Medium"), local("Yu Gothic Medium"),
-    local("YuGothic-Regular"); /* Windows8.1ではMediumがないのでRegularを指定 */
-}
-@font-face {
-  font-family: YuGothicM;
-  font-weight: bold;
-  src: local("YoGothic-Bold"), local("Yu Gothic");
-}
 #displayTime {
   transition: color 0.2s ease-out;
 }
@@ -478,7 +466,7 @@ input[type="text"]:not(.browser-default)[readonly="readonly"] {
 .icons {
   white-space: nowrap;
   margin-inline-end: 0.5em;
-  vertical-align: middle;
+  vertical-align: -4px;
 }
 .setBtns a {
   display: inline-flex;

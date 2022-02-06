@@ -14,7 +14,7 @@
     "type": "git",
     "url": "git+https://github.com/r-40021/countdown-timer.git"
   },
-  "author": "Kenichi Yamada",
+  "author": "Frog",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/r-40021/countdown-timer/issues"
@@ -23,19 +23,18 @@
   "devDependencies": {
     "@materializecss/materialize": "^1.1.0-alpha",
     "ansi-regex": "^6.0.1",
+    "css-loader": "^6.6.0",
     "fibers": "^5.0.0",
     "follow-redirects": ">=1.14.7",
     "glob-parent": "^6.0.2",
-    "gulp": "^4.0.2",
-    "gulp-cli": "^2.3.0",
-    "gulp-concat": "^2.6.1",
-    "gulp-sass": "^5.1.0",
     "howler": "^2.2.3",
+    "mini-css-extract-plugin": "^2.5.3",
     "nosleep.js": "^0.12.0",
     "sass": "^1.48.0",
+    "sass-loader": "^12.4.0",
     "set-value": "^4.1.0",
-    "webpack": "^5.66.0",
-    "webpack-cli": "^4.9.1",
+    "webpack": "^5.68.0",
+    "webpack-cli": "^4.9.2",
     "webpack-dev-server": "^4.7.3"
   },
   "dependencies": {

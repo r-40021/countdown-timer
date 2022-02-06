@@ -11,6 +11,8 @@ import { toggleTheme } from "./theme";
 import { copy, tweet, shareAPI } from "./share";
 import { registerInstallAppEvent } from "./pwa";
 
+import "./style.scss"
+
 /*変数の定義*/
 var down, displayEnd, oldDisplay, title, myDate, myTime, target, kiduke;
 var useDevice = 0;
