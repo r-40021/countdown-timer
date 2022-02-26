@@ -9,7 +9,6 @@ import { fullscreen } from "./fullscreen";
 import { resize, resizeTitleInput } from "./resize";
 import { toggleTheme } from "./theme";
 import { copy, tweet, shareAPI } from "./share";
-import { registerInstallAppEvent } from "./pwa";
 
 import "./style.scss"
 
@@ -37,8 +36,6 @@ materializeInit();
 
 modalTrigger();
 modalClose();
-
-registerInstallAppEvent(document.getElementById("getPWA"));
 
 function second() {
   if (localStorage.getItem("ct-skip")) {
