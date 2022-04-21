@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/r-40021/countdown-timer#readme",
   "devDependencies": {
-    "@materializecss/materialize": "^1.1.0-alpha",
+    "@materializecss/materialize": "^1.1.0",
     "ansi-regex": "^6.0.1",
     "css-loader": "^6.7.1",
     "fibers": "^5.0.0",

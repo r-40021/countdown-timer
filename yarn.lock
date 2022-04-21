@@ -12,10 +12,10 @@
   resolved "https://registry.yarnpkg.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.3.tgz#0300943770e04231041a51bd39f0439b5c7ab4f0"
   integrity sha512-nkalE/f1RvRGChwBnEIoBfSEYOXnCRdleKuv6+lePbMDrMZXeDQnqak5XDOeBgrPPyPfAdcCu/B5z+v3VhplGg==
 
-"@materializecss/materialize@^1.1.0-alpha":
-  version "1.1.0-alpha"
-  resolved "https://registry.yarnpkg.com/@materializecss/materialize/-/materialize-1.1.0-alpha.tgz#448e742f7f4346d1dee11390a9e567545a139c49"
-  integrity sha512-dOAcIAe4L7kGtZ8V5oSxUrwHOsPGxfRwefvRk/jRcPwtZfmLoiQtS37JO0p9PTdkCj+aQmqUOzHoRhaF3TxmAg==
+"@materializecss/materialize@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@materializecss/materialize/-/materialize-1.1.0.tgz#22096b7ab908bc7c6e00fe10c2c0295c0c9dcca6"
+  integrity sha512-W2MrDC8mzpMWyP2OpS0RWTWGcLiRRBz7kn2E9TsbardPyVNFdoNvXq5sLy3NcEfAlACc1+L7Q95+pBuUX44dRg==
 
 "@types/body-parser@*":
   version "1.19.2"
