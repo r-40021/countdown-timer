@@ -1,7 +1,7 @@
 # <img src="./favicon/favicon.ico" width="30px">Countdown Timer
 半永久的に計れるタイマー  
 
-[デモを開く](https://r-40021.github.io/countdown-timer/?date=2023/01/01&time=00:00&title=2023)
+[デモを開く](https://timer.frogapp.net/?date=2023/01/01&time=00:00&title=2023)
 
 <img src="./favicon/OGP.png" width="300px">
 

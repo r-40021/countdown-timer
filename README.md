@@ -4,7 +4,7 @@
 
 This is a timer that can be timed semi-permanently.
 
-[Open demo](https://r-40021.github.io/countdown-timer/?date=2023/01/01&time=00:00&title=2023)
+[Open demo](https://timer.frogapp.net/?date=2023/01/01&time=00:00&title=2023)
 
 # Screenshots
 #### Light Mode
