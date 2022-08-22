@@ -146,12 +146,12 @@ function third() {
     document.getElementById("audioVolume").value = localVolume * 100;//前回の音量を取得しセット
   }
   alarm = new Howl({
-    src: ['/countdown-timer/alarm.mp3'],
+    src: ['/alarm.mp3'],
     volume: document.getElementById("audioVolume").value / 100,
     loop: true
   });
   testAlarm = new Howl({
-    src: ['/countdown-timer/alarm.mp3'],
+    src: ['/alarm.mp3'],
     volume: document.getElementById("audioVolume").value / 100,
     loop: true
   });
@@ -620,12 +620,12 @@ function load1() {
     doubleAlarmStop();
     document.getElementById("file1").value = null;
     alarm = new Howl({
-      src: ['/countdown-timer/alarm.mp3'],
+      src: ['/alarm.mp3'],
       volume: document.getElementById("audioVolume").value / 100,
       loop: true
     });
     testAlarm = new Howl({
-      src: ['/countdown-timer/alarm.mp3'],
+      src: ['/alarm.mp3'],
       volume: document.getElementById("audioVolume").value / 100,
       loop: true
     });
