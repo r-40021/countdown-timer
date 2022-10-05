@@ -30,7 +30,7 @@ export function tweet() {
     let title = document.getElementById("title").value;
     // ツイート文を作成
     let base = "https://twitter.com/intent/tweet?";
-    let hashtags = "やまだのタイマー,やまだけんいち";
+    let hashtags = "やまだのタイマー,カエルアプリ工房";
     let text = "10万年先まで計れるやまだのタイマーでカウントダウン！";
     let url;
     if (title) {
