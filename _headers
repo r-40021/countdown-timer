@@ -1,0 +1,4 @@
+https://:project.pages.dev/*
+  Link: <https://timer.frogapp.net/:splat>; rel="canonical"
+  X-Robots-Tag: noindex
+  Refresh: 0; url=https://timer.frogapp.net/:splat
