@@ -399,7 +399,6 @@ function myCount() {
           link: "/countdown-timer",
           onClick: () => {
             window.focus();
-            this.close();
             stop();
             audiostop(true);
           },
