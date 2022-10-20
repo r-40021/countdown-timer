@@ -7,7 +7,7 @@ export function shareAPI (){
         let title = document.getElementById("title").value;
         const shareData = {
             title: 'やまだのタイマー',
-            text: (title ? title + "\n" : "") + '10万年先まで計れるやまだのタイマーでカウントダウン！',
+            text: (title ? title + "までの時間を" : "") + 'やまだのタイマーでカウントダウン！',
             url: location.href
           }
 
@@ -31,15 +31,14 @@ export function tweet() {
     // ツイート文を作成
     let base = "https://twitter.com/intent/tweet?";
     let hashtags = "やまだのタイマー,カエルアプリ工房";
-    let text = "10万年先まで計れるやまだのタイマーでカウントダウン！";
+    let text = "やまだのタイマーでカウントダウン！";
     let url;
     if (title) {
         url =
             base +
             "text=" +
-            "「" +
             title +
-            "」%0a" +
+            "までの時間を" +
             text +
             "%0a&hashtags=" +
             hashtags +
