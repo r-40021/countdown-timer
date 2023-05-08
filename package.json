@@ -34,7 +34,7 @@
     "set-value": "^4.1.0",
     "webpack": "^5.82.0",
     "webpack-cli": "^5.0.2",
-    "webpack-dev-server": "^4.13.3"
+    "webpack-dev-server": "^4.15.0"
   },
   "dependencies": {
     "push.js": "^1.0.12"
