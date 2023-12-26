@@ -60,10 +60,10 @@
   resolved "https://registry.yarnpkg.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.3.tgz#0300943770e04231041a51bd39f0439b5c7ab4f0"
   integrity sha512-nkalE/f1RvRGChwBnEIoBfSEYOXnCRdleKuv6+lePbMDrMZXeDQnqak5XDOeBgrPPyPfAdcCu/B5z+v3VhplGg==
 
-"@materializecss/materialize@^2.0.3":
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/@materializecss/materialize/-/materialize-2.0.3.tgz#249e514af6e7428f7634e191b4cf9412b7f0aabc"
-  integrity sha512-QgiTW/3KHC/gTmpBloJONyTNpu24XBTAzrKWeS517S5lhMbw5yRvLTQuEAjlifRgGkLC/7j56D0G2aKfL4j9Qg==
+"@materializecss/materialize@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@materializecss/materialize/-/materialize-1.2.2.tgz#3308e76806a8f6d14b7838656fbf24e0bf3496c8"
+  integrity sha512-+zp/myqWFywj/F64byUM+H3iiuDmVjKBHZ0lj3b07QiaLVaNoUBCcsS0nkdwB9YsebzFpZLWeASPkmolu3yA+Q==
 
 "@types/body-parser@*":
   version "1.19.2"
@@ -1697,10 +1697,10 @@ safe-buffer@5.2.1, safe-buffer@>=5.1.0, safe-buffer@^5.1.0, safe-buffer@~5.2.0:
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
 
-sass-loader@^13.3.2:
-  version "13.3.2"
-  resolved "https://registry.yarnpkg.com/sass-loader/-/sass-loader-13.3.2.tgz#460022de27aec772480f03de17f5ba88fa7e18c6"
-  integrity sha512-CQbKl57kdEv+KDLquhC+gE3pXt74LEAzm+tzywcA0/aHZuub8wTErbjAoNI57rPUWRYRNC5WUnNl8eGJNbDdwg==
+sass-loader@^13.3.3:
+  version "13.3.3"
+  resolved "https://registry.yarnpkg.com/sass-loader/-/sass-loader-13.3.3.tgz#60df5e858788cffb1a3215e5b92e9cba61e7e133"
+  integrity sha512-mt5YN2F1MOZr3d/wBRcZxeFgwgkH44wVc2zohO2YF6JiOMkiXe4BYRZpSu2sO1g71mo/j16txzUhsKZlqjVGzA==
   dependencies:
     neo-async "^2.6.2"
 
