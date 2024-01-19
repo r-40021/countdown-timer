@@ -23,7 +23,7 @@
   "devDependencies": {
     "@materializecss/materialize": "^1.2.2",
     "ansi-regex": "^6.0.1",
-    "css-loader": "^6.9.0",
+    "css-loader": "^6.9.1",
     "follow-redirects": ">=1.15.5",
     "glob-parent": "^6.0.2",
     "howler": "^2.2.4",
