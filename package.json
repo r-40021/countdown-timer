@@ -27,7 +27,7 @@
     "follow-redirects": ">=1.15.5",
     "glob-parent": "^6.0.2",
     "howler": "^2.2.4",
-    "mini-css-extract-plugin": "^2.7.7",
+    "mini-css-extract-plugin": "^2.8.0",
     "nosleep.js": "^0.12.0",
     "sass": "^1.70.0",
     "sass-loader": "^14.1.0",
