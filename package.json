@@ -29,7 +29,7 @@
     "howler": "^2.2.4",
     "mini-css-extract-plugin": "^2.8.1",
     "nosleep.js": "^0.12.0",
-    "sass": "^1.74.1",
+    "sass": "^1.75.0",
     "sass-loader": "^14.2.0",
     "set-value": "^4.1.0",
     "webpack": "^5.91.0",
