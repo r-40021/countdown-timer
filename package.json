@@ -24,7 +24,7 @@
     "@materializecss/materialize": "^1.2.2",
     "ansi-regex": "^6.0.1",
     "css-loader": "^7.1.2",
-    "follow-redirects": ">=1.15.6",
+    "follow-redirects": ">=1.15.8",
     "glob-parent": "^6.0.2",
     "howler": "^2.2.4",
     "mini-css-extract-plugin": "^2.9.1",
