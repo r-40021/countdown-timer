@@ -70,10 +70,10 @@
   resolved "https://registry.yarnpkg.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.3.tgz#0300943770e04231041a51bd39f0439b5c7ab4f0"
   integrity sha512-nkalE/f1RvRGChwBnEIoBfSEYOXnCRdleKuv6+lePbMDrMZXeDQnqak5XDOeBgrPPyPfAdcCu/B5z+v3VhplGg==
 
-"@materializecss/materialize@^1.2.2":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@materializecss/materialize/-/materialize-1.2.2.tgz#3308e76806a8f6d14b7838656fbf24e0bf3496c8"
-  integrity sha512-+zp/myqWFywj/F64byUM+H3iiuDmVjKBHZ0lj3b07QiaLVaNoUBCcsS0nkdwB9YsebzFpZLWeASPkmolu3yA+Q==
+"@materializecss/materialize@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@materializecss/materialize/-/materialize-2.2.0.tgz#7722dcc1840105dd2619fe9e49064e1fbc24a56a"
+  integrity sha512-k9gMbh+xx5fn+GF1aYGHuwAtgB825ilibp4RKaQ5ZqS38JJYjWs0p/AgF6UHx+35tl0VKa6SN67D7NqODDxT8g==
 
 "@parcel/watcher-android-arm64@2.4.1":
   version "2.4.1"
