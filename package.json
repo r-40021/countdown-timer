@@ -22,7 +22,7 @@
   "homepage": "https://github.com/r-40021/countdown-timer#readme",
   "devDependencies": {
     "@materializecss/materialize": "^1.2.2",
-    "ansi-regex": "^6.2.0",
+    "ansi-regex": "^6.2.2",
     "css-loader": "^7.1.2",
     "follow-redirects": ">=1.15.11",
     "glob-parent": "^6.0.2",
