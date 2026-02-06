@@ -70,10 +70,10 @@
   resolved "https://registry.yarnpkg.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.3.tgz#0300943770e04231041a51bd39f0439b5c7ab4f0"
   integrity sha512-nkalE/f1RvRGChwBnEIoBfSEYOXnCRdleKuv6+lePbMDrMZXeDQnqak5XDOeBgrPPyPfAdcCu/B5z+v3VhplGg==
 
-"@materializecss/materialize@^1.2.2":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@materializecss/materialize/-/materialize-1.2.2.tgz#3308e76806a8f6d14b7838656fbf24e0bf3496c8"
-  integrity sha512-+zp/myqWFywj/F64byUM+H3iiuDmVjKBHZ0lj3b07QiaLVaNoUBCcsS0nkdwB9YsebzFpZLWeASPkmolu3yA+Q==
+"@materializecss/materialize@^2.3.2":
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/@materializecss/materialize/-/materialize-2.3.2.tgz#6319a7fbb9e283409c2ae8d407794fada03c3c1b"
+  integrity sha512-0LF6uK+grJh+fUiW6mpR2ovKL2T4kZLWiSD4jL9IbLmit1YRRyz3+x7cJ8QWMsIPC9r05oIsoiP+8OjZjeH5GQ==
 
 "@noble/hashes@1.4.0":
   version "1.4.0"
