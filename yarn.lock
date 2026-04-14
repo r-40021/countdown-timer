@@ -70,10 +70,12 @@
   resolved "https://registry.yarnpkg.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.3.tgz#0300943770e04231041a51bd39f0439b5c7ab4f0"
   integrity sha512-nkalE/f1RvRGChwBnEIoBfSEYOXnCRdleKuv6+lePbMDrMZXeDQnqak5XDOeBgrPPyPfAdcCu/B5z+v3VhplGg==
 
-"@materializecss/materialize@^1.2.2":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@materializecss/materialize/-/materialize-1.2.2.tgz#3308e76806a8f6d14b7838656fbf24e0bf3496c8"
-  integrity sha512-+zp/myqWFywj/F64byUM+H3iiuDmVjKBHZ0lj3b07QiaLVaNoUBCcsS0nkdwB9YsebzFpZLWeASPkmolu3yA+Q==
+"@materializecss/materialize@^2.3.3":
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/@materializecss/materialize/-/materialize-2.3.3.tgz#0b9f54a280348f1cc12789a5d33dc227ba93e72a"
+  integrity sha512-PJ9Io7yi8FVGcySwu7n3wY8pUDkhz2YG5VZazzSPOrqId6xetdSQGuQP7cICRHNHlmAn4MIW78kg7CVDfrD2Rg==
+  dependencies:
+    normalize.css "^8.0.1"
 
 "@noble/hashes@1.4.0":
   version "1.4.0"
@@ -1679,6 +1681,11 @@ normalize-path@^3.0.0, normalize-path@~3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/normalize-path/-/normalize-path-3.0.0.tgz#0dcd69ff23a1c9b11fd0978316644a0388216a65"
   integrity sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==
+
+normalize.css@^8.0.1:
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/normalize.css/-/normalize.css-8.0.1.tgz#9b98a208738b9cc2634caacbc42d131c97487bf3"
+  integrity sha512-qizSNPO93t1YUuUhP22btGOo3chcvDFqFaj2TRybP0DMxkHOCTYwp3n34fel4a31ORXy4m1Xq0Gyqpb5m33qIg==
 
 nosleep.js@^0.12.0:
   version "0.12.0"
